@@ -1,0 +1,13 @@
+{
+  "description": "TODO",
+  "manifest_version": 2,
+  "name": "Spur",
+  "version": "1.0",
+  "homepage_url": "http://TODO.com",
+  "icons": {
+    "48": "icons/coffee.png"
+  },
+  "chrome_url_overrides" : {
+    "newtab": "app.html"
+  }
+}

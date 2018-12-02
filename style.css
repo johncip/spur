@@ -1,0 +1,65 @@
+body, html {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background-color: #e3e3e3;
+  font-family: palatino;
+  display: flex;
+  align-items: center;
+  color: #444;
+}
+
+#container {
+  width: 600px;
+  margin: auto;
+  padding: 40px;
+  background-color: #eee;
+}
+
+#quote {
+  font-size: 32pt;
+  line-height: 130%;
+}
+
+#author {
+  font-size: 16pt;
+  width: 100%;
+  text-align: right;
+}
+
+#author:before {
+  content: "\2015 ";
+}
+
+#category:before {
+  content: 'Category: ';
+}
+
+#quote, #author {
+  margin-bottom: 24px;
+}
+
+#author, #category {
+  color: #666;
+}
+
+#category, #url {
+  font-size: 10pt;
+  font-family: 'courier prime';
+  font-style: italic;
+  margin-bottom: 18px;
+}
+
+#url a {
+  text-decoration: none;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  border-top: 1px solid #ddd;
+  margin-bottom: 18px;
+}
