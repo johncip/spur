@@ -1,4 +1,9 @@
 {
+  "applications": {
+    "gecko": {
+      "id": "spur@spur.com"
+    }
+  },
   "description": "TODO",
   "manifest_version": 2,
   "name": "Spur",
@@ -9,5 +14,11 @@
   },
   "chrome_url_overrides" : {
     "newtab": "app.html"
-  }
+  },
+  "web_accessible_resources": [
+    "seeds.json"
+  ],
+  "permissions": [
+    "storage"
+  ]
 }
