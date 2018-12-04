@@ -5,62 +5,88 @@ body, html {
 }
 
 body {
-  background-color: #e3e3e3;
   font-family: palatino;
   display: flex;
   align-items: center;
-  color: #444;
 }
 
 #container {
   width: 600px;
   margin: auto;
-  padding: 40px;
-  background-color: #eee;
+  padding: 50px;
+  background-color: #fafafa;
+  border: 1px solid #ddd;
 }
 
 #quote {
+  color: #444;
   font-size: 32pt;
   line-height: 130%;
   white-space: pre-wrap;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+#quote:before, #quote:after {
+  font-size: 180px;
+  position: absolute;
+  font-family: georgia;
+  opacity: 0.05;
+}
+
+#quote:before {
+  content: "\201C";
+  z-index: -1;
+  top: 30px;
+  left: -25px;
+}
+
+#quote:after {
+  content: "\201D";
+  z-index: -1;
+  bottom: -40px;
+  right: -8px;
 }
 
 #author {
   font-size: 16pt;
   width: 100%;
   text-align: right;
+  color: #888;
 }
 
 #author:before {
   content: "\2015 ";
 }
 
+#category {
+  color: #bbb;
+}
+
 #category:before {
   content: 'Category: ';
 }
 
-#quote, #author {
-  margin-bottom: 24px;
+#url {
+  margin-bottom: 18px;
 }
 
-#author, #category {
-  color: #666;
+#url a {
+  text-decoration: none;
+  color: #79b;
 }
 
 #category, #url {
   font-size: 10pt;
   font-family: 'courier prime';
   font-style: italic;
-  margin-bottom: 18px;
-}
-
-#url a {
-  text-decoration: none;
 }
 
 hr {
   border: 0;
   height: 1px;
   border-top: 1px solid #ddd;
-  margin-bottom: 18px;
+  margin-bottom: 32px;
+  margin-top: 32px;
 }
