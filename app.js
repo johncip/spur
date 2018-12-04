@@ -8,6 +8,13 @@ function randomItem(arr) {
 }
 
 /**
+ * Given the stored options, applies the selected theme, or the default.
+ */
+function applyTheme(options) {
+  document.documentElement.classList.add(options['theme']);
+}
+
+/**
  * Loads quote list from browser storage. If there are no quotes, storage is first seeded
  * with the included quotes.
  */
@@ -65,5 +72,7 @@ function render(record) {
   document.getElementById('url').append(aTag);
 }
 
+
+applyTheme({theme: 'indexCard'});
 // loadQuotes();
 browser.storage.sync.clear().then(loadQuotes);

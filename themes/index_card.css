@@ -1,89 +1,70 @@
-body, html {
-  margin: 0;
-  height: 100%;
-  width: 100%;
+.indexCard body {
+  font-family: lora, palatino, palatino linotype, book antiqua, georgia, serif;
 }
 
-body {
-  font-family: palatino;
-  display: flex;
-  align-items: center;
-}
-
-#container {
+.indexCard #container {
   width: 600px;
-  margin: auto;
   padding: 50px;
   background-color: #fafafa;
   border: 1px solid #ddd;
 }
 
-#quote {
+.indexCard #quote {
   color: #444;
   font-size: 32pt;
   line-height: 130%;
-  white-space: pre-wrap;
   margin-bottom: 24px;
   position: relative;
   z-index: 1;
 }
 
-#quote:before, #quote:after {
+.indexCard #quote:before,
+.indexCard #quote:after {
   font-size: 180px;
   position: absolute;
   font-family: georgia;
   opacity: 0.05;
+  z-index: -1;
 }
 
-#quote:before {
+.indexCard #quote:before {
   content: "\201C";
-  z-index: -1;
   top: 30px;
   left: -25px;
 }
 
-#quote:after {
+.indexCard #quote:after {
   content: "\201D";
-  z-index: -1;
   bottom: -40px;
   right: -8px;
 }
 
-#author {
+.indexCard #author {
   font-size: 16pt;
-  width: 100%;
-  text-align: right;
   color: #888;
+  /* text-shadow: 0px 0px 2px #ccc; */
 }
 
-#author:before {
-  content: "\2015 ";
-}
-
-#category {
-  color: #bbb;
-}
-
-#category:before {
-  content: 'Category: ';
-}
-
-#url {
-  margin-bottom: 18px;
-}
-
-#url a {
-  text-decoration: none;
-  color: #79b;
-}
-
-#category, #url {
+.indexCard #category, #url {
   font-size: 10pt;
   font-family: 'courier prime';
   font-style: italic;
 }
 
-hr {
+.indexCard #category {
+  color: #bbb;
+}
+
+.indexCard #url {
+  margin-bottom: 18px;
+}
+
+.indexCard #url a {
+  text-decoration: none;
+  color: #79b;
+}
+
+.indexCard hr {
   border: 0;
   height: 1px;
   border-top: 1px solid #ddd;
