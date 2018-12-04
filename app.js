@@ -11,7 +11,11 @@ function randomItem(arr) {
  * Given the stored options, applies the selected theme, or the default.
  */
 function applyTheme(options) {
-  document.documentElement.classList.add(options['theme']);
+  const theme = options['theme'] || 'indexCard';
+  document.documentElement.classList.add(theme);
+
+  const variant = options['variant'] || 'dark';
+  document.documentElement.classList.add(theme + '-' + variant);
 }
 
 /**
@@ -73,6 +77,6 @@ function render(record) {
 }
 
 
-applyTheme({theme: 'indexCard'});
+applyTheme({});
 // loadQuotes();
 browser.storage.sync.clear().then(loadQuotes);

@@ -1,0 +1,34 @@
+.indexCard.indexCard-dark body {
+  background-color: #202020;
+}
+
+.indexCard.indexCard-dark #container {
+  background-color: #282829;
+  border-color: #444;
+}
+
+.indexCard.indexCard-dark #quote {
+  color: #ccc;
+}
+
+.indexCard.indexCard-dark #quote:before,
+.indexCard.indexCard-dark #quote:after {
+  opacity: 0.025;
+}
+
+.indexCard.indexCard-dark #author {
+  color: #778;
+}
+
+.indexCard.indexCard-dark #category {
+  color: #445;
+}
+
+.indexCard.indexCard-dark #url a {
+  color: #569;
+}
+
+.indexCard.indexCard-dark hr {
+  border-color: #444;
+}
+
