@@ -46,7 +46,8 @@
   color: #888;
 }
 
-.indexCard #category, #url {
+.indexCard #category,
+.indexCard #url {
   font-size: 9pt;
   font-family: 'courier prime';
   font-style: italic;
