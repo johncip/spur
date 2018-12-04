@@ -1,12 +1,56 @@
+/**
+ * Returns a random array element.
+ */
 function randomItem(arr) {
   const rIndex = Math.floor(Math.random() * arr.length);
   return arr[rIndex];
+  // return arr[3]; // randomly selected by fair dice roll
 }
 
-function populate(record) {
+/**
+ * Loads quote list from browser storage. If there are no quotes, storage is first seeded
+ * with the included quotes.
+ */
+function loadQuotes() {
+  const storage = browser.storage.sync;
+  storage.get('storedQuotes').then((response) => {
+    var quotes = response['storedQuotes'];
+    if (!quotes) {
+      seedStorage().then(loadQuotes);
+    }
+    render(randomItem(quotes));
+  });
+}
+
+/**
+ * Seeds browser storage with the included quotes.
+ */
+function seedStorage() {
+  const storage = browser.storage.sync;
+  const url = browser.extension.getURL('seeds.json');
+  return fetch(url).then((resp) => resp.json())
+                   .then((seeds) => storage.set({storedQuotes: seeds}));
+}
+
+/**
+ * Returns an appropriate font size for the given text string. That is, longer strings will
+ * have a smaller font size, and shorter strings will have a larger font size.
+ *
+ * (Line breaks are not taken into account.)
+ */
+function adjustedFontSize(text) {
+  const size = 200 * (1 / (text.length ** 0.4));
+  return size + 'px';
+}
+
+/**
+ * Fills the DIVs with quote text, author, etc.
+ */
+function render(record) {
   // quote
   const quoteDiv = document.getElementById('quote');
   quoteDiv.textContent = record['quote'];
+  quoteDiv.style.fontSize = adjustedFontSize(record['quote']);
 
   // author
   document.getElementById('author').textContent = record['author'];
@@ -21,26 +65,5 @@ function populate(record) {
   document.getElementById('url').append(aTag);
 }
 
-
-// TODO: seed quotes on first run (or empty storage), but not after
-function seedQuotes(func) {
-  // const url = browser.extension.getURL('seeds.json');
-  // fetch(url).then((response) => response.json())
-  //           .then((seeds) => browser.storage.sync.set({seeds}))
-  //           //
-  //           .then(() => {
-  //             browser.storage.sync.get('seeds')
-  //               .then((response) => func(response['seeds']));
-  //           });
-
-  browser.storage.sync.get('seeds')
-    .then((response) => func(response['seeds']));
-}
-
-function go(corpus) {
-  console.log(corpus);
-  populate(randomItem(corpus));
-  // populate(corpus[corpus.length - 1]);
-}
-
-seedQuotes(go);
+// loadQuotes();
+browser.storage.sync.clear().then(loadQuotes);
