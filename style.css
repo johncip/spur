@@ -22,6 +22,7 @@ body {
 #quote {
   font-size: 32pt;
   line-height: 130%;
+  white-space: pre-wrap;
 }
 
 #author {
