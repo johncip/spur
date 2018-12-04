@@ -39,7 +39,7 @@ function seedStorage() {
  * (Line breaks are not taken into account.)
  */
 function adjustedFontSize(text) {
-  const size = 200 * (1 / (text.length ** 0.4));
+  const size = 150 * (1 / (text.length ** 0.3));
   return size + 'px';
 }
 
