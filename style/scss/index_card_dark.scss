@@ -1,4 +1,8 @@
-.indexCard.indexCard-dark {
+@import 'index_card';
+
+.indexCardDark {
+  @extend .indexCard;
+
   body {
     background-color: #202020;
   }
