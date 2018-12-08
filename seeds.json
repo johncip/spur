@@ -24,8 +24,8 @@
     "url"      : "https://motivationmentalist.com/2016/12/15/do-what-makes-you-great-charlie-day-motivational-video/"
   },
   {
-    "quote"    : "Success isn't always about \"greatness\", it's about consistency. Consistent hard work gains success. Greatness will come.",
-    "author"   : "Dwayne \"The Rock\" Johnson",
+    "quote"    : "Success isn't always about “greatness,” it's about consistency. Consistent hard work gains success. Greatness will come.",
+    "author"   : "Dwayne “The Rock” Johnson",
     "category" : "Mindset",
     "url"      : "https://twitter.com/therock/status/548846125529055232"
   },
@@ -58,5 +58,17 @@
     "author"   : "Tim Denning",
     "category" : "Mindset",
     "url"      : "https://addicted2success.com/success-advice/how-losers-are-created-and-how-to-avoid-becoming-one/"
+  },
+  {
+    "quote"    : "To know oneself, one should assert oneself.",
+    "author"   : "Albert Camus",
+    "category" : "Mindset",
+    "url"      : "https://allauthor.com/quotes/76640/"
+  },
+  {
+    "quote"    : "Either you run the day or the day runs you.",
+    "author"   : "Jim Rohn",
+    "category" : "Mindset",
+    "url"      : "https://allauthor.com/quotes/76640/"
   }
 ]
