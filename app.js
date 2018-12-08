@@ -1,4 +1,6 @@
 const get =  document.getElementById.bind(document);
+const storage = browser.storage.sync;
+
 /**
  * Returns a random array element.
  */
@@ -24,7 +26,6 @@ function applyTheme(options) {
  * with the included quotes.
  */
 function loadQuotes() {
-  const storage = browser.storage.sync;
   storage.get('storedQuotes').then((response) => {
     var quotes = response['storedQuotes'];
     if (!quotes) {
@@ -38,7 +39,6 @@ function loadQuotes() {
  * Seeds browser storage with the included quotes.
  */
 function seedStorage() {
-  const storage = browser.storage.sync;
   const url = browser.extension.getURL('seeds.json');
   return fetch(url).then((resp) => resp.json())
                    .then((seeds) => storage.set({storedQuotes: seeds}));
