@@ -1,29 +1,37 @@
+$body-background-color: #ffffff;
+$container-background-color: #fafafa;
+$container-border-color: #cccccc;
+$ink-color: #444444;
+$lighter-ink-color: #888888;
+$link-color: #7799cc;
+
 .indexCard {
   body {
-    background-color: #fff;
+    background-color: $body-background-color;
     font-family: lora, palatino, palatino linotype, book antiqua, georgia, serif;
   }
 
   #container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
     width: 600px;
     padding: 50px;
     border-style: solid;
     border-width: 1px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
 
-    background-color: #fafafa;
-    border-color: #ccc;
+    background-color: $container-background-color;
+    border-color: $container-border-color;
   }
 
   #category,
   #url,
   hr {
+    height: 1em;
     opacity: 1;
     transition-property: height, opacity, margin;
-    height: 1em;
     transition-duration: 0.5s;
     transition-timing-function: ease-in-out;
   }
@@ -31,25 +39,25 @@
   &.is-collapsed #category,
   &.is-collapsed #url,
   &.is-collapsed hr {
-    opacity: 0;
-    height: 0;
     overflow: hidden;
+    height: 0;
     margin: 0;
+    opacity: 0;
   }
 
   #toggle {
+    position: absolute;
+    bottom: -8px;
     font-size: 12px;
     border-radius: 2px;
     cursor: pointer;
     line-height: 10px;
     border-width: 1px;
     border-style: solid;
-    position: absolute;
-    bottom: -8px;
 
-    color: #ccc;
-    background-color: #fafafa;
-    border-color: #ccc;
+    color: $container-border-color;
+    background-color: $container-background-color;
+    border-color: $container-border-color;
 
     &:hover {
       color: #aaa;
@@ -73,18 +81,18 @@
   }
 
   #quote {
-    color: #444;
+    position: relative;
+    color: $ink-color;
     font-size: 32pt;
     line-height: 130%;
     margin-top: 18px;
     margin-bottom: 40px;
-    position: relative;
     z-index: 1;
 
     &:before,
     &:after {
-      font-size: 180px;
       position: absolute;
+      font-size: 180px;
       font-family: georgia;
       opacity: 0.05;
       z-index: -1;
@@ -105,7 +113,7 @@
 
   #author {
     font-size: 16pt;
-    color: #888;
+    color: $lighter-ink-color;
   }
 
   #category,
@@ -117,7 +125,7 @@
   }
 
   #category {
-    color: #bbb;
+    color: $lighter-ink-color;
   }
 
   #url {
@@ -126,19 +134,19 @@
 
   #url a {
     display: block;
-    text-decoration: none;
-    color: #79c;
-    text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+    text-decoration: none;
     width: 100%;
+    text-overflow: ellipsis;
+    color: $link-color;
   }
 
   hr {
-    border: 0;
-    height: 1px;
-    border-top: 1px solid #ddd;
     margin-bottom: 40px;
     margin-top: 40px;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ddd;
   }
 }
