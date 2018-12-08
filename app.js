@@ -80,3 +80,24 @@ function render(record) {
 applyTheme({});
 // loadQuotes();
 browser.storage.sync.clear().then(loadQuotes);
+
+// -- start expanded stuff
+let expanded = false;
+
+get('toggle').onclick = function(event) {
+  const containerDiv =  get('container');
+  const rootClasses = document.documentElement.classList;
+  const button = event.target;
+
+  expanded = !expanded;
+  if (expanded) {
+    rootClasses.remove('is-collapsed');
+    rootClasses.add('is-expanded');
+    button.textContent = "\u25b2";
+  } else {
+    rootClasses.remove('is-expanded');
+    rootClasses.add('is-collapsed');
+    button.textContent = "\u25bc";
+  }
+}
+// -- end expanded stuff
