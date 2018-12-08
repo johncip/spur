@@ -92,3 +92,7 @@ Thumbs.db
 
 # personal
 notes.txt
+
+# sass source maps & compiled css
+*.css.map
+*.css
