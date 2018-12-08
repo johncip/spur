@@ -1,19 +1,26 @@
 @import 'index_card';
 
+$body-background-color: #202020;
+$container-background-color: #282829;
+$container-border-color: #444444;
+$ink-color: #cccccc;
+$faded-ink-color: #777788;
+$link-color: #556699;
+
 .indexCardDark {
   @extend .indexCard;
 
   body {
-    background-color: #202020;
+    background-color: $body-background-color;
   }
 
   #container {
-    background-color: #282829;
-    border-color: #444;
+    background-color: $container-background-color;
+    border-color: $container-border-color;
   }
 
   #quote {
-    color: #ccc;
+    color: $ink-color;
 
     &:before,
     &:after {
@@ -22,30 +29,36 @@
   }
 
   #author {
-    color: #778;
+    color: $faded-ink-color;
   }
 
   #category {
-    color: #445;
+    color: $faded-ink-color;
   }
 
   #url a {
-    color: #569;
+    color: $link-color;
   }
 
   hr {
-    border-color: #444;
+    border-color: $container-border-color;
   }
 
   #toggle {
-    color: #444;
-    background-color: #333;
-    border-color: #444;
+    color: $container-border-color;
+    background-color: $container-background-color;
+    border-color: $container-border-color;
 
     &:hover {
-      color: #777;
-      background-color: #444;
-      border-color: #777;
+      color: lighten($container-border-color, 10%);
+      background-color: lighten($container-background-color, 10%);
+      border-color: lighten($container-border-color, 10%);
+    }
+
+    &:active {
+      color: lighten($container-border-color, 15%);
+      background-color: lighten($container-background-color, 15%);
+      border-color: lighten($container-border-color, 15%);
     }
   }
 }
