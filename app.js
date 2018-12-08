@@ -1,3 +1,4 @@
+const get =  document.getElementById.bind(document);
 /**
  * Returns a random array element.
  */
@@ -59,21 +60,21 @@ function adjustedFontSize(text) {
  */
 function render(record) {
   // quote
-  const quoteDiv = document.getElementById('quote');
+  const quoteDiv = get('quote');
   quoteDiv.textContent = record['quote'];
   quoteDiv.style.fontSize = adjustedFontSize(record['quote']);
 
   // author
-  document.getElementById('author').textContent = record['author'];
+  get('author').textContent = record['author'];
 
   // category
-  document.getElementById('category').textContent = record['category'];
+  get('category').textContent = record['category'];
 
   // url
   const aTag = document.createElement('a');
   aTag.setAttribute('href', record['url']);
   aTag.innerHTML = record['url'];
-  document.getElementById('url').append(aTag);
+  get('url').append(aTag);
 }
 
 
