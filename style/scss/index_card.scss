@@ -60,15 +60,15 @@ $link-color: #7799cc;
     border-color: $container-border-color;
 
     &:hover {
-      color: #aaa;
-      background-color: #eee;
-      border-color: #aaa;
+      color: darken($container-border-color, 10%);
+      background-color: darken($container-background-color, 10%);
+      border-color: darken($container-border-color, 10%);
     }
 
     &:active {
-      color: #999;
-      background-color: #ddd;
-      border-color: #999;
+      color: darken($container-border-color, 15%);
+      background-color: darken($container-background-color, 15%);
+      border-color: darken($container-border-color, 15%);
     }
   }
 
@@ -82,12 +82,12 @@ $link-color: #7799cc;
 
   #quote {
     position: relative;
-    color: $ink-color;
-    font-size: 32pt;
-    line-height: 130%;
     margin-top: 18px;
     margin-bottom: 40px;
+    font-size: 32pt;
+    line-height: 130%;
     z-index: 1;
+    color: $ink-color;
 
     &:before,
     &:after {
@@ -135,9 +135,9 @@ $link-color: #7799cc;
   #url a {
     display: block;
     overflow: hidden;
+    width: 100%;
     white-space: nowrap;
     text-decoration: none;
-    width: 100%;
     text-overflow: ellipsis;
     color: $link-color;
   }
