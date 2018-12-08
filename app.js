@@ -1,5 +1,5 @@
 const get =  document.getElementById.bind(document);
-const storage = browser.storage.sync;
+// const storage = browser.storage.sync;
 
 /**
  * Returns a random array element.
@@ -14,11 +14,11 @@ function randomItem(arr) {
  * Given the stored options, applies the selected theme, or the default.
  */
 function applyTheme(options) {
-  const theme = options['theme'] || 'indexCard';
-  document.documentElement.classList.add(theme);
-
-  const variant = options['variant'] || 'dark';
-  document.documentElement.classList.add(theme + '-' + variant);
+  // const theme = options['theme'] || 'indexCard';
+  // document.documentElement.classList.add(theme);
+  //
+  // const variant = options['variant'] || 'dark';
+  // document.documentElement.classList.add(theme + '-' + variant);
 }
 
 /**
@@ -80,7 +80,7 @@ function render(record) {
 
 applyTheme({});
 // loadQuotes();
-browser.storage.sync.clear().then(loadQuotes);
+// storage.clear().then(loadQuotes);
 
 // -- start expanded stuff
 let expanded = false;
