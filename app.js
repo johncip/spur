@@ -1,5 +1,17 @@
 const get =  document.getElementById.bind(document);
-// const storage = browser.storage.sync;
+let storage = null;
+
+if (window.browser) {
+  storage = browser.storage.sync;
+} else {
+  /* for quick loading of HTML, remove later */
+  render({
+    "quote"    : "People who are unable to motivate themselves must be content with mediocrity, no matter how impressive their other talents.",
+    "author"   : "Andrew Carnegie",
+    "category" : "Mindset",
+    "url"      : "https://www.brainyquote.com/quotes/andrew_carnegie_391523"
+  });
+}
 
 /**
  * Returns a random array element.
@@ -65,13 +77,12 @@ function render(record) {
   get('author').textContent = record['author'];
 
   // category
-  get('category').textContent = record['category'];
+  get('category').lastElementChild.textContent = record['category'];
 
   // url
-  const aTag = document.createElement('a');
-  aTag.setAttribute('href', record['url']);
-  aTag.innerHTML = record['url'];
-  get('url').append(aTag);
+  const urlAnchor = get('url');
+  get('url').firstElementChild.setAttribute('href', record['url']);
+  get('urlText').textContent = record['url'];
 }
 
 
