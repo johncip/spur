@@ -34,14 +34,14 @@ function applyTheme(options) {
  * Loads quote list from browser storage. If there are no quotes, storage is first seeded
  * with the included quotes.
  */
-function loadQuotes() {
-  storage.get('storedQuotes').then((response) => {
-    var quotes = response['storedQuotes'];
-    if (!quotes) {
-      seedStorage().then(loadQuotes);
-    }
-    render(randomItem(quotes));
-  });
+async function loadQuotes() {
+  const key = 'storedQuotes';
+  const quotes = await storage.get(key);
+  if (!quotes) {
+    await seedStorage();
+    return loadQuotes();
+  }
+  return quotes[key];
 }
 
 /**
@@ -87,7 +87,9 @@ function render(record) {
 
 
 applyTheme({});
-// loadQuotes();
+if (window.browser) {
+  loadQuotes().then(qs => render(randomItem(qs)));
+}
 // storage.clear().then(loadQuotes);
 
 // -- start expanded stuff
