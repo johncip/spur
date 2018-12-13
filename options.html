@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Options</title>
+    <script src="vendor/jquery-3.3.1.slim.min.js"></script>
+  </head>
+  <body>
+    <div id="options">
+      <label for="theme">theme</label>
+
+      <select id="theme">
+        <option value="indexCard">index card</option>
+        <option value="indexCardDark">index card dark</option>
+      </select>
+
+      <br/>
+      <label for="wakeTime">wakeTime</label>
+      <input type="text" id="wakeTime"></input>
+      <div>
+        <button>save</button>
+        <span id="savedStatus"></span>
+      </div>
+    </div>
+    <script type="text/javascript" src="util.js"></script>
+    <script type="text/javascript" src="options.js"></script>
+  </body>
+</html>
