@@ -28,7 +28,7 @@ function applyTheme(options) {
 async function loadQuotes() {
   const key = 'storedQuotes';
   const quotes = await storage.get(key);
-  if (!quotes) {
+  if (!Object.keys(quotes).length) {
     await seedStorage();
     return loadQuotes();
   }
