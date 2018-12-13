@@ -14,15 +14,6 @@ if (window.browser) {
 }
 
 /**
- * Returns a random array element.
- */
-function randomItem(arr) {
-  const rIndex = Math.floor(Math.random() * arr.length);
-  return arr[rIndex];
-  // return arr[3]; // randomly selected by fair dice roll
-}
-
-/**
  * Given the stored options, applies the selected theme, or the default.
  */
 function applyTheme(options) {
