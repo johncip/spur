@@ -76,8 +76,12 @@ function render(record) {
   get('urlText').textContent = record['url'];
 }
 
+if (window.browser) {
+  loadOptions().then(opts => applyTheme(opts));
+} else {
+  applyTheme({});
+}
 
-applyTheme({});
 if (window.browser) {
   loadQuotes().then(qs => render(randomItem(qs)));
 }
