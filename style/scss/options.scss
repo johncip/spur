@@ -1,0 +1,64 @@
+body, input, select, option, textarea {
+  font-size: 14px;
+}
+
+div {
+  margin-bottom: 16px;
+}
+
+#options,
+#quotes {
+  border: 3px solid gray;
+  width: 700px;
+  padding: 8px;
+}
+
+.quoteParent {
+  display: flex;
+}
+
+.leftChild {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.rightChild {
+  display: flex;
+  align-items: center;
+
+  button {
+    background-color: #aa3311;
+    color: white;
+    border: 0;
+    border-radius: 1px;
+    height: 20px;
+    width: 20px;
+    text-align: center;
+    line-height: 20px;
+    padding: 0;
+    font-size: 20px;
+  }
+}
+
+
+#quotes input {
+  margin: 4px;
+  padding: 4px;
+  // border-radius: px;
+}
+
+.quoteInput {
+  width: 100%;
+}
+
+.authorInput {
+  width: 25%;
+}
+
+.categoryInput {
+  width: 25%;
+}
+
+.urlInput {
+  width: 25%;
+}
