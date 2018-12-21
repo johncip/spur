@@ -16,8 +16,7 @@ if (window.browser) {
 /**
  * Given the stored options, applies the selected theme, or the default.
  */
-function applyTheme(options) {
-  const theme = options['theme'] || 'indexCardDark';
+function applyTheme(theme) {
   document.documentElement.classList.add(theme);
 }
 
@@ -63,7 +62,7 @@ function render(record) {
 }
 
 if (window.browser) {
-  loadOptions().then(opts => applyTheme(opts));
+  loadOptions().then(opts => applyTheme(opts['theme']));
 } else {
   applyTheme({});
 }
