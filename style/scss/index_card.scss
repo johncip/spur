@@ -4,7 +4,9 @@ $container-border-color: #cccccc;
 $ink-color: #444444;
 $faded-ink-color: #888888;
 $link-color: #7799cc;
-$fancy-font-stack: lora, palatino, palatino linotype, book antiqua, georgia, serif;
+$fancy-font-stack: zilla slab, georgia, serif;
+
+// TODO: swap out courier prime for something free
 $nerdy-font-stack: 'courier prime', 'sf mono', monospace;
 
 %nerdy-type {
