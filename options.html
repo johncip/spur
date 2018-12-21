@@ -9,21 +9,29 @@
 
   <body>
     <div id="options">
-      <label for="theme">theme</label>
-
-      <select id="theme">
-        <option value="indexCard">index card</option>
-        <option value="indexCardDark">index card dark</option>
-      </select>
-
-      <br/>
-      <label for="wakeTime">wakeTime</label>
-      <input type="text" id="wakeTime"></input>
       <div>
-        <button>save</button>
+        <label for="theme">Theme</label>
+        <select id="theme">
+          <option value="indexCard">index card</option>
+          <option value="indexCardDark">index card dark</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="wakeTime">Wake Time</label>
+        <input type="text" id="wakeTime"></input>
+      </div>
+
+      <div>
+        <button>Save</button>
         <span id="savedStatus"></span>
       </div>
     </div>
+
+    <div id="quotes">
+      <!-- JS -->
+    </div>
+
     <script type="text/javascript" src="util.js"></script>
     <script type="text/javascript" src="options.js"></script>
   </body>
