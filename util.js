@@ -41,3 +41,19 @@ async function loadOptions() {
   });
   return options;
 }
+
+/**
+ * Loads quote list from browser storage. If there are no quotes, storage is first seeded
+ * with the included quotes.
+ */
+async function loadQuotes() {
+  const key = 'storedQuotes';
+  const storage = browser.storage.sync;
+  const quotes = await storage.get(key);
+
+  if (!Object.keys(quotes).length) {
+    await seedStorage();
+    return loadQuotes();
+  }
+  return quotes[key];
+}
