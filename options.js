@@ -1,8 +1,8 @@
 /* Renders the options page. */
 async function render() {
-  const options = await loadOptions();
-  console.log(options);
-  $('#wakeTime')[0].value = options.wakeTime;
+  // do options
+  const opts = await loadOptions();
+  $('#wakeTime').val(opts.wakeTime); // TODO: make this a time input
 }
 
 $('button').click(async () => {
@@ -12,7 +12,7 @@ $('button').click(async () => {
       wakeTime: $('#wakeTime')[0].value
     }
   });
-  $('#savedStatus')[0].text = 'Saved!'
+  $('#savedStatus').text('Saved!')
 });
 
 render();
