@@ -1,3 +1,8 @@
+const DEFAULT_OPTIONS = {
+  theme: 'indexCard',
+  wakeTime: '6 am'
+};
+
 /**
  * Returns a random array element.
  */
@@ -16,18 +21,19 @@ async function readKey(key) {
   return response[key];
 }
 
-const DEFAULT_OPTIONS = {
-  theme: 'indexCard',
-  wakeTime: '6 am'
-};
-
 /**
  * Loads options from storage, or supplies defaults.
+ *
+ * TODO: cleaner hash merge
  */
 async function loadOptions() {
   const options = await readKey('options');
 
-  Object.keys(options).forEach((key) => {
+  if (!options) {
+    return DEFAULT_OPTIONS;
+  }
+
+  Object.keys(DEFAULT_OPTIONS).forEach((key) => {
     const val = options[key];
     if (val === null || val === undefined || val === "") {
       options[key] = DEFAULT_OPTIONS[key];
