@@ -3,12 +3,12 @@ function renderQuote(quote, $root) {
   const $left = $('<div class="leftChild">').appendTo($parent);
   const $right = $('<div class="rightChild">').appendTo($parent);
 
-  $('<textarea class="quoteInput">').val(quote['quote']).appendTo($left);
-  $('<input type="text" class="authorInput">').val(quote['author']).appendTo($left);
-  $('<input type="text" class="categoryInput">').val(quote['category']).appendTo($left);
-  $('<input type="text" class="urlInput">').val(quote['url']).appendTo($left);
+  $('<textarea class="input-quote">').val(quote['quote']).appendTo($left);
+  $('<input type="text" class="input-author">').val(quote['author']).appendTo($left);
+  $('<input type="text" class="input-category">').val(quote['category']).appendTo($left);
+  $('<input type="text" class="input-url">').val(quote['url']).appendTo($left);
 
-  $('<button>').text('✖').appendTo($right);
+  $('<button>').addClass('deleteBtn').text('✖').appendTo($right);
 
   $parent.appendTo($root);
 }
@@ -21,7 +21,7 @@ async function render() {
 
   // do quotes
   const quotes = await loadQuotes();
-  const $root = $('#quotes');
+  const $root = $('.js-quotes').eq(0);
   quotes.forEach((quote) => renderQuote(quote, $root));
 }
 

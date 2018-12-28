@@ -4,32 +4,35 @@
     <meta charset="utf-8"/>
     <title>Options</title>
     <script src="vendor/jquery-3.3.1.slim.min.js"></script>
+    <script src="http://backbonejs.org/backbone.js"></script>
     <link rel="stylesheet" type="text/css" href="style/css/options.css">
   </head>
 
   <body>
-    <div id="options">
-      <div>
-        <label for="theme">Theme</label>
-        <select id="theme">
-          <option value="indexCard">index card</option>
-          <option value="indexCardDark">index card dark</option>
-        </select>
-      </div>
+    <div class="l-container">
+      <section class="section section-options js-options">
+        <div>
+          <label for="theme">Theme</label>
+          <select id="theme">
+            <option value="indexCard">index card</option>
+            <option value="indexCardDark">index card dark</option>
+          </select>
+        </div>
 
-      <div>
-        <label for="wakeTime">Wake Time</label>
-        <input type="text" id="wakeTime"></input>
-      </div>
+        <div>
+          <label for="wakeTime">Wake Time</label>
+          <input type="text" id="wakeTime"></input>
+        </div>
 
-      <div>
-        <button>Save</button>
-        <span id="savedStatus"></span>
-      </div>
-    </div>
+        <div>
+          <button>Save</button>
+          <span id="savedStatus"></span>
+        </div>
+      </section>
 
-    <div id="quotes">
-      <!-- JS -->
+      <section class="section section-quotes js-quotes">
+        <!-- JS -->
+      </section>
     </div>
 
     <script type="text/javascript" src="util.js"></script>

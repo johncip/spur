@@ -1,16 +1,59 @@
-body, input, select, option, textarea {
-  font-size: 14px;
+.l-container {
+  max-width: 700px;
 }
 
-div {
+.section {
   margin-bottom: 16px;
+  background-color: #f5f5f5;
+  border: 1px solid #e5e5e5;
+  border-radius: 2px;
+  padding: 8px;
+  font-size: 14px;
+  color: #444;
+  font-family: sans-serif;
 }
 
-#options,
-#quotes {
-  border: 3px solid gray;
-  width: 700px;
-  padding: 8px;
+/* quotes */
+.section-quotes {
+  input {
+    margin: 4px;
+    padding: 4px;
+    font-size: 12px;
+
+    &:first-of-type {
+      margin-left: 0;
+    }
+
+    &:last-of-type {
+      margin-right: 0;
+      flex-grow: 2;
+    }
+  }
+
+  textarea {
+    padding: 4px;
+    line-height: 125%;
+    border: 1px solid lightgray;
+    width: 100%;
+    font-family: sans-serif;
+    font-size: 12px;
+  }
+}
+
+.input-quote {
+  width: 100%;
+}
+
+.input-author {
+  width: 25%;
+}
+
+.input-category {
+  width: 25%;
+}
+
+.input-url {
+  width: 25%;
 }
 
 .quoteParent {
@@ -20,45 +63,23 @@ div {
 .leftChild {
   display: flex;
   flex-wrap: wrap;
+  margin-right: 12px;
 }
 
 .rightChild {
   display: flex;
   align-items: center;
-
-  button {
-    background-color: #aa3311;
-    color: white;
-    border: 0;
-    border-radius: 1px;
-    height: 20px;
-    width: 20px;
-    text-align: center;
-    line-height: 20px;
-    padding: 0;
-    font-size: 20px;
-  }
 }
 
-
-#quotes input {
-  margin: 4px;
-  padding: 4px;
-  // border-radius: px;
-}
-
-.quoteInput {
-  width: 100%;
-}
-
-.authorInput {
-  width: 25%;
-}
-
-.categoryInput {
-  width: 25%;
-}
-
-.urlInput {
-  width: 25%;
+.deleteBtn {
+  background-color: #aa3311;
+  color: white;
+  border: 0;
+  border-radius: 1px;
+  height: 20px;
+  width: 20px;
+  text-align: center;
+  line-height: 20px;
+  padding: 0;
+  font-size: 20px;
 }
