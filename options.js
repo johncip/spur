@@ -36,3 +36,19 @@ $('button').click(async () => {
 });
 
 render();
+
+function sup() {
+  var AppView = Backbone.View.extend({
+    el: '#bb-container',
+    initialize: function() {
+      this.render();
+    },
+    render: function() {
+      this.$el.html('supbra');
+    }
+  });
+
+  new AppView();
+}
+
+sup();
