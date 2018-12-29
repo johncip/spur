@@ -1,17 +1,3 @@
-function newRenderEditQuote(model) {
-  return Mustache.render(`
-    <div class="quoteParent">
-      <div class="leftChild">
-        <textarea class="input-quote">{{ quote }}</textarea>
-        <input type="text" class="input-author" value="{{author}}"></input>
-        <input type="text" class="input-category" value="{{category}}"></input>
-        <input type="text" class="input-url" value="{{url}}"></input>
-      </div>
-        <div class="rightChild">
-        </div>
-    </div>
-  `, model);
-}
 
 /* Renders the options page. */
 async function oldRender() {
@@ -53,8 +39,23 @@ app.QuoteView = Backbone.View.extend({
     this.render();
   },
   tagName: 'li',
+  renderEdit: function() {
+    return Mustache.render(`
+      <div class="quoteParent">
+        <div class="leftChild">
+          <textarea class="input-quote">{{ quote }}</textarea>
+          <input type="text" class="input-author" value="{{author}}"></input>
+          <input type="text" class="input-category" value="{{category}}"></input>
+          <input type="text" class="input-url" value="{{url}}"></input>
+        </div>
+        <div class="rightChild">
+          <button class="deleteBtn">✖</button>
+        </div>
+      </div>
+    `, this.model.attributes);
+  },
   render: function() {
-    const dom = newRenderEditQuote(this.model.attributes);
+    const dom = this.renderEdit();
     $(dom).appendTo(this.$el);
   }
 });
