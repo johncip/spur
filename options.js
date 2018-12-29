@@ -1,20 +1,20 @@
-function renderQuote(quote, $root) {
-  const $parent = $('<div class="quoteParent">');
-  const $left = $('<div class="leftChild">').appendTo($parent);
-  const $right = $('<div class="rightChild">').appendTo($parent);
-
-  $('<textarea class="input-quote">').val(quote['quote']).appendTo($left);
-  $('<input type="text" class="input-author">').val(quote['author']).appendTo($left);
-  $('<input type="text" class="input-category">').val(quote['category']).appendTo($left);
-  $('<input type="text" class="input-url">').val(quote['url']).appendTo($left);
-
-  $('<button>').addClass('deleteBtn').text('✖').appendTo($right);
-
-  $parent.appendTo($root);
+function newRenderEditQuote(model) {
+  return Mustache.render(`
+    <div class="quoteParent">
+      <div class="leftChild">
+        <textarea class="input-quote">{{ quote }}</textarea>
+        <input type="text" class="input-author" value="{{author}}"></input>
+        <input type="text" class="input-category" value="{{category}}"></input>
+        <input type="text" class="input-url" value="{{url}}"></input>
+      </div>
+        <div class="rightChild">
+        </div>
+    </div>
+  `, model);
 }
 
 /* Renders the options page. */
-async function render() {
+async function oldRender() {
   // do options
   const opts = await loadOptions();
   $('#wakeTime').val(opts.wakeTime); // TODO: make this a time input
@@ -22,7 +22,7 @@ async function render() {
   // do quotes
   const quotes = await loadQuotes();
   const $root = $('.js-quotes').eq(0);
-  quotes.forEach((quote) => renderQuote(quote, $root));
+  quotes.forEach((quote) => oldRenderEditQuote(quote, $root));
 }
 
 $('button').click(async () => {
@@ -35,20 +35,39 @@ $('button').click(async () => {
   $('#savedStatus').text('Saved!')
 });
 
-render();
+// ---------------------------------------------------------------------------------------
 
-function sup() {
-  var AppView = Backbone.View.extend({
-    el: '#bb-container',
-    initialize: function() {
-      this.render();
-    },
-    render: function() {
-      this.$el.html('supbra');
-    }
-  });
+const app = {};
 
-  new AppView();
-}
+app.QuoteModel = Backbone.Model.extend({
+  defaults: {
+    author: 'john',
+    quote: "don't count your chickens before they hatch",
+    category: 'chicken farming',
+    url: 'http://google.com'
+  }
+});
 
-sup();
+app.QuoteView = Backbone.View.extend({
+  initialize: function() {
+    this.render();
+  },
+  tagName: 'li',
+  render: function() {
+    const dom = newRenderEditQuote(this.model.attributes);
+    $(dom).appendTo(this.$el);
+  }
+});
+
+app.QuoteListView = Backbone.View.extend({
+  initialize: function() {
+    this.render();
+  },
+  el: '#quoteList',
+  render: function() {
+    const aQuote = new app.QuoteView({model: new app.QuoteModel()});
+    this.$el.append(aQuote.el);
+  }
+});
+
+new app.QuoteListView();
