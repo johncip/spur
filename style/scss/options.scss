@@ -1,10 +1,23 @@
-.l-container {
-  max-width: 700px;
+// reset
+ul {
+  margin: 0;
+  list-style-type: none;
+  padding-left: 0;
 }
 
-.section {
-  margin-bottom: 16px;
-  background-color: #f5f5f5;
+body {
+  background-color: #555;
+}
+
+.l-container {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.optionSection {
+  margin-bottom: 24px;
+  // background-color: #f5f5f5;
+  background-color: #777;
   border: 1px solid #e5e5e5;
   border-radius: 2px;
   padding: 8px;
@@ -13,61 +26,30 @@
   font-family: sans-serif;
 }
 
-// quotes
-// TODO: don't nest like this
-.section-quotes {
-  input {
-    margin: 4px;
-    padding: 4px;
-    font-size: 12px;
-
-    &:first-of-type {
-      margin-left: 0;
-    }
-
-    &:last-of-type {
-      margin-right: 0;
-      flex-grow: 2;
-    }
-  }
-
-  textarea {
-    padding: 4px;
-    line-height: 125%;
-    border: 1px solid lightgray;
-    width: 100%;
-    font-family: sans-serif;
-    font-size: 12px;
-  }
+.setting {
+  margin-bottom: 12px;
 }
 
-.input-quote {
-  width: 100%;
+.settingLabel {
+  margin-right: 8px;
 }
 
-.input-author {
-  width: 25%;
-}
-
-.input-category {
-  width: 25%;
-}
-
-.input-url {
-  width: 25%;
-}
-
-.quoteParent {
+// -----------------------------------------------------------------
+// options quote common
+// -----------------------------------------------------------------
+.quoteListItem {
   display: flex;
+  margin-bottom: 16px;
 }
 
-.leftChild {
+.quoteListItem--first {
   display: flex;
   flex-wrap: wrap;
+  width: 640px;
   margin-right: 12px;
 }
 
-.rightChild {
+.quoteListItem--second {
   display: flex;
   align-items: center;
 }
@@ -83,4 +65,71 @@
   line-height: 20px;
   padding: 0;
   font-size: 20px;
+}
+
+// -----------------------------------------------------------------
+// .display -- options quote display
+// -----------------------------------------------------------------
+.display {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.display-quote {
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.display-category {
+  width: 25%;
+}
+
+.display-author {
+  width: 25%;
+}
+
+.display-url {
+  width: 50%;
+}
+
+// -----------------------------------------------------------------
+// .edit -- options quote edit
+// -----------------------------------------------------------------
+.edit {
+  margin: 4px;
+  padding: 4px;
+  font-size: 12px;
+  opacity: 0.5;
+
+  &:first-of-type {
+    margin-left: 0;
+  }
+
+  &:last-of-type {
+    margin-right: 0;
+    flex-grow: 2;
+  }
+}
+
+.edit-quote {
+  width: 100%;
+  padding: 4px;
+  border: 1px solid lightgray;
+  font-family: sans-serif;
+  font-size: 12px;
+  line-height: 125%;
+  margin-bottom: 12px;
+}
+
+.edit-author {
+  width: 25%;
+}
+
+.edit-category {
+  width: 25%;
+}
+
+.edit-url {
+  width: 25%;
 }
