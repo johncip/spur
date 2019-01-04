@@ -13,17 +13,18 @@
 
   <body>
     <div class="l-container">
-      <section class="section section-options js-options">
+      <h1>Options</h1>
+      <section class="optionSection">
 
-        <div>
-          <label for="theme">Theme</label>
+        <div class="setting">
+          <label for="theme" class="settingLabel">Theme</label>
           <select id="theme">
             <option value="indexCard">index card</option>
             <option value="indexCardDark">index card dark</option>
           </select>
         </div>
 
-        <div>
+        <div class="setting" class="settingLabel">
           <label for="wakeTime">Wake Time</label>
           <input type="text" id="wakeTime"></input>
         </div>
@@ -35,8 +36,8 @@
 
       </section>
 
-      <section class="section section-quotes js-quotes">
-        <ul id="quoteList">
+      <section class="optionSection">
+        <ul class="js-quoteList">
           <!-- JS -->
         </ul>
       </section>

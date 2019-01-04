@@ -1,74 +1,94 @@
-
-/* Renders the options page. */
-async function oldRender() {
-  // do options
-  const opts = await loadOptions();
-  $('#wakeTime').val(opts.wakeTime); // TODO: make this a time input
-
-  // do quotes
-  const quotes = await loadQuotes();
-  const $root = $('.js-quotes').eq(0);
-  quotes.forEach((quote) => oldRenderEditQuote(quote, $root));
-}
-
-$('button').click(async () => {
-  await browser.storage.sync.set({
-    options: {
-      theme: $('#theme')[0].value,
-      wakeTime: $('#wakeTime')[0].value
-    }
-  });
-  $('#savedStatus').text('Saved!')
+const Quote = Backbone.Model.extend({
+  defaults: {}
 });
 
-// ---------------------------------------------------------------------------------------
-
-const app = {};
-
-app.QuoteModel = Backbone.Model.extend({
-  defaults: {
-    author: 'john',
-    quote: "don't count your chickens before they hatch",
-    category: 'chicken farming',
-    url: 'http://google.com'
-  }
+const Corpus = Backbone.Collection.extend({
+  model: Quote
 });
 
-app.QuoteView = Backbone.View.extend({
-  initialize: function() {
-    this.render();
-  },
+const QuoteListItem = Backbone.View.extend({
   tagName: 'li',
   renderEdit: function() {
     return Mustache.render(`
-      <div class="quoteParent">
-        <div class="leftChild">
-          <textarea class="input-quote">{{ quote }}</textarea>
-          <input type="text" class="input-author" value="{{author}}"></input>
-          <input type="text" class="input-category" value="{{category}}"></input>
-          <input type="text" class="input-url" value="{{url}}"></input>
+      <div class="quoteListItem">
+        <div class="quoteListItem--first">
+          <textarea class="edit edit-quote">{{ quote }}</textarea>
+          <input type="text" class="edit edit-author" value="{{author}}"></input>
+          <input type="text" class="edit edit-category" value="{{category}}"></input>
+          <input type="text" class="edit edit-url" value="{{url}}"></input>
         </div>
-        <div class="rightChild">
+        <div class="quoteListItem--second">
+          <button class="deleteBtn">✖</button>
+        </div>
+      </div>
+    `, this.model.attributes);
+  },
+  renderDisplay: function() {
+    return Mustache.render(`
+      <div class="quoteListItem">
+        <div class="quoteListItem--first">
+          <div class="display display-quote">{{ quote }}</div>
+          <div class="display display-author">{{ author }}</div>
+          <div class="display display-category">{{ category }}</div>
+          <div class="display display-url">{{ url }}</div>
+        </div>
+        <div class="quoteListItem--second">
           <button class="deleteBtn">✖</button>
         </div>
       </div>
     `, this.model.attributes);
   },
   render: function() {
-    const dom = this.renderEdit();
+    // const dom = this.renderEdit();
+    const dom = this.renderDisplay();
     $(dom).appendTo(this.$el);
+    return this;
   }
 });
 
-app.QuoteListView = Backbone.View.extend({
-  initialize: function() {
-    this.render();
+const QuoteListView = Backbone.View.extend({
+  collection: null,
+  el: '.js-quoteList',
+  initialize: function(options) {
+    this.collection = options.collection;
   },
-  el: '#quoteList',
   render: function() {
-    const aQuote = new app.QuoteView({model: new app.QuoteModel()});
-    this.$el.append(aQuote.el);
+    this.$el.empty();
+
+    this.collection.forEach((item) => {
+      var view = new QuoteListItem({
+        model: new Quote(item)
+      });
+      this.el.append(view.render().el);
+    });
+
+    return this;
   }
 });
 
-new app.QuoteListView();
+
+async function renderOptions() {
+  const opts = await loadOptions();
+  $('#wakeTime').val(opts.wakeTime); // TODO: make this a time input
+
+  $('button').click(async () => {
+    await browser.storage.sync.set({
+      options: {
+        theme: $('#theme')[0].value,
+        wakeTime: $('#wakeTime')[0].value
+      }
+    });
+    $('#savedStatus').text('Saved!')
+  });
+}
+
+async function renderQuotes() {
+  const quotes = await loadQuotes();
+  const view = new QuoteListView({
+    collection: quotes
+  });
+  view.render();
+}
+
+renderOptions();
+renderQuotes();
