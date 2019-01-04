@@ -54,19 +54,6 @@ body {
   align-items: center;
 }
 
-.deleteBtn {
-  background-color: #aa3311;
-  color: white;
-  border: 0;
-  border-radius: 1px;
-  height: 20px;
-  width: 20px;
-  text-align: center;
-  line-height: 20px;
-  padding: 0;
-  font-size: 20px;
-}
-
 // -----------------------------------------------------------------
 // .display -- options quote display
 // -----------------------------------------------------------------
@@ -132,4 +119,32 @@ body {
 
 .edit-url {
   width: 25%;
+}
+
+
+// -----------------------------------------------------------------
+// buttons
+// -----------------------------------------------------------------
+.btn {
+  border-radius: 1px;
+}
+
+.btn-save {
+  background-color: #1133aa;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: 0;
+}
+
+.btn-delete {
+  background-color: #aa3311;
+  color: white;
+  border: 0;
+  height: 20px;
+  width: 20px;
+  text-align: center;
+  line-height: 20px;
+  padding: 0;
+  font-size: 20px;
 }
