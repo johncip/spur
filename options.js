@@ -34,10 +34,10 @@ const QuoteListItem = Backbone.View.extend({
   renderDisplay: function() {
     const template = this.wrapTemplate(`
       <div class="display display-quote">{{ quote }}</div>
-      <div class="display display-author">{{ author }}</div>
-      <div class="display display-category">{{ category }}</div>
-      <div class="display display-url">{{ url }}</div>
     `);
+    // <div class="display display-author">{{ author }}</div>
+    // <div class="display display-category">{{ category }}</div>
+    // <div class="display display-url">{{ url }}</div>
     return Mustache.render(template, this.model.attributes);
   },
   render: function() {
