@@ -1,5 +1,7 @@
 const Quote = Backbone.Model.extend({
-  defaults: {}
+  defaults: {
+    mode: 'display'
+  }
 });
 
 const Corpus = Backbone.Collection.extend({
@@ -8,6 +10,10 @@ const Corpus = Backbone.Collection.extend({
 
 const QuoteListItem = Backbone.View.extend({
   tagName: 'li',
+  initialize: function(options) {
+    this.model = options.model;
+    this.listenTo(this.model, 'change', this.render);
+  },
 
   // TODO: this seems backwards
   wrapTemplate: function(middle) {
@@ -40,9 +46,17 @@ const QuoteListItem = Backbone.View.extend({
     // <div class="display display-url">{{ url }}</div>
     return Mustache.render(template, this.model.attributes);
   },
+
+  // TODO: look into class-based polymorphism for backbone views
   render: function() {
-    const dom = this.renderDisplay();
-    $(dom).appendTo(this.$el);
+    let dom = null;
+    if (this.model.attributes.mode === 'display') {
+      dom = this.renderDisplay();
+    } else {
+      dom = this.renderEdit();
+    }
+
+    this.$el.empty().append(dom);
     return this;
   }
 });
@@ -52,6 +66,19 @@ const QuoteListView = Backbone.View.extend({
   el: '.js-quoteList',
   initialize: function(options) {
     this.collection = options.collection;
+    this.viewList = [];
+  },
+  events: {
+    click: 'handleClick'
+  },
+  handleClick: function(event) {
+    this.viewList.forEach((view) => {
+      if (view.el.contains(event.target)) {
+        view.model.set({mode: 'edit'});
+      } else {
+        view.model.set({mode: 'display'});
+      }
+    });
   },
   render: function() {
     this.$el.empty();
@@ -60,6 +87,7 @@ const QuoteListView = Backbone.View.extend({
       var view = new QuoteListItem({
         model: new Quote(item)
       });
+      this.viewList.push(view);
       this.el.append(view.render().el);
     });
 
@@ -89,6 +117,18 @@ async function renderQuotes() {
     collection: quotes
   });
   view.render();
+
+  $('body').click((ev) => {
+    if ($('.js-quoteList')[0].contains(ev.target)) {
+      return;
+    }
+    /* if they clicked in a display-mode quote & it got removed
+       from the dom (updated) already by container click handler */
+    if (!document.body.contains(ev.target)) {
+      return;
+    }
+    view.handleClick(ev);
+  });
 }
 
 renderOptions();
