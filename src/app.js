@@ -1,3 +1,7 @@
+import 'Styles/app.scss';
+import 'Styles/index_card.scss';
+import 'Styles/index_card_dark.scss';
+
 const get =  document.getElementById.bind(document);
 let storage = null;
 

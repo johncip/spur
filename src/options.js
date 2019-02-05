@@ -1,3 +1,5 @@
+import 'Styles/options.scss';
+
 const Quote = Backbone.Model.extend({
   defaults: {
     mode: 'display'
