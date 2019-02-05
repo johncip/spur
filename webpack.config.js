@@ -5,6 +5,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   mode: 'development',
 
+  resolve: {
+    alias: {
+      Styles: path.resolve(__dirname, 'assets', 'styles'),
+    },
+  },
+
   entry: {
     app: './src/app.js',
     options: './src/options.js',
