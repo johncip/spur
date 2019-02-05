@@ -3,11 +3,14 @@
   "version": "1.0.0",
   "description": "Spur is a browser extension designed to spur your toward greater action. It places a random motivational quote on your new tab window.",
   "main": "app.js",
-  "dependencies": {
-    "webpack-cli": "^3.2.3",
-    "webpack": "^4.29.1"
+  "dependencies": {},
+  "devDependencies": {
+    "clean-webpack-plugin": "^1.0.1",
+    "html-webpack-plugin": "^3.2.0",
+    "html-webpack-template": "^6.2.0",
+    "webpack": "^4.29.1",
+    "webpack-cli": "^3.2.3"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
