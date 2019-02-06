@@ -10,9 +10,10 @@ const Quote = Backbone.Model.extend({
   },
 });
 
-const Corpus = Backbone.Collection.extend({
-  model: Quote,
-});
+// // TODO: use me
+// const Corpus = Backbone.Collection.extend({
+//   model: Quote,
+// });
 
 const QuoteListItem = Backbone.View.extend({
   tagName: 'li',
@@ -67,6 +68,7 @@ const QuoteListItem = Backbone.View.extend({
   },
 });
 
+// TODO: use the Corpus collection (am I just using an array right now?)
 const QuoteListView = Backbone.View.extend({
   collection: null,
   el: '.js-quoteList',
