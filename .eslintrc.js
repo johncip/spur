@@ -1,10 +1,11 @@
 module.exports = {
   extends: 'airbnb',
+  settings: {
+    'import/resolver': 'webpack',
+  },
   env: {
     browser: true,
     jquery: true,
-  },
-  settings: {
-    'import/resolver': 'webpack',
+    webextensions: true,
   },
 };
