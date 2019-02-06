@@ -54,7 +54,7 @@ module.exports = {
     }),
     new WebpackWebExt({
       runOnce: true,
-      maxRetries: 1,
+      maxRetries: 0,
       argv: ["run", "-s", "dist/"],
     })
   ],
