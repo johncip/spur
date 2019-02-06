@@ -2,6 +2,7 @@ const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const WebpackWebExt = require('webpack-webext-plugin');
 
 module.exports = {
   mode: 'development',
@@ -47,5 +48,10 @@ module.exports = {
       chunks: ['options'],
       template: './src/options.html',
     }),
+    new WebpackWebExt({
+      runOnce: true,
+      maxRetries: 1,
+      argv: ["run", "-s", "dist/"],
+    })
   ],
 };
