@@ -68,7 +68,7 @@ function render(record) {
 if (window.browser) {
   loadOptions().then(opts => applyTheme(opts['theme']));
 } else {
-  applyTheme({});
+  applyTheme('indexCard'); // TODO clean up
 }
 
 if (window.browser) {
