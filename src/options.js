@@ -1,4 +1,6 @@
+import $ from 'jquery';
 import Backbone from 'backbone';
+import Mustache from 'mustache';
 
 import 'Styles/options.scss';
 
