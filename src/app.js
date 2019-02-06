@@ -1,7 +1,7 @@
 import { loadOptions, loadQuotes, randomItem } from './util';
 
 require('typeface-zilla-slab');
-require('font-awesome-webpack');
+// require('font-awesome-webpack');
 
 import 'Styles/app.scss';
 import 'Styles/index_card.scss';
