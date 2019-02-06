@@ -1,36 +1,16 @@
+import { loadOptions, loadQuotes, randomItem } from './util';
+
 import 'Styles/app.scss';
 import 'Styles/index_card.scss';
 import 'Styles/index_card_dark.scss';
 
 const get = document.getElementById.bind(document);
-let storage = null;
-
-if (window.browser) {
-  storage = browser.storage.sync;
-} else {
-  /* for quick loading of HTML, remove later */
-  render({
-    quote: 'People who are unable to motivate themselves must be content with mediocrity, no matter how impressive their other talents.',
-    author: 'Andrew Carnegie',
-    category: 'Mindset',
-    url: 'https://www.brainyquote.com/quotes/andrew_carnegie_391523',
-  });
-}
 
 /**
  * Given the stored options, applies the selected theme, or the default.
  */
 function applyTheme(theme) {
   document.documentElement.classList.add(theme);
-}
-
-/**
- * Seeds browser storage with the included quotes.
- */
-function seedStorage() {
-  const url = browser.extension.getURL('seeds.json');
-  return fetch(url).then(resp => resp.json())
-    .then(seeds => storage.set({ storedQuotes: seeds }));
 }
 
 /**
@@ -60,27 +40,17 @@ function render(record) {
   get('category').lastElementChild.textContent = record.category;
 
   // url
-  const urlAnchor = get('url');
   get('url').firstElementChild.setAttribute('href', record.url);
   get('urlText').textContent = record.url;
 }
 
-if (window.browser) {
-  loadOptions().then(opts => applyTheme(opts.theme));
-} else {
-  applyTheme('indexCard'); // TODO clean up
-}
+// ---------------------------------------------------------------------------------------
 
-if (window.browser) {
-  loadQuotes().then(qs => render(randomItem(qs)));
-}
-// storage.clear().then(loadQuotes);
-
-// -- start expanded stuff
+/*
+ * expand the box
+ */
 let expanded = false;
-
-get('toggle').onclick = function (event) {
-  const containerDiv = get('container');
+get('toggle').onclick = (event) => {
   const rootClasses = document.documentElement.classList;
   const button = event.target;
 
@@ -95,4 +65,29 @@ get('toggle').onclick = function (event) {
     button.textContent = '\u25bc';
   }
 };
-// -- end expanded stuff
+
+/*
+ * apply theme
+ */
+if (window.browser) {
+  loadOptions().then(opts => applyTheme(opts.theme));
+} else {
+  applyTheme('indexCard');
+}
+
+/*
+ * print a quote
+ */
+if (window.browser) {
+  loadQuotes().then(qs => render(randomItem(qs)));
+} else {
+  render({
+    quote: 'People who are unable to motivate themselves must be content with mediocrity, no matter how impressive their other talents.',
+    author: 'Andrew Carnegie',
+    category: 'Mindset',
+    url: 'https://www.brainyquote.com/quotes/andrew_carnegie_391523',
+  });
+}
+
+// /* DEBUG: clear (and re-seed) storage */
+// browser.storage.sync.clear().then(loadQuotes);

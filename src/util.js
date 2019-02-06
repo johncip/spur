@@ -6,14 +6,16 @@ const DEFAULT_OPTIONS = {
 /**
  * Returns a random array element.
  */
-function randomItem(arr) {
+export function randomItem(arr) {
   const rIndex = Math.floor(Math.random() * arr.length);
   return arr[rIndex];
   // return arr[3]; // randomly selected by fair dice roll
 }
 
-/* reads an option from browser storage. */
-async function readKey(key) {
+/**
+ * Reads an option from browser storage.
+ */
+export async function readKey(key) {
   const response = await browser.storage.sync.get(key);
   if (!Object.keys(response).length) {
     return null;
@@ -26,7 +28,7 @@ async function readKey(key) {
  *
  * TODO: cleaner hash merge
  */
-async function loadOptions() {
+export async function loadOptions() {
   const options = await readKey('options');
 
   if (!options) {
@@ -43,10 +45,21 @@ async function loadOptions() {
 }
 
 /**
+ * Seeds browser storage with the included quotes.
+ */
+function seedStorage() {
+  const url = browser.extension.getURL('seeds.json');
+  const storage = browser.storage.sync;
+
+  return fetch(url).then(resp => resp.json())
+    .then(seeds => storage.set({ storedQuotes: seeds }));
+}
+
+/**
  * Loads quote list from browser storage. If there are no quotes, storage is first seeded
  * with the included quotes.
  */
-async function loadQuotes() {
+export async function loadQuotes() {
   const key = 'storedQuotes';
   const storage = browser.storage.sync;
   const quotes = await storage.get(key);

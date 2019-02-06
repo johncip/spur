@@ -2,6 +2,8 @@ import $ from 'jquery';
 import Backbone from 'backbone';
 import Mustache from 'mustache';
 
+import { loadOptions, loadQuotes } from './util';
+
 import 'Styles/options.scss';
 
 const Quote = Backbone.Model.extend({
