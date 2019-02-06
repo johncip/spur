@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "Spur is a browser extension designed to spur your toward greater action. It places a random motivational quote on your new tab window.",
   "main": "app.js",
-  "dependencies": {},
+  "dependencies": {
+    "backbone": "^1.3.3",
+    "underscore": "^1.9.1"
+  },
   "devDependencies": {
     "clean-webpack-plugin": "^1.0.1",
     "css-loader": "^2.1.0",
