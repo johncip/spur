@@ -2,23 +2,23 @@ import 'Styles/options.scss';
 
 const Quote = Backbone.Model.extend({
   defaults: {
-    mode: 'display'
-  }
+    mode: 'display',
+  },
 });
 
 const Corpus = Backbone.Collection.extend({
-  model: Quote
+  model: Quote,
 });
 
 const QuoteListItem = Backbone.View.extend({
   tagName: 'li',
-  initialize: function(options) {
+  initialize(options) {
     this.model = options.model;
     this.listenTo(this.model, 'change', this.render);
   },
 
   // TODO: this seems backwards
-  wrapTemplate: function(middle) {
+  wrapTemplate(middle) {
     return `
       <div class="quoteListItem">
         <div class="quoteListItem--first">
@@ -30,7 +30,7 @@ const QuoteListItem = Backbone.View.extend({
       </div>
     `;
   },
-  renderEdit: function() {
+  renderEdit() {
     const template = this.wrapTemplate(`
       <textarea class="edit edit-quote">{{ quote }}</textarea>
       <input type="text" class="edit edit-author" value="{{author}}"></input>
@@ -39,7 +39,7 @@ const QuoteListItem = Backbone.View.extend({
     `, this.model.attributes);
     return Mustache.render(template, this.model.attributes);
   },
-  renderDisplay: function() {
+  renderDisplay() {
     const template = this.wrapTemplate(`
       <div class="display display-quote">{{ quote }}</div>
     `);
@@ -50,7 +50,7 @@ const QuoteListItem = Backbone.View.extend({
   },
 
   // TODO: look into class-based polymorphism for backbone views
-  render: function() {
+  render() {
     let dom = null;
     if (this.model.attributes.mode === 'display') {
       dom = this.renderDisplay();
@@ -60,41 +60,41 @@ const QuoteListItem = Backbone.View.extend({
 
     this.$el.empty().append(dom);
     return this;
-  }
+  },
 });
 
 const QuoteListView = Backbone.View.extend({
   collection: null,
   el: '.js-quoteList',
-  initialize: function(options) {
+  initialize(options) {
     this.collection = options.collection;
     this.viewList = [];
   },
   events: {
-    click: 'handleClick'
+    click: 'handleClick',
   },
-  handleClick: function(event) {
+  handleClick(event) {
     this.viewList.forEach((view) => {
       if (view.el.contains(event.target)) {
-        view.model.set({mode: 'edit'});
+        view.model.set({ mode: 'edit' });
       } else {
-        view.model.set({mode: 'display'});
+        view.model.set({ mode: 'display' });
       }
     });
   },
-  render: function() {
+  render() {
     this.$el.empty();
 
     this.collection.forEach((item) => {
-      var view = new QuoteListItem({
-        model: new Quote(item)
+      const view = new QuoteListItem({
+        model: new Quote(item),
       });
       this.viewList.push(view);
       this.el.append(view.render().el);
     });
 
     return this;
-  }
+  },
 });
 
 
@@ -106,17 +106,17 @@ async function renderOptions() {
     await browser.storage.sync.set({
       options: {
         theme: $('#theme')[0].value,
-        wakeTime: $('#wakeTime')[0].value
-      }
+        wakeTime: $('#wakeTime')[0].value,
+      },
     });
-    $('#savedStatus').text('Saved!')
+    $('#savedStatus').text('Saved!');
   });
 }
 
 async function renderQuotes() {
   const quotes = await loadQuotes();
   const view = new QuoteListView({
-    collection: quotes
+    collection: quotes,
   });
   view.render();
 

@@ -1,6 +1,6 @@
 const DEFAULT_OPTIONS = {
   theme: 'indexCard',
-  wakeTime: '6 am'
+  wakeTime: '6 am',
 };
 
 /**
@@ -35,7 +35,7 @@ async function loadOptions() {
 
   Object.keys(DEFAULT_OPTIONS).forEach((key) => {
     const val = options[key];
-    if (val === null || val === undefined || val === "") {
+    if (val === null || val === undefined || val === '') {
       options[key] = DEFAULT_OPTIONS[key];
     }
   });
