@@ -5,7 +5,13 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const WebpackWebExt = require('webpack-webext-plugin');
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
+
+  node: {
+    global: false,
+  },
+
+  devtool: false,
 
   resolve: {
     alias: {
