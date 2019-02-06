@@ -34,8 +34,8 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(['dist']),
     new CopyWebpackPlugin([
-      'assets/manifest.json',
-      { from: 'assets/images/*', to: '[name].[ext]' }
+      { from: 'assets/*.json', to: '[name].[ext]' },
+      { from: 'assets/images/*.png', to: '[name].[ext]' }
     ]),
     new HtmlWebpackPlugin({
       filename: 'app.html',
