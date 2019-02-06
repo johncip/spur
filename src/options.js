@@ -1,3 +1,5 @@
+import Backbone from 'backbone';
+
 import 'Styles/options.scss';
 
 const Quote = Backbone.Model.extend({
