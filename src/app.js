@@ -1,6 +1,5 @@
 import { loadOptions, loadQuotes, randomItem } from './util';
 
-// import '@fortawesome/fontawesome-free/js/fontawesome'
 // require('font-awesome-webpack');
 
 import 'Styles/app.scss';
