@@ -37,5 +37,8 @@
     "start": "npx webpack"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "webExt": {
+    "sourceDir": "dist"
+  }
 }
