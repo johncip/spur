@@ -3,6 +3,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 // const WebpackWebExt = require('webpack-webext-plugin');
+const GoogleFontsPlugin = require('@beyonk/google-fonts-webpack-plugin');
 
 module.exports = {
   mode: 'production',
@@ -60,6 +61,12 @@ module.exports = {
       filename: 'options.html',
       chunks: ['options'],
       template: './src/options.html',
+    }),
+    new GoogleFontsPlugin({
+      fonts: [
+        { family: 'Zilla Slab', variants: ['300'] },
+      ],
+      formats: ['woff2'],
     }),
     // new WebpackWebExt({
     //   runOnce: true,

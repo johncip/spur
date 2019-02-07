@@ -9,6 +9,7 @@
     "mustache": "^3.0.1"
   },
   "devDependencies": {
+    "@beyonk/google-fonts-webpack-plugin": "^1.2.1",
     "@fortawesome/fontawesome-free": "^5.7.1",
     "clean-webpack-plugin": "^1.0.1",
     "copy-webpack-plugin": "^4.6.0",
