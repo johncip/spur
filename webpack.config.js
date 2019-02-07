@@ -66,7 +66,6 @@ module.exports = {
         { family: 'Work Sans', variants: ['300', '400'] },
         { family: 'Zilla Slab', variants: ['300'] },
 
-
         { family: 'PT Mono', variants: ['400'] },
         // { family: 'Overpass Mono', variants: ['300', '400'] },
         // { family: 'Anonymous Pro', variants: ['400'] },
