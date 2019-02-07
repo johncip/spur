@@ -8,7 +8,9 @@ import 'Styles/app.scss';
 import 'Styles/index_card.scss';
 import 'Styles/index_card_dark.scss';
 
-const get = document.getElementById.bind(document);
+function get(id) {
+  return document.getElementById(id);
+}
 
 /**
  * Given the stored options, applies the selected theme, or the default.
