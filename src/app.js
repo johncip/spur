@@ -46,8 +46,8 @@ function render(record) {
   get('category').lastElementChild.textContent = record.category;
 
   // url
-  get('url').firstElementChild.setAttribute('href', record.url);
-  get('urlText').textContent = record.url;
+  get('urla').setAttribute('href', record.url);
+  get('urla').textContent = record.url;
 }
 
 // ---------------------------------------------------------------------------------------

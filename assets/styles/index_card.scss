@@ -87,17 +87,21 @@ $nerdy-font-stack: 'pt mono', 'sf mono', monospace;
 
   #url {
     @extend %nerdy-type;
+    display: block;
     width: 100%;
     margin-bottom: 18px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: $link-color;
 
     a {
-      display: block;
-      overflow: hidden;
-      width: 100%;
-      white-space: nowrap;
+      color: inherit;
       text-decoration: none;
-      text-overflow: ellipsis;
-      color: $link-color;
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 
