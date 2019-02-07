@@ -5,14 +5,12 @@ $ink-color: #444444;
 $faded-ink-color: #888888;
 $link-color: #7799cc;
 
-// TODO: find a better fallback than georgia
-$fancy-font-stack: 'zilla slab', georgia, serif;
+$fancy-font-stack: 'work sans', georgia, serif;
 
-// TODO: swap out courier prime for something free
-$nerdy-font-stack: 'courier prime', 'sf mono', monospace;
+$nerdy-font-stack: 'pt mono', 'sf mono', monospace;
 
 %nerdy-type {
-  font: italic 9pt $nerdy-font-stack;
+  font: 300 9pt $nerdy-font-stack;
 }
 
 %hidden {

@@ -64,7 +64,18 @@ module.exports = {
     }),
     new GoogleFontsPlugin({
       fonts: [
+        { family: 'Bree Serif', variants: ['400'] }, // options headings?
+
+        { family: 'Aleo', variants: ['300', '400'] },
+        { family: 'Lora', variants: ['400'] },
+        { family: 'Work Sans', variants: ['300', '400'] },
         { family: 'Zilla Slab', variants: ['300'] },
+
+
+        { family: 'PT Mono', variants: ['400'] },
+        // { family: 'Overpass Mono', variants: ['300', '400'] },
+        // { family: 'Anonymous Pro', variants: ['400'] },
+        // { family: 'Roboto Mono', variants: ['italic'] },
       ],
       formats: ['woff2'],
     }),
