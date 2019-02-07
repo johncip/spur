@@ -61,10 +61,10 @@ module.exports = {
       chunks: ['options'],
       template: './src/options.html',
     }),
-    new WebpackWebExt({
-      runOnce: true,
-      maxRetries: 0,
-      argv: ["run", "-s", "dist/"],
-    })
+    // new WebpackWebExt({
+    //   runOnce: true,
+    //   maxRetries: 0,
+    //   argv: ["run", "-s", "dist/"],
+    // })
   ],
 };
