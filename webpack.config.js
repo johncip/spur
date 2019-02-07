@@ -6,13 +6,9 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const GoogleFontsPlugin = require('@beyonk/google-fonts-webpack-plugin');
 
 module.exports = {
-  mode: 'production',
+  mode: 'development',
 
-  node: {
-    global: false,
-  },
-
-  devtool: false,
+  devtool: 'source-map',
 
   resolve: {
     alias: {
