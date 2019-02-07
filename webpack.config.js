@@ -2,7 +2,6 @@ const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-// const WebpackWebExt = require('webpack-webext-plugin');
 const GoogleFontsPlugin = require('@beyonk/google-fonts-webpack-plugin');
 
 module.exports = {
@@ -75,10 +74,5 @@ module.exports = {
       ],
       formats: ['woff2'],
     }),
-    // new WebpackWebExt({
-    //   runOnce: true,
-    //   maxRetries: 0,
-    //   argv: ["run", "-s", "dist/"],
-    // })
   ],
 };
