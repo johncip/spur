@@ -8,9 +8,6 @@ import 'Styles/app.scss';
 import 'Styles/index_card.scss';
 import 'Styles/index_card_dark.scss';
 
-library.add(faBox, faGlobeAmericas);
-dom.watch();
-
 const get = document.getElementById.bind(document);
 
 /**
@@ -95,6 +92,10 @@ if (window.browser) {
     url: 'https://www.brainyquote.com/quotes/andrew_carnegie_391523',
   });
 }
+
+/* font awesome */
+library.add(faBox, faGlobeAmericas);
+dom.watch();
 
 // /* DEBUG: clear (and re-seed) storage */
 // browser.storage.sync.clear().then(loadQuotes);
