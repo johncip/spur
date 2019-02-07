@@ -1,10 +1,15 @@
 import { loadOptions, loadQuotes, randomItem } from './util';
 
-// require('font-awesome-webpack');
+import { library, dom } from "@fortawesome/fontawesome-svg-core";
+import { faBox } from "@fortawesome/free-solid-svg-icons/faBox";
+import { faGlobeAmericas } from "@fortawesome/free-solid-svg-icons/faGlobeAmericas";
 
 import 'Styles/app.scss';
 import 'Styles/index_card.scss';
 import 'Styles/index_card_dark.scss';
+
+library.add(faBox, faGlobeAmericas);
+dom.watch();
 
 const get = document.getElementById.bind(document);
 
