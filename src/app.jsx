@@ -9,13 +9,6 @@ import 'Styles/index_card.scss';
 import 'Styles/index_card_dark.scss';
 
 /**
- * Given the stored options, applies the selected theme, or the default.
- */
-function applyTheme(theme) {
-  document.documentElement.classList.add(theme);
-}
-
-/**
  * Fills the DIVs with quote text, author, etc.
  */
 function render(record) {
@@ -61,9 +54,9 @@ document.getElementById('toggle').onclick = (event) => {
  * apply theme
  */
 if (window.browser) {
-  loadOptions().then(opts => applyTheme(opts.theme));
+  loadOptions().then(opts => document.documentElement.classList.add(opts.theme));
 } else {
-  applyTheme('indexCard');
+  document.documentElement.classList.add('indexCard');
 }
 
 /*
