@@ -34,7 +34,11 @@
     "webpack-cli": "^3.2.3"
   },
   "scripts": {
-    "start": "npx webpack"
+    "build": "webpack",
+    "watch": "webpack -w",
+    "run": "web-ext run",
+    "fflint": "web-ext lint || true",
+    "lint": "eslint . || true"
   },
   "author": "",
   "license": "ISC",
