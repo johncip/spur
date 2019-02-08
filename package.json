@@ -15,7 +15,9 @@
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.2.2",
+    "@babel/preset-react": "^7.0.0",
     "@beyonk/google-fonts-webpack-plugin": "^1.2.1",
+    "babel-loader": "^8.0.5",
     "clean-webpack-plugin": "^1.0.1",
     "copy-webpack-plugin": "^4.6.0",
     "css-loader": "^2.1.0",
