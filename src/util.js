@@ -4,6 +4,17 @@ const DEFAULT_OPTIONS = {
 };
 
 /**
+ * Returns an appropriate font size for the given text string. That is, longer strings will
+ * have a smaller font size, and shorter strings will have a larger font size.
+ *
+ * (Line breaks are not taken into account.)
+ */
+export function adjustedFontSize(text) {
+  const size = 150 * (1 / (text.length ** 0.3));
+  return `${size}px`;
+}
+
+/**
  * Returns a random array element.
  */
 export function randomItem(arr) {

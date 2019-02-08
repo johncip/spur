@@ -2,7 +2,7 @@ import { library, dom } from '@fortawesome/fontawesome-svg-core';
 import { faBox } from '@fortawesome/free-solid-svg-icons/faBox';
 import { faGlobeAmericas } from '@fortawesome/free-solid-svg-icons/faGlobeAmericas';
 
-import { loadOptions, loadQuotes, randomItem } from './util';
+import { loadOptions, loadQuotes, randomItem, adjustedFontSize } from './util';
 
 import 'Styles/app.scss';
 import 'Styles/index_card.scss';
@@ -13,17 +13,6 @@ import 'Styles/index_card_dark.scss';
  */
 function applyTheme(theme) {
   document.documentElement.classList.add(theme);
-}
-
-/**
- * Returns an appropriate font size for the given text string. That is, longer strings will
- * have a smaller font size, and shorter strings will have a larger font size.
- *
- * (Line breaks are not taken into account.)
- */
-function adjustedFontSize(text) {
-  const size = 150 * (1 / (text.length ** 0.3));
-  return `${size}px`;
 }
 
 /**
