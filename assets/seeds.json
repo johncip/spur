@@ -60,15 +60,33 @@
     "url"      : "https://addicted2success.com/success-advice/how-losers-are-created-and-how-to-avoid-becoming-one/"
   },
   {
-    "quote"    : "To know oneself, one should assert oneself.",
-    "author"   : "Albert Camus",
-    "category" : "Mindset",
-    "url"      : "https://allauthor.com/quotes/76640/"
-  },
-  {
     "quote"    : "Either you run the day or the day runs you.",
     "author"   : "Jim Rohn",
-    "category" : "Mindset",
-    "url"      : "https://allauthor.com/quotes/76640/"
+    "category" : "Mindset"
+  },
+  {
+    "quote"    : "The secret of getting ahead is getting started.",
+    "author"   : "Mark Twain",
+    "category" : "Mindset"
+  },
+  {
+    "quote"    : "Try not to become a person of success, but rather try to become a person of value.",
+    "author"   : "Albert Einstein",
+    "category" : "Mindset"
+  },
+  {
+    "quote"    : "The difference between winning and losing is most often not quitting.",
+    "author"   : "Walt Disney",
+    "category" : "Mindset"
+  },
+  {
+    "quote"    : "You'll never plow a field by turning it over in your mind.",
+    "author"   : "Irish proverb",
+    "category" : "Mindset"
+  },
+  {
+    "quote"    : "If the wind will not serve, take to the oars.",
+    "author"   : "Latin proverb",
+    "category" : "Mindset"
   }
 ]
