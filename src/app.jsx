@@ -8,10 +8,6 @@ import 'Styles/app.scss';
 import 'Styles/index_card.scss';
 import 'Styles/index_card_dark.scss';
 
-function get(id) {
-  return document.getElementById(id);
-}
-
 /**
  * Given the stored options, applies the selected theme, or the default.
  */
@@ -35,19 +31,19 @@ function adjustedFontSize(text) {
  */
 function render(record) {
   // quote
-  const quoteDiv = get('quote');
+  const quoteDiv = document.getElementById('quote');
   quoteDiv.textContent = record.quote;
   quoteDiv.style.fontSize = adjustedFontSize(record.quote);
 
   // author
-  get('author').textContent = record.author;
+  document.getElementById('author').textContent = record.author;
 
   // category
-  get('category').lastElementChild.textContent = record.category;
+  document.getElementById('category').lastElementChild.textContent = record.category;
 
   // url
-  get('urla').setAttribute('href', record.url);
-  get('urla').textContent = record.url;
+  document.getElementById('urla').setAttribute('href', record.url);
+  document.getElementById('urla').textContent = record.url;
 }
 
 // ---------------------------------------------------------------------------------------
@@ -56,7 +52,7 @@ function render(record) {
  * expand the box
  */
 let expanded = false;
-get('toggle').onclick = (event) => {
+document.getElementById('toggle').onclick = (event) => {
   const rootClasses = document.documentElement.classList;
   const button = event.target;
 
