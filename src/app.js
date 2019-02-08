@@ -1,8 +1,8 @@
-import { loadOptions, loadQuotes, randomItem } from './util';
+import { library, dom } from '@fortawesome/fontawesome-svg-core';
+import { faBox } from '@fortawesome/free-solid-svg-icons/faBox';
+import { faGlobeAmericas } from '@fortawesome/free-solid-svg-icons/faGlobeAmericas';
 
-import { library, dom } from "@fortawesome/fontawesome-svg-core";
-import { faBox } from "@fortawesome/free-solid-svg-icons/faBox";
-import { faGlobeAmericas } from "@fortawesome/free-solid-svg-icons/faGlobeAmericas";
+import { loadOptions, loadQuotes, randomItem } from './util';
 
 import 'Styles/app.scss';
 import 'Styles/index_card.scss';

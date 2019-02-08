@@ -34,10 +34,10 @@ module.exports = {
       use: ['style-loader', 'css-loader'],
     }, {
       test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-      loader: "url-loader?limit=10000&mimetype=application/font-woff"
+      loader: 'url-loader?limit=10000&mimetype=application/font-woff',
     }, {
       test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-      loader: "file-loader"
+      loader: 'file-loader',
     }],
   },
 
@@ -45,7 +45,7 @@ module.exports = {
     new CleanWebpackPlugin(['dist']),
     new CopyWebpackPlugin([
       { from: 'assets/*.json', to: '[name].[ext]' },
-      { from: 'assets/images/*.png', to: '[name].[ext]' }
+      { from: 'assets/images/*.png', to: '[name].[ext]' },
     ]),
     new HtmlWebpackPlugin({
       filename: 'app.html',
