@@ -8,26 +8,6 @@ import 'Styles/app.scss';
 import 'Styles/index_card.scss';
 import 'Styles/index_card_dark.scss';
 
-/**
- * Fills the DIVs with quote text, author, etc.
- */
-function render(record) {
-  // quote
-  const quoteDiv = document.getElementById('quote');
-  quoteDiv.textContent = record.quote;
-  quoteDiv.style.fontSize = adjustedFontSize(record.quote);
-
-  // author
-  document.getElementById('author').textContent = record.author;
-
-  // category
-  document.getElementById('category').lastElementChild.textContent = record.category;
-
-  // url
-  document.getElementById('urla').setAttribute('href', record.url);
-  document.getElementById('urla').textContent = record.url;
-}
-
 // ---------------------------------------------------------------------------------------
 
 /*
@@ -59,13 +39,25 @@ if (window.browser) {
   document.documentElement.classList.add('indexCard');
 }
 
+/**
+ * Fills the DIVs with quote text, author, etc.
+ */
+function fill(record) {
+  document.getElementById('quote').textContent = record.quote;
+  document.getElementById('quote').style.fontSize = adjustedFontSize(record.quote);
+  document.getElementById('author').textContent = record.author;
+  document.getElementById('category').lastElementChild.textContent = record.category;
+  document.getElementById('urla').setAttribute('href', record.url);
+  document.getElementById('urla').textContent = record.url;
+}
+
 /*
  * print a quote
  */
 if (window.browser) {
-  loadQuotes().then(qs => render(randomItem(qs)));
+  loadQuotes().then(qs => fill(randomItem(qs)));
 } else {
-  render({
+  fill({
     quote: 'People who are unable to motivate themselves must be content with mediocrity, no matter how impressive their other talents.',
     author: 'Andrew Carnegie',
     category: 'Mindset',
