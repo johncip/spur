@@ -16,7 +16,7 @@ module.exports = {
   },
 
   entry: {
-    app: './src/app.js',
+    app: './src/app.jsx',
     options: './src/options.js',
   },
 
