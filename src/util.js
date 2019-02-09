@@ -3,6 +3,13 @@ const DEFAULT_OPTIONS = {
   wakeTime: '6 am',
 };
 
+export const SAMPLE_QUOTE = {
+  quote: 'People who are unable to motivate themselves must be content with mediocrity, no matter how impressive their other talents.',
+  author: 'Andrew Carnegie',
+  category: 'Mindset',
+  url: 'https://www.brainyquote.com/quotes/andrew_carnegie_391523',
+};
+
 /**
  * Returns an appropriate font size for the given text string. That is, longer strings will
  * have a smaller font size, and shorter strings will have a larger font size.

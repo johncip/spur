@@ -5,7 +5,7 @@ import { library, dom } from '@fortawesome/fontawesome-svg-core';
 import { faBox } from '@fortawesome/free-solid-svg-icons/faBox';
 import { faGlobeAmericas } from '@fortawesome/free-solid-svg-icons/faGlobeAmericas';
 
-import { loadOptions, loadQuotes, randomItem, adjustedFontSize } from './util';
+import { loadOptions, loadQuotes, randomItem, adjustedFontSize, SAMPLE_QUOTE } from './util';
 
 import 'Styles/app.scss';
 import 'Styles/index_card.scss';
@@ -90,12 +90,7 @@ function fill(record) {
 if (window.browser) {
   loadQuotes().then(qs => fill(randomItem(qs)));
 } else {
-  fill({
-    quote: 'People who are unable to motivate themselves must be content with mediocrity, no matter how impressive their other talents.',
-    author: 'Andrew Carnegie',
-    category: 'Mindset',
-    url: 'https://www.brainyquote.com/quotes/andrew_carnegie_391523',
-  });
+  fill(SAMPLE_QUOTE);
 }
 
 /* font awesome */
