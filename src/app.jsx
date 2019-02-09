@@ -1,5 +1,6 @@
 import React, { Component, PureComponent } from 'react'
 import ReactDOM from 'react-dom'
+import classNames from 'classnames'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBox } from '@fortawesome/free-solid-svg-icons/faBox'
