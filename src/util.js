@@ -4,6 +4,16 @@ const DEFAULT_SETTINGS = {
 }
 
 /**
+ * Creates a div, appends it to the body, and returns it.
+ */
+export function createDiv(className) {
+  const div = document.createElement('div')
+  div.classList.add(className)
+  document.body.appendChild(div)
+  return div
+}
+
+/**
  * Reads an option from browser storage.
  */
 export async function readKey(key) {

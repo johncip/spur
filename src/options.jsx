@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import ReactDOM from 'react-dom'
 
-import { loadSettings, loadQuotes } from './util'
+import { createDiv, loadSettings, loadQuotes } from './util'
 
 import 'Styles/options/style.scss'
 
@@ -99,9 +99,5 @@ class DisplayedQuote extends PureComponent {
 (async function main() {
   const settings = await loadSettings()
   const quotes = await loadQuotes()
-
-  ReactDOM.render(
-    <OptionsPage settings={settings} quotes={quotes} />,
-    document.body,
-  )
+  ReactDOM.render(<OptionsPage settings={settings} quotes={quotes} />, createDiv('l-root'))
 })()

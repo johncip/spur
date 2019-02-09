@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBox } from '@fortawesome/free-solid-svg-icons/faBox'
 import { faGlobeAmericas } from '@fortawesome/free-solid-svg-icons/faGlobeAmericas'
 
-import { loadSettings, loadQuotes } from './util'
+import { createDiv, loadSettings, loadQuotes } from './util'
 
 import 'Styles/app/style.scss'
 
@@ -150,9 +150,5 @@ class QuoteLoader extends Component {
 (async function main() {
   const settings = await loadSettings()
   document.documentElement.classList.add(settings.theme)
-
-  const target = document.createElement('div')
-  target.classList.add('l-root')
-  document.body.appendChild(target)
-  ReactDOM.render(<QuoteLoader />, target)
+  ReactDOM.render(<QuoteLoader />, createDiv('l-root'))
 })()
