@@ -16,10 +16,18 @@ import 'Styles/index_card_dark.scss'
  * A button captioned with an up or down triangle.
  */
 class VerticalToggle extends PureComponent {
+  classes() {
+    return classNames({
+      verticalToggle: true,
+      'verticalToggle-is-up': this.props.up,
+      'verticalToggle-is-down': !this.props.up,
+    })
+  }
+
   render() {
     return (
-      <button id="toggle" onClick={this.props.handleClick} type="button">
-        {this.props.up ? '\u25b2' : '\u25bc'}
+      <button className={this.classes()} onClick={this.props.handleClick} type="button">
+        {this.props.up ? '▲' : '▼'}
       </button>
     )
   }
@@ -32,9 +40,11 @@ class Quote extends Component {
   /**
    * Returns an appropriate font size for the given string. That is, longer strings will
    * return a smaller size, and shorter strings will return a larger size.
+   *
+   *  TODO: this should scale, so that a base size can be set in css
    */
   static adjustedFontSize(text) {
-    const size = 150 * (1 / (text.length ** 0.3))
+    const size = 160 * (1 / (text.length ** 0.3))
     return `${size}px`
   }
 
@@ -56,8 +66,8 @@ class Quote extends Component {
   classes() {
     return classNames({
       quoteBox: true,
-      'is-expanded': this.state.expanded,
-      'is-collapsed': !this.state.expanded,
+      'quoteBox-is-expanded': this.state.expanded,
+      'quoteBox-is-collapsed': !this.state.expanded,
     })
   }
 
@@ -66,16 +76,18 @@ class Quote extends Component {
 
     return (
       <div className={this.classes()}>
-        <div id="quote" style={{ fontSize: quoteFontSize }}>
+        <div className="quoteBox--quote" style={{ fontSize: quoteFontSize }}>
           {this.props.quote}
         </div>
-        <div id="author">{this.props.author}</div>
-        <hr />
-        <div id="url">
+        <div className="quoteBox--author">{this.props.author}</div>
+
+        <hr className="quoteBox--rule" />
+
+        <div className="quoteBox--url">
           <FontAwesomeIcon icon={faGlobeAmericas} />
-          <a href={this.props.url} id="urla">{this.props.url}</a>
+          <a href={this.props.url}>{this.props.url}</a>
         </div>
-        <div id="category">
+        <div className="quoteBox--category">
           <FontAwesomeIcon icon={faBox} />
           <span id="categoryText">{this.props.category}</span>
         </div>

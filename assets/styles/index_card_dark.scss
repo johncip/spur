@@ -19,7 +19,7 @@ $link-color: #556699;
     border-color: $quotebox-border-color;
   }
 
-  #quote {
+  .quoteBox--quote {
     color: $ink-color;
 
     &:before,
@@ -28,23 +28,23 @@ $link-color: #556699;
     }
   }
 
-  #author {
+  .quoteBox--author {
     color: $faded-ink-color;
   }
 
-  #category {
+  .quoteBox--category {
     color: $faded-ink-color;
   }
 
-  #url, #url a {
+  .quoteBox--url {
     color: $link-color;
   }
 
-  hr {
+  .quoteBox--rule {
     border-color: $quotebox-border-color;
   }
 
-  #toggle {
+  .verticalToggle {
     color: $quotebox-border-color;
     background-color: $quotebox-background-color;
     border-color: $quotebox-border-color;
