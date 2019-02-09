@@ -61,15 +61,10 @@ module.exports = {
     }),
     new GoogleFontsPlugin({
       fonts: [
-        { family: 'Aleo', variants: ['300', '400'] },
-        { family: 'Lora', variants: ['400'] },
         { family: 'Work Sans', variants: ['300', '400'] },
-        { family: 'Zilla Slab', variants: ['300'] },
-
-        { family: 'Staatliches', variants: ['400'] },
-
+        { family: 'Staatliches', variants: ['400'], subsets: ['latin'] },
         { family: 'PT Mono', variants: ['400'] },
-        { family: 'Overpass Mono', variants: ['300', '400'] }, // 10 pt
+        { family: 'Overpass Mono', variants: ['300', '400'] },
       ],
       formats: ['woff2'],
     }),
