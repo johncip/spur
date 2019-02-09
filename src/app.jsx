@@ -1,3 +1,6 @@
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+
 import { library, dom } from '@fortawesome/fontawesome-svg-core';
 import { faBox } from '@fortawesome/free-solid-svg-icons/faBox';
 import { faGlobeAmericas } from '@fortawesome/free-solid-svg-icons/faGlobeAmericas';
@@ -8,7 +11,37 @@ import 'Styles/app.scss';
 import 'Styles/index_card.scss';
 import 'Styles/index_card_dark.scss';
 
-// ---------------------------------------------------------------------------------------
+/*
+ * The full quote card.
+ */
+class Quote extends Component {
+  constructor() {
+    super();
+  }
+
+  render() {
+    return (
+      <div id="container">
+        <div id="quote">{"quote"}</div>
+        <div id="author">{"author"}</div>
+
+        <hr/>
+        <div id="url">
+          <i class="fas fa-globe-americas"></i>
+          <a href={"#"} id="urla">{"url"}</a>
+        </div>
+        <div id="category">
+          <i class="fas fa-box"></i>
+          <span id="categoryText">{"Mindset"}</span>
+        </div>
+
+        <button id="toggle">&#x25bc;</button>
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(<Quote />, document.body);
 
 /*
  * expand the box
