@@ -1,16 +1,16 @@
-import $ from 'jquery';
-import Backbone from 'backbone';
-import Mustache from 'mustache';
+import $ from 'jquery'
+import Backbone from 'backbone'
+import Mustache from 'mustache'
 
-import { loadOptions, loadQuotes } from './util';
+import { loadOptions, loadQuotes } from './util'
 
-import 'Styles/options.scss';
+import 'Styles/options.scss'
 
 const Quote = Backbone.Model.extend({
   defaults: {
     mode: 'display',
   },
-});
+})
 
 // // TODO: use me
 // const Corpus = Backbone.Collection.extend({
@@ -20,8 +20,8 @@ const Quote = Backbone.Model.extend({
 const QuoteListItem = Backbone.View.extend({
   tagName: 'li',
   initialize(options) {
-    this.model = options.model;
-    this.listenTo(this.model, 'change', this.render);
+    this.model = options.model
+    this.listenTo(this.model, 'change', this.render)
   },
 
   // TODO: this seems backwards
@@ -35,7 +35,7 @@ const QuoteListItem = Backbone.View.extend({
           <button class="btn btn-delete">✖</button>
         </div>
       </div>
-    `;
+    `
   },
   renderEdit() {
     const template = this.wrapTemplate(`
@@ -43,40 +43,40 @@ const QuoteListItem = Backbone.View.extend({
       <input type="text" class="edit edit-author" value="{{author}}"></input>
       <input type="text" class="edit edit-category" value="{{category}}"></input>
       <input type="text" class="edit edit-url" value="{{url}}"></input>
-    `, this.model.attributes);
-    return Mustache.render(template, this.model.attributes);
+    `, this.model.attributes)
+    return Mustache.render(template, this.model.attributes)
   },
   renderDisplay() {
     const template = this.wrapTemplate(`
       <div class="display display-quote">{{ quote }}</div>
-    `);
+    `)
     // <div class="display display-author">{{ author }}</div>
     // <div class="display display-category">{{ category }}</div>
     // <div class="display display-url">{{ url }}</div>
-    return Mustache.render(template, this.model.attributes);
+    return Mustache.render(template, this.model.attributes)
   },
 
   // TODO: look into class-based polymorphism for backbone views
   render() {
-    let dom = null;
+    let dom = null
     if (this.model.attributes.mode === 'display') {
-      dom = this.renderDisplay();
+      dom = this.renderDisplay()
     } else {
-      dom = this.renderEdit();
+      dom = this.renderEdit()
     }
 
-    this.$el.empty().append(dom);
-    return this;
+    this.$el.empty().append(dom)
+    return this
   },
-});
+})
 
 // TODO: use the Corpus collection (am I just using an array right now?)
 const QuoteListView = Backbone.View.extend({
   collection: null,
   el: '.js-quoteList',
   initialize(options) {
-    this.collection = options.collection;
-    this.viewList = [];
+    this.collection = options.collection
+    this.viewList = []
   },
   events: {
     click: 'handleClick',
@@ -84,31 +84,31 @@ const QuoteListView = Backbone.View.extend({
   handleClick(event) {
     this.viewList.forEach((view) => {
       if (view.el.contains(event.target)) {
-        view.model.set({ mode: 'edit' });
+        view.model.set({ mode: 'edit' })
       } else {
-        view.model.set({ mode: 'display' });
+        view.model.set({ mode: 'display' })
       }
-    });
+    })
   },
   render() {
-    this.$el.empty();
+    this.$el.empty()
 
     this.collection.forEach((item) => {
       const view = new QuoteListItem({
         model: new Quote(item),
-      });
-      this.viewList.push(view);
-      this.el.append(view.render().el);
-    });
+      })
+      this.viewList.push(view)
+      this.el.append(view.render().el)
+    })
 
-    return this;
+    return this
   },
-});
+})
 
 
 async function renderOptions() {
-  const opts = await loadOptions();
-  $('#wakeTime').val(opts.wakeTime); // TODO: make this a time input
+  const opts = await loadOptions()
+  $('#wakeTime').val(opts.wakeTime) // TODO: make this a time input
 
   $('button').click(async () => {
     await browser.storage.sync.set({
@@ -116,30 +116,30 @@ async function renderOptions() {
         theme: $('#theme')[0].value,
         wakeTime: $('#wakeTime')[0].value,
       },
-    });
-    $('#savedStatus').text('Saved!');
-  });
+    })
+    $('#savedStatus').text('Saved!')
+  })
 }
 
 async function renderQuotes() {
-  const quotes = await loadQuotes();
+  const quotes = await loadQuotes()
   const view = new QuoteListView({
     collection: quotes,
-  });
-  view.render();
+  })
+  view.render()
 
   $('body').click((ev) => {
     if ($('.js-quoteList')[0].contains(ev.target)) {
-      return;
+      return
     }
     /* if they clicked in a display-mode quote & it got removed
        from the dom (updated) already by container click handler */
     if (!document.body.contains(ev.target)) {
-      return;
+      return
     }
-    view.handleClick(ev);
-  });
+    view.handleClick(ev)
+  })
 }
 
-renderOptions();
-renderQuotes();
+renderOptions()
+renderQuotes()

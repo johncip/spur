@@ -10,6 +10,8 @@ module.exports = {
     webextensions: true,
   },
   rules: {
+    'semi': ['error', 'never', { beforeStatementContinuationChars: 'always' }],
+    'no-unexpected-multiline': 'error',
     'wrap-iife': ['error', 'inside'],
     'nonblock-statement-body-position': 'off',
     'no-else-return': 'off',

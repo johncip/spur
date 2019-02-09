@@ -1,17 +1,17 @@
 const DEFAULT_OPTIONS = {
   theme: 'indexCard',
   wakeTime: '6 am',
-};
+}
 
 /**
  * Reads an option from browser storage.
  */
 export async function readKey(key) {
-  const response = await browser.storage.sync.get(key);
+  const response = await browser.storage.sync.get(key)
   if (!Object.keys(response).length) {
-    return null;
+    return null
   }
-  return response[key];
+  return response[key]
 }
 
 /**
@@ -20,30 +20,30 @@ export async function readKey(key) {
  * TODO: cleaner hash merge
  */
 export async function loadOptions() {
-  const options = await readKey('options');
+  const options = await readKey('options')
 
   if (!options) {
-    return DEFAULT_OPTIONS;
+    return DEFAULT_OPTIONS
   }
 
   Object.keys(DEFAULT_OPTIONS).forEach((key) => {
-    const val = options[key];
+    const val = options[key]
     if (val === null || val === undefined || val === '') {
-      options[key] = DEFAULT_OPTIONS[key];
+      options[key] = DEFAULT_OPTIONS[key]
     }
-  });
-  return options;
+  })
+  return options
 }
 
 /**
  * Seeds browser storage with the included quotes.
  */
 function seedStorage() {
-  const url = browser.extension.getURL('seeds.json');
-  const storage = browser.storage.sync;
+  const url = browser.extension.getURL('seeds.json')
+  const storage = browser.storage.sync
 
   return fetch(url).then(resp => resp.json())
-    .then(seeds => storage.set({ storedQuotes: seeds }));
+    .then(seeds => storage.set({ storedQuotes: seeds }))
 }
 
 /**
@@ -51,13 +51,13 @@ function seedStorage() {
  * with the included quotes.
  */
 export async function loadQuotes() {
-  const key = 'storedQuotes';
-  const storage = browser.storage.sync;
-  const quotes = await storage.get(key);
+  const key = 'storedQuotes'
+  const storage = browser.storage.sync
+  const quotes = await storage.get(key)
 
   if (!Object.keys(quotes).length) {
-    await seedStorage();
-    return loadQuotes();
+    await seedStorage()
+    return loadQuotes()
   }
-  return quotes[key];
+  return quotes[key]
 }

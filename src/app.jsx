@@ -1,15 +1,15 @@
-import React, { Component, PureComponent } from 'react';
-import ReactDOM from 'react-dom';
+import React, { Component, PureComponent } from 'react'
+import ReactDOM from 'react-dom'
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBox } from '@fortawesome/free-solid-svg-icons/faBox';
-import { faGlobeAmericas } from '@fortawesome/free-solid-svg-icons/faGlobeAmericas';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBox } from '@fortawesome/free-solid-svg-icons/faBox'
+import { faGlobeAmericas } from '@fortawesome/free-solid-svg-icons/faGlobeAmericas'
 
-import { loadOptions, loadQuotes } from './util';
+import { loadOptions, loadQuotes } from './util'
 
-import 'Styles/app.scss';
-import 'Styles/index_card.scss';
-import 'Styles/index_card_dark.scss';
+import 'Styles/app.scss'
+import 'Styles/index_card.scss'
+import 'Styles/index_card_dark.scss'
 
 /*
  * A button captioned with an up or down triangle.
@@ -20,7 +20,7 @@ class VerticalToggle extends PureComponent {
       <button id="toggle" onClick={this.props.handleClick} type="button">
         {this.props.up ? '\u25b2' : '\u25bc'}
       </button>
-    );
+    )
   }
 }
 
@@ -33,34 +33,34 @@ class Quote extends Component {
    * return a smaller size, and shorter strings will return a larger size.
    */
   static adjustedFontSize(text) {
-    const size = 150 * (1 / (text.length ** 0.3));
-    return `${size}px`;
+    const size = 150 * (1 / (text.length ** 0.3))
+    return `${size}px`
   }
 
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       expanded: false,
-    };
+    }
   }
 
   /**
    * Reverses state.expanded (which hides & shows the URL and category).
    */
   toggleDrawer = () => {
-    this.setState(prev => ({ expanded: !prev.expanded }));
+    this.setState(prev => ({ expanded: !prev.expanded }))
   }
 
   containerClass() {
     if (this.state.expanded)
-      return 'is-expanded';
+      return 'is-expanded'
     else
-      return 'is-collapsed';
+      return 'is-collapsed'
   }
 
   render() {
-    const quoteFontSize = this.constructor.adjustedFontSize(this.props.quote);
+    const quoteFontSize = this.constructor.adjustedFontSize(this.props.quote)
 
     return (
       <div id="container" className={this.containerClass()}>
@@ -83,7 +83,7 @@ class Quote extends Component {
           handleClick={this.toggleDrawer}
         />
       </div>
-    );
+    )
   }
 }
 
@@ -92,28 +92,28 @@ class Quote extends Component {
  */
 class QuoteLoader extends Component {
   static randomItem(arr) {
-    return arr[Math.floor(Math.random() * arr.length)];
+    return arr[Math.floor(Math.random() * arr.length)]
   }
 
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       quote: undefined,
       author: undefined,
       url: undefined,
       category: undefined,
-    };
+    }
   }
 
   componentDidMount() {
     loadQuotes().then((quotes) => {
-      this.setState(this.constructor.randomItem(quotes));
-    });
+      this.setState(this.constructor.randomItem(quotes))
+    })
   }
 
   render() {
-    if (!this.state.quote) return null;
+    if (!this.state.quote) return null
 
     return (
       <Quote
@@ -122,12 +122,12 @@ class QuoteLoader extends Component {
         url={this.state.url}
         category={this.state.category}
       />
-    );
+    )
   }
 }
 
 (async function main() {
-  const options = await loadOptions();
-  document.documentElement.classList.add(options.theme);
-  ReactDOM.render(<QuoteLoader />, document.body);
-})();
+  const options = await loadOptions()
+  document.documentElement.classList.add(options.theme)
+  ReactDOM.render(<QuoteLoader />, document.body)
+})()

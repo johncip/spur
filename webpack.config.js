@@ -1,8 +1,8 @@
-const path = require('path');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const GoogleFontsPlugin = require('@beyonk/google-fonts-webpack-plugin');
+const path = require('path')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const GoogleFontsPlugin = require('@beyonk/google-fonts-webpack-plugin')
 
 module.exports = {
   mode: 'development',
@@ -74,4 +74,4 @@ module.exports = {
       formats: ['woff2'],
     }),
   ],
-};
+}
