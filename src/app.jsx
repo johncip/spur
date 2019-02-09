@@ -12,7 +12,7 @@ import 'Styles/index_card.scss';
 import 'Styles/index_card_dark.scss';
 
 /*
- * Toggles showing of the URL and category.
+ * A button captioned with an up or down triangle.
  */
 class ToggleButton extends Component {
   render() {
@@ -25,7 +25,7 @@ class ToggleButton extends Component {
 }
 
 /*
- * The full quote card.
+ * A displayed quote, with author, etc.
  */
 class Quote extends Component {
   constructor(props) {
@@ -36,6 +36,9 @@ class Quote extends Component {
     };
   }
 
+  /**
+   * Reverses state.expanded (which hides & shows the URL and category).
+   */
   toggleDrawer = () => {
     this.setState({expanded: !this.state.expanded});
   }
