@@ -54,7 +54,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'app.html',
       chunks: ['app'],
-      template: './src/app.html',
     }),
     new HtmlWebpackPlugin({
       filename: 'options.html',
