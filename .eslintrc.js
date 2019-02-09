@@ -10,14 +10,18 @@ module.exports = {
     webextensions: true,
   },
   rules: {
-    'semi': ['error', 'never', { beforeStatementContinuationChars: 'always' }],
-    'no-unexpected-multiline': 'error',
-    'wrap-iife': ['error', 'inside'],
-    'nonblock-statement-body-position': 'off',
-    'no-else-return': 'off',
     'curly': 'off',
-    'react/prop-types': 'off',
-    'react/no-multi-comp': 'off',
+    'no-else-return': 'off',
+    'no-unexpected-multiline': 'error',
+    'nonblock-statement-body-position': 'off',
+    'semi': ['error', 'never', { beforeStatementContinuationChars: 'always' }],
+    'wrap-iife': ['error', 'inside'],
+
     'react/destructuring-assignment': 'off',
+    'react/no-multi-comp': 'off',
+    'react/prop-types': 'off',
+
+    'jsx-a11y/label-has-associated-control': ['error', { assert: 'both' } ],
+    'jsx-a11y/label-has-for': 'off',
   }
 };
