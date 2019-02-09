@@ -14,7 +14,7 @@ import 'Styles/index_card_dark.scss';
 /*
  * A button captioned with an up or down triangle.
  */
-class ToggleButton extends Component {
+class VerticalToggle extends Component {
   render() {
     return (
       <button id="toggle" onClick={this.props.handleClick}>
@@ -76,7 +76,7 @@ class Quote extends Component {
           <span id="categoryText">{this.props.category}</span>
         </div>
 
-        <ToggleButton
+        <VerticalToggle
           up={this.state.expanded}
           handleClick={this.toggleDrawer}
         />
