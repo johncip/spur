@@ -8,4 +8,5 @@ module.exports = {
     jquery: true,
     webextensions: true,
   },
+  parser: 'babel-eslint',
 };

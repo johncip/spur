@@ -21,6 +21,7 @@
     "@babel/plugin-proposal-class-properties": "^7.3.0",
     "@babel/preset-react": "^7.0.0",
     "@beyonk/google-fonts-webpack-plugin": "^1.2.1",
+    "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.5",
     "clean-webpack-plugin": "^1.0.1",
     "copy-webpack-plugin": "^4.6.0",
@@ -46,7 +47,7 @@
     "watch": "webpack -w",
     "run": "web-ext run",
     "fflint": "web-ext lint || true",
-    "lint": "eslint . || true"
+    "lint": "eslint . --ext .js,.jsx || true"
   },
   "author": "",
   "license": "ISC",
