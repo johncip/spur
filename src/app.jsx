@@ -119,17 +119,14 @@ class QuoteLoader extends Component {
   }
 }
 
-async function applyTheme() {
+(async function () {
+  // apply theme
   const options = await loadOptions();
   document.documentElement.classList.add(options.theme);
-}
 
-async function main() {
-  await applyTheme();
   ReactDOM.render(<QuoteLoader />, document.body);
 
+  // font-awesome
   library.add(faBox, faGlobeAmericas);
   dom.watch();
-}
-
-main();
+})();
