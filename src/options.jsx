@@ -9,7 +9,7 @@ import 'Styles/options/style.scss'
 class OptionsPage extends PureComponent {
   render() {
     return (
-      <div className="l-container">
+      <div className="optionsContainer">
         <h1>Options</h1>
         <SettingsSection settings={this.props.settings} />
         <QuotesSection quotes={this.props.quotes} />
@@ -21,11 +21,11 @@ class OptionsPage extends PureComponent {
 class SettingsSection extends PureComponent {
   render() {
     return (
-      <section className="optionSection">
+      <section className="optionsSection">
         <div className="setting">
-          <label htmlFor="theme">
-            <span className="settingLabel">Theme</span>
-            <select id="theme">
+          <label htmlFor="id-theme">
+            <span className="setting--label">Theme</span>
+            <select id="id-theme">
               <option value="indexCard">Index Card</option>
               <option value="indexCardDark">Index Card Dark</option>
             </select>
@@ -33,9 +33,9 @@ class SettingsSection extends PureComponent {
         </div>
 
         <div className="setting">
-          <label htmlFor="wakeTime">
-            <span className="settingLabel">Wake Time</span>
-            <input type="text" id="wakeTime" />
+          <label htmlFor="id-wake-time">
+            <span className="setting--label">Wake Time</span>
+            <input type="text" id="id-wake-time" />
           </label>
         </div>
 
@@ -66,7 +66,7 @@ class QuotesSection extends PureComponent {
 
   render() {
     return (
-      <section className="optionSection">
+      <section className="optionsSection">
         <ul>{this.props.quotes.map(record => this.constructor.renderQuote(record))}</ul>
       </section>
     )

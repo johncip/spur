@@ -1,19 +1,16 @@
 @import '../common/base';
 @import '../common/vendor';
 
-// -----------------------------------------------------------------
-// misc
-// -----------------------------------------------------------------
 body {
   background-color: #555;
 }
 
-.l-container {
+.optionsContainer {
   max-width: 710px;
   margin: 0 auto;
 }
 
-.optionSection {
+.optionsSection {
   margin-bottom: 24px;
   background-color: #777;
   border: 1px solid #e5e5e5;
@@ -27,7 +24,7 @@ body {
   margin-bottom: 12px;
 }
 
-.settingLabel {
+.setting--label {
   margin-right: 8px;
 }
 
