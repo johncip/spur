@@ -17,7 +17,7 @@ import 'Styles/index_card_dark.scss';
 class ToggleButton extends Component {
   render() {
     return (
-      <button id="toggle" onclick={this.props.handleClick}>
+      <button id="toggle" onClick={this.props.handleClick}>
         {this.props.up ? '\u25b2' : '\u25bc'}
       </button>
     );
