@@ -130,5 +130,9 @@ class QuoteLoader extends Component {
 (async function main() {
   const settings = await loadSettings()
   document.documentElement.classList.add(settings.theme)
-  ReactDOM.render(<QuoteLoader />, document.body)
+
+  const target = document.createElement('div')
+  target.classList.add('l-root')
+  document.body.appendChild(target)
+  ReactDOM.render(<QuoteLoader />, target)
 })()
