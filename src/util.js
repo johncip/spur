@@ -1,4 +1,4 @@
-const DEFAULT_OPTIONS = {
+const DEFAULT_SETTINGS = {
   theme: 'indexCard',
   wakeTime: '6 am',
 }
@@ -15,24 +15,24 @@ export async function readKey(key) {
 }
 
 /**
- * Loads options from storage, or supplies defaults.
+ * Loads settings from storage, or supplies defaults.
  *
  * TODO: cleaner hash merge
  */
-export async function loadOptions() {
-  const options = await readKey('options')
+export async function loadSettings() {
+  const settings = await readKey('settings')
 
-  if (!options) {
-    return DEFAULT_OPTIONS
+  if (!settings) {
+    return DEFAULT_SETTINGS
   }
 
-  Object.keys(DEFAULT_OPTIONS).forEach((key) => {
-    const val = options[key]
+  Object.keys(DEFAULT_SETTINGS).forEach((key) => {
+    const val = settings[key]
     if (val === null || val === undefined || val === '') {
-      options[key] = DEFAULT_OPTIONS[key]
+      settings[key] = DEFAULT_SETTINGS[key]
     }
   })
-  return options
+  return settings
 }
 
 /**

@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import ReactDOM from 'react-dom'
 
-import { loadOptions, loadQuotes } from './util'
+import { loadSettings, loadQuotes } from './util'
 
 import 'Styles/options.scss'
 
@@ -97,7 +97,7 @@ class DisplayedQuote extends PureComponent {
 }
 
 (async function main() {
-  const settings = await loadOptions()
+  const settings = await loadSettings()
   const quotes = await loadQuotes()
 
   ReactDOM.render(
