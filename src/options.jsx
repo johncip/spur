@@ -12,11 +12,6 @@ const Quote = Backbone.Model.extend({
   },
 })
 
-// // TODO: use me
-// const Corpus = Backbone.Collection.extend({
-//   model: Quote,
-// });
-
 const QuoteListItem = Backbone.View.extend({
   tagName: 'li',
   initialize(options) {
@@ -24,7 +19,6 @@ const QuoteListItem = Backbone.View.extend({
     this.listenTo(this.model, 'change', this.render)
   },
 
-  // TODO: this seems backwards
   wrapTemplate(middle) {
     return `
       <div class="quoteListItem">
@@ -50,13 +44,9 @@ const QuoteListItem = Backbone.View.extend({
     const template = this.wrapTemplate(`
       <div class="display display-quote">{{ quote }}</div>
     `)
-    // <div class="display display-author">{{ author }}</div>
-    // <div class="display display-category">{{ category }}</div>
-    // <div class="display display-url">{{ url }}</div>
     return Mustache.render(template, this.model.attributes)
   },
 
-  // TODO: look into class-based polymorphism for backbone views
   render() {
     let dom = null
     if (this.model.attributes.mode === 'display') {
@@ -70,7 +60,6 @@ const QuoteListItem = Backbone.View.extend({
   },
 })
 
-// TODO: use the Corpus collection (am I just using an array right now?)
 const QuoteListView = Backbone.View.extend({
   collection: null,
   el: '.js-quoteList',
@@ -106,9 +95,9 @@ const QuoteListView = Backbone.View.extend({
 })
 
 
-async function renderOptions() {
+(async function renderOptions() {
   const opts = await loadOptions()
-  $('#wakeTime').val(opts.wakeTime) // TODO: make this a time input
+  $('#wakeTime').val(opts.wakeTime)
 
   $('button').click(async () => {
     await browser.storage.sync.set({
@@ -119,9 +108,9 @@ async function renderOptions() {
     })
     $('#savedStatus').text('Saved!')
   })
-}
+})()
 
-async function renderQuotes() {
+(async function renderQuotes() {
   const quotes = await loadQuotes()
   const view = new QuoteListView({
     collection: quotes,
@@ -132,14 +121,9 @@ async function renderQuotes() {
     if ($('.js-quoteList')[0].contains(ev.target)) {
       return
     }
-    /* if they clicked in a display-mode quote & it got removed
-       from the dom (updated) already by container click handler */
     if (!document.body.contains(ev.target)) {
       return
     }
     view.handleClick(ev)
   })
-}
-
-renderOptions()
-renderQuotes()
+})()
