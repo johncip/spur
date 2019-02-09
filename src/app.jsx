@@ -53,18 +53,19 @@ class Quote extends Component {
     this.setState(prev => ({ expanded: !prev.expanded }))
   }
 
-  containerClass() {
-    if (this.state.expanded)
-      return 'is-expanded'
-    else
-      return 'is-collapsed'
+  classes() {
+    return classNames({
+      quoteBox: true,
+      'is-expanded': this.state.expanded,
+      'is-collapsed': !this.state.expanded,
+    })
   }
 
   render() {
     const quoteFontSize = this.constructor.adjustedFontSize(this.props.quote)
 
     return (
-      <div id="container" className={this.containerClass()}>
+      <div className={this.classes()}>
         <div id="quote" style={{ fontSize: quoteFontSize }}>
           {this.props.quote}
         </div>

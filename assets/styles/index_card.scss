@@ -1,6 +1,6 @@
 $body-background-color: #ffffff;
-$container-background-color: #fafafa;
-$container-border-color: #cccccc;
+$quotebox-background-color: #fafafa;
+$quotebox-border-color: #cccccc;
 $ink-color: #444444;
 $faded-ink-color: #888888;
 $link-color: #7799cc;
@@ -28,7 +28,7 @@ $nerdy-font-stack: 'pt mono', 'sf mono', monospace;
   }
 
   /* main divs */
-  #container {
+  .quoteBox {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -39,8 +39,8 @@ $nerdy-font-stack: 'pt mono', 'sf mono', monospace;
     border-style: solid;
     border-width: 1px;
 
-    background-color: $container-background-color;
-    border-color: $container-border-color;
+    background-color: $quotebox-background-color;
+    border-color: $quotebox-border-color;
 
     /* TODO: not smacssy */
     &.is-expanded {
@@ -153,20 +153,20 @@ $nerdy-font-stack: 'pt mono', 'sf mono', monospace;
     border-width: 1px;
     border-style: solid;
 
-    color: $container-border-color;
-    background-color: $container-background-color;
-    border-color: $container-border-color;
+    color: $quotebox-border-color;
+    background-color: $quotebox-background-color;
+    border-color: $quotebox-border-color;
 
     &:hover {
-      color: darken($container-border-color, 10%);
-      background-color: darken($container-background-color, 10%);
-      border-color: darken($container-border-color, 10%);
+      color: darken($quotebox-border-color, 10%);
+      background-color: darken($quotebox-background-color, 10%);
+      border-color: darken($quotebox-border-color, 10%);
     }
 
     &:active {
-      color: darken($container-border-color, 15%);
-      background-color: darken($container-background-color, 15%);
-      border-color: darken($container-border-color, 15%);
+      color: darken($quotebox-border-color, 15%);
+      background-color: darken($quotebox-background-color, 15%);
+      border-color: darken($quotebox-border-color, 15%);
     }
   }
 

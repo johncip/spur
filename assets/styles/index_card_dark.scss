@@ -1,8 +1,8 @@
 @import 'index_card';
 
 $body-background-color: #202020;
-$container-background-color: #282829;
-$container-border-color: #444444;
+$quotebox-background-color: #282829;
+$quotebox-border-color: #444444;
 $ink-color: #cccccc;
 $faded-ink-color: #777788;
 $link-color: #556699;
@@ -14,9 +14,9 @@ $link-color: #556699;
     background-color: $body-background-color;
   }
 
-  #container {
-    background-color: $container-background-color;
-    border-color: $container-border-color;
+  .quoteBox {
+    background-color: $quotebox-background-color;
+    border-color: $quotebox-border-color;
   }
 
   #quote {
@@ -41,24 +41,24 @@ $link-color: #556699;
   }
 
   hr {
-    border-color: $container-border-color;
+    border-color: $quotebox-border-color;
   }
 
   #toggle {
-    color: $container-border-color;
-    background-color: $container-background-color;
-    border-color: $container-border-color;
+    color: $quotebox-border-color;
+    background-color: $quotebox-background-color;
+    border-color: $quotebox-border-color;
 
     &:hover {
-      color: lighten($container-border-color, 10%);
-      background-color: lighten($container-background-color, 10%);
-      border-color: lighten($container-border-color, 10%);
+      color: lighten($quotebox-border-color, 10%);
+      background-color: lighten($quotebox-background-color, 10%);
+      border-color: lighten($quotebox-border-color, 10%);
     }
 
     &:active {
-      color: lighten($container-border-color, 15%);
-      background-color: lighten($container-background-color, 15%);
-      border-color: lighten($container-border-color, 15%);
+      color: lighten($quotebox-border-color, 15%);
+      background-color: lighten($quotebox-background-color, 15%);
+      border-color: lighten($quotebox-border-color, 15%);
     }
   }
 }
