@@ -36,6 +36,10 @@ class Quote extends Component {
     };
   }
 
+  toggleDrawer = () => {
+    this.setState({expanded: !this.state.expanded});
+  }
+
   /**
    * Returns an appropriate font size for the given text string. That is, longer strings will
    * have a smaller font size, and shorter strings will have a larger font size.
@@ -69,7 +73,10 @@ class Quote extends Component {
           <span id="categoryText">{this.props.category}</span>
         </div>
 
-        <ToggleButton up={this.state.expanded} />
+        <ToggleButton
+          up={this.state.expanded}
+          handleClick={this.toggleDrawer}
+        />
       </div>
     );
   }
