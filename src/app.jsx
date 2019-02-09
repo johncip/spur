@@ -8,9 +8,7 @@ import { faGlobeAmericas } from '@fortawesome/free-solid-svg-icons/faGlobeAmeric
 
 import { loadSettings, loadQuotes } from './util'
 
-import 'Styles/app.scss'
-import 'Styles/index_card.scss'
-import 'Styles/index_card_dark.scss'
+import 'Styles/app/style.scss'
 
 /*
  * A button captioned with an up or down triangle.

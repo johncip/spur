@@ -1,0 +1,20 @@
+.l-root {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.quoteBox {
+  margin: auto;
+}
+
+.quoteBox--quote {
+  // white-space: pre-wrap;
+  text-align: justify;
+  text-justify: auto;
+}
+
+.quoteBox--author {
+  text-align: right;
+  width: 100%;
+}

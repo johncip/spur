@@ -1,17 +1,4 @@
-$body-background-color: #ffffff;
-$quotebox-background-color: #fafafa;
-$quotebox-border-color: #cccccc;
-$ink-color: #444444;
-$faded-ink-color: #888888;
-$link-color: #7799cc;
-
-$fancy-font-stack: 'work sans', georgia, serif;
-
-$nerdy-font-stack: 'pt mono', 'sf mono', monospace;
-
-%nerdy-type {
-  font: 300 9pt $nerdy-font-stack;
-}
+@import '../common/index_card';
 
 %vertical-transition {
   transition-property: height, opacity, margin;
@@ -44,6 +31,7 @@ $nerdy-font-stack: 'pt mono', 'sf mono', monospace;
     align-items: center;
 
     max-width: 700px;
+    margin: auto;
     padding: 50px;
     border-style: solid;
     border-width: 1px;
@@ -62,6 +50,10 @@ $nerdy-font-stack: 'pt mono', 'sf mono', monospace;
     line-height: 130%;
     color: $ink-color;
     z-index: 1;
+
+    // white-space: pre-wrap;
+    text-align: justify;
+    text-justify: auto;
 
     &:before,
     &:after {
@@ -90,6 +82,10 @@ $nerdy-font-stack: 'pt mono', 'sf mono', monospace;
     font-family: $fancy-font-stack;
     font-weight: 300;
     color: $faded-ink-color;
+
+    &:before {
+      content: "\2015 ";
+    }
   }
 
   .quoteBox--category {

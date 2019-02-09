@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 
 import { loadSettings, loadQuotes } from './util'
 
-import 'Styles/options.scss'
+import 'Styles/options/style.scss'
 
 
 class OptionsPage extends PureComponent {
