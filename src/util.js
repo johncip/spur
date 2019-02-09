@@ -3,33 +3,6 @@ const DEFAULT_OPTIONS = {
   wakeTime: '6 am',
 };
 
-export const SAMPLE_QUOTE = {
-  quote: 'People who are unable to motivate themselves must be content with mediocrity, no matter how impressive their other talents.',
-  author: 'Andrew Carnegie',
-  category: 'Mindset',
-  url: 'https://www.brainyquote.com/quotes/andrew_carnegie_391523',
-};
-
-/**
- * Returns an appropriate font size for the given text string. That is, longer strings will
- * have a smaller font size, and shorter strings will have a larger font size.
- *
- * (Line breaks are not taken into account.)
- */
-export function adjustedFontSize(text) {
-  const size = 150 * (1 / (text.length ** 0.3));
-  return `${size}px`;
-}
-
-/**
- * Returns a random array element.
- */
-export function randomItem(arr) {
-  const rIndex = Math.floor(Math.random() * arr.length);
-  return arr[rIndex];
-  // return arr[3]; // randomly selected by fair dice roll
-}
-
 /**
  * Reads an option from browser storage.
  */

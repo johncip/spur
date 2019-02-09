@@ -41,6 +41,24 @@ $nerdy-font-stack: 'pt mono', 'sf mono', monospace;
 
     background-color: $container-background-color;
     border-color: $container-border-color;
+
+    /* TODO: not smacssy */
+    &.is-expanded {
+      #category,
+      #url,
+      hr {
+        height: 1.2em;
+        opacity: 1;
+      }
+    }
+
+    &.is-collapsed {
+      #category,
+      #url,
+      hr {
+        @extend %hidden;
+      }
+    }
   }
 
   #quote {
@@ -123,22 +141,6 @@ $nerdy-font-stack: 'pt mono', 'sf mono', monospace;
     transition-timing-function: ease-in-out;
   }
 
-  &.is-expanded {
-    #category,
-    #url,
-    hr {
-      height: 1.2em;
-      opacity: 1;
-    }
-  }
-
-  &.is-collapsed {
-    #category,
-    #url,
-    hr {
-      @extend %hidden;
-    }
-  }
 
   /* toggle button */
   #toggle {
