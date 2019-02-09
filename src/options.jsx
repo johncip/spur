@@ -1,129 +1,107 @@
-import $ from 'jquery'
-import Backbone from 'backbone'
-import Mustache from 'mustache'
+import React, { PureComponent } from 'react'
+import ReactDOM from 'react-dom'
 
 import { loadOptions, loadQuotes } from './util'
 
 import 'Styles/options.scss'
 
-const Quote = Backbone.Model.extend({
-  defaults: {
-    mode: 'display',
-  },
-})
 
-const QuoteListItem = Backbone.View.extend({
-  tagName: 'li',
-  initialize(options) {
-    this.model = options.model
-    this.listenTo(this.model, 'change', this.render)
-  },
-
-  wrapTemplate(middle) {
-    return `
-      <div class="quoteListItem">
-        <div class="quoteListItem--first">
-          ${middle}
-        </div>
-        <div class="quoteListItem--second">
-          <button class="btn btn-delete">✖</button>
-        </div>
+class OptionsPage extends PureComponent {
+  render() {
+    return (
+      <div className="l-container">
+        <h1>Options</h1>
+        <SettingsSection settings={this.props.settings} />
+        <QuotesSection quotes={this.props.quotes} />
       </div>
-    `
-  },
-  renderEdit() {
-    const template = this.wrapTemplate(`
-      <textarea class="edit edit-quote">{{ quote }}</textarea>
-      <input type="text" class="edit edit-author" value="{{author}}"></input>
-      <input type="text" class="edit edit-category" value="{{category}}"></input>
-      <input type="text" class="edit edit-url" value="{{url}}"></input>
-    `, this.model.attributes)
-    return Mustache.render(template, this.model.attributes)
-  },
-  renderDisplay() {
-    const template = this.wrapTemplate(`
-      <div class="display display-quote">{{ quote }}</div>
-    `)
-    return Mustache.render(template, this.model.attributes)
-  },
+    )
+  }
+}
+
+class SettingsSection extends PureComponent {
+  render() {
+    return (
+      <section className="optionSection">
+        <div className="setting">
+          <label htmlFor="theme">
+            <span className="settingLabel">Theme</span>
+            <select id="theme">
+              <option value="indexCard">Index Card</option>
+              <option value="indexCardDark">Index Card Dark</option>
+            </select>
+          </label>
+        </div>
+
+        <div className="setting">
+          <label htmlFor="wakeTime">
+            <span className="settingLabel">Wake Time</span>
+            <input type="text" id="wakeTime" />
+          </label>
+        </div>
+
+        <div>
+          <button className="btn btn-save" type="button">Save</button>
+          <span id="savedStatus">Not saved.</span>
+        </div>
+      </section>
+    )
+  }
+}
+
+class QuotesSection extends PureComponent {
+  static renderQuote(record) {
+    return (
+      <li>
+        <div className="quoteListItem">
+          <div className="quoteListItem--first">
+            <DisplayedQuote quote={record.quote} />
+          </div>
+          <div className="quoteListItem--second">
+            <button className="btn btn-delete" type="button">✖</button>
+          </div>
+        </div>
+      </li>
+    )
+  }
 
   render() {
-    let dom = null
-    if (this.model.attributes.mode === 'display') {
-      dom = this.renderDisplay()
-    } else {
-      dom = this.renderEdit()
-    }
+    return (
+      <section className="optionSection">
+        <ul>{this.props.quotes.map(record => this.constructor.renderQuote(record))}</ul>
+      </section>
+    )
+  }
+}
 
-    this.$el.empty().append(dom)
-    return this
-  },
-})
-
-const QuoteListView = Backbone.View.extend({
-  collection: null,
-  el: '.js-quoteList',
-  initialize(options) {
-    this.collection = options.collection
-    this.viewList = []
-  },
-  events: {
-    click: 'handleClick',
-  },
-  handleClick(event) {
-    this.viewList.forEach((view) => {
-      if (view.el.contains(event.target)) {
-        view.model.set({ mode: 'edit' })
-      } else {
-        view.model.set({ mode: 'display' })
-      }
-    })
-  },
+class EditableQuote extends PureComponent {
   render() {
-    this.$el.empty()
+    return (
+      <div>
+        <textarea className="edit edit-quote">{this.props.quote}</textarea>
+        <input type="text" className="edit edit-author" value={this.props.author} />
+        <input type="text" className="edit edit-category" value={this.props.category} />
+        <input type="text" className="edit edit-url" value={this.props.url} />
+      </div>
+    )
+  }
+}
 
-    this.collection.forEach((item) => {
-      const view = new QuoteListItem({
-        model: new Quote(item),
-      })
-      this.viewList.push(view)
-      this.el.append(view.render().el)
-    })
+class DisplayedQuote extends PureComponent {
+  render() {
+    return (
+      <div className="display display-quote">
+        {this.props.quote}
+      </div>
+    )
+  }
+}
 
-    return this
-  },
-})
-
-
-(async function renderOptions() {
-  const opts = await loadOptions()
-  $('#wakeTime').val(opts.wakeTime)
-
-  $('button').click(async () => {
-    await browser.storage.sync.set({
-      options: {
-        theme: $('#theme')[0].value,
-        wakeTime: $('#wakeTime')[0].value,
-      },
-    })
-    $('#savedStatus').text('Saved!')
-  })
-})()
-
-(async function renderQuotes() {
+(async function main() {
+  const settings = await loadOptions()
   const quotes = await loadQuotes()
-  const view = new QuoteListView({
-    collection: quotes,
-  })
-  view.render()
 
-  $('body').click((ev) => {
-    if ($('.js-quoteList')[0].contains(ev.target)) {
-      return
-    }
-    if (!document.body.contains(ev.target)) {
-      return
-    }
-    view.handleClick(ev)
-  })
+  ReactDOM.render(
+    <OptionsPage settings={settings} quotes={quotes} />,
+    document.body,
+  )
 })()
