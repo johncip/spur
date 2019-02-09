@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library, dom } from '@fortawesome/fontawesome-svg-core';
 import { faBox } from '@fortawesome/free-solid-svg-icons/faBox';
 import { faGlobeAmericas } from '@fortawesome/free-solid-svg-icons/faGlobeAmericas';
@@ -68,11 +69,11 @@ class Quote extends Component {
         <div id="author">{this.props.author}</div>
         <hr/>
         <div id="url">
-          <i className="fas fa-globe-americas"></i>
+          <FontAwesomeIcon icon={faGlobeAmericas} />
           <a href={this.props.url} id="urla">{this.props.url}</a>
         </div>
         <div id="category">
-          <i className="fas fa-box"></i>
+          <FontAwesomeIcon icon={faBox} />
           <span id="categoryText">{this.props.category}</span>
         </div>
 
@@ -123,13 +124,7 @@ class QuoteLoader extends Component {
 }
 
 (async function () {
-  // apply theme
   const options = await loadOptions();
   document.documentElement.classList.add(options.theme);
-
   ReactDOM.render(<QuoteLoader />, document.body);
-
-  // font-awesome
-  library.add(faBox, faGlobeAmericas);
-  dom.watch();
 })();
