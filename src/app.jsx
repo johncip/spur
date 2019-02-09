@@ -71,6 +71,18 @@ class Quote extends Component {
     })
   }
 
+  renderUrl() {
+    if (!this.props.url)
+      return null;
+
+    return (
+      <div className="quoteBox--url">
+        <FontAwesomeIcon icon={faGlobeAmericas} />
+        <a href={this.props.url}>{this.props.url}</a>
+      </div>
+    )
+  }
+
   render() {
     const quoteFontSize = this.constructor.adjustedFontSize(this.props.quote)
 
@@ -80,13 +92,10 @@ class Quote extends Component {
           {this.props.quote}
         </div>
         <div className="quoteBox--author">{this.props.author}</div>
-
         <hr className="quoteBox--rule" />
 
-        <div className="quoteBox--url">
-          <FontAwesomeIcon icon={faGlobeAmericas} />
-          <a href={this.props.url}>{this.props.url}</a>
-        </div>
+        {this.renderUrl()}
+
         <div className="quoteBox--category">
           <FontAwesomeIcon icon={faBox} />
           <span id="categoryText">{this.props.category}</span>
