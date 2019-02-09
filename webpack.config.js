@@ -58,7 +58,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'options.html',
       chunks: ['options'],
-      template: './src/options.html',
     }),
     new GoogleFontsPlugin({
       fonts: [
