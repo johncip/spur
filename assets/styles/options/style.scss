@@ -1,8 +1,6 @@
 @import '../common/base';
 @import '../common/vendor';
 
-body {
-  background-color: #555;
 // TODO: duplicated
 %truncated {
   overflow: hidden;
@@ -11,11 +9,19 @@ body {
   display: block;
 }
 
+.l-root {
+  display: flex;
+  flex-direction: column;
+}
+
+.optionsHeading {
+  font-family: 'work sans';
 }
 
 .optionsContainer {
-  max-width: 710px;
+  max-width: 700px;
   margin: 0 auto;
+  min-width: 0;
 }
 
 .optionsSection {
@@ -36,83 +42,51 @@ body {
   margin-right: 8px;
 }
 
-// -----------------------------------------------------------------
-// options page quote common styling
-// -----------------------------------------------------------------
 .quoteListItem {
-  display: flex;
-  margin-bottom: 16px;
-}
-
-.quoteListItem--first {
-  display: flex;
-  flex-wrap: wrap;
-  width: 640px;
-  margin-right: 12px;
-}
-
-.quoteListItem--second {
-  display: flex;
-  align-items: center;
-}
-
-// -----------------------------------------------------------------
-// options page displayed quote
-// -----------------------------------------------------------------
-.display {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.display-quote {
-  width: 100%;
   margin-bottom: 8px;
 }
 
-// -----------------------------------------------------------------
-// options page editable quote
-// -----------------------------------------------------------------
-.edit {
-  margin: 4px;
-  padding: 4px;
-  font-size: 12px;
-  opacity: 0.5;
-
-  &:first-of-type {
-    margin-left: 0;
-  }
-
-  &:last-of-type {
-    margin-right: 0;
-    flex-grow: 2;
-  }
+.displayedQuote {
+  @extend %truncated;
 }
 
-.edit-quote {
-  width: 100%;
-  padding: 4px;
-  border: 1px solid lightgray;
-  font-size: 12px;
-  line-height: 125%;
-  margin-bottom: 12px;
-}
+// .editableQuote {
+//   margin: 4px;
+//   padding: 4px;
+//   font-size: 12px;
+//   opacity: 0.5;
+//
+//   &:first-of-type {
+//     margin-left: 0;
+//   }
+//
+//   &:last-of-type {
+//     margin-right: 0;
+//     flex-grow: 2;
+//   }
+// }
+//
+// .editableQuote--quote {
+//   width: 100%;
+//   padding: 4px;
+//   border: 1px solid lightgray;
+//   font-size: 12px;
+//   line-height: 125%;
+//   margin-bottom: 12px;
+// }
+//
+// .editableQuote--author {
+//   width: 25%;
+// }
+//
+// .editableQuote--category {
+//   width: 25%;
+// }
+//
+// .editableQuote--url {
+//   width: 25%;
+// }
 
-.edit-author {
-  width: 25%;
-}
-
-.edit-category {
-  width: 25%;
-}
-
-.edit-url {
-  width: 25%;
-}
-
-// -----------------------------------------------------------------
-// buttons
-// -----------------------------------------------------------------
 .btn {
   border-radius: 1px;
 }
@@ -126,26 +100,26 @@ body {
   padding: 2px 8px;
 }
 
-.btn-delete {
-  background-color: #aa3311;
-  color: white;
-  border: 0;
-  height: 20px;
-  width: 20px;
-  text-align: center;
-  line-height: 20px;
-  padding: 0;
-  font-size: 20px;
-}
+// .btn-delete {
+//   background-color: #aa3311;
+//   color: white;
+//   border: 0;
+//   height: 20px;
+//   width: 20px;
+//   text-align: center;
+//   line-height: 20px;
+//   padding: 0;
+//   font-size: 20px;
+// }
 
 // -----------------------------------------------------------------
 // theming
 // -----------------------------------------------------------------
+body {
+  background-color: #555;
+}
+
 body, div, textarea, input, button, option, select {
   font-family: 'work sans';
   letter-spacing: -0.3px;
-}
-
-h1 {
-  font-family: 'aleo';
 }

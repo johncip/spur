@@ -5,12 +5,11 @@ import { createDiv, loadSettings, loadQuotes } from './util'
 
 import 'Styles/options/style.scss'
 
-
 class OptionsPage extends PureComponent {
   render() {
     return (
       <div className="optionsContainer">
-        <h1>Options</h1>
+        <h1 className="optionsHeading">Options</h1>
         <SettingsSection settings={this.props.settings} />
         <QuotesSection quotes={this.props.quotes} />
       </div>
@@ -51,15 +50,8 @@ class SettingsSection extends PureComponent {
 class QuotesSection extends PureComponent {
   static renderQuote(record) {
     return (
-      <li>
-        <div className="quoteListItem">
-          <div className="quoteListItem--first">
-            <DisplayedQuote quote={record.quote} />
-          </div>
-          <div className="quoteListItem--second">
-            <button className="btn btn-delete" type="button">✖</button>
-          </div>
-        </div>
+      <li className="quoteListItem">
+        <DisplayedQuote key={record.quote} quote={record.quote} />
       </li>
     )
   }
@@ -73,19 +65,6 @@ class QuotesSection extends PureComponent {
   }
 }
 
-class EditableQuote extends PureComponent {
-  render() {
-    return (
-      <div>
-        <textarea className="edit edit-quote">{this.props.quote}</textarea>
-        <input type="text" className="edit edit-author" value={this.props.author} />
-        <input type="text" className="edit edit-category" value={this.props.category} />
-        <input type="text" className="edit edit-url" value={this.props.url} />
-      </div>
-    )
-  }
-}
-
 class DisplayedQuote extends PureComponent {
   render() {
     return (
@@ -95,6 +74,19 @@ class DisplayedQuote extends PureComponent {
     )
   }
 }
+
+// class EditableQuote extends PureComponent {
+//   render() {
+//     return (
+//       <div>
+//         <textarea className="edit edit-quote">{this.props.quote}</textarea>
+//         <input type="text" className="edit edit-author" value={this.props.author} />
+//         <input type="text" className="edit edit-category" value={this.props.category} />
+//         <input type="text" className="edit edit-url" value={this.props.url} />
+//       </div>
+//     )
+//   }
+// }
 
 (async function main() {
   const settings = await loadSettings()
