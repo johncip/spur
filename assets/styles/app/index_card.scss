@@ -59,7 +59,7 @@
     color: $ink-color;
     z-index: 1;
 
-    /* white-space: pre-wrap; */ // not compatible with text-justify
+    white-space: pre-line;
     text-align: justify;
     text-justify: auto;
 
