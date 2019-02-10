@@ -18,6 +18,13 @@
   opacity: 0;
 }
 
+%truncated {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: block;
+}
+
 /* the "index card" theme */
 .indexCard {
   body {
@@ -28,6 +35,8 @@
     position: relative;
     display: flex;
     flex-direction: column;
+
+    min-width: 0; // needed for "elastic" truncated URL
 
     max-width: 700px;
     margin: auto;
@@ -108,12 +117,12 @@
     @extend %collapsed;
     @extend %vertical-transition;
 
-    display: block;
     margin-bottom: 18px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
     color: $link-color;
+
+    a {
+      @extend %truncated;
+    }
 
     @at-root .indexCard .quoteBox-is-expanded .quoteBox--url {
       @extend %expanded;
