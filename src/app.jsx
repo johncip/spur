@@ -110,6 +110,7 @@ class Quote extends Component {
   }
 }
 
+// TODO: load quote outside of react? we have to load the settings outside anyway
 /*
  * Loads a quote and renders the <Quote/>.
  */
