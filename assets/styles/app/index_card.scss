@@ -19,6 +19,7 @@
   opacity: 0;
 }
 
+// TODO: duplicated
 %truncated {
   overflow: hidden;
   white-space: nowrap;
@@ -36,8 +37,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
-
-    min-width: 0; // needed for "elastic" truncated URL
+    min-width: 0;
 
     max-width: 700px;
     margin: auto;

@@ -3,6 +3,14 @@
 
 body {
   background-color: #555;
+// TODO: duplicated
+%truncated {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: block;
+}
+
 }
 
 .optionsContainer {
