@@ -1,5 +1,11 @@
 [
   {
+    "quote"    : "A monk told Joshu, “I have just entered this monastery. I beg you to teach me.”\n\nJoshu asked, “Have you eaten your rice porridge?”\n\nThe monk replied, “I have.”\n\n“Then,” said Joshu, “Go and wash your bowl.”",
+    "author"   : "無門慧開",
+    "category" : "Mindset",
+    "url"      : "http://mnmlist.com/wash-your-bowl/"
+  },
+  {
     "quote"    : "People who are unable to motivate themselves must be content with mediocrity, no matter how impressive their other talents.",
     "author"   : "Andrew Carnegie",
     "category" : "Mindset",
@@ -54,7 +60,7 @@
     "url"      : "https://www.goodreads.com/quotes/5832-argue-for-your-limitations-and-sure-enough-they-re-yours"
   },
   {
-    "quote"    : "Losers spend way too much time being pissed off by the problem rather than moving into the positive state of mind and getting on with building the solution... Losers tell made up stories to themselves and those around them about the problem. This storytelling takes up a lot of time and sucks away all the energy that could be channeled into coming up with the solution.",
+    "quote"    : "Losers spend way too much time being pissed off by the problem rather than moving into the positive state of mind and getting on with building the solution... Losers tell made up stories to themselves and those around them about the problem.\n\nThis storytelling takes up a lot of time and sucks away all the energy that could be channeled into coming up with the solution.",
     "author"   : "Tim Denning",
     "category" : "Mindset",
     "url"      : "https://addicted2success.com/success-advice/how-losers-are-created-and-how-to-avoid-becoming-one/"
@@ -88,5 +94,11 @@
     "quote"    : "If the wind will not serve, take to the oars.",
     "author"   : "Latin proverb",
     "category" : "Mindset"
+  },
+  {
+    "quote"    : "Skills can be taught. Character you either have or don't have. Bigfoot understood that there are two types of people in the world: those who do what they say they're going to do-and everyone else.",
+    "author"   : "Anthony Bourdain",
+    "category" : "Mindset",
+    "url"      : "https://archive.org/stream/Anthony_Bourdain_Kitchen_Confidential/Anthony_Bourdain_Kitchen_Confidential_djvu.txt"
   }
 ]
