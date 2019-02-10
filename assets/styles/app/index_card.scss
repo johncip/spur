@@ -63,6 +63,10 @@
     text-align: justify;
     text-justify: auto;
 
+    @media (max-width: 800px) {
+      text-align: left;
+    }
+
     &:before,
     &:after {
       position: absolute;
