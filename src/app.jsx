@@ -75,8 +75,10 @@ class Quote extends Component {
 
     return (
       <div className="quoteBox--url">
-        <FontAwesomeIcon icon={faGlobeAmericas} />
-        <a href={this.props.url}>{this.props.url}</a>
+        <a href={this.props.url}>
+          <FontAwesomeIcon icon={faGlobeAmericas} />
+          {this.props.url}
+        </a>
       </div>
     )
   }
