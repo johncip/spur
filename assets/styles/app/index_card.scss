@@ -1,5 +1,6 @@
 @import '../common/index_card';
 
+/* mixins */
 %vertical-transition {
   transition-property: height, opacity, margin;
   transition-duration: 0.5s;
@@ -54,12 +55,11 @@
     margin-bottom: 40px;
     font-family: $fancy-font-stack;
     font-weight: 300;
-    // font-size: 32pt;
     line-height: 130%;
     color: $ink-color;
     z-index: 1;
 
-    // white-space: pre-wrap;
+    /* white-space: pre-wrap; */ // not compatible with text-justify
     text-align: justify;
     text-justify: auto;
 
