@@ -61,7 +61,7 @@ class QuotesSection extends Component {
         <ul>
           {this.props.quotes.map(record => (
             <QuoteListItem key={record.quote} quote={record.quote} />
-            ))}
+          ))}
           <AddQuoteButton />
         </ul>
       </section>
