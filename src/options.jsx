@@ -5,12 +5,18 @@ import { createDiv, loadSettings, loadQuotes } from './util'
 
 import 'Styles/options/style.scss'
 
+function stripStart(str) {
+  return str.replace(/^\W+/, '');
+}
+
 class OptionsPage extends PureComponent {
   render() {
     return (
       <div className="optionsContainer">
-        <h1 className="optionsHeading">Options</h1>
+        <h1 className="optionsHeading">Settings</h1>
         <SettingsSection settings={this.props.settings} />
+
+        <h1 className="optionsHeading">Quotes</h1>
         <QuotesSection quotes={this.props.quotes} />
       </div>
     )
@@ -28,13 +34,6 @@ class SettingsSection extends PureComponent {
               <option value="indexCard">Index Card</option>
               <option value="indexCardDark">Index Card Dark</option>
             </select>
-          </label>
-        </div>
-
-        <div className="setting">
-          <label htmlFor="id-wake-time">
-            <span className="setting--labelText">Wake Time</span>
-            <input type="text" id="id-wake-time" />
           </label>
         </div>
 
@@ -65,14 +64,10 @@ class QuotesSection extends PureComponent {
 }
 
 class DisplayedQuote extends PureComponent {
-  static stripStart(str) {
-    return str.replace(/^\W+/, '');
-  }
-
   render() {
     return (
       <div className="displayedQuote">
-        {this.constructor.stripStart(this.props.quote)}
+        {stripStart(this.props.quote)}
       </div>
     )
   }
@@ -93,6 +88,8 @@ class DisplayedQuote extends PureComponent {
 
 (async function main() {
   const settings = await loadSettings()
-  const quotes = await loadQuotes()
+  const quotes = (await loadQuotes()).sort((a, b) => {
+    return stripStart(a.quote).localeCompare(stripStart(b.quote))
+  })
   ReactDOM.render(<OptionsPage settings={settings} quotes={quotes} />, createDiv('l-root'))
 })()
