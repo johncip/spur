@@ -1,4 +1,4 @@
-import React, { Component, PureComponent } from 'react'
+import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import classNames from 'classnames'
 import sample from 'lodash.sample'
@@ -79,7 +79,7 @@ const VerticalToggle = (props) => {
     'verticalToggle', {
       'verticalToggle-is-up': props.up,
       'verticalToggle-is-down': !props.up,
-    }
+    },
   )
   return (
     <button type="button" className={classes} onClick={props.handleClick}>
@@ -102,17 +102,17 @@ class QuoteBox extends Component {
   }
 
   classes() {
-    const { expanded } = this.state;
+    const { expanded } = this.state
     return classNames(
       'quoteBox', {
         'quoteBox-is-expanded': expanded,
         'quoteBox-is-collapsed': !expanded,
-      }
+      },
     )
   }
 
   render() {
-    const { quote, author, url, category } = this.props;
+    const { quote, author, url, category } = this.props
     return (
       <div className={this.classes()}>
         <Quote quote={quote} />
