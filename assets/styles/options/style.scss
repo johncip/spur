@@ -71,7 +71,6 @@ select {
 
   cursor: pointer;
   -webkit-user-select: none;
-  user-select: none;
 
   &:hover {
     background-color: darken($quotebox-background-color, 10%);
