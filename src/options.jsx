@@ -23,7 +23,7 @@ class SettingsSection extends PureComponent {
       <section className="optionsSection">
         <div className="setting">
           <label htmlFor="id-theme">
-            <span className="setting--label">Theme</span>
+            <span className="setting--labelText">Theme</span>
             <select id="id-theme">
               <option value="indexCard">Index Card</option>
               <option value="indexCardDark">Index Card Dark</option>
@@ -33,7 +33,7 @@ class SettingsSection extends PureComponent {
 
         <div className="setting">
           <label htmlFor="id-wake-time">
-            <span className="setting--label">Wake Time</span>
+            <span className="setting--labelText">Wake Time</span>
             <input type="text" id="id-wake-time" />
           </label>
         </div>
