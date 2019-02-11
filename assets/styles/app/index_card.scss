@@ -159,7 +159,7 @@
     }
   }
 
-  .quoteBox--settingsLink {
+  .quoteBox--optionsLink {
     color: $faded-ink-color;
     margin-top: 18px;
     cursor: pointer;
@@ -168,11 +168,11 @@
     // https://stackoverflow.com/questions/17833674/sass-ampersand-select-immmediate-parent
     @extend %collapsed;
 
-    @at-root .indexCard .quoteBox-is-collapsed .quoteBox--settingsLink {
+    @at-root .indexCard .quoteBox-is-collapsed .quoteBox--optionsLink {
       @extend %collapsed;
     }
 
-    @at-root .indexCard .quoteBox-is-expanded .quoteBox--settingsLink {
+    @at-root .indexCard .quoteBox-is-expanded .quoteBox--optionsLink {
       @extend %expanded;
     }
   }

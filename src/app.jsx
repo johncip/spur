@@ -95,7 +95,7 @@ class Quote extends Component {
           <span id="categoryText">{this.props.category}</span>
         </div>
 
-        <div className="quoteBox--settingsLink">
+        <div className="quoteBox--optionsLink">
           <FontAwesomeIcon icon={faCog} onClick={() => browser.runtime.openOptionsPage()}/>
         </div>
 
