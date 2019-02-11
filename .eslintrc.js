@@ -21,6 +21,7 @@ module.exports = {
     'react/destructuring-assignment': 'off',
     'react/no-multi-comp': 'off',
     'react/prop-types': 'off',
+    'react/no-unused-state': 'off',
 
     'jsx-a11y/label-has-associated-control': ['error', { assert: 'both' } ],
     'jsx-a11y/label-has-for': 'off',
