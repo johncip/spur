@@ -126,8 +126,12 @@
     margin-top: 18px;
     color: $link-color;
 
-    a {
+    > a {
       @extend %truncated;
+    }
+
+    .svg-inline--fa {
+      color: $faded-ink-color;
     }
 
     @at-root .indexCard .quoteBox-is-expanded .quoteBox--url {
@@ -167,6 +171,7 @@
     // TODO: make this a mixin
     // https://stackoverflow.com/questions/17833674/sass-ampersand-select-immmediate-parent
     @extend %collapsed;
+    @extend %vertical-transition;
 
     @at-root .indexCard .quoteBox-is-collapsed .quoteBox--optionsLink {
       @extend %collapsed;
