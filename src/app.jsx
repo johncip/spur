@@ -41,7 +41,7 @@ const Rule = () => <hr className="quoteBox--rule" />
 /*
  * A link to additional info, like the quote's source.
  */
-const InfoLink = ({ url }) => (
+const Info = ({ url }) => (
   <div className="quoteBox--url">
     <a href={url}>
       <FontAwesomeIcon icon={faGlobeAmericas} />
@@ -119,7 +119,7 @@ class QuoteBox extends Component {
         <Author author={author} />
         <Rule />
 
-        {url && <InfoLink url={url} />}
+        {url && <Info url={url} />}
         <Category category={category} />
         <OptionsLink />
 
