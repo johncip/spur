@@ -43,10 +43,8 @@ const Rule = () => <hr className="quoteBox--rule" />
  */
 const Info = ({ url }) => (
   <div className="quoteBox--url">
-    <a href={url}>
-      <FontAwesomeIcon icon={faGlobeAmericas} />
-      {url}
-    </a>
+    <FontAwesomeIcon icon={faGlobeAmericas} />
+    <a href={url}>{url}</a>
   </div>
 )
 

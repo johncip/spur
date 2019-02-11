@@ -123,13 +123,13 @@
     @extend %vertical-transition;
 
     margin-top: 18px;
-    color: $link-color;
 
     > a {
       @extend %truncated;
+      color: $link-color;
     }
 
-    .svg-inline--fa {
+    > .svg-inline--fa {
       color: $faded-ink-color;
     }
 
