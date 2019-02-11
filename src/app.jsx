@@ -31,7 +31,7 @@ const VerticalToggle = (props) => {
 /*
  * A displayed quote, with author, etc.
  */
-class Quote extends Component {
+class QuoteBox extends Component {
   /**
    * Returns an appropriate font size for the given string. That is, longer strings will
    * return a smaller size, and shorter strings will return a larger size.
@@ -59,11 +59,12 @@ class Quote extends Component {
   }
 
   classes() {
-    return classNames({
-      quoteBox: true,
-      'quoteBox-is-expanded': this.state.expanded,
-      'quoteBox-is-collapsed': !this.state.expanded,
-    })
+    return classNames(
+      'quoteBox', {
+        'quoteBox-is-expanded': this.state.expanded,
+        'quoteBox-is-collapsed': !this.state.expanded,
+      }
+    )
   }
 
   render() {
@@ -104,9 +105,8 @@ class Quote extends Component {
   }
 }
 
-// TODO: load quote outside of react? we have to load the settings outside anyway
 /*
- * Loads a quote and renders the <Quote/>.
+ * Loads a quote and renders the <QuoteBox />.
  */
 class QuoteLoader extends Component {
   static randomItem(arr) {
@@ -134,7 +134,7 @@ class QuoteLoader extends Component {
     if (!this.state.quote) return null
 
     return (
-      <Quote
+      <QuoteBox
         quote={this.state.quote}
         author={this.state.author}
         url={this.state.url}
