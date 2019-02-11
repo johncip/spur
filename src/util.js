@@ -26,10 +26,10 @@ export function trimStart(str) {
 /**
  * Creates a div, appends it to the body, and returns it.
  */
-export async function createDiv(className) {
+export function createDiv(className) {
   const div = document.createElement('div')
   div.classList.add(className)
-  await document.body.appendChild(div)
+  document.body.appendChild(div)
   return div
 }
 
