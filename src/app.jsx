@@ -12,6 +12,9 @@ import { createDiv, loadSettings, loadQuotes } from './util'
 
 import 'Styles/app/style.scss'
 
+/*
+ * The main text of a quote.
+ */
 const Quote = ({ quote }) => {
   const size = 160 * (1 / (quote.length ** 0.3))
   return (
@@ -21,15 +24,24 @@ const Quote = ({ quote }) => {
   )
 }
 
+/*
+ * The quote's author.
+ */
 const Author = ({ author }) => (
   <div className="quoteBox--author">
     {author}
   </div>
 )
 
+/*
+ * A horizonal rule.
+ */
 const Rule = () => <hr className="quoteBox--rule" />
 
-const Url = ({ url }) => (
+/*
+ * A link to additional info, like the quote's source.
+ */
+const InfoLink = ({ url }) => (
   <div className="quoteBox--url">
     <a href={url}>
       <FontAwesomeIcon icon={faGlobeAmericas} />
@@ -38,6 +50,9 @@ const Url = ({ url }) => (
   </div>
 )
 
+/*
+ * The quote's category.
+ */
 const Category = ({ category }) => (
   <div className="quoteBox--category">
     <FontAwesomeIcon icon={faBox} />
@@ -47,6 +62,9 @@ const Category = ({ category }) => (
   </div>
 )
 
+/*
+ * A gear linking to the options page.
+ */
 const OptionsLink = () => (
   <div className="quoteBox--optionsLink">
     <FontAwesomeIcon icon={faCog} onClick={() => browser.runtime.openOptionsPage()} />
@@ -101,7 +119,7 @@ class QuoteBox extends Component {
         <Author author={author} />
         <Rule />
 
-        {url && <Url url={url} />}
+        {url && <InfoLink url={url} />}
         <Category category={category} />
         <OptionsLink />
 
