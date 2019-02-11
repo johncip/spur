@@ -81,6 +81,6 @@ class QuotesSection extends PureComponent {
   ))
   ReactDOM.render(
     <OptionsPage settings={settings} quotes={quotes} />,
-    createDiv('l-root'),
+    await createDiv('l-root'),
   )
 })()
