@@ -1,6 +1,7 @@
 import React, { Component, PureComponent } from 'react'
 import ReactDOM from 'react-dom'
 import classNames from 'classnames'
+import sample from 'lodash.sample'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBox } from '@fortawesome/free-solid-svg-icons/faBox'
@@ -10,6 +11,47 @@ import { faGlobeAmericas } from '@fortawesome/free-solid-svg-icons/faGlobeAmeric
 import { createDiv, loadSettings, loadQuotes } from './util'
 
 import 'Styles/app/style.scss'
+
+const Quote = ({ quote }) => {
+  const size = 160 * (1 / (quote.length ** 0.3))
+  return (
+    <div className="quoteBox--quote" style={{ fontSize: `${size}px` }}>
+      {quote}
+    </div>
+  )
+}
+
+const Author = ({ author }) => (
+  <div className="quoteBox--author">
+    {author}
+  </div>
+)
+
+const Rule = () => <hr className="quoteBox--rule" />
+
+const Url = ({ url }) => (
+  <div className="quoteBox--url">
+    <a href={url}>
+      <FontAwesomeIcon icon={faGlobeAmericas} />
+      {url}
+    </a>
+  </div>
+)
+
+const Category = ({ category }) => (
+  <div className="quoteBox--category">
+    <FontAwesomeIcon icon={faBox} />
+    <span id="categoryText">
+      {category}
+    </span>
+  </div>
+)
+
+const OptionsLink = () => (
+  <div className="quoteBox--optionsLink">
+    <FontAwesomeIcon icon={faCog} onClick={() => browser.runtime.openOptionsPage()} />
+  </div>
+)
 
 /*
  * A button captioned with an up or down triangle.
@@ -32,69 +74,36 @@ const VerticalToggle = (props) => {
  * A displayed quote, with author, etc.
  */
 class QuoteBox extends Component {
-  /**
-   * Returns an appropriate font size for the given string. That is, longer strings will
-   * return a smaller size, and shorter strings will return a larger size.
-   *
-   *  TODO: this should scale, so that a base size can be set in css
-   */
-  static adjustedFontSize(text) {
-    const size = 160 * (1 / (text.length ** 0.3))
-    return `${size}px`
-  }
-
   constructor(props) {
     super(props)
-
-    this.state = {
-      expanded: false,
-    }
+    this.state = { expanded: false }
   }
 
-  /**
-   * Reverses state.expanded (which hides & shows the URL and category).
-   */
   toggleDrawer = () => {
-    this.setState(prev => ({ expanded: !prev.expanded }))
+    this.setState(old => ({ expanded: !old.expanded }))
   }
 
   classes() {
+    const { expanded } = this.state;
     return classNames(
       'quoteBox', {
-        'quoteBox-is-expanded': this.state.expanded,
-        'quoteBox-is-collapsed': !this.state.expanded,
+        'quoteBox-is-expanded': expanded,
+        'quoteBox-is-collapsed': !expanded,
       }
     )
   }
 
   render() {
-    const quoteFontSize = this.constructor.adjustedFontSize(this.props.quote)
-
+    const { quote, author, url, category } = this.props;
     return (
       <div className={this.classes()}>
-        <div className="quoteBox--quote" style={{ fontSize: quoteFontSize }}>
-          {this.props.quote}
-        </div>
-        <div className="quoteBox--author">{this.props.author}</div>
-        <hr className="quoteBox--rule" />
+        <Quote quote={quote} />
+        <Author author={author} />
+        <Rule />
 
-        {this.props.url &&
-          <div className="quoteBox--url">
-            <a href={this.props.url}>
-              <FontAwesomeIcon icon={faGlobeAmericas} />
-              {this.props.url}
-            </a>
-          </div>
-        }
-
-        <div className="quoteBox--category">
-          <FontAwesomeIcon icon={faBox} />
-          <span id="categoryText">{this.props.category}</span>
-        </div>
-
-        <div className="quoteBox--optionsLink">
-          <FontAwesomeIcon icon={faCog} onClick={() => browser.runtime.openOptionsPage()}/>
-        </div>
+        {url && <Url url={url} />}
+        <Category category={category} />
+        <OptionsLink />
 
         <VerticalToggle
           up={this.state.expanded}
@@ -108,11 +117,7 @@ class QuoteBox extends Component {
 /*
  * Loads a quote and renders the <QuoteBox />.
  */
-class QuoteLoader extends Component {
-  static randomItem(arr) {
-    return arr[Math.floor(Math.random() * arr.length)]
-  }
-
+class AppRoot extends Component {
   constructor(props) {
     super(props)
 
@@ -125,9 +130,7 @@ class QuoteLoader extends Component {
   }
 
   componentDidMount() {
-    loadQuotes().then((quotes) => {
-      this.setState(this.constructor.randomItem(quotes))
-    })
+    loadQuotes().then(qs => this.setState(sample(qs)))
   }
 
   render() {
@@ -147,5 +150,5 @@ class QuoteLoader extends Component {
 (async function main() {
   const settings = await loadSettings()
   document.documentElement.classList.add(settings.theme)
-  ReactDOM.render(<QuoteLoader />, createDiv('l-root'))
+  ReactDOM.render(<AppRoot />, createDiv('l-root'))
 })()
