@@ -167,6 +167,14 @@
     margin-top: 18px;
     cursor: pointer;
 
+    .svg-inline--fa {
+      color: $faded-ink-color;
+
+      &:hover {
+        color: darken($faded-ink-color, 25%);
+      }
+    }
+
     // TODO: make this a mixin
     // https://stackoverflow.com/questions/17833674/sass-ampersand-select-immmediate-parent
     @extend %collapsed;
