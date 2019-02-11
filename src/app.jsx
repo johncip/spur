@@ -74,16 +74,16 @@ const OptionsLink = () => (
 /*
  * A button captioned with an up or down triangle.
  */
-const VerticalToggle = (props) => {
+const VerticalToggle = ({ up, handleClick }) => {
   const classes = classNames(
     'verticalToggle', {
-      'verticalToggle-is-up': props.up,
-      'verticalToggle-is-down': !props.up,
+      'verticalToggle-is-up': up,
+      'verticalToggle-is-down': !up,
     },
   )
   return (
-    <button type="button" className={classes} onClick={props.handleClick}>
-      {props.up ? '▲' : '▼'}
+    <button type="button" className={classes} onClick={handleClick}>
+      {up ? '▲' : '▼'}
     </button>
   )
 }
