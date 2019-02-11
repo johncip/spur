@@ -89,6 +89,18 @@ select {
   }
 }
 
+.addQuoteButton {
+  @extend .quoteListItem;
+  color: $quotebox-border-color;
+  border: 2px dashed $quotebox-border-color; // TODO: dupe
+  box-sizing: border-box;
+
+  &:hover {
+    color: darken($quotebox-border-color, 25%);
+    border-color: darken($quotebox-border-color, 15%);
+  }
+}
+
 .btn {
   padding: 5px 10px;
   border: 0;

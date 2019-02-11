@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus'
 
 import { createDiv, loadSettings, loadQuotes, trimStart } from './util'
 
@@ -39,6 +41,14 @@ const QuoteListItem = ({ quote }) => (
   </li>
 )
 
+const AddQuoteButton = () => (
+  <li className="addQuoteButton">
+    <FontAwesomeIcon icon={faPlus} />
+    New quote…
+  </li>
+)
+
+
 /*
  * The quotes section of the options page. An editable list of stored quotes.
  */
@@ -51,7 +61,8 @@ class QuotesSection extends Component {
         <ul>
           {this.props.quotes.map(record => (
             <QuoteListItem key={record.quote} quote={record.quote} />
-          ))}
+            ))}
+          <AddQuoteButton />
         </ul>
       </section>
     )
