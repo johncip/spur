@@ -3,6 +3,19 @@ const DEFAULT_SETTINGS = {
   wakeTime: '6 am',
 }
 
+const STORAGE = browser.storage.local;
+
+/**
+ * Seeds browser storage with the included quotes.
+ */
+function seedStorage() {
+  const url = browser.extension.getURL('seeds.json')
+
+  return fetch(url)
+    .then(resp => resp.json())
+    .then(seeds => STORAGE.set({ storedQuotes: seeds }))
+}
+
 /**
  * Creates a div, appends it to the body, and returns it.
  */
@@ -14,10 +27,10 @@ export function createDiv(className) {
 }
 
 /**
- * Reads an option from browser storage.
+ * Reads a single key from browser storage and returns the value without the wrapper object.
  */
-export async function readKey(key) {
-  const response = await browser.storage.local.get(key)
+export async function getOneKey(key) {
+  const response = await STORAGE.get(key)
   if (!Object.keys(response).length) {
     return null
   }
@@ -30,7 +43,7 @@ export async function readKey(key) {
  * TODO: cleaner hash merge
  */
 export async function loadSettings() {
-  const settings = await readKey('settings')
+  const settings = await getOneKey('settings')
 
   if (!settings) {
     return DEFAULT_SETTINGS
@@ -46,28 +59,10 @@ export async function loadSettings() {
 }
 
 /**
- * Seeds browser storage with the included quotes.
- */
-function seedStorage() {
-  const url = browser.extension.getURL('seeds.json')
-  const storage = browser.storage.local
-
-  return fetch(url).then(resp => resp.json())
-    .then(seeds => storage.set({ storedQuotes: seeds }))
-}
-
-/**
- * Loads quote list from browser storage. If there are no quotes, storage is first seeded
- * with the included quotes.
+ * Loads quotes from browser storage. If they are not found, seeds storage with the
+ * included quotes and tries again.
  */
 export async function loadQuotes() {
-  const key = 'storedQuotes'
-  const storage = browser.storage.local
-  const quotes = await storage.get(key)
-
-  if (!Object.keys(quotes).length) {
-    await seedStorage()
-    return loadQuotes()
-  }
-  return quotes[key]
+  const quotes = await getOneKey('storedQuotes')
+  return quotes ? quotes : await seedStorage() && loadQuotes()
 }
