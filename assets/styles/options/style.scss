@@ -3,6 +3,7 @@
 @import '../common/index_card';
 
 $save-button-color: #5577aa;
+$content-width: 720px;
 
 // TODO: duplicated
 %truncated {
@@ -16,9 +17,6 @@ body {
 }
 
 .l-root {
-  display: flex;
-  align-items: center;
-  min-height: 100%;
   padding: 20px;
 }
 
@@ -27,9 +25,8 @@ body {
 }
 
 .optionsContainer {
-  max-width: 700px;
-  margin: 0 auto;
-  min-width: 0;
+  max-width: $content-width;
+  margin: auto;
 }
 
 .optionsSection {
@@ -40,6 +37,14 @@ body {
   padding: 16px;
   font-size: 14px;
   color: $ink-color;
+
+  &:nth-of-type(2) {
+    display: flex;
+
+    > ul {
+      overflow: hidden;
+    }
+  }
 }
 
 .setting {
