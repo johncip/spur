@@ -44,9 +44,7 @@ class SettingsSection extends PureComponent {
 
 const QuoteListItem = ({ quote }) => (
   <li className="quoteListItem">
-    <div className="displayedQuote">
-      {trimStart(quote)}
-    </div>
+    {quote}
   </li>
 )
 
