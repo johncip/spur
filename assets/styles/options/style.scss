@@ -1,5 +1,6 @@
 @import '../common/base';
 @import '../common/vendor';
+@import '../common/index_card';
 
 // TODO: duplicated
 %truncated {
@@ -26,8 +27,8 @@
 
 .optionsSection {
   margin-bottom: 24px;
-  background-color: #777;
-  border: 1px solid #e5e5e5;
+  background-color: $quotebox-background-color;
+  border: 1px solid lighten($quotebox-border-color, 12%);
   border-radius: 2px;
   padding: 16px;
   font-size: 14px;
@@ -43,7 +44,15 @@
 }
 
 .quoteListItem {
-  margin-bottom: 8px;
+  background-color: darken($quotebox-background-color, 5%);
+  padding: 12px 8px;
+  border-radius: 2px;
+  margin-bottom: 10px; // TODO: not smacss
+  cursor: pointer;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .displayedQuote {
@@ -115,11 +124,12 @@
 // -----------------------------------------------------------------
 // theming
 // -----------------------------------------------------------------
-body {
-  background-color: #555;
-}
 
 body, div, textarea, input, button, option, select {
   font-family: 'work sans';
   letter-spacing: -0.3px;
+}
+
+body {
+  background-color: $body-background-color;
 }
