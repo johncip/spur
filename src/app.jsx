@@ -14,22 +14,18 @@ import 'Styles/app/style.scss'
 /*
  * A button captioned with an up or down triangle.
  */
-class VerticalToggle extends PureComponent {
-  classes() {
-    return classNames({
-      verticalToggle: true,
-      'verticalToggle-is-up': this.props.up,
-      'verticalToggle-is-down': !this.props.up,
-    })
-  }
-
-  render() {
-    return (
-      <button className={this.classes()} onClick={this.props.handleClick} type="button">
-        {this.props.up ? '▲' : '▼'}
-      </button>
-    )
-  }
+const VerticalToggle = (props) => {
+  const classes = classNames(
+    'verticalToggle', {
+      'verticalToggle-is-up': props.up,
+      'verticalToggle-is-down': !props.up,
+    }
+  )
+  return (
+    <button type="button" className={classes} onClick={props.handleClick}>
+      {props.up ? '▲' : '▼'}
+    </button>
+  )
 }
 
 /*
