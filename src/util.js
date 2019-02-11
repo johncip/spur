@@ -17,7 +17,7 @@ export function createDiv(className) {
  * Reads an option from browser storage.
  */
 export async function readKey(key) {
-  const response = await browser.storage.sync.get(key)
+  const response = await browser.storage.local.get(key)
   if (!Object.keys(response).length) {
     return null
   }
@@ -50,7 +50,7 @@ export async function loadSettings() {
  */
 function seedStorage() {
   const url = browser.extension.getURL('seeds.json')
-  const storage = browser.storage.sync
+  const storage = browser.storage.local
 
   return fetch(url).then(resp => resp.json())
     .then(seeds => storage.set({ storedQuotes: seeds }))
@@ -62,7 +62,7 @@ function seedStorage() {
  */
 export async function loadQuotes() {
   const key = 'storedQuotes'
-  const storage = browser.storage.sync
+  const storage = browser.storage.local
   const quotes = await storage.get(key)
 
   if (!Object.keys(quotes).length) {
