@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
 import { createDiv, loadSettings, loadQuotes, trimStart } from './util'
@@ -6,27 +6,10 @@ import { createDiv, loadSettings, loadQuotes, trimStart } from './util'
 import 'Styles/options/style.scss'
 
 /*
- * The entire options page.
- */
-class OptionsPage extends PureComponent {
-  render() {
-    return (
-      <div className="optionsContainer">
-        <h1 className="optionsHeading">Settings</h1>
-        <SettingsSection settings={this.props.settings} />
-
-        <h1 className="optionsHeading">Quotes</h1>
-        <QuotesSection quotes={this.props.quotes} />
-      </div>
-    )
-  }
-}
-
-/*
  * The (behavior) settings section of the options page.
  */
 // eslint-disable-next-line react/prefer-stateless-function
-class SettingsSection extends PureComponent {
+class SettingsSection extends Component {
   render() {
     return (
       <section className="optionsSection">
@@ -59,7 +42,8 @@ const QuoteListItem = ({ quote }) => (
 /*
  * The quotes section of the options page. An editable list of stored quotes.
  */
-class QuotesSection extends PureComponent {
+// eslint-disable-next-line react/prefer-stateless-function
+class QuotesSection extends Component {
   // TODO: rename "quotes" (quoteRecords or something)
   render() {
     return (
@@ -74,12 +58,30 @@ class QuotesSection extends PureComponent {
   }
 }
 
+/*
+ * The entire options page.
+ */
+const OptionsPage = ({ settings, quotes }) => (
+  <div className="optionsContainer">
+    <h1 className="optionsHeading">Settings</h1>
+    <SettingsSection settings={settings} />
+
+    <h1 className="optionsHeading">Quotes</h1>
+    <QuotesSection quotes={quotes} />
+  </div>
+)
+
+
 async function main() {
   const settings = await loadSettings()
   const quotes = (await loadQuotes()).sort((a, b) => (
     trimStart(a.quote).localeCompare(trimStart(b.quote))
   ))
-  ReactDOM.render(<OptionsPage settings={settings} quotes={quotes} />, createDiv('l-root'))
+
+  ReactDOM.render(
+    <OptionsPage settings={settings} quotes={quotes} />,
+    createDiv('l-root'),
+  )
 }
 
 main()
