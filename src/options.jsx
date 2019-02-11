@@ -1,13 +1,9 @@
 import React, { PureComponent } from 'react'
 import ReactDOM from 'react-dom'
 
-import { createDiv, loadSettings, loadQuotes } from './util'
+import { createDiv, loadSettings, loadQuotes, trimStart } from './util'
 
 import 'Styles/options/style.scss'
-
-function stripStart(str) {
-  return str.replace(/^\W+/, '');
-}
 
 class OptionsPage extends PureComponent {
   render() {
@@ -23,6 +19,7 @@ class OptionsPage extends PureComponent {
   }
 }
 
+// eslint-disable-next-line react/prefer-stateless-function
 class SettingsSection extends PureComponent {
   render() {
     return (
@@ -67,29 +64,16 @@ class DisplayedQuote extends PureComponent {
   render() {
     return (
       <div className="displayedQuote">
-        {stripStart(this.props.quote)}
+        {trimStart(this.props.quote)}
       </div>
     )
   }
 }
 
-// class EditableQuote extends PureComponent {
-//   render() {
-//     return (
-//       <div>
-//         <textarea className="edit edit-quote">{this.props.quote}</textarea>
-//         <input type="text" className="edit edit-author" value={this.props.author} />
-//         <input type="text" className="edit edit-category" value={this.props.category} />
-//         <input type="text" className="edit edit-url" value={this.props.url} />
-//       </div>
-//     )
-//   }
-// }
-
 (async function main() {
   const settings = await loadSettings()
-  const quotes = (await loadQuotes()).sort((a, b) => {
-    return stripStart(a.quote).localeCompare(stripStart(b.quote))
-  })
+  const quotes = (await loadQuotes()).sort((a, b) => (
+    trimStart(a.quote).localeCompare(trimStart(b.quote))
+  ))
   ReactDOM.render(<OptionsPage settings={settings} quotes={quotes} />, createDiv('l-root'))
 })()

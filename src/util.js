@@ -17,6 +17,13 @@ function seedStorage() {
 }
 
 /**
+ * Returns string with leading nonword characters removed.
+ */
+export function trimStart(str) {
+  return str.replace(/^\W+/, '')
+}
+
+/**
  * Creates a div, appends it to the body, and returns it.
  */
 export function createDiv(className) {
