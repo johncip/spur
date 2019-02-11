@@ -34,9 +34,7 @@ class SettingsSection extends PureComponent {
           </label>
         </div>
 
-        <div>
-          <button className="btn btn-save" type="button">Save</button>
-        </div>
+        <button className="btn btn-save" type="button">Save</button>
       </section>
     )
   }
