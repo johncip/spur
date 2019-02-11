@@ -42,30 +42,25 @@ class SettingsSection extends PureComponent {
   }
 }
 
-class QuotesSection extends PureComponent {
-  static renderQuote(record) {
-    return (
-      <li className="quoteListItem">
-        <DisplayedQuote key={record.quote} quote={record.quote} />
-      </li>
-    )
-  }
+const QuoteListItem = ({ quote }) => (
+  <li className="quoteListItem">
+    <div className="displayedQuote">
+      {trimStart(quote)}
+    </div>
+  </li>
+)
 
+class QuotesSection extends PureComponent {
+  // TODO: rename "quotes" (quoteRecords or something)
   render() {
     return (
       <section className="optionsSection">
-        <ul>{this.props.quotes.map(record => this.constructor.renderQuote(record))}</ul>
+        <ul>
+          {this.props.quotes.map(record => (
+            <QuoteListItem key={record.quote} quote={record.quote} />
+          ))}
+        </ul>
       </section>
-    )
-  }
-}
-
-class DisplayedQuote extends PureComponent {
-  render() {
-    return (
-      <div className="displayedQuote">
-        {trimStart(this.props.quote)}
-      </div>
     )
   }
 }
