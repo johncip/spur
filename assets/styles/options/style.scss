@@ -53,6 +53,14 @@
   &:last-child {
     margin-bottom: 0;
   }
+
+  &:hover {
+    background-color: darken($quotebox-background-color, 10%);
+  }
+
+  &:active {
+    background-color: darken($quotebox-background-color, 15%);
+  }
 }
 
 .displayedQuote {
