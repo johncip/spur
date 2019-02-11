@@ -5,6 +5,9 @@ import { createDiv, loadSettings, loadQuotes, trimStart } from './util'
 
 import 'Styles/options/style.scss'
 
+/*
+ * The entire options page.
+ */
 class OptionsPage extends PureComponent {
   render() {
     return (
@@ -19,6 +22,9 @@ class OptionsPage extends PureComponent {
   }
 }
 
+/*
+ * The (behavior) settings section of the options page.
+ */
 // eslint-disable-next-line react/prefer-stateless-function
 class SettingsSection extends PureComponent {
   render() {
@@ -40,12 +46,19 @@ class SettingsSection extends PureComponent {
   }
 }
 
+/*
+ * A clickable displayed quote.
+ */
+// TODO: this should be / contain a button for a11y
 const QuoteListItem = ({ quote }) => (
   <li className="quoteListItem">
     {quote}
   </li>
 )
 
+/*
+ * The quotes section of the options page. An editable list of stored quotes.
+ */
 class QuotesSection extends PureComponent {
   // TODO: rename "quotes" (quoteRecords or something)
   render() {
