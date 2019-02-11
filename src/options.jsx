@@ -66,10 +66,14 @@ class QuotesSection extends PureComponent {
 }
 
 class DisplayedQuote extends PureComponent {
+  static stripStart(str) {
+    return str.replace(/^\W+/, '');
+  }
+
   render() {
     return (
-      <div className="display display-quote">
-        {this.props.quote}
+      <div className="displayedQuote">
+        {this.constructor.stripStart(this.props.quote)}
       </div>
     )
   }
