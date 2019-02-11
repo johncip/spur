@@ -79,5 +79,8 @@ class QuotesSection extends PureComponent {
   const quotes = (await loadQuotes()).sort((a, b) => (
     trimStart(a.quote).localeCompare(trimStart(b.quote))
   ))
-  ReactDOM.render(<OptionsPage settings={settings} quotes={quotes} />, createDiv('l-root'))
+  ReactDOM.render(
+    <OptionsPage settings={settings} quotes={quotes} />,
+    createDiv('l-root'),
+  )
 })()
