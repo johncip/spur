@@ -3,7 +3,7 @@ const DEFAULT_SETTINGS = {
   wakeTime: '6 am',
 }
 
-const STORAGE = browser.storage.local;
+const STORAGE = browser.storage.local
 
 /**
  * Seeds browser storage with the included quotes.
@@ -71,5 +71,5 @@ export async function loadSettings() {
  */
 export async function loadQuotes() {
   const quotes = await getOneKey('storedQuotes')
-  return quotes ? quotes : await seedStorage() && loadQuotes()
+  return quotes || (await seedStorage() && loadQuotes())
 }
