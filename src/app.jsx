@@ -4,6 +4,7 @@ import classNames from 'classnames'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBox } from '@fortawesome/free-solid-svg-icons/faBox'
+import { faCog } from '@fortawesome/free-solid-svg-icons/faCog'
 import { faGlobeAmericas } from '@fortawesome/free-solid-svg-icons/faGlobeAmericas'
 
 import { createDiv, loadSettings, loadQuotes } from './util'
@@ -92,6 +93,10 @@ class Quote extends Component {
         <div className="quoteBox--category">
           <FontAwesomeIcon icon={faBox} />
           <span id="categoryText">{this.props.category}</span>
+        </div>
+
+        <div className="quoteBox--settingsLink">
+          <FontAwesomeIcon icon={faCog} onClick={() => browser.runtime.openOptionsPage()}/>
         </div>
 
         <VerticalToggle

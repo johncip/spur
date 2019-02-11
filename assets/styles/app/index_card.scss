@@ -158,6 +158,24 @@
     }
   }
 
+  .quoteBox--settingsLink {
+    color: $faded-ink-color;
+    margin-top: 18px;
+    cursor: pointer;
+
+    // TODO: make this a mixin
+    // https://stackoverflow.com/questions/17833674/sass-ampersand-select-immmediate-parent
+    @extend %collapsed;
+
+    @at-root .indexCard .quoteBox-is-collapsed .quoteBox--settingsLink {
+      @extend %collapsed;
+    }
+
+    @at-root .indexCard .quoteBox-is-expanded .quoteBox--settingsLink {
+      @extend %expanded;
+    }
+  }
+
   .verticalToggle {
     position: absolute;
     bottom: -8px;
