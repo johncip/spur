@@ -48,7 +48,6 @@ const AddQuoteButton = () => (
   </li>
 )
 
-
 /*
  * The quotes section of the options page. An editable list of stored quotes.
  */
