@@ -40,7 +40,6 @@ class SettingsSection extends PureComponent {
 
         <div>
           <button className="btn btn-save" type="button">Save</button>
-          <span id="savedStatus">Not saved.</span>
         </div>
       </section>
     )
