@@ -1,35 +1,13 @@
-@import '../common/index_card';
+@import '../common/variables';
+@import '../common/mixins';
 
-/* mixins */
-%vertical-transition {
-  transition-property: height, opacity, margin;
-  transition-duration: 0.5s;
-  transition-timing-function: ease-in-out;
-}
+// TODO: replace darken with css filter
 
-%expanded {
-  height: 1.2em;
-  opacity: 1;
-}
+$nerdy-font: 300 9pt $mono-font-stack;
 
-%collapsed {
-  overflow: hidden;
-  height: 0;
-  margin: 0;
-  opacity: 0;
-}
-
-// TODO: duplicated
-%truncated {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-/* the "index card" theme */
 .indexCard {
   body {
-    background-color: $body-background-color;
+    background-color: $white;
   }
 
   .quoteBox {
@@ -44,18 +22,18 @@
     border-style: solid;
     border-width: 1px;
 
-    background-color: $quotebox-background-color;
-    border-color: $quotebox-border-color;
+    background-color: $gray-6;
+    border-color: $gray-4;
   }
 
   .quoteBox--quote {
     position: relative;
     margin-top: 18px;
     margin-bottom: 40px;
-    font-family: $fancy-font-stack;
+    font-family: $basic-font-stack;
     font-weight: 300;
     line-height: 130%;
-    color: $ink-color;
+    color: $ink;
     z-index: 1;
 
     white-space: pre-line;
@@ -91,9 +69,9 @@
   .quoteBox--author {
     align-self: end;
     font-size: 16pt;
-    font-family: $fancy-font-stack;
+    font-family: $basic-font-stack;
     font-weight: 300;
-    color: $faded-ink-color;
+    color: $gray-3;
 
     &:before {
       content: "\2015 ";
@@ -101,12 +79,12 @@
   }
 
   .quoteBox--category {
-    @extend %nerdy-type;
     @extend %collapsed;
     @extend %vertical-transition;
 
     margin-top: 18px;
-    color: $faded-ink-color;
+    color: $gray-3;
+    font: $nerdy-font;
 
     @at-root .indexCard .quoteBox-is-expanded .quoteBox--category {
       @extend %expanded;
@@ -118,19 +96,19 @@
   }
 
   .quoteBox--url {
-    @extend %nerdy-type;
     @extend %collapsed;
     @extend %vertical-transition;
 
     margin-top: 18px;
+    font: $nerdy-font;
 
     > a {
       @extend %truncated;
-      color: $link-color;
+      color: $blue-2;
     }
 
     > .svg-inline--fa {
-      color: $faded-ink-color;
+      color: $gray-3;
     }
 
     @at-root .indexCard .quoteBox-is-expanded .quoteBox--url {
@@ -149,7 +127,7 @@
     width: 100%;
     height: 1px;
     border: 0;
-    border-top: 1px solid #ddd;
+    border-top: 1px solid $gray-5;
 
     margin: 40px 0 0 0;
 
@@ -163,15 +141,15 @@
   }
 
   .quoteBox--optionsLink {
-    color: $faded-ink-color;
+    color: $gray-3;
     margin-top: 18px;
     cursor: pointer;
 
     .svg-inline--fa {
-      color: $faded-ink-color;
+      color: $gray-3;
 
       &:hover {
-        color: darken($faded-ink-color, 25%);
+        color: darken($gray-3, 25%);
       }
     }
 
@@ -196,23 +174,20 @@
     border-radius: 2px;
     cursor: pointer;
     line-height: 10px;
-    border-width: 1px;
-    border-style: solid;
-
-    color: $quotebox-border-color;
-    background-color: $quotebox-background-color;
-    border-color: $quotebox-border-color;
+    border: 1px solid currentColor; // TODO: check hover/active
+    color: $gray-4;
+    background-color: $gray-6;
 
     &:hover {
-      color: darken($quotebox-border-color, 10%);
-      background-color: darken($quotebox-background-color, 10%);
-      border-color: darken($quotebox-border-color, 10%);
+      color: darken($gray-4, 10%);
+      background-color: darken($gray-6, 10%);
+      // border-color: darken($gray-4, 10%);
     }
 
     &:active {
-      color: darken($quotebox-border-color, 15%);
-      background-color: darken($quotebox-background-color, 15%);
-      border-color: darken($quotebox-border-color, 15%);
+      color: darken($gray-4, 15%);
+      background-color: darken($gray-6, 15%);
+      // border-color: darken($gray-4, 15%);
     }
 
     &.verticalToggle-is-up {

@@ -1,20 +1,21 @@
 @import 'index_card';
-@import '../common/index_card_dark';
+
+// TODO: use css filter on vertical toggle hover/active
 
 .indexCardDark {
   @extend .indexCard;
 
   body {
-    background-color: $body-background-color;
+    background-color: $gray-1;
   }
 
   .quoteBox {
-    background-color: $quotebox-background-color;
-    border-color: $quotebox-border-color;
+    background-color: $gray-2;
+    border-color: $ink;
   }
 
   .quoteBox--quote {
-    color: $ink-color;
+    color: $gray-4;
 
     &:before,
     &:after {
@@ -23,36 +24,36 @@
   }
 
   .quoteBox--author {
-    color: $faded-ink-color;
+    color: $slate;
   }
 
   .quoteBox--category {
-    color: $faded-ink-color;
+    color: $slate;
   }
 
   .quoteBox--url {
-    color: $link-color;
+    color: $blue-0;
   }
 
   .quoteBox--rule {
-    border-color: $quotebox-border-color;
+    border-color: $ink;
   }
 
   .verticalToggle {
-    color: $quotebox-border-color;
-    background-color: $quotebox-background-color;
-    border-color: $quotebox-border-color;
+    color: $ink;
+    background-color: $gray-2;
+    border-color: $ink;
 
     &:hover {
-      color: lighten($quotebox-border-color, 10%);
-      background-color: lighten($quotebox-background-color, 10%);
-      border-color: lighten($quotebox-border-color, 10%);
+      color: lighten($ink, 10%);
+      background-color: lighten($gray-2, 10%);
+      border-color: lighten($ink, 10%);
     }
 
     &:active {
-      color: lighten($quotebox-border-color, 15%);
-      background-color: lighten($quotebox-background-color, 15%);
-      border-color: lighten($quotebox-border-color, 15%);
+      color: lighten($ink, 15%);
+      background-color: lighten($gray-2, 15%);
+      border-color: lighten($ink, 15%);
     }
   }
 }
