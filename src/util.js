@@ -26,9 +26,10 @@ export function trimStart(str) {
 /**
  * Creates a div, appends it to the body, and returns it.
  */
-export function createDiv(className) {
+export function createRootDiv() {
   const div = document.createElement('div')
-  div.classList.add(className)
+  div.classList.add('l-root')
+  div.setAttribute('id', 'root')
   document.body.appendChild(div)
   return div
 }

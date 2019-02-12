@@ -8,7 +8,7 @@ import { faBox } from '@fortawesome/free-solid-svg-icons/faBox'
 import { faCog } from '@fortawesome/free-solid-svg-icons/faCog'
 import { faGlobeAmericas } from '@fortawesome/free-solid-svg-icons/faGlobeAmericas'
 
-import { createDiv, loadSettings, loadQuotes } from './util'
+import { createRootDiv, loadSettings, loadQuotes } from './util'
 
 import 'Styles/app/style.scss'
 
@@ -166,8 +166,8 @@ class AppRoot extends Component {
 async function main() {
   const settings = await loadSettings()
   document.documentElement.classList.add(settings.theme)
-  ReactDOM.render(<AppRoot />, createDiv('l-root'))
   // browser.runtime.openOptionsPage()
+  ReactDOM.render(<AppRoot />, createRootDiv())
 }
 
 main()
