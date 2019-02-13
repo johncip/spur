@@ -54,20 +54,20 @@ class QuoteListItem extends PureComponent {
     this.state = { hover: false }
   }
 
+  handleMouseEnter = () => {
+    this.setState({ hover: true })
+  }
+
+  handleMouseLeave = () => {
+    this.setState({ hover: false })
+  }
+
   classes() {
     return classNames(
       'quoteListItem', {
         'quoteListItem-is-hovered': this.state.hover,
       },
     )
-  }
-
-  handleMouseEnter = () => {
-    this.setState({hover: true})
-  }
-
-  handleMouseLeave = () => {
-    this.setState({hover: false})
   }
 
   render() {
@@ -91,6 +91,7 @@ class QuoteListItem extends PureComponent {
 }
 
 const AddQuoteButton = () => (
+  // TODO: this should be / contain a button for a11y
   <li className="addQuoteButton">
     <FontAwesomeIcon icon={faPlus} />
     New quote…
@@ -186,7 +187,7 @@ class AppRoot extends Component {
           closeModal={this.openModal}
         />
 
-      <Modal
+        <Modal
           className="modal"
           overlayClassName="modalOverlay"
           isOpen={this.state.modalIsOpen}

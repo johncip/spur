@@ -15,7 +15,7 @@ async function seedStorage() {
     .then(resp => resp.json())
     .then(seeds => STORAGE.set({ storedQuotes: seeds }))
 
-  return true;
+  return true
 }
 
 /**
