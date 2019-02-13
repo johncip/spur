@@ -1,9 +1,12 @@
-import React, { Component } from 'react'
+import React, { Component, PureComponent } from 'react'
 import ReactDOM from 'react-dom'
 import Modal from 'react-modal'
+import classNames from 'classnames'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons/faSpinner'
+import { faPencilAlt } from '@fortawesome/free-solid-svg-icons/faPencilAlt'
 
 import { createRootDiv, loadSettings, loadQuotes, trimStart } from './util'
 
@@ -18,8 +21,7 @@ const Spinner = () => (
 /*
  * The (behavior) settings section of the options page.
  */
-// eslint-disable-next-line react/prefer-stateless-function
-class SettingsSection extends Component {
+class SettingsSection extends PureComponent {
   render() {
     if (!this.props.settings) {
       return <Spinner />
@@ -46,12 +48,49 @@ class SettingsSection extends Component {
 /*
  * A clickable displayed quote.
  */
-// TODO: this should be / contain a button for a11y
-const QuoteListItem = ({ quote, openModal }) => (
-  <li className="quoteListItem" onClick={openModal}>
-    {quote}
-  </li>
-)
+class QuoteListItem extends PureComponent {
+  constructor(props) {
+    super(props)
+    this.state = { hover: false }
+  }
+
+  classes() {
+    return classNames(
+      'quoteListItem', {
+        'quoteListItem-is-hovered': this.state.hover,
+      },
+    )
+  }
+
+  handleMouseEnter = () => {
+    this.setState({hover: true})
+  }
+
+  handleMouseLeave = () => {
+    this.setState({hover: false})
+  }
+
+  render() {
+    const { quote, openModal } = this.props
+
+
+
+    return (
+      // TODO: this should be / contain a button for a11y
+      <li
+        className={this.classes()}
+        onClick={openModal}
+        onMouseEnter={this.handleMouseEnter}
+        onMouseLeave={this.handleMouseLeave}
+      >
+        <div className="truncatedText">
+          {quote}
+        </div>
+        {this.state.hover ? <FontAwesomeIcon icon={faPencilAlt} /> : null}
+      </li>
+    )
+  }
+}
 
 const AddQuoteButton = () => (
   <li className="addQuoteButton">
