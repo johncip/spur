@@ -30,7 +30,7 @@ class SettingsSection extends Component {
         <div className="setting">
           <label htmlFor="id-theme">
             <span className="setting--labelText">Theme</span>
-            <select id="id-theme">
+            <select className="setting--select" id="id-theme">
               <option value="indexCard">Index Card</option>
               <option value="indexCardDark">Index Card Dark</option>
             </select>
