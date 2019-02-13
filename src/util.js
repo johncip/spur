@@ -8,12 +8,14 @@ const STORAGE = browser.storage.local
 /**
  * Seeds browser storage with the included quotes.
  */
-function seedStorage() {
+async function seedStorage() {
   const url = browser.extension.getURL('seeds.json')
 
-  return fetch(url)
+  await fetch(url)
     .then(resp => resp.json())
     .then(seeds => STORAGE.set({ storedQuotes: seeds }))
+
+  return true;
 }
 
 /**
