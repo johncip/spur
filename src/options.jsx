@@ -73,8 +73,6 @@ class QuoteListItem extends PureComponent {
   render() {
     const { quote, openModal } = this.props
 
-
-
     return (
       // TODO: this should be / contain a button for a11y
       <li
