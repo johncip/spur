@@ -57,7 +57,7 @@ class QuotesSection extends Component {
   // TODO: rename "quotes" (quoteRecords or something)
   render() {
     return (
-      <section className="optionsSection">
+      <section className="optionsSection optionsSection-quotes">
         <ul>
           {this.props.quotes.map(record => (
             <QuoteListItem
