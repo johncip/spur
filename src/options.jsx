@@ -3,10 +3,17 @@ import ReactDOM from 'react-dom'
 import Modal from 'react-modal'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons/faSpinner'
 
 import { createRootDiv, loadSettings, loadQuotes, trimStart } from './util'
 
 import 'Styles/options/style.scss'
+
+const Spinner = () => (
+  <section className="optionsSection optionsSection-empty">
+    <FontAwesomeIcon icon={faSpinner} className="fa-spin" />
+  </section>
+)
 
 /*
  * The (behavior) settings section of the options page.
@@ -14,6 +21,10 @@ import 'Styles/options/style.scss'
 // eslint-disable-next-line react/prefer-stateless-function
 class SettingsSection extends Component {
   render() {
+    if (!this.props.settings) {
+      return <Spinner />
+    }
+
     return (
       <section className="optionsSection">
         <div className="setting">
@@ -56,6 +67,10 @@ const AddQuoteButton = () => (
 class QuotesSection extends Component {
   // TODO: rename "quotes" (quoteRecords or something)
   render() {
+    if (!this.props.quotes) {
+      return <Spinner />
+    }
+
     return (
       <section className="optionsSection optionsSection-quotes">
         <ul>
@@ -125,10 +140,6 @@ class AppRoot extends Component {
   }
 
   render() {
-    if (!this.state.settings || !this.state.quotes) {
-      return "loading"
-    }
-
     return (
       <div className="optionsContainer">
         <OptionsPage
