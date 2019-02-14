@@ -102,16 +102,15 @@ const AddQuoteButton = () => (
 /*
  * The quotes section of the options page. An editable list of stored quotes.
  */
-const QuotesSection = ({ quotes, openModal }) => {
-  // TODO: rename "quotes" (quoteRecords or something)
-  if (!quotes) {
+const QuotesSection = ({ quoteRecords, openModal }) => {
+  if (!quoteRecords) {
     return <Spinner />
   }
 
   return (
     <section className="optionsSection optionsSection-quotes">
       <div className="optionsSection--preventOverflow">
-        {quotes.map(record => (
+        {quoteRecords.map(record => (
           <QuoteListItem
             key={record.quote}
             quote={record.quote}
@@ -127,14 +126,14 @@ const QuotesSection = ({ quotes, openModal }) => {
 /*
  * The entire options page.
  */
-const OptionsPage = ({ settings, quotes, openModal, closeModal }) => (
+const OptionsPage = ({ settings, quoteRecords, openModal, closeModal }) => (
   <div>
     <h1 className="optionsHeading">Settings</h1>
     <SettingsSection settings={settings} />
 
     <h1 className="optionsHeading">Quotes</h1>
     <QuotesSection
-      quotes={quotes}
+      quoteRecords={quoteRecords}
       openModal={openModal}
       closeModal={closeModal}
     />
@@ -149,7 +148,7 @@ class AppRoot extends Component {
     super()
     this.state = {
       settings: null,
-      quotes: null,
+      quoteRecords: null,
       modalIsOpen: false,
     }
   }
@@ -159,11 +158,11 @@ class AppRoot extends Component {
     loadSettings().then((settings) => {
       this.setState({ settings })
     })
-    loadQuotes().then((quotes) => {
-      const sorted = quotes.sort((a, b) => (
+    loadQuotes().then((quoteRecords) => {
+      const sorted = quoteRecords.sort((a, b) => (
         trimStart(a.quote).localeCompare(trimStart(b.quote))
       ))
-      this.setState({ quotes: sorted })
+      this.setState({ quoteRecords: sorted })
     })
   }
 
@@ -180,7 +179,7 @@ class AppRoot extends Component {
       <div className="optionsContainer">
         <OptionsPage
           settings={this.state.settings}
-          quotes={this.state.quotes}
+          quoteRecords={this.state.quoteRecords}
           openModal={this.openModal}
           closeModal={this.openModal}
         />
