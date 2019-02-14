@@ -23,3 +23,10 @@
   opacity: 0;
   visibility: hidden;
 }
+
+%no-moz-focus-inner {
+  &:focus::-moz-focus-inner {
+    border: 0;
+    outline: 0;
+  }
+}

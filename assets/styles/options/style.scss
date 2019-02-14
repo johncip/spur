@@ -65,6 +65,8 @@ body {
 }
 
 .quoteListItem {
+  @extend %no-moz-focus-inner;
+
   display: flex;
   align-items: center;
   width: 100%;
@@ -131,6 +133,8 @@ body {
 }
 
 .btn {
+  @extend %no-moz-focus-inner;
+
   border-radius: 2px;
   font: 400 16px $basic-font-stack;
 }
