@@ -74,28 +74,29 @@ class QuoteListItem extends PureComponent {
     const { quote, openModal } = this.props
 
     return (
-      // TODO: this should be / contain a button for a11y
-      <li
+      <button
         className={this.classes()}
+        type="button"
         onClick={openModal}
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
+        onFocus={this.handleMouseEnter}
+        onBlur={this.handleMouseLeave}
       >
         <div className="truncatedText">
           {quote}
         </div>
         {this.state.hover ? <FontAwesomeIcon icon={faPencilAlt} /> : null}
-      </li>
+      </button>
     )
   }
 }
 
 const AddQuoteButton = () => (
-  // TODO: this should be / contain a button for a11y
-  <li className="addQuoteButton">
+  <button className="addQuoteButton" type="button">
     <FontAwesomeIcon icon={faPlus} />
     New quote…
-  </li>
+  </button>
 )
 
 /*
@@ -111,7 +112,7 @@ class QuotesSection extends Component {
 
     return (
       <section className="optionsSection optionsSection-quotes">
-        <ul>
+        <div className="optionsSection--preventOverflow">
           {this.props.quotes.map(record => (
             <QuoteListItem
               key={record.quote}
@@ -120,7 +121,7 @@ class QuotesSection extends Component {
             />
           ))}
           <AddQuoteButton />
-        </ul>
+        </div>
       </section>
     )
   }
