@@ -99,41 +99,38 @@ $nerdy-font: 300 12px $mono-font-stack;
   .quoteBox--infoLink {
     @extend %collapsed;
     @extend %vertical-transition;
+    @extend %truncated;
 
     margin-top: 18px;
     font: $nerdy-font;
+    color: $blue-2;
 
-    > a {
-      @extend %truncated;
-      color: $blue-2;
+    .svg-inline--fa {
+      color: $gray-3;
+    }
 
-      .svg-inline--fa {
-        color: $gray-3;
+    &:focus {
+      outline: 0;
+      color: darken($blue-2, 20%);
+
+      > .svg-inline--fa {
+        color: darken($gray-3, 20%);
       }
+    }
 
-      &:focus {
-        outline: 0;
-        color: darken($blue-2, 20%);
+    &:hover {
+      color: darken($blue-2, 20%);
 
-        > .svg-inline--fa {
-          color: darken($gray-3, 20%);
-        }
+      > .svg-inline--fa {
+        color: darken($gray-3, 20%);
       }
+    }
 
-      &:hover {
-        color: darken($blue-2, 20%);
+    &:active {
+      color: darken($blue-2, 30%);
 
-        > .svg-inline--fa {
-          color: darken($gray-3, 20%);
-        }
-      }
-
-      &:active {
-        color: darken($blue-2, 30%);
-
-        > .svg-inline--fa {
-          color: darken($gray-3, 30%);
-        }
+      > .svg-inline--fa {
+        color: darken($gray-3, 30%);
       }
     }
 
