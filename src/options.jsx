@@ -102,29 +102,26 @@ const AddQuoteButton = () => (
 /*
  * The quotes section of the options page. An editable list of stored quotes.
  */
-// eslint-disable-next-line react/prefer-stateless-function
-class QuotesSection extends Component {
+const QuotesSection = ({ quotes, openModal }) => {
   // TODO: rename "quotes" (quoteRecords or something)
-  render() {
-    if (!this.props.quotes) {
-      return <Spinner />
-    }
-
-    return (
-      <section className="optionsSection optionsSection-quotes">
-        <div className="optionsSection--preventOverflow">
-          {this.props.quotes.map(record => (
-            <QuoteListItem
-              key={record.quote}
-              quote={record.quote}
-              openModal={this.props.openModal}
-            />
-          ))}
-          <AddQuoteButton />
-        </div>
-      </section>
-    )
+  if (!quotes) {
+    return <Spinner />
   }
+
+  return (
+    <section className="optionsSection optionsSection-quotes">
+      <div className="optionsSection--preventOverflow">
+        {quotes.map(record => (
+          <QuoteListItem
+            key={record.quote}
+            quote={record.quote}
+            openModal={openModal}
+          />
+        ))}
+        <AddQuoteButton />
+      </div>
+    </section>
+  )
 }
 
 /*
