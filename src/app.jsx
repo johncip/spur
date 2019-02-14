@@ -172,7 +172,7 @@ async function main() {
   const settings = await loadSettings()
   document.documentElement.classList.add(settings.theme)
   ReactDOM.render(<AppRoot />, createRootDiv())
-  browser.runtime.openOptionsPage()
+  // browser.runtime.openOptionsPage()
 }
 
 main()
