@@ -95,7 +95,7 @@ $nerdy-font: 300 9pt $mono-font-stack;
     }
   }
 
-  .quoteBox--url {
+  .quoteBox--infoLink {
     @extend %collapsed;
     @extend %vertical-transition;
 
@@ -111,11 +111,11 @@ $nerdy-font: 300 9pt $mono-font-stack;
       color: $gray-3;
     }
 
-    @at-root .indexCard .quoteBox-is-expanded .quoteBox--url {
+    @at-root .indexCard .quoteBox-is-expanded .quoteBox--infoLink {
       @extend %expanded;
     }
 
-    @at-root .indexCard .quoteBox-is-collapsed .quoteBox--url {
+    @at-root .indexCard .quoteBox-is-collapsed .quoteBox--infoLink {
       @extend %collapsed;
     }
   }

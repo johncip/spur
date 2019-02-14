@@ -42,7 +42,7 @@ const Rule = () => <hr className="quoteBox--rule" />
  * A link to additional info, like the quote's source.
  */
 const Info = ({ url }) => (
-  <div className="quoteBox--url">
+  <div className="quoteBox--infoLink">
     <a href={url}>
       <FontAwesomeIcon icon={faGlobeAmericas} />
       {url}
