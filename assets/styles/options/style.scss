@@ -138,8 +138,11 @@ body {
 .btn-save {
   color: $white;
   background-color: $blue-1;
+  border: 3px solid $blue-1;
+  height: 32px;
+  width: 64px;
 
-  &:hover {
+  &:hover, &:focus {
     background-color: lighten($blue-1, 7%);
   }
 
