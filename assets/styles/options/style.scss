@@ -81,10 +81,6 @@ body {
 
   .optionsSection & {
     margin-bottom: 10px;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
   }
 }
 
@@ -118,6 +114,10 @@ body {
 
   &:active {
     // TODO
+  }
+
+  .optionsSection & {
+    margin-bottom: 0;
   }
 }
 
