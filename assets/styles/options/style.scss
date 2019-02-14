@@ -142,7 +142,7 @@ body {
   height: 32px;
   width: 64px;
 
-  &:hover, &:focus {
+  &:hover {
     background-color: lighten($blue-1, 7%);
   }
 
