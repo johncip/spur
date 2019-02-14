@@ -107,7 +107,7 @@ $nerdy-font: 300 9pt $mono-font-stack;
       color: $blue-2;
     }
 
-    > .svg-inline--fa {
+    .svg-inline--fa {
       color: $gray-3;
     }
 
@@ -178,16 +178,16 @@ $nerdy-font: 300 9pt $mono-font-stack;
     color: $gray-4;
     background-color: $gray-6;
 
-    &:hover {
+    &:hover, &:focus {
       color: darken($gray-4, 10%);
       background-color: darken($gray-6, 10%);
-      // border-color: darken($gray-4, 10%);
+      border-color: darken($gray-4, 10%);
     }
 
     &:active {
       color: darken($gray-4, 15%);
       background-color: darken($gray-6, 15%);
-      // border-color: darken($gray-4, 15%);
+      border-color: darken($gray-4, 15%);
     }
 
     &.verticalToggle-is-up {
