@@ -65,10 +65,13 @@ const Category = ({ category }) => (
 /*
  * A gear linking to the options page.
  */
-const OptionsLink = () => (
-  <div className="quoteBox--optionsLink">
-    <FontAwesomeIcon icon={faCog} onClick={() => browser.runtime.openOptionsPage()} />
-  </div>
+const OptionsButton = () => (
+  <button
+    className="quoteBox--optionsButton"
+    onClick={() => browser.runtime.openOptionsPage()}
+  >
+    <FontAwesomeIcon icon={faCog} />
+  </button>
 )
 
 /*
@@ -121,7 +124,7 @@ class QuoteBox extends Component {
 
         {url && <Info url={url} />}
         <Category category={category} />
-        <OptionsLink />
+        <OptionsButton />
 
         <VerticalToggle
           up={this.state.expanded}

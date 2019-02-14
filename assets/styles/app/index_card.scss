@@ -140,17 +140,19 @@ $nerdy-font: 300 12px $mono-font-stack;
     }
   }
 
-  .quoteBox--optionsLink {
+  .quoteBox--optionsButton {
     color: $gray-3;
     margin-top: 18px;
-    cursor: pointer;
+    background: none;
+    font-size: 14px;
+    width: 1em;
 
     .svg-inline--fa {
       color: $gray-3;
+    }
 
-      &:hover {
-        color: darken($gray-3, 25%);
-      }
+    &:hover {
+      filter: brightness(66%);
     }
 
     // TODO: make this a mixin
@@ -158,11 +160,11 @@ $nerdy-font: 300 12px $mono-font-stack;
     @extend %collapsed;
     @extend %vertical-transition;
 
-    @at-root .indexCard .quoteBox-is-collapsed .quoteBox--optionsLink {
+    @at-root .indexCard .quoteBox-is-collapsed .quoteBox--optionsButton {
       @extend %collapsed;
     }
 
-    @at-root .indexCard .quoteBox-is-expanded .quoteBox--optionsLink {
+    @at-root .indexCard .quoteBox-is-expanded .quoteBox--optionsButton {
       @extend %expanded;
     }
   }
