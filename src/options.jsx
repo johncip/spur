@@ -93,7 +93,7 @@ class QuoteListItem extends PureComponent {
 }
 
 const AddQuoteButton = () => (
-  <button className="addQuoteButton" type="button">
+  <button className="quoteListItem quoteListItem-add" type="button">
     <FontAwesomeIcon icon={faPlus} />
     New quote…
   </button>
