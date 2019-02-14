@@ -105,10 +105,35 @@ $nerdy-font: 300 12px $mono-font-stack;
     > a {
       @extend %truncated;
       color: $blue-2;
-    }
 
-    .svg-inline--fa {
-      color: $gray-3;
+      .svg-inline--fa {
+        color: $gray-3;
+      }
+
+      &:focus {
+        outline: 0;
+        color: darken($blue-2, 20%);
+
+        > .svg-inline--fa {
+          color: darken($gray-3, 20%);
+        }
+      }
+
+      &:hover {
+        color: darken($blue-2, 20%);
+
+        > .svg-inline--fa {
+          color: darken($gray-3, 20%);
+        }
+      }
+
+      &:active {
+        color: darken($blue-2, 30%);
+
+        > .svg-inline--fa {
+          color: darken($gray-3, 30%);
+        }
+      }
     }
 
     @at-root .indexCard .quoteBox-is-expanded .quoteBox--infoLink {
