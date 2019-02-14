@@ -81,6 +81,7 @@ body {
 
   &:active {
     background-color: darken($gray-5-5, 10%);
+    border-color: darken($gray-5-5, 10%);
   }
 
   &:focus {
@@ -116,13 +117,17 @@ body {
   color: $gray-4;
   border: 2px dashed currentColor;
 
-  &:hover, &:focus {
+  &:hover {
+    color: darken($gray-4, 25%);
+  }
+
+  &:focus {
     color: darken($gray-4, 25%);
     border: 3px solid darken($gray-4, 15%);
   }
 
   &:active {
-    // TODO
+    border: 2px dashed currentColor;
   }
 
   .optionsSection & {
