@@ -3,8 +3,6 @@
 @import '../common/variables';
 @import '../common/vendor';
 
-// TODO: replace lighten with css filter (and some darken, maybe all)
-
 $content-width: 720px;
 
 body {
@@ -82,7 +80,7 @@ body {
   text-align: left;
 
   &:hover {
-    background-color: darken($gray-5-5, 5%);
+    filter: brightness(92%);
   }
 
   &:focus {
@@ -91,7 +89,7 @@ body {
   }
 
   &:active {
-    background-color: darken($gray-5-5, 10%);
+    filter: brightness(86%);
   }
 
   .optionsSection & {
@@ -116,11 +114,11 @@ body {
   border: 2px dashed currentColor;
 
   &:hover {
-    color: darken($gray-4, 33%);
+    color: $gray-3;
   }
 
   &:focus {
-    color: darken($gray-4, 33%);
+    color: $gray-3;
     padding-left: 6px;
   }
 
@@ -151,11 +149,11 @@ body {
   width: 64px;
 
   &:hover {
-    background-color: lighten($blue-1, 7%);
+    filter: brightness(110%);
   }
 
   &:active {
-    background-color: lighten($blue-1, 10%);
+    filter: brightness(120%);
   }
 
   &:focus {
