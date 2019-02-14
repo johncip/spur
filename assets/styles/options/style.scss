@@ -65,11 +65,15 @@ body {
 }
 
 .quoteListItem {
+  display: flex;
+  align-items: center;
+
   background-color: $gray-5-5;
   padding: 12px 8px;
   border-radius: 2px;
   font: 400 14px 'work sans';
   letter-spacing: -0.3px;
+  text-align: left;
 
   &:active {
     background-color: darken($gray-5-5, 10%);
@@ -86,7 +90,6 @@ body {
 
 .quoteListItem-is-hovered {
   background-color: darken($gray-5-5, 5%);
-  display: flex;
 
   > div:first-child {
     flex-grow: 1;
