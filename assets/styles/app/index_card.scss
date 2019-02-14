@@ -44,8 +44,8 @@ $nerdy-font: 300 9pt $mono-font-stack;
       text-align: left;
     }
 
-    &:before,
-    &:after {
+    &::before,
+    &::after {
       position: absolute;
       font-size: 180px;
       font-family: 'staatliches';
@@ -53,13 +53,13 @@ $nerdy-font: 300 9pt $mono-font-stack;
       z-index: -1;
     }
 
-    &:before {
+    &::before {
       content: '“';
       top: 32px;
       left: -24px;
     }
 
-    &:after {
+    &::after {
       content: '”';
       bottom: -64px;
       right: -24px;
@@ -73,7 +73,7 @@ $nerdy-font: 300 9pt $mono-font-stack;
     font-weight: 300;
     color: $gray-3;
 
-    &:before {
+    &::before {
       content: "\2015 ";
     }
   }
