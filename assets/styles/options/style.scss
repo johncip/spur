@@ -71,9 +71,6 @@ body {
   font: 400 14px 'work sans';
   letter-spacing: -0.3px;
 
-  cursor: pointer;
-  -webkit-user-select: none;
-
   &:active {
     background-color: darken($gray-5-5, 10%);
   }
@@ -110,7 +107,6 @@ body {
 
   color: $gray-4;
   border: 2px dashed currentColor;
-  box-sizing: border-box;
 
   &:hover {
     color: darken($gray-4, 25%);
@@ -123,11 +119,9 @@ body {
 }
 
 .btn {
-  border: 0;
   padding: 5px 10px;
   border-radius: 2px;
   font: 400 16px $basic-font-stack;
-  cursor: pointer;
 }
 
 .btn-save {
