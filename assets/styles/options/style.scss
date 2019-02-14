@@ -105,10 +105,6 @@ body {
   }
 }
 
-.truncatedText {
-  @extend %truncated; // TODO: use directly
-}
-
 .addQuoteButton {
   @extend .quoteListItem;
 
@@ -130,6 +126,10 @@ body {
   .optionsSection & {
     margin-bottom: 0;
   }
+}
+
+.truncatedText {
+  @extend %truncated; // TODO: use directly
 }
 
 .btn {
