@@ -80,7 +80,7 @@ body {
   text-align: left;
 
   &:hover {
-    filter: brightness(92%);
+    background-color: darken($gray-5-5, 5%);
   }
 
   &:focus {
@@ -89,7 +89,7 @@ body {
   }
 
   &:active {
-    filter: brightness(86%);
+    background-color: darken($gray-5-5, 10%);
   }
 
   .optionsSection & {
@@ -114,11 +114,11 @@ body {
   border: 2px dashed currentColor;
 
   &:hover {
-    color: $gray-3;
+    color: darken($gray-4, 33%);
   }
 
   &:focus {
-    color: $gray-3;
+    color: darken($gray-4, 33%);
     padding-left: 6px;
   }
 
@@ -142,11 +142,11 @@ body {
   font: 400 16px $basic-font-stack;
 
   &:hover {
-    filter: brightness(110%);
+    background-color: lighten($blue-1, 7%);
   }
 
   &:active {
-    filter: brightness(120%);
+    background-color: lighten($blue-1, 10%);
   }
 
   &:focus {
