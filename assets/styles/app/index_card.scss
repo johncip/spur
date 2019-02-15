@@ -99,25 +99,15 @@ $nerdy-font: 300 12px $mono-font-stack;
   }
 
   .quoteBox--category {
-    @extend %collapsed;
-    @extend %vertical-transition;
+    @include drawer-element;
 
     margin-top: 18px;
     color: $gray-3;
     font: $nerdy-font;
-
-    @at-root .indexCard .quoteBox-is-expanded .quoteBox--category {
-      @extend %expanded;
-    }
-
-    @at-root .indexCard .quoteBox-is-collapsed .quoteBox--category {
-      @extend %collapsed;
-    }
   }
 
   .quoteBox--infoLink {
-    @extend %collapsed;
-    @extend %vertical-transition;
+    @include drawer-element;
     @extend %truncated;
 
     margin-top: 18px;
@@ -152,36 +142,16 @@ $nerdy-font: 300 12px $mono-font-stack;
         color: darken($gray-3, 30%);
       }
     }
-
-    @at-root .indexCard .quoteBox-is-expanded .quoteBox--infoLink {
-      @extend %expanded;
-    }
-
-    @at-root .indexCard .quoteBox-is-collapsed .quoteBox--infoLink {
-      @extend %collapsed;
-    }
   }
 
   .quoteBox--rule {
+    @include drawer-element;
+
     width: 100%;
     height: 1px;
     border: 0;
     border-top: 1px solid $gray-5;
-
     margin: 40px 0 0 0;
-
-    // TODO: make this a mixin
-    // https://stackoverflow.com/questions/17833674/sass-ampersand-select-immmediate-parent
-    @extend %collapsed;
-    @extend %vertical-transition;
-
-    @at-root .indexCard .quoteBox-is-expanded .quoteBox--rule {
-      @extend %expanded;
-    }
-
-    @at-root .indexCard .quoteBox-is-collapsed .quoteBox--rule {
-      @extend %collapsed;
-    }
   }
 
   .verticalToggle {

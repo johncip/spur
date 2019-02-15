@@ -30,3 +30,26 @@
     outline: 0;
   }
 }
+
+/*
+ * Will hide or show an element nested under .quoteBox based on the .quoteBox state.
+ */
+@mixin drawer-element {
+  @extend %collapsed;
+  @extend %vertical-transition;
+
+  /*
+   * the class of the targeted element. e.g.:
+   *
+   * self('.a .b .c.d') -> '.c.d'
+   */
+  $self: nth(nth(&, -1), -1);
+
+  @at-root .indexCard .quoteBox.quoteBox-is-expanded #{$self} {
+    @extend %expanded;
+  }
+
+  @at-root .indexCard .quoteBox.quoteBox-is-collapsed #{$self} {
+    @extend %collapsed;
+  }
+}
