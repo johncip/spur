@@ -49,8 +49,6 @@ export async function getOneKey(key) {
 
 /**
  * Loads settings from storage, or supplies defaults.
- *
- * TODO: cleaner hash merge
  */
 export async function loadSettings() {
   const settings = await getOneKey('settings')
@@ -59,13 +57,7 @@ export async function loadSettings() {
     return DEFAULT_SETTINGS
   }
 
-  Object.keys(DEFAULT_SETTINGS).forEach((key) => {
-    const val = settings[key]
-    if (val === null || val === undefined || val === '') {
-      settings[key] = DEFAULT_SETTINGS[key]
-    }
-  })
-  return settings
+  return Object.assign(DEFAULT_SETTINGS, settings)
 }
 
 /**
