@@ -65,7 +65,7 @@ const Category = ({ category }) => (
  */
 const OptionsButton = () => (
   <button
-    className="quoteBox--optionsButton"
+    className="optionsButton"
     onClick={() => browser.runtime.openOptionsPage()}
   >
     <FontAwesomeIcon icon={faCog} />
@@ -122,7 +122,6 @@ class QuoteBox extends Component {
 
         {url && <Info url={url} />}
         <Category category={category} />
-        <OptionsButton />
 
         <VerticalToggle
           up={this.state.expanded}
@@ -153,15 +152,18 @@ class AppRoot extends Component {
   }
 
   render() {
-    if (!this.state.quote) return null
+    if (!this.state.quote) return null // TODO: replace with spinner
 
     return (
-      <QuoteBox
-        quote={this.state.quote}
-        author={this.state.author}
-        url={this.state.url}
-        category={this.state.category}
-      />
+      <div className="u-fullWidth">
+        <OptionsButton />
+        <QuoteBox
+          quote={this.state.quote}
+          author={this.state.author}
+          url={this.state.url}
+          category={this.state.category}
+        />
+      </div>
     )
   }
 }
