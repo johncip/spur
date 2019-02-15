@@ -132,7 +132,7 @@ body {
 }
 
 .truncatedText {
-  @extend %truncated; // TODO: use directly
+  @extend %truncated;
 }
 
 .btn {
@@ -170,7 +170,7 @@ body {
   margin-right: -50%;
   transform: translate(-50%, -50%);
 
-  font: 400 14px $basic-font-stack; // TODO try using $basic-font-stack;
+  font: 400 14px $basic-font-stack;
   width: 400px;
   background-color: $white;
   padding: 20px;
