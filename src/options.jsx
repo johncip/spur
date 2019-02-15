@@ -153,7 +153,6 @@ class AppRoot extends Component {
     }
   }
 
-  // TODO: split up
   componentDidMount() {
     loadSettings().then((settings) => {
       this.setState({ settings })
