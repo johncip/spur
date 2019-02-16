@@ -166,6 +166,25 @@ const OptionsPage = ({ settings, quoteRecords, openModal }) => (
 )
 
 /*
+ * A modal for editing the clicked-on quote.
+ */
+const _EditQuoteModal = ({ quoteRecord, isOpen, onRequestClose }) => (
+  <Modal
+    className="modal"
+    overlayClassName="modalOverlay"
+    isOpen={isOpen}
+    onRequestClose={onRequestClose}
+    contentLabel="Edit Quote"
+  >
+    {quoteRecord.quote}
+  </Modal>
+)
+const mapStateToProps = (state) => ({
+  quoteRecord: state.activeQuote,
+})
+const EditQuoteModal = connect(mapStateToProps)(_EditQuoteModal)
+
+/*
  * Loads the options page and holds state.
  */
 class AppRoot extends Component {
@@ -209,18 +228,12 @@ class AppRoot extends Component {
           settings={settings}
           quoteRecords={quoteRecords}
           openModal={this.openModal}
-          closeModal={this.openModal}
         />
 
-        <Modal
-          className="modal"
-          overlayClassName="modalOverlay"
-          isOpen={modalIsOpen}
+        <EditQuoteModal
           onRequestClose={this.closeModal}
-          contentLabel="Example Modal"
-        >
-          The man who acquires the ability to take full possession of his own mind...
-        </Modal>
+          isOpen={modalIsOpen}
+        />
       </div>
     )
   }
