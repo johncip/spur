@@ -2,6 +2,8 @@ import React, { Component, PureComponent } from 'react'
 import ReactDOM from 'react-dom'
 import Modal from 'react-modal'
 import classNames from 'classnames'
+import { createStore, combineReducers } from 'redux'
+import { connect, Provider } from 'react-redux'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus'
@@ -18,6 +20,26 @@ const normalizedQuoteRecords = (records) => {
     map.set(idx, Object.assign({ id: idx }, record))
     return map
   }, new Map())
+}
+
+const defaultActiveQuote = {
+  quote: 'sup bra',
+  author: 'some dude',
+  url: 'http://google.com',
+  category: 'Mindset',
+}
+
+const activeQuoteReducer = (state = defaultActiveQuote, action) => {
+  switch (action.type) {
+    default:
+      return state
+  }
+}
+
+const store = createStore(combineReducers({ activeQuote: activeQuoteReducer }))
+
+const setActiveQuote = (quote) => {
+  store.dispatch({ type: 'SET_ACTIVE_QUOTE', payload: quote })
 }
 
 // -- end redux crap --------------------------------------------------------------------
@@ -206,4 +228,8 @@ class AppRoot extends Component {
 
 const root = createRootDiv()
 Modal.setAppElement('#root')
-ReactDOM.render(<AppRoot />, root)
+ReactDOM.render((
+  <Provider store={store}>
+    <AppRoot />
+  </Provider>
+), root)
