@@ -20,16 +20,27 @@ body {
 .optionsContainer {
   max-width: $content-width;
   margin: auto;
+
+  .optionsSection {
+    margin-bottom: 32px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
 }
 
 .optionsSection {
-  margin-bottom: 24px;
   background-color: $gray-7;
   border: 1px solid $gray-5;
   border-radius: 2px;
   padding: 16px;
   font-size: 14px;
   color: $gray-2;
+
+  .setting {
+    margin-bottom: 12px;
+  }
 }
 
 .optionsSection-quotes {
@@ -43,10 +54,6 @@ body {
 .optionsSection-empty {
   width: 100%;
   text-align: center;
-}
-
-.setting {
-  margin-bottom: 12px;
 }
 
 .setting--labelText {
