@@ -4,11 +4,11 @@
       "id": "spur@spur.com"
     }
   },
-  "description": "TODO",
+  "description": "A motivational new tab page that lets you choose your own quotes.",
   "manifest_version": 2,
   "name": "Spur",
   "version": "1.0",
-  "homepage_url": "http://TODO.com",
+  "homepage_url": "https://github.com/johncip/spur",
   "icons": {
     "48": "spur1.png"
   },
