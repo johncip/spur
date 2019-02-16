@@ -39,11 +39,11 @@
 
   &:hover,
   &:focus {
-    color: call($fn, $color, 20%);
+    color: call(get-function($fn), $color, 20%);
   }
 
   &:active {
-    color: call($fn, $color, 40%);
+    color: call(get-function($fn), $color, 40%);
   }
 }
 
