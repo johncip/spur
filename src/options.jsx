@@ -31,6 +31,8 @@ const defaultActiveQuote = {
 
 const activeQuoteReducer = (state = defaultActiveQuote, action) => {
   switch (action.type) {
+    case 'SET_ACTIVE_QUOTE':
+      return action.payload
     default:
       return state
   }
@@ -38,8 +40,8 @@ const activeQuoteReducer = (state = defaultActiveQuote, action) => {
 
 const store = createStore(combineReducers({ activeQuote: activeQuoteReducer }))
 
-const setActiveQuote = (quote) => {
-  store.dispatch({ type: 'SET_ACTIVE_QUOTE', payload: quote })
+const setActiveQuote = quote => {
+  return store.dispatch({ type: 'SET_ACTIVE_QUOTE', payload: quote })
 }
 
 // -- end redux crap --------------------------------------------------------------------
@@ -70,7 +72,7 @@ class SettingsSection extends PureComponent {
 /*
  * A clickable displayed quote.
  */
-class QuoteListItem extends PureComponent {
+class _QuoteListItem extends PureComponent {
   constructor(props) {
     super(props)
     this.state = { hover: false }
@@ -84,6 +86,12 @@ class QuoteListItem extends PureComponent {
     this.setState({ hover: false })
   }
 
+  handleClick = () => {
+    const { setActiveQuote, quoteRecord, openModal } = this.props
+    setActiveQuote(quoteRecord)
+    openModal()
+  }
+
   classes() {
     return classNames(
       'quoteListItem', {
@@ -93,27 +101,33 @@ class QuoteListItem extends PureComponent {
   }
 
   render() {
-    const { quote, openModal } = this.props
-
     return (
       <button
         className={this.classes()}
         type="button"
-        onClick={openModal}
+        onClick={this.handleClick}
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
         onFocus={this.handleMouseEnter}
         onBlur={this.handleMouseLeave}
       >
         <div className="truncatedText">
-          {quote}
+          {this.props.quoteRecord.quote}
         </div>
         {this.state.hover ? <FontAwesomeIcon icon={faPencilAlt} /> : null}
       </button>
     )
   }
 }
+const mapDispatchToProps = {
+  setActiveQuote,
+}
+const QuoteListItem = connect(null, mapDispatchToProps)(_QuoteListItem)
 
+
+/*
+ * Button for adding a new quote.
+ */
 const AddQuoteButton = () => (
   <button className="quoteListItem quoteListItem-add" type="button">
     <FontAwesomeIcon icon={faPlus} />
@@ -131,15 +145,15 @@ const sortedQuoteRecords = (records) => {
  * The quotes section of the options page. An editable list of stored quotes.
  */
 const QuotesSection = ({ quoteRecords, openModal }) => {
-  const quotes = sortedQuoteRecords(Array.from(quoteRecords.values()))
+  const sorted = sortedQuoteRecords(Array.from(quoteRecords.values()))
 
   return (
     <section className="optionsSection optionsSection-quotes">
       <div className="optionsSection--preventOverflow">
-        {quotes.map(record => (
+        {sorted.map(quoteRecord => (
           <QuoteListItem
-            key={record.id}
-            quote={record.quote}
+            key={quoteRecord.id}
+            quoteRecord={quoteRecord}
             openModal={openModal}
           />
         ))}
