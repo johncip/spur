@@ -130,7 +130,7 @@ const QuotesSection = ({ quoteRecords, openModal }) => {
 /*
  * The entire options page.
  */
-const OptionsPage = ({ settings, quoteRecords, openModal, closeModal }) => (
+const OptionsPage = ({ settings, quoteRecords, openModal }) => (
   <div>
     <h1 className="optionsHeading">Settings</h1>
     <SettingsSection settings={settings} />
@@ -139,7 +139,6 @@ const OptionsPage = ({ settings, quoteRecords, openModal, closeModal }) => (
     <QuotesSection
       quoteRecords={quoteRecords}
       openModal={openModal}
-      closeModal={closeModal}
     />
   </div>
 )
