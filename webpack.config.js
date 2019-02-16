@@ -54,10 +54,12 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'app.html',
       chunks: ['app'],
+      template: './src/template.html',
     }),
     new HtmlWebpackPlugin({
       filename: 'options.html',
       chunks: ['options'],
+      template: './src/template.html',
     }),
     new GoogleFontsPlugin({
       fonts: [

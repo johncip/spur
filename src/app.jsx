@@ -170,8 +170,9 @@ class AppRoot extends Component {
 
 async function main() {
   const settings = await loadSettings()
-  document.documentElement.classList.add(settings.theme)
-  ReactDOM.render(<AppRoot />, createRootDiv())
+  const rootEl = document.getElementById('root')
+  rootEl.classList.add(settings.theme)
+  ReactDOM.render(<AppRoot />, rootEl)
   // browser.runtime.openOptionsPage()
 }
 

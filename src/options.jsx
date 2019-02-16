@@ -253,10 +253,10 @@ class AppRoot extends Component {
   }
 }
 
-const root = createRootDiv()
+const rootEl = document.getElementById('root')
 Modal.setAppElement('#root')
 ReactDOM.render((
   <Provider store={store}>
     <AppRoot />
   </Provider>
-), root)
+), rootEl)
