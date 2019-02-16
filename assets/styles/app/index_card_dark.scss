@@ -7,6 +7,18 @@
     background-color: $gray-1;
   }
 
+  .optionsButton {
+    color: $gray-2;
+
+    &:hover {
+      color: lighten($gray-2, 20%);
+    }
+
+    &:active {
+      color: lighten($gray-2, 40%);
+    }
+  }
+
   .quoteBox {
     background-color: $slate-1;
     border-color: $gray-2;
