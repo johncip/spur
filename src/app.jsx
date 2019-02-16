@@ -152,7 +152,7 @@ class AppRoot extends Component {
   }
 
   render() {
-    if (!this.state.quote) return null // TODO: replace with spinner
+    if (!this.state.quote) return null;
 
     return (
       <div className="u-fullWidth">
