@@ -11,6 +11,17 @@ import { createRootDiv, loadSettings, loadQuotes, trimStart } from './util'
 
 import 'Styles/options/style.scss'
 
+// -- redux crap -----------------------------------------------------------------------
+
+const normalizedQuoteRecords = (records) => {
+  return records.reduce((map, record, idx) => {
+    map.set(idx, Object.assign({ id: idx }, record))
+    return map
+  }, new Map())
+}
+
+// -- end redux crap --------------------------------------------------------------------
+
 /*
  * The (behavior) settings section of the options page.
  */
@@ -88,16 +99,24 @@ const AddQuoteButton = () => (
   </button>
 )
 
+const sortedQuoteRecords = (records) => {
+  return records.sort((a, b) => (
+    trimStart(a.quote).localeCompare(trimStart(b.quote))
+  ))
+}
+
 /*
  * The quotes section of the options page. An editable list of stored quotes.
  */
 const QuotesSection = ({ quoteRecords, openModal }) => {
+  const quotes = sortedQuoteRecords(Array.from(quoteRecords.values()))
+
   return (
     <section className="optionsSection optionsSection-quotes">
       <div className="optionsSection--preventOverflow">
-        {quoteRecords.map(record => (
+        {quotes.map(record => (
           <QuoteListItem
-            key={record.quote}
+            key={record.id}
             quote={record.quote}
             openModal={openModal}
           />
@@ -142,11 +161,9 @@ class AppRoot extends Component {
     loadSettings().then((settings) => {
       this.setState({ settings })
     })
-    loadQuotes().then((quoteRecords) => {
-      const sorted = quoteRecords.sort((a, b) => (
-        trimStart(a.quote).localeCompare(trimStart(b.quote))
-      ))
-      this.setState({ quoteRecords: sorted })
+    loadQuotes().then((records) => {
+      const normalized = normalizedQuoteRecords(records)
+      this.setState({ quoteRecords: normalized })
     })
   }
 
