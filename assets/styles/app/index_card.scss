@@ -107,8 +107,8 @@ $nerdy-font: 300 12px $mono-font-stack;
   }
 
   .quoteBox--infoLink {
-    @include drawer-element;
     @extend %truncated;
+    @include drawer-element;
 
     margin-top: 18px;
     font: $nerdy-font;
@@ -118,29 +118,14 @@ $nerdy-font: 300 12px $mono-font-stack;
       color: $gray-3;
     }
 
-    &:focus {
-      outline: 0;
-      color: darken($blue-2, 20%);
-
-      > .svg-inline--fa {
-        color: darken($gray-3, 20%);
-      }
-    }
-
+    &:focus,
     &:hover {
-      color: darken($blue-2, 20%);
-
-      > .svg-inline--fa {
-        color: darken($gray-3, 20%);
-      }
+      outline: 0;
+      filter: brightness(80%);
     }
 
     &:active {
-      color: darken($blue-2, 30%);
-
-      > .svg-inline--fa {
-        color: darken($gray-3, 30%);
-      }
+      filter: brightness(50%);
     }
   }
 
