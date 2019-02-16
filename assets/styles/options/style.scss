@@ -24,7 +24,7 @@ body {
 
 .optionsSection {
   margin-bottom: 24px;
-  background-color: $gray-6;
+  background-color: $gray-7;
   border: 1px solid $gray-5;
   border-radius: 2px;
   padding: 16px;
@@ -72,7 +72,7 @@ body {
   height: 42px;
   padding: 8px;
 
-  background-color: $gray-5-5;
+  background-color: $gray-6;
   border-radius: 2px;
 
   font: 400 14px 'work sans';
@@ -80,7 +80,7 @@ body {
   text-align: left;
 
   &:hover {
-    background-color: darken($gray-5-5, 5%);
+    background-color: darken($gray-6, 5%);
   }
 
   &:focus {
@@ -89,7 +89,7 @@ body {
   }
 
   &:active {
-    background-color: darken($gray-5-5, 10%);
+    background-color: darken($gray-6, 10%);
   }
 
   .optionsSection & {

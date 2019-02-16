@@ -42,7 +42,7 @@ $nerdy-font: 300 12px $mono-font-stack;
     border-style: solid;
     border-width: 1px;
 
-    background-color: $gray-6;
+    background-color: $gray-7;
     border-color: $gray-4;
   }
 
@@ -166,18 +166,18 @@ $nerdy-font: 300 12px $mono-font-stack;
     font-size: 12px;
     line-height: 10px;
     color: $gray-4;
-    background-color: $gray-6;
+    background-color: $gray-7;
     border: 1px solid currentColor;
     cursor: pointer;
 
     &:hover {
       color: darken($gray-4, 10%);
-      background-color: darken($gray-6, 10%);
+      background-color: darken($gray-7, 10%);
     }
 
     &:active {
       color: darken($gray-4, 15%);
-      background-color: darken($gray-6, 15%);
+      background-color: darken($gray-7, 15%);
     }
 
     &:focus {
