@@ -110,15 +110,10 @@ body {
 }
 
 .quoteListItem-add {
-  color: $gray-4;
+  @include tinted-foreground($gray-4);
   border: 2px dashed currentColor;
 
-  &:hover {
-    color: darken($gray-4, 33%);
-  }
-
   &:focus {
-    color: darken($gray-4, 33%);
     padding-left: 6px;
   }
 

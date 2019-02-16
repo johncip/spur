@@ -32,6 +32,22 @@
 }
 
 /*
+ * Sets a foreground color and tints/shades the hover, focus & active states.
+ */
+@mixin tinted-foreground($color, $fn: 'darken') {
+  color: $color;
+
+  &:hover,
+  &:focus {
+    color: call($fn, $color, 20%);
+  }
+
+  &:active {
+    color: call($fn, $color, 40%);
+  }
+}
+
+/*
  * Will hide or show an element nested under .quoteBox based on the .quoteBox state.
  */
 @mixin drawer-element {

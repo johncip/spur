@@ -8,15 +8,7 @@
   }
 
   .optionsButton {
-    color: $gray-2;
-
-    &:hover {
-      color: lighten($gray-2, 20%);
-    }
-
-    &:active {
-      color: lighten($gray-2, 40%);
-    }
+    @include tinted-foreground($gray-2, 'lighten');
   }
 
   .quoteBox {
@@ -50,17 +42,15 @@
   }
 
   .verticalToggle {
-    color: $gray-2;
+    @include tinted-foreground($gray-2, 'lighten');
     background-color: $slate-1;
     border-color: currentColor;
 
     &:hover {
-      color: lighten($gray-2, 10%);
       background-color: lighten($slate-1, 10%);
     }
 
     &:active {
-      color: lighten($gray-2, 15%);
       background-color: lighten($slate-1, 15%);
     }
   }
