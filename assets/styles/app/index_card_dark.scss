@@ -40,18 +40,16 @@
   .verticalToggle {
     color: $gray-2;
     background-color: $slate-1;
-    border-color: $gray-2;
+    border-color: currentColor;
 
     &:hover {
       color: lighten($gray-2, 10%);
       background-color: lighten($slate-1, 10%);
-      border-color: lighten($gray-2, 10%);
     }
 
     &:active {
       color: lighten($gray-2, 15%);
       background-color: lighten($slate-1, 15%);
-      border-color: lighten($gray-2, 15%);
     }
   }
 }
