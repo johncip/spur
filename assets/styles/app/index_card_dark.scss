@@ -8,7 +8,7 @@
   }
 
   .quoteBox {
-    background-color: $gray-2;
+    background-color: $slate-1;
     border-color: $ink;
   }
 
@@ -22,11 +22,11 @@
   }
 
   .quoteBox--author {
-    color: $slate;
+    color: $slate-2;
   }
 
   .quoteBox--category {
-    color: $slate;
+    color: $slate-2;
   }
 
   .quoteBox--url {
@@ -39,18 +39,18 @@
 
   .verticalToggle {
     color: $ink;
-    background-color: $gray-2;
+    background-color: $slate-1;
     border-color: $ink;
 
     &:hover {
       color: lighten($ink, 10%);
-      background-color: lighten($gray-2, 10%);
+      background-color: lighten($slate-1, 10%);
       border-color: lighten($ink, 10%);
     }
 
     &:active {
       color: lighten($ink, 15%);
-      background-color: lighten($gray-2, 15%);
+      background-color: lighten($slate-1, 15%);
       border-color: lighten($ink, 15%);
     }
   }
