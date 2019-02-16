@@ -9,7 +9,7 @@
 
   .quoteBox {
     background-color: $slate-1;
-    border-color: $ink;
+    border-color: $gray-2;
   }
 
   .quoteBox--quote {
@@ -34,24 +34,24 @@
   }
 
   .quoteBox--rule {
-    border-color: $ink;
+    border-color: $gray-2;
   }
 
   .verticalToggle {
-    color: $ink;
+    color: $gray-2;
     background-color: $slate-1;
-    border-color: $ink;
+    border-color: $gray-2;
 
     &:hover {
-      color: lighten($ink, 10%);
+      color: lighten($gray-2, 10%);
       background-color: lighten($slate-1, 10%);
-      border-color: lighten($ink, 10%);
+      border-color: lighten($gray-2, 10%);
     }
 
     &:active {
-      color: lighten($ink, 15%);
+      color: lighten($gray-2, 15%);
       background-color: lighten($slate-1, 15%);
-      border-color: lighten($ink, 15%);
+      border-color: lighten($gray-2, 15%);
     }
   }
 }
