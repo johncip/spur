@@ -5,28 +5,17 @@ import classNames from 'classnames'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus'
-import { faSpinner } from '@fortawesome/free-solid-svg-icons/faSpinner'
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons/faPencilAlt'
 
 import { createRootDiv, loadSettings, loadQuotes, trimStart } from './util'
 
 import 'Styles/options/style.scss'
 
-const Spinner = () => (
-  <section className="optionsSection optionsSection-empty">
-    <FontAwesomeIcon icon={faSpinner} className="fa-spin" />
-  </section>
-)
-
 /*
  * The (behavior) settings section of the options page.
  */
 class SettingsSection extends PureComponent {
   render() {
-    if (!this.props.settings) {
-      return <Spinner />
-    }
-
     return (
       <section className="optionsSection">
         <div className="setting">
@@ -103,10 +92,6 @@ const AddQuoteButton = () => (
  * The quotes section of the options page. An editable list of stored quotes.
  */
 const QuotesSection = ({ quoteRecords, openModal }) => {
-  if (!quoteRecords) {
-    return <Spinner />
-  }
-
   return (
     <section className="optionsSection optionsSection-quotes">
       <div className="optionsSection--preventOverflow">
@@ -174,11 +159,17 @@ class AppRoot extends Component {
   }
 
   render() {
+    const { settings, quoteRecords, modalIsOpen } = this.state;
+
+    if (!settings || !quoteRecords) {
+      return null;
+    }
+
     return (
       <div className="optionsContainer">
         <OptionsPage
-          settings={this.state.settings}
-          quoteRecords={this.state.quoteRecords}
+          settings={settings}
+          quoteRecords={quoteRecords}
           openModal={this.openModal}
           closeModal={this.openModal}
         />
@@ -186,7 +177,7 @@ class AppRoot extends Component {
         <Modal
           className="modal"
           overlayClassName="modalOverlay"
-          isOpen={this.state.modalIsOpen}
+          isOpen={modalIsOpen}
           onRequestClose={this.closeModal}
           contentLabel="Example Modal"
         >
