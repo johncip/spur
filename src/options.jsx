@@ -2,49 +2,25 @@ import React, { Component, PureComponent } from 'react'
 import ReactDOM from 'react-dom'
 import Modal from 'react-modal'
 import classNames from 'classnames'
-import { createStore, combineReducers } from 'redux'
+import { createStore } from 'redux'
 import { connect, Provider } from 'react-redux'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus'
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons/faPencilAlt'
 
+import reducers from './reducers'
+import {
+  setActiveQuote,
+  openEditModal,
+  closeEditModal,
+  updateSettings,
+  updateQuoteRecords,
+} from './actions'
 import { loadSettings, loadQuotes, sortedQuoteRecords } from './util'
 
 import 'Styles/options/style.scss'
 
-// -- redux crap -----------------------------------------------------------------------
-
-const normalizedQuoteRecords = (records) => {
-  return records.reduce((map, record, idx) => {
-    map.set(idx, Object.assign({ id: idx }, record))
-    return map
-  }, new Map())
-}
-
-const defaultActiveQuote = {
-  quote: 'sup bra',
-  author: 'some dude',
-  url: 'http://google.com',
-  category: 'Mindset',
-}
-
-const activeQuoteReducer = (state = defaultActiveQuote, action) => {
-  switch (action.type) {
-    case 'SET_ACTIVE_QUOTE':
-      return action.payload
-    default:
-      return state
-  }
-}
-
-const store = createStore(combineReducers({ activeQuote: activeQuoteReducer }))
-
-const setActiveQuote = quote => {
-  return store.dispatch({ type: 'SET_ACTIVE_QUOTE', payload: quote })
-}
-
-// -- end redux crap --------------------------------------------------------------------
 
 /*
  * The (behavior) settings section of the options page.
@@ -87,9 +63,9 @@ class _QuoteListItem extends PureComponent {
   }
 
   handleClick = () => {
-    const { setActiveQuote, quoteRecord, openModal } = this.props
+    const { setActiveQuote, quoteRecord, openEditModal } = this.props
     setActiveQuote(quoteRecord)
-    openModal()
+    openEditModal()
   }
 
   classes() {
@@ -119,11 +95,13 @@ class _QuoteListItem extends PureComponent {
     )
   }
 }
-const mapDispatchToProps = {
-  setActiveQuote,
-}
-const QuoteListItem = connect(null, mapDispatchToProps)(_QuoteListItem)
-
+const QuoteListItem = connect(
+  null,
+  (dispatch, own) => ({
+    openEditModal: () => dispatch(openEditModal),
+    setActiveQuote: () => dispatch(setActiveQuote(own.quoteRecord)),
+  }),
+)(_QuoteListItem)
 
 /*
  * Button for adding a new quote.
@@ -135,17 +113,12 @@ const AddQuoteButton = () => (
   </button>
 )
 
-const sortedQuoteRecords = (records) => {
-  return records.sort((a, b) => (
-    trimStart(a.quote).localeCompare(trimStart(b.quote))
-  ))
-}
-
 /*
  * The quotes section of the options page. An editable list of stored quotes.
  */
-const QuotesSection = ({ quoteRecords, openModal }) => {
-  const sorted = sortedQuoteRecords(Array.from(quoteRecords.values()))
+const QuotesSection = ({ quoteRecords, openEditModal }) => {
+  const values = Array.from(quoteRecords.values())
+  const sorted = sortedQuoteRecords(values)
 
   return (
     <section className="optionsSection">
@@ -153,7 +126,6 @@ const QuotesSection = ({ quoteRecords, openModal }) => {
         <QuoteListItem
           key={quoteRecord.id}
           quoteRecord={quoteRecord}
-          openModal={openModal}
         />
       ))}
       <AddQuoteButton />
@@ -164,74 +136,60 @@ const QuotesSection = ({ quoteRecords, openModal }) => {
 /*
  * The entire options page.
  */
-const OptionsPage = ({ settings, quoteRecords, openModal }) => (
+const OptionsPage = ({ settings, quoteRecords }) => (
   <div>
     <h1 className="optionsHeading">Settings</h1>
     <SettingsSection settings={settings} />
 
     <h1 className="optionsHeading">Quotes</h1>
-    <QuotesSection
-      quoteRecords={quoteRecords}
-      openModal={openModal}
-    />
+    <QuotesSection quoteRecords={quoteRecords} />
   </div>
 )
 
 /*
  * A modal for editing the clicked-on quote.
  */
-const _EditQuoteModal = ({ quoteRecord, isOpen, onRequestClose }) => (
+const _EditQuoteModal = ({ quoteRecord, isOpen, closeEditModal }) => (
   <Modal
     className="modal"
     overlayClassName="modalOverlay"
     isOpen={isOpen}
-    onRequestClose={onRequestClose}
+    onRequestClose={closeEditModal}
     contentLabel="Edit Quote"
   >
     {quoteRecord.quote}
   </Modal>
 )
-const mapStateToProps = (state) => ({
-  quoteRecord: state.activeQuote,
-})
-const EditQuoteModal = connect(mapStateToProps)(_EditQuoteModal)
+const EditQuoteModal = connect(
+  state => ({
+    quoteRecord: state.activeQuote,
+    isOpen: state.editModal.isOpen,
+  }),
+  dispatch => ({
+    closeEditModal: () => dispatch(closeEditModal),
+  }),
+)(_EditQuoteModal)
+
 
 /*
  * Loads the options page and holds state.
  */
-class AppRoot extends Component {
+class _AppRoot extends Component {
   constructor() {
     super()
-    this.state = {
-      settings: null,
-      quoteRecords: null,
-      modalIsOpen: false,
-    }
+    this.state = { settings: null, quoteRecords: null }
   }
 
   componentDidMount() {
-    loadSettings().then((settings) => {
-      this.setState({ settings })
-    })
-    loadQuotes().then((records) => {
-      const normalized = normalizedQuoteRecords(records)
-      this.setState({ quoteRecords: normalized })
-    })
-  }
-
-  openModal = () => {
-    this.setState({ modalIsOpen: true })
-  }
-
-  closeModal = () => {
-    this.setState({ modalIsOpen: false })
+    const { updateSettings, updateQuoteRecords } = this.props
+    loadSettings().then(settings => updateSettings(settings))
+    loadQuotes().then(quoteRecords => updateQuoteRecords(quoteRecords))
   }
 
   render() {
-    const { settings, quoteRecords, modalIsOpen } = this.state;
-
-    if (!settings || !quoteRecords) {
-      return null;
+    const { settings, quoteRecords } = this.props;
+    if (!settings.size || !quoteRecords.size) {
+      return null
     }
 
     return (
@@ -239,19 +197,25 @@ class AppRoot extends Component {
         <OptionsPage
           settings={settings}
           quoteRecords={quoteRecords}
-          openModal={this.openModal}
         />
-
-        <EditQuoteModal
-          onRequestClose={this.closeModal}
-          isOpen={modalIsOpen}
-        />
+        <EditQuoteModal />
       </div>
     )
   }
 }
+const AppRoot = connect(
+  state => ({
+    settings: state.settings,
+    quoteRecords: state.quoteRecords,
+  }),
+  (dispatch, own) => ({
+    updateSettings: settings => dispatch(updateSettings(settings)),
+    updateQuoteRecords: quoteRecords => dispatch(updateQuoteRecords(quoteRecords)),
+  }),
+)(_AppRoot)
 
 const rootEl = document.getElementById('root')
+const store = createStore(reducers)
 Modal.setAppElement('#root')
 ReactDOM.render((
   <Provider store={store}>
