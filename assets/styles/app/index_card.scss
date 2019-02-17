@@ -6,26 +6,21 @@ $vspace: 20px;
 
 .indexCard {
   .quoteBox {
-    position: relative;
+    position: relative; // for verticalToggle
     display: flex;
     flex-direction: column;
     min-width: 240px;
     max-width: 700px;
     padding: 50px;
-    border-style: solid;
-    border-width: 1px;
-
+    border: 1px solid $gray-4;
     background-color: $gray-7;
-    border-color: $gray-4;
   }
 
   .quoteBox--quote {
-    position: relative;
+    position: relative; // for before & after
     margin-top: $vspace;
-    margin-bottom: 40px;
-    font-family: $basic-font-stack;
-    font-weight: 300;
-    line-height: 130%;
+    margin-bottom: $vspace * 2;
+    font: 300 100px/130% $basic-font-stack;
     color: $gray-2;
     z-index: 1;
 
@@ -61,13 +56,11 @@ $vspace: 20px;
 
   .quoteBox--author {
     align-self: end;
-    font-size: 16pt;
-    font-family: $basic-font-stack;
-    font-weight: 300;
+    font: 300 16pt $basic-font-stack;
     color: $gray-3;
 
     &::before {
-      content: "\2015 ";
+      content: "—";
     }
   }
 
@@ -109,6 +102,7 @@ $vspace: 20px;
 
   .quoteBox--rule {
     @include slide;
+
     border-color: $gray-5;
     margin: 40px 0 0 0;
   }
@@ -123,12 +117,9 @@ $vspace: 20px;
     bottom: -8px;
     height: 20px;
     width: 40px;
-
-    border-radius: 2px;
-    font-size: 12px;
-    line-height: 10px;
-    background-color: $gray-7;
     border: 1px solid currentColor;
+    border-radius: 2px;
+    background-color: $gray-7;
 
     @at-root .indexCard .quoteBox .verticalToggle {
       align-self: center;
@@ -144,9 +135,6 @@ $vspace: 20px;
     top: 20px;
     color: $gray-5;
     font-size: 24px;
-    width: 28px;
-    height: 24px;
-    padding-left: 2px;
     opacity: 1;
     transition: opacity 0.4s, visibility 0.4s;
 
