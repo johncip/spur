@@ -31,8 +31,16 @@ button {
   cursor: pointer;
 }
 
+h1 {
+  margin: 0;
+}
+
 hr {
   height: 1px;
   border: 0;
   border-top: 1px solid black;
+}
+
+p {
+  margin: 0;
 }

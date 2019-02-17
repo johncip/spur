@@ -7,12 +7,20 @@
   letter-spacing: -0.3px;
 }
 
+p {
+  @extend %basic-type;
+}
+
 .l-root {
   padding: 20px;
 }
 
 .optionsHeading {
   font: 300 32px $basic-font-stack;
+
+  .optionsContainer & {
+    margin-bottom: 12px;
+  }
 }
 
 .optionsContainer {
@@ -207,10 +215,8 @@
   & + & {
     margin-top: 12px;
   }
-}
 
-p {
-  @extend %basic-type;
-  margin-top: 40px;
-  margin-bottom: 0;
+  .optionsSection &:last-of-type {
+    margin-bottom: 24px;
+  }
 }
