@@ -148,5 +148,12 @@ $vspace: 20px;
     width: 28px;
     height: 24px;
     padding-left: 2px;
+    opacity: 1;
+    transition: opacity 0.4s, visibility 0.4s;
+
+    @media (max-width: 900px) {
+      visibility: hidden;
+      opacity: 0;
+    }
   }
 }
