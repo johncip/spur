@@ -78,6 +78,10 @@ $vspace: 20px;
     margin-top: $vspace;
     color: $gray-3;
     font: $nerdy-font;
+
+    .svg-inline--fa {
+      margin-right: 8px;
+    }
   }
 
   .quoteBox--infoLink {
@@ -90,6 +94,7 @@ $vspace: 20px;
 
     .svg-inline--fa {
       color: $gray-3;
+      margin-right: 8px;
     }
 
     &:focus,
