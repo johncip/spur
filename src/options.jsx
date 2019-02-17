@@ -7,7 +7,11 @@ import { connect, Provider } from 'react-redux'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus'
+import { faAt } from '@fortawesome/free-solid-svg-icons/faAt'
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons/faPencilAlt'
+import { faGithub } from '@fortawesome/free-brands-svg-icons'
+import { faFirefox } from '@fortawesome/free-brands-svg-icons'
+import { faChrome} from '@fortawesome/free-brands-svg-icons'
 
 import reducers from './reducers'
 import {
@@ -150,6 +154,35 @@ const QuotesSection = ({ quoteRecords, openEditModal }) => {
 
 
 /*
+ * Links section.
+ */
+const LinksSection = () => (
+  <section className="optionsSection">
+    <a className="link" href="https://github.com/johncip/spur">
+      <FontAwesomeIcon icon={faGithub} />
+      Spur on <b>GitHub</b>
+    </a>
+
+    <a className="link" href="">
+      <FontAwesomeIcon icon={faChrome} />
+      Spur in the <b>Chrome Web Store</b>
+    </a>
+
+    <a className="link" href="">
+      <FontAwesomeIcon icon={faFirefox} />
+      Spur at <b>Firefox Add-ons</b>
+    </a>
+
+    <a className="link" href="mailto:spur.tab@gmail.com">
+      <FontAwesomeIcon icon={faAt} />
+      Email John at <b>spur.tab@gmail.com</b>
+    </a>
+
+    <p>Thanks for using Spur! If you like it, please consider leaving a rating! 🏄</p>
+  </section>
+)
+
+/*
  * The entire options page.
  */
 const OptionsPage = ({ settings, quoteRecords }) => (
@@ -159,6 +192,9 @@ const OptionsPage = ({ settings, quoteRecords }) => (
 
     <h1 className="optionsHeading">Quotes</h1>
     <QuotesSection quoteRecords={quoteRecords} />
+
+    <h1 className="optionsHeading">Links</h1>
+    <LinksSection />
   </div>
 )
 

@@ -101,7 +101,7 @@
 .btn {
   @include focus-ring('border');
   border-radius: 2px;
-  font: 400 16px $basic-font-stack;
+  font: 500 16px $basic-font-stack;
 }
 
 .btn-save {
@@ -128,4 +128,30 @@
   left: 0;
   right: 0;
   background-color: $trans-white;
+}
+.link {
+  @extend %basic-type;
+  @extend %icon-margin;
+  display: block;
+
+  @include foreground-tints($blue-1);
+
+  > b {
+    font-weight: 500;
+  }
+
+  > .svg-inline--fa {
+    @include foreground-tints($gray-4);
+    color: $gray-2;
+  }
+
+  & + & {
+    margin-top: 12px;
+  }
+}
+
+p {
+  @extend %basic-type;
+  margin-top: 40px;
+  margin-bottom: 0;
 }

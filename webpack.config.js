@@ -63,7 +63,7 @@ module.exports = {
     }),
     new GoogleFontsPlugin({
       fonts: [
-        { family: 'Work Sans', variants: ['300', '400'] },
+        { family: 'Work Sans', variants: ['300', '400', '500'] },
         { family: 'Staatliches', variants: ['400'], subsets: ['latin'] },
         { family: 'PT Mono', variants: ['400'] },
         { family: 'Overpass Mono', variants: ['300', '400'] },
