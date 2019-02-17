@@ -47,6 +47,7 @@ class SettingsSection extends PureComponent {
   }
 }
 
+
 /*
  * A clickable displayed quote. Includes a pencil icon on hover.
  */
@@ -105,6 +106,7 @@ const QuoteListItem = connect(
   }),
 )(_QuoteListItem)
 
+
 /*
  * Button for adding a new quote.
  */
@@ -125,6 +127,7 @@ const AddQuoteButton = connect(
   }),
 )(_AddQuoteButton)
 
+
 /*
  * The quotes section of the options page. An editable list of stored quotes.
  */
@@ -144,6 +147,7 @@ const QuotesSection = ({ quoteRecords, openEditModal }) => {
     </section>
   )
 }
+
 
 /*
  * The entire options page.
@@ -182,6 +186,7 @@ const EditQuoteModal = connect(
     closeEditModal: () => dispatch(closeEditModal),
   }),
 )(_EditQuoteModal)
+
 
 // TODO: make this a presentational component
 /*
@@ -250,6 +255,7 @@ const AppRoot = connect(
     updateQuoteRecords: quoteRecords => dispatch(updateQuoteRecords(quoteRecords)),
   }),
 )(_AppRoot)
+
 
 const rootEl = document.getElementById('root')
 const store = createStore(reducers)
