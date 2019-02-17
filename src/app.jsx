@@ -153,8 +153,9 @@ class AppRoot extends Component {
     if (!this.state.quote) return null;
 
     return [
-      <OptionsButton />,
+      <OptionsButton key="opts-btn" />,
       <QuoteBox
+        key="quote-box"
         quote={this.state.quote}
         author={this.state.author}
         url={this.state.url}
