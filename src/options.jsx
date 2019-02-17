@@ -148,8 +148,8 @@ const QuotesSection = ({ quoteRecords, openModal }) => {
   const sorted = sortedQuoteRecords(Array.from(quoteRecords.values()))
 
   return (
-    <section className="optionsSection optionsSection-quotes">
-      <div className="optionsSection--preventOverflow">
+    <section className="optionsSection">
+      <div>
         {sorted.map(quoteRecord => (
           <QuoteListItem
             key={quoteRecord.id}

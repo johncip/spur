@@ -10,6 +10,7 @@ body {
   margin: 0;
   height: 100%;
   width: 100%;
+  background-color: white;
 }
 
 a {
@@ -28,4 +29,10 @@ button {
   background: none;
   box-sizing: border-box;
   cursor: pointer;
+}
+
+hr {
+  height: 1px;
+  border: 0;
+  border-top: 1px solid black;
 }

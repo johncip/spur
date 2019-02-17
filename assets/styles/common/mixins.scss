@@ -1,71 +1,83 @@
-%truncated {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-%vertical-transition {
-  transition-property: height, opacity, margin, visibility;
-  transition-duration: 0.5s;
-  transition-timing-function: ease-in-out;
-}
-
-%expanded {
-  height: 1.2em;
-  opacity: 1;
-  visibility: visible;
-}
-
-%collapsed {
-  overflow: hidden;
-  height: 0;
-  margin: 0;
-  opacity: 0;
-  visibility: hidden;
-}
-
-%no-moz-focus-inner {
-  &:focus::-moz-focus-inner {
-    border: 0;
-    outline: 0;
-  }
-}
-
 /*
- * Sets a foreground color and tints/shades the hover, focus & active states.
+ * Sets a foreground color plus variants for hover/focus/active.
  */
-@mixin tinted-foreground($color, $fn: 'darken') {
+@mixin foreground-tints($color, $fn: 'darken') {
   color: $color;
 
-  &:hover,
-  &:focus {
+  &:hover, &:focus {
     color: call(get-function($fn), $color, 20%);
   }
-
   &:active {
     color: call(get-function($fn), $color, 40%);
   }
 }
 
 /*
- * Will hide or show an element nested under .quoteBox based on the .quoteBox state.
+ * Sets a background color plus variants for hover/focus/active.
  */
-@mixin drawer-element {
-  @extend %collapsed;
-  @extend %vertical-transition;
+@mixin background-tints($color, $fn: 'darken') {
+  background-color: $color;
 
-  /*
-   * the class of the targeted element. e.g.:
-   *
-   * self('.a .b .c.d') -> '.c.d'
-   */
-  $self: nth(nth(&, -1), -1);
+  &:hover, &:focus {
+    background-color: call(get-function($fn), $color, 5%);
+  }
+  &:active {
+    background-color: call(get-function($fn), $color, 10%);
+  }
+}
 
-  @at-root .indexCard .quoteBox.quoteBox-is-expanded #{$self} {
-    @extend %expanded;
+/*
+ * Enables a child of .quoteBox to be hidden or shown based on .quoteBox state.
+ */
+@mixin slide {
+  transition-property: height, opacity, margin, visibility;
+  transition-duration: 0.5s;
+  transition-timing-function: ease-in-out;
+
+  $self: nth(nth(&, -1), -1); // class of the targeted element. self('.a .b .c') -> '.c'
+
+  @at-root .indexCard .quoteBox-is-expanded #{$self} {
+    height: 1.2em;
+    opacity: 1;
+    visibility: visible;
   }
 
-  @at-root .indexCard .quoteBox.quoteBox-is-collapsed #{$self} {
-    @extend %collapsed;
+  @at-root .indexCard .quoteBox-is-collapsed #{$self} {
+    height: 0;
+    margin: 0;
+    opacity: 0;
+    overflow: hidden;
+    visibility: hidden;
   }
+}
+
+/*
+ * Gives element a blue focus ring. Need to supply 'border' or 'outline'.
+ * Disables the FF default inner dotted border.
+ */
+@mixin focus-ring($property) {
+  &:focus {
+    #{$property}: 3px solid $blue-focus;
+
+    &::-moz-focus-inner {
+      border: 0;
+      outline: 0;
+    }
+  }
+}
+
+%truncated {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+%absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
 }

@@ -2,14 +2,7 @@
 
 .indexCardDark {
   @extend .indexCard;
-
-  body {
-    background-color: $gray-1;
-  }
-
-  .optionsButton {
-    @include tinted-foreground($gray-2, 'lighten');
-  }
+  background-color: $gray-1;
 
   .quoteBox {
     background-color: $slate-1;
@@ -19,22 +12,32 @@
   .quoteBox--quote {
     color: $gray-4;
 
-    &:before,
-    &:after {
-      opacity: 0.025;
+    &:before, &:after {
+      opacity: 0.02;
     }
   }
 
-  .quoteBox--author {
-    color: $slate-2;
-  }
-
+  .quoteBox--author,
   .quoteBox--category {
     color: $slate-2;
   }
 
-  .quoteBox--url {
+  .quoteBox--infoLink {
     color: $blue-0;
+
+    .svg-inline--fa {
+      color: $slate-2;
+    }
+
+    &:focus,
+    &:hover {
+      outline: 0;
+      filter: brightness(125%);
+    }
+
+    &:active {
+      filter: brightness(150%);
+    }
   }
 
   .quoteBox--rule {
@@ -42,16 +45,12 @@
   }
 
   .verticalToggle {
-    @include tinted-foreground($gray-2, 'lighten');
-    background-color: $slate-1;
+    @include foreground-tints($gray-2, 'lighten');
+    @include background-tints($slate-1, 'lighten');
     border-color: currentColor;
+  }
 
-    &:hover {
-      background-color: lighten($slate-1, 10%);
-    }
-
-    &:active {
-      background-color: lighten($slate-1, 15%);
-    }
+  .optionsButton {
+    @include foreground-tints($gray-2, 'lighten');
   }
 }
