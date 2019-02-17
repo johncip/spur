@@ -152,6 +152,19 @@ const QuotesSection = ({ quoteRecords, openEditModal }) => {
   )
 }
 
+const ChromeStoreLink = () => (
+  <a className="link" href="">
+    <FontAwesomeIcon icon={faChrome} />
+    Spur in the <b>Chrome Web Store</b>
+  </a>
+)
+
+const FirefoxStoreLink = () => (
+  <a className="link" href="">
+    <FontAwesomeIcon icon={faFirefox} />
+    Spur at <b>Firefox Add-ons</b>
+  </a>
+)
 
 /*
  * Links section.
@@ -163,15 +176,8 @@ const LinksSection = () => (
       Spur on <b>GitHub</b>
     </a>
 
-    <a className="link" href="">
-      <FontAwesomeIcon icon={faChrome} />
-      Spur in the <b>Chrome Web Store</b>
-    </a>
-
-    <a className="link" href="">
-      <FontAwesomeIcon icon={faFirefox} />
-      Spur at <b>Firefox Add-ons</b>
-    </a>
+    {navigator.userAgent.includes('Firefox') ? <FirefoxStoreLink /> : null}
+    {navigator.userAgent.includes('Chrome') ? <ChromeStoreLink /> : null}
 
     <a className="link" href="mailto:spur.tab@gmail.com">
       <FontAwesomeIcon icon={faAt} />
