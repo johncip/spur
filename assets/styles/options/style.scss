@@ -51,7 +51,7 @@
 
 .quoteListItem {
   @extend %basic-type;
-  @include tinted-background($gray-6);
+  @include background-tints($gray-6);
   @include focus-ring('border');
 
   width: 100%;
