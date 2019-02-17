@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus'
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons/faPencilAlt'
 
-import { loadSettings, loadQuotes, trimStart } from './util'
+import { loadSettings, loadQuotes, sortedQuoteRecords } from './util'
 
 import 'Styles/options/style.scss'
 
