@@ -84,7 +84,9 @@
 }
 
 .quoteListItem-add {
+  @extend %icon-margin;
   @include foreground-tints($gray-4);
+
   border: 2px dashed currentColor;
 
   &:focus {

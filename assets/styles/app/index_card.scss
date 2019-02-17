@@ -66,18 +66,16 @@ $vspace: 20px;
 
   .quoteBox--category {
     @include slide;
+    @extend %icon-margin;
 
     margin-top: $vspace;
     color: $gray-3;
     font: $nerdy-font;
-
-    .svg-inline--fa {
-      margin-right: 8px;
-    }
   }
 
   .quoteBox--infoLink {
     @extend %truncated;
+    @extend %icon-margin;
     @include slide;
 
     margin-top: $vspace;
@@ -86,7 +84,6 @@ $vspace: 20px;
 
     .svg-inline--fa {
       color: $gray-3;
-      margin-right: 8px;
     }
 
     &:focus,

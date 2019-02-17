@@ -81,3 +81,9 @@
   margin-right: -50%;
   transform: translate(-50%, -50%);
 }
+
+%icon-margin {
+  .svg-inline--fa {
+    margin-right: 8px;
+  }
+}
