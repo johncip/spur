@@ -18,6 +18,7 @@
 .optionsContainer {
   max-width: 720px;
   margin: auto;
+  // TODO: blur on modal open
 }
 
 .optionsSection {
@@ -104,21 +105,47 @@
   font: 500 16px $basic-font-stack;
 }
 
+// TODO: try to avoid setting width & height
 .btn-save {
   @include background-tints($blue-1, 'lighten')
-  color: $white;
   height: 32px;
   width: 64px;
+  color: $white;
+}
+
+// TODO: try to avoid setting width & height
+.btn-cancel {
+  @include background-tints($gray-4, 'lighten')
+  height: 32px;
+  width: 80px;
+  color: $gray-2;
+}
+
+.btnContainer {
+  .btn + .btn {
+    margin-left: 8px;
+  }
 }
 
 .modal {
   @extend %absolute-center;
-  @extend %basic-type;
+  width: 420px;
+  padding: 24px;
+  background-color: $gray-7;
+  border: 1px solid $gray-4;
+  border-radius: 2px;
+}
 
-  width: 400px;
-  padding: 20px;
-  color: $gray-2;
-  background-color: $white;
+// TODO: set margin of h1 to 0 in base
+.modal--heading {
+  font: 300 28px $basic-font-stack;
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+.modal--rule {
+  border-color: $gray-5;
+  margin-bottom: 20px;
 }
 
 .modalOverlay {
@@ -129,6 +156,38 @@
   right: 0;
   background-color: $trans-white;
 }
+
+.quoteForm {
+  > .btnContainer {
+    margin-top: 40px;
+  }
+}
+
+.quoteForm--label {
+  font: 500 14px $basic-font-stack;
+  color: $gray-3;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.quoteForm--field {
+  @extend %basic-type;
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  border: 1px solid $gray-4;
+  border-radius: 2px;
+  padding: 6px;
+
+  &:not(:last-child) {
+    margin-bottom: 20px;
+  }
+}
+
+.quoteForm--field-textarea {
+  height: 150px;
+}
+
 .link {
   @extend %basic-type;
   @extend %icon-margin;

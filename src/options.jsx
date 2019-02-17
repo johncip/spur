@@ -198,30 +198,42 @@ const OptionsPage = ({ settings, quoteRecords }) => (
   </div>
 )
 
-// TODO: make this a presentational component
 /*
- * A modal for editing the clicked-on quote.
+ * A cancel button for the modals.
  */
-const _EditQuoteModal = ({ quoteRecord, isOpen, closeEditModal }) => (
-  <Modal
-    className="modal"
-    overlayClassName="modalOverlay"
-    isOpen={isOpen}
-    onRequestClose={closeEditModal}
-    contentLabel="Edit Quote"
+const CancelButton = ({ onCancel }) => (
+  <button
+    type="button"
+    className="btn btn-cancel"
+    onClick={onCancel}
   >
-    {quoteRecord.quote}
-  </Modal>
+    Cancel
+  </button>
 )
-const EditQuoteModal = connect(
-  state => ({
-    quoteRecord: state.activeQuote,
-    isOpen: state.editModal.isOpen,
-  }),
-  dispatch => ({
-    closeEditModal: () => dispatch(closeEditModal),
-  }),
-)(_EditQuoteModal)
+
+
+/*
+ * A form for editing a quote. Buttons should be passed in as children.
+ */
+const QuoteForm = ({ quote, author, url, category, children }) => (
+  <form className="quoteForm">
+    <label className="quoteForm--label">Quote</label>
+    <textarea className="quoteForm--field quoteForm--field-textarea" value={quote} autoFocus />
+
+    <label className="quoteForm--label">Author</label>
+    <input className="quoteForm--field" value={author} />
+
+    <label className="quoteForm--label">URL</label>
+    <input className="quoteForm--field" value={url} />
+
+    <label className="quoteForm--label">Category</label>
+    <input className="quoteForm--field" value={category} />
+
+    <div className="btnContainer">
+      {children}
+    </div>
+  </form>
+)
 
 
 // TODO: make this a presentational component
@@ -236,7 +248,18 @@ const _AddQuoteModal = ({ isOpen, closeAddModal }) => (
     onRequestClose={closeAddModal}
     contentLabel="Add Quote"
   >
-    hello
+    <h1 className="modal--heading">Add Quote</h1>
+    <hr className="modal--rule" />
+
+    <QuoteForm
+      quote=""
+      author=""
+      url=""
+      category=""
+    >
+      <button type="button" class="btn btn-save">Add</button>
+      <CancelButton onCancel={closeAddModal} />
+    </QuoteForm>
   </Modal>
 )
 const AddQuoteModal = connect(
@@ -247,6 +270,46 @@ const AddQuoteModal = connect(
     closeAddModal: () => dispatch(closeAddModal),
   }),
 )(_AddQuoteModal)
+
+
+// TODO: make this a presentational component
+/*
+ * A modal for editing the clicked-on quote.
+ */
+const _EditQuoteModal = ({ quoteRecord, isOpen, closeEditModal }) => {
+  const { quote, author, url, category } = quoteRecord;
+  return (
+    <Modal
+      className="modal"
+      overlayClassName="modalOverlay"
+      isOpen={isOpen}
+      onRequestClose={closeEditModal}
+      contentLabel="Edit Quote"
+    >
+      <h1 className="modal--heading">Edit Quote</h1>
+      <hr className="modal--rule" />
+
+      <QuoteForm
+        quote={quote}
+        author={author}
+        url={url}
+        category={category}
+      >
+        <button type="button" class="btn btn-save">Save</button>
+        <CancelButton onCancel={closeAddModal} />
+      </QuoteForm>
+    </Modal>
+  )
+}
+const EditQuoteModal = connect(
+  state => ({
+    quoteRecord: state.activeQuote,
+    isOpen: state.editModal.isOpen,
+  }),
+  dispatch => ({
+    closeEditModal: () => dispatch(closeEditModal),
+  }),
+)(_EditQuoteModal)
 
 
 /*
