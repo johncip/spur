@@ -2,6 +2,7 @@
 @import '../common/mixins';
 
 $nerdy-font: 300 12px $mono-font-stack;
+$vspace: 20px;
 
 .indexCard {
   .quoteBox {
@@ -21,7 +22,7 @@ $nerdy-font: 300 12px $mono-font-stack;
 
   .quoteBox--quote {
     position: relative;
-    margin-top: 18px;
+    margin-top: $vspace;
     margin-bottom: 40px;
     font-family: $basic-font-stack;
     font-weight: 300;
@@ -74,7 +75,7 @@ $nerdy-font: 300 12px $mono-font-stack;
   .quoteBox--category {
     @include slide;
 
-    margin-top: 18px;
+    margin-top: $vspace;
     color: $gray-3;
     font: $nerdy-font;
   }
@@ -83,7 +84,7 @@ $nerdy-font: 300 12px $mono-font-stack;
     @extend %truncated;
     @include slide;
 
-    margin-top: 18px;
+    margin-top: $vspace;
     font: $nerdy-font;
     color: $blue-2;
 
