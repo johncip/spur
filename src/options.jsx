@@ -14,6 +14,8 @@ import {
   setActiveQuote,
   openEditModal,
   closeEditModal,
+  openAddModal,
+  closeAddModal,
   updateSettings,
   updateQuoteRecords,
 } from './actions'
@@ -106,12 +108,22 @@ const QuoteListItem = connect(
 /*
  * Button for adding a new quote.
  */
-const AddQuoteButton = () => (
-  <button className="quoteListItem quoteListItem-add" type="button">
+const _AddQuoteButton = ({ openAddModal }) => (
+  <button
+    className="quoteListItem quoteListItem-add"
+    type="button"
+    onClick={openAddModal}
+  >
     <FontAwesomeIcon icon={faPlus} />
     New quote…
   </button>
 )
+const AddQuoteButton = connect(
+  null,
+  (dispatch, own) => ({
+    openAddModal: () => dispatch(openAddModal),
+  }),
+)(_AddQuoteButton)
 
 /*
  * The quotes section of the options page. An editable list of stored quotes.
@@ -169,6 +181,30 @@ const EditQuoteModal = connect(
     closeEditModal: () => dispatch(closeEditModal),
   }),
 )(_EditQuoteModal)
+
+// TODO: make this a presentational component
+/*
+ * A modal for editing the clicked-on quote.
+ */
+const _AddQuoteModal = ({ isOpen, closeAddModal }) => (
+  <Modal
+    className="modal"
+    overlayClassName="modalOverlay"
+    isOpen={isOpen}
+    onRequestClose={closeAddModal}
+    contentLabel="Add Quote"
+  >
+    hello
+  </Modal>
+)
+const AddQuoteModal = connect(
+  state => ({
+    isOpen: state.addModal.isOpen,
+  }),
+  dispatch => ({
+    closeAddModal: () => dispatch(closeAddModal),
+  }),
+)(_AddQuoteModal)
 
 
 /*
