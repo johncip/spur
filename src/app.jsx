@@ -8,7 +8,7 @@ import { faBox } from '@fortawesome/free-solid-svg-icons/faBox'
 import { faCog } from '@fortawesome/free-solid-svg-icons/faCog'
 import { faGlobeAmericas } from '@fortawesome/free-solid-svg-icons/faGlobeAmericas'
 
-import { createRootDiv, loadSettings, loadQuotes } from './util'
+import { loadSettings, loadQuotes } from './util'
 
 import 'Styles/app/style.scss'
 
@@ -54,9 +54,7 @@ const Info = ({ url }) => (
 const Category = ({ category }) => (
   <div className="quoteBox--category">
     <FontAwesomeIcon icon={faBox} />
-    <span id="categoryText">
-      {category}
-    </span>
+    {category}
   </div>
 )
 

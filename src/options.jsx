@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus'
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons/faPencilAlt'
 
-import { createRootDiv, loadSettings, loadQuotes, trimStart } from './util'
+import { loadSettings, loadQuotes, trimStart } from './util'
 
 import 'Styles/options/style.scss'
 
@@ -149,16 +149,14 @@ const QuotesSection = ({ quoteRecords, openModal }) => {
 
   return (
     <section className="optionsSection">
-      <div>
-        {sorted.map(quoteRecord => (
-          <QuoteListItem
-            key={quoteRecord.id}
-            quoteRecord={quoteRecord}
-            openModal={openModal}
-          />
-        ))}
-        <AddQuoteButton />
-      </div>
+      {sorted.map(quoteRecord => (
+        <QuoteListItem
+          key={quoteRecord.id}
+          quoteRecord={quoteRecord}
+          openModal={openModal}
+        />
+      ))}
+      <AddQuoteButton />
     </section>
   )
 }
