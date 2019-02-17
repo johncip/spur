@@ -149,7 +149,7 @@ const QuotesSection = ({ quoteRecords, openEditModal }) => {
  * The entire options page.
  */
 const OptionsPage = ({ settings, quoteRecords }) => (
-  <div>
+  <div className="optionsContainer">
     <h1 className="optionsHeading">Settings</h1>
     <SettingsSection settings={settings} />
 
@@ -229,15 +229,15 @@ class _AppRoot extends Component {
       return null
     }
 
-    return (
-      <div className="optionsContainer">
-        <OptionsPage
-          settings={settings}
-          quoteRecords={quoteRecords}
-        />
-        <EditQuoteModal />
-      </div>
-    )
+    return [
+      <OptionsPage
+        key="opts"
+        settings={settings}
+        quoteRecords={quoteRecords}
+      />,
+      <EditQuoteModal key="edit-modal" />,
+      <AddQuoteModal key="add-modal" />
+    ]
   }
 }
 const AppRoot = connect(
