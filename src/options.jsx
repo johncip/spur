@@ -257,7 +257,7 @@ const _AddQuoteModal = ({ isOpen, closeAddModal }) => (
       url=""
       category=""
     >
-      <button type="button" class="btn btn-save">Add</button>
+      <button type="button" className="btn btn-save">Add</button>
       <CancelButton onCancel={closeAddModal} />
     </QuoteForm>
   </Modal>
