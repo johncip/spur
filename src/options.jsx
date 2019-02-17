@@ -25,7 +25,7 @@ import 'Styles/options/style.scss'
 
 
 /*
- * The (behavior) settings section of the options page.
+ * The settings section of the options page.
  */
 class SettingsSection extends PureComponent {
   render() {
@@ -48,7 +48,7 @@ class SettingsSection extends PureComponent {
 }
 
 /*
- * A clickable displayed quote.
+ * A clickable displayed quote. Includes a pencil icon on hover.
  */
 class _QuoteListItem extends PureComponent {
   constructor(props) {
@@ -158,6 +158,7 @@ const OptionsPage = ({ settings, quoteRecords }) => (
   </div>
 )
 
+// TODO: make this a presentational component
 /*
  * A modal for editing the clicked-on quote.
  */
