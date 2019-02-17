@@ -154,17 +154,15 @@ class AppRoot extends Component {
   render() {
     if (!this.state.quote) return null;
 
-    return (
-      <div className="u-fullWidth">
-        <OptionsButton />
-        <QuoteBox
-          quote={this.state.quote}
-          author={this.state.author}
-          url={this.state.url}
-          category={this.state.category}
-        />
-      </div>
-    )
+    return [
+      <OptionsButton />,
+      <QuoteBox
+        quote={this.state.quote}
+        author={this.state.author}
+        url={this.state.url}
+        category={this.state.category}
+      />
+    ]
   }
 }
 
