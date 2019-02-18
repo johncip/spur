@@ -14,6 +14,9 @@ export const closeEditModal = () => (
 )
 
 
+export const saveQuoteRecords = () => (
+  { type: 'SAVE_QUOTE_RECORDS' }
+)
 export const updateQuoteRecords = quoteRecords => (
   { type: 'UPDATE_QUOTE_RECORDS', payload: quoteRecords }
 )
@@ -29,4 +32,7 @@ export const updateSettings = settings => (
 
 export const setActiveQuote = quote => (
   { type: 'SET_ACTIVE_QUOTE', payload: quote }
+)
+export const setNewActiveQuote = quote => (
+  { type: 'SET_NEW_ACTIVE_QUOTE' }
 )

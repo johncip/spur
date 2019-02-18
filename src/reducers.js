@@ -11,6 +11,9 @@ const activeQuote = (state = {}, action) => {
   switch (action.type) {
     case 'SET_ACTIVE_QUOTE':
       return action.payload
+    case 'SET_NEW_ACTIVE_QUOTE': {
+      return { quote: '', author: '', url: '', category: '', id: Math.random() }
+    }
     default:
       return state
   }
@@ -57,6 +60,11 @@ const quoteRecords = (state = new Map(), action) => {
       const quoteRecord = action.payload
       result.set(quoteRecord.id, quoteRecord)
       return result
+    }
+    // TODO thunk it up
+    case 'SAVE_QUOTE_RECORDS': {
+      browser.storage.local.set({ storedQuotes: Array.from(state.values()) })
+      return state
     }
     default:
       return state

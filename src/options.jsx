@@ -16,6 +16,7 @@ import { faChrome} from '@fortawesome/free-brands-svg-icons'
 import reducers from './reducers'
 import {
   setActiveQuote,
+  setNewActiveQuote,
   openEditModal,
   closeEditModal,
   openAddModal,
@@ -23,6 +24,7 @@ import {
   updateSettings,
   updateQuoteRecords,
   updateQuoteRecord,
+  saveQuoteRecords,
 } from './actions'
 import { loadSettings, loadQuotes } from './util'
 
@@ -107,29 +109,42 @@ class _EditQuoteButton extends PureComponent {
 }
 const EditQuoteButton = connect(
   null,
-  (dispatch, own) => ({
-    setActiveQuote: () => dispatch(setActiveQuote(own.quoteRecord)),
-    openModal: () => dispatch(openEditModal()),
-  }),
+  {
+    setActiveQuote: quoteRecord => setActiveQuote(quoteRecord),
+    openModal: openEditModal,
+  },
 )(_EditQuoteButton)
 
 
 /*
  * Button for adding a new quote.
  */
-const _AddQuoteButton = ({ openAddModal }) => (
-  <button
-    className="editQuoteButton editQuoteButton-add"
-    type="button"
-    onClick={openAddModal}
-  >
-    <FontAwesomeIcon icon={faPlus} />
-    New quote…
-  </button>
-)
+class _AddQuoteButton extends Component {
+  handleClick = () => {
+    const { setNewActiveQuote, openModal } = this.props
+    setNewActiveQuote()
+    openModal()
+  }
+
+  render() {
+    return (
+      <button
+        className="editQuoteButton editQuoteButton-add"
+        type="button"
+        onClick={this.handleClick}
+      >
+        <FontAwesomeIcon icon={faPlus} />
+        New quote…
+      </button>
+    )
+  }
+}
 const AddQuoteButton = connect(
   null,
-  { openAddModal },
+  {
+    setNewActiveQuote,
+    openModal: openAddModal,
+  },
 )(_AddQuoteButton)
 
 
@@ -260,60 +275,95 @@ const QuoteForm = ({ quote, author, url, category, children, handleChange }) => 
 )
 
 
-// TODO: make this a presentational component
+// TODO: delete AddQuoteModal
+// TODO: make this a presentational component?
 /*
  * A modal for editing the clicked-on quote.
  */
-const _AddQuoteModal = ({ isOpen, closeModal }) => (
-  <Modal
-    className="modal"
-    overlayClassName="modalOverlay"
-    isOpen={isOpen}
-    onRequestClose={closeModal}
-    contentLabel="Add Quote"
-  >
-    <h1 className="modal--heading">Add Quote</h1>
-    <hr className="modal--rule" />
+class _AddQuoteModal extends Component {
+  handleChange = (field, event) => {
+    this.props.setActiveQuote(
+      Object.assign({}, this.props.quoteRecord, { [field]: event.target.value })
+    )
+  }
 
-    <QuoteForm
-      quote=""
-      author=""
-      url=""
-      category=""
-    >
-      <button type="button" className="btn btn-save">Add</button>
-      <CancelButton onCancel={closeModal} />
-    </QuoteForm>
-  </Modal>
-)
+  handleSave = () => {
+    const { quoteRecord, updateQuoteRecord, closeModal, saveQuoteRecords } = this.props
+    updateQuoteRecord(quoteRecord)
+    saveQuoteRecords()
+    closeModal()
+  }
+
+  render() {
+    const { quoteRecord, isOpen, closeModal } = this.props;
+    const { quote, author, url, category } = quoteRecord;
+
+    return (
+      <Modal
+        className="modal"
+        overlayClassName="modalOverlay"
+        isOpen={isOpen}
+        onRequestClose={closeModal}
+        contentLabel="Add Quote"
+      >
+        <h1 className="modal--heading">Add Quote</h1>
+        <hr className="modal--rule" />
+
+        <QuoteForm
+          quote={quote}
+          author={author}
+          url={url}
+          category={category}
+          handleChange={this.handleChange}
+        >
+          <button
+            type="button"
+            className="btn btn-save"
+            onClick={this.handleSave}
+          >
+            Save
+          </button>
+          <CancelButton onCancel={closeModal} />
+        </QuoteForm>
+      </Modal>
+    )
+  }
+}
 const AddQuoteModal = connect(
   state => ({
+    quoteRecord: state.activeQuote,
     isOpen: state.addModal.isOpen,
   }),
-  { closeModal: closeAddModal },
+  {
+    saveQuoteRecords,
+    closeModal: closeAddModal,
+    setActiveQuote: quoteRecord => setActiveQuote(quoteRecord),
+    updateQuoteRecord: quoteRecord => updateQuoteRecord(quoteRecord),
+  },
 )(_AddQuoteModal)
 
 
-// TODO: make this a presentational component
+// TODO: make this a presentational component?
 /*
  * A modal for editing the clicked-on quote.
  */
 class _EditQuoteModal extends Component {
   handleChange = (field, event) => {
     this.props.setActiveQuote(
-      Object.assign({}, this.props.activeQuote, { [field]: event.target.value })
+      Object.assign({}, this.props.quoteRecord, { [field]: event.target.value })
     )
   }
 
   handleSave = () => {
-    const { activeQuote, updateQuoteRecord, closeModal } = this.props
-    updateQuoteRecord(activeQuote)
+    const { quoteRecord, updateQuoteRecord, closeModal, saveQuoteRecords } = this.props
+    updateQuoteRecord(quoteRecord)
+    saveQuoteRecords()
     closeModal()
   }
 
   render() {
-    const { activeQuote, isOpen, closeModal, updateQuoteRecord, setActiveQuote } = this.props;
-    const { quote, author, url, category } = activeQuote;
+    const { quoteRecord, isOpen, closeModal } = this.props;
+    const { quote, author, url, category } = quoteRecord;
     return (
       <Modal
         className="modal"
@@ -347,14 +397,15 @@ class _EditQuoteModal extends Component {
 }
 const EditQuoteModal = connect(
   state => ({
-    activeQuote: state.activeQuote,
+    quoteRecord: state.activeQuote,
     isOpen: state.editModal.isOpen,
   }),
-  (dispatch, own) => ({
-    closeModal: () => dispatch(closeEditModal()),
-    updateQuoteRecord: qr => dispatch(updateQuoteRecord(qr)),
-    setActiveQuote: qr => dispatch(setActiveQuote(qr)),
-  }),
+  {
+    saveQuoteRecords,
+    closeModal: closeEditModal,
+    updateQuoteRecord: quoteRecord => updateQuoteRecord(quoteRecord),
+    setActiveQuote: quoteRecord => setActiveQuote(quoteRecord),
+  },
 )(_EditQuoteModal)
 
 
@@ -390,10 +441,10 @@ const AppRoot = connect(
     settings: state.settings,
     quoteRecords: state.quoteRecords,
   }),
-  (dispatch, own) => ({
-    updateSettings: sgs => dispatch(updateSettings(sgs)),
-    updateQuoteRecords: qrs => dispatch(updateQuoteRecords(qrs)),
-  }),
+  {
+    updateSettings: settings => updateSettings(settings),
+    updateQuoteRecords: quoteRecordList => updateQuoteRecords(quoteRecordList),
+  },
 )(_AppRoot)
 
 
