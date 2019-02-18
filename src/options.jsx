@@ -105,8 +105,8 @@ class _QuoteListItem extends PureComponent {
 const QuoteListItem = connect(
   null,
   (dispatch, own) => ({
-    openEditModal: () => dispatch(openEditModal),
     setActiveQuote: () => dispatch(setActiveQuote(own.quoteRecord)),
+    openEditModal: () => dispatch(openEditModal()),
   }),
 )(_QuoteListItem)
 
@@ -126,9 +126,7 @@ const _AddQuoteButton = ({ openAddModal }) => (
 )
 const AddQuoteButton = connect(
   null,
-  (dispatch, own) => ({
-    openAddModal: () => dispatch(openAddModal),
-  }),
+  { openAddModal },
 )(_AddQuoteButton)
 
 
@@ -272,9 +270,7 @@ const AddQuoteModal = connect(
   state => ({
     isOpen: state.addModal.isOpen,
   }),
-  dispatch => ({
-    closeAddModal: () => dispatch(closeAddModal),
-  }),
+  { closeAddModal },
 )(_AddQuoteModal)
 
 
@@ -301,8 +297,8 @@ const _EditQuoteModal = ({ quoteRecord, isOpen, closeEditModal }) => {
         url={url}
         category={category}
       >
-        <button type="button" class="btn btn-save">Save</button>
-        <CancelButton onCancel={closeAddModal} />
+        <button type="button" className="btn btn-save">Save</button>
+        <CancelButton onCancel={closeEditModal} />
       </QuoteForm>
     </Modal>
   )
@@ -312,9 +308,7 @@ const EditQuoteModal = connect(
     quoteRecord: state.activeQuote,
     isOpen: state.editModal.isOpen,
   }),
-  dispatch => ({
-    closeEditModal: () => dispatch(closeEditModal),
-  }),
+  { closeEditModal },
 )(_EditQuoteModal)
 
 
