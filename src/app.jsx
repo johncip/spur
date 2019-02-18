@@ -63,6 +63,7 @@ const Category = ({ category }) => (
  */
 const OptionsButton = () => (
   <button
+    type="button"
     className="optionsButton"
     onClick={() => browser.runtime.openOptionsPage()}
   >
@@ -150,7 +151,7 @@ class AppRoot extends Component {
   }
 
   render() {
-    if (!this.state.quote) return null;
+    if (!this.state.quote) return null
 
     return [
       <OptionsButton key="opts-btn" />,
@@ -160,7 +161,7 @@ class AppRoot extends Component {
         author={this.state.author}
         url={this.state.url}
         category={this.state.category}
-      />
+      />,
     ]
   }
 }

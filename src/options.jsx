@@ -167,16 +167,18 @@ const QuotesSection = ({ quoteRecords }) => {
 }
 
 const ChromeStoreLink = () => (
-  <a className="link" href="">
+  <a className="link" href="https://chrome.google.com/webstore/category/extensions">
     <FontAwesomeIcon icon={faChrome} />
-    Spur in the <b>Chrome Web Store</b>
+    Spur in the
+    <b> Chrome Web Store</b>
   </a>
 )
 
 const FirefoxStoreLink = () => (
-  <a className="link" href="">
+  <a className="link" href="https://addons.mozilla.org/en-US/firefox/">
     <FontAwesomeIcon icon={faFirefox} />
-    Spur at <b>Firefox Add-ons</b>
+    Spur at
+    <b> Firefox Add-ons</b>
   </a>
 )
 
@@ -242,30 +244,28 @@ const QuoteForm = ({ quote, author, url, category, children, handleChange }) => 
       autoFocus
       className="quoteForm--field quoteForm--field-textarea"
       value={quote}
-      onChange={(event) => handleChange('quote', event) }
+      onChange={event => handleChange('quote', event)}
     />
 
     <label className="quoteForm--label">Author</label>
     <input
       className="quoteForm--field"
       value={author}
-      onChange={(event) => handleChange('author', event) }
+      onChange={event => handleChange('author', event)}
     />
 
     <label className="quoteForm--label">URL</label>
     <input
       className="quoteForm--field"
       value={url}
-      onChange={handleChange}
-      onChange={(event) => handleChange('url', event) }
+      onChange={event => handleChange('url', event)}
     />
 
     <label className="quoteForm--label">Category</label>
     <input
       className="quoteForm--field"
       value={category}
-      onChange={handleChange}
-      onChange={(event) => handleChange('category', event) }
+      onChange={event => handleChange('category', event)}
     />
 
     <div className="btnContainer">
@@ -283,7 +283,7 @@ const QuoteForm = ({ quote, author, url, category, children, handleChange }) => 
 class _AddQuoteModal extends Component {
   handleChange = (field, event) => {
     this.props.setActiveQuote(
-      Object.assign({}, this.props.quoteRecord, { [field]: event.target.value })
+      Object.assign({}, this.props.quoteRecord, { [field]: event.target.value }),
     )
   }
 
@@ -295,8 +295,8 @@ class _AddQuoteModal extends Component {
   }
 
   render() {
-    const { quoteRecord, isOpen, closeModal } = this.props;
-    const { quote, author, url, category } = quoteRecord;
+    const { quoteRecord, isOpen, closeModal } = this.props
+    const { quote, author, url, category } = quoteRecord
 
     return (
       <Modal
@@ -350,7 +350,7 @@ const AddQuoteModal = connect(
 class _EditQuoteModal extends Component {
   handleChange = (field, event) => {
     this.props.setActiveQuote(
-      Object.assign({}, this.props.quoteRecord, { [field]: event.target.value })
+      Object.assign({}, this.props.quoteRecord, { [field]: event.target.value }),
     )
   }
 
@@ -362,8 +362,8 @@ class _EditQuoteModal extends Component {
   }
 
   render() {
-    const { quoteRecord, isOpen, closeModal } = this.props;
-    const { quote, author, url, category } = quoteRecord;
+    const { quoteRecord, isOpen, closeModal } = this.props
+    const { quote, author, url, category } = quoteRecord
     return (
       <Modal
         className="modal"
@@ -420,7 +420,7 @@ class _AppRoot extends Component {
   }
 
   render() {
-    const { settings, quoteRecords } = this.props;
+    const { settings, quoteRecords } = this.props
     if (!settings.size || !quoteRecords.size) {
       return null
     }
@@ -432,7 +432,7 @@ class _AppRoot extends Component {
         quoteRecords={quoteRecords}
       />,
       <EditQuoteModal key="edit-modal" />,
-      <AddQuoteModal key="add-modal" />
+      <AddQuoteModal key="add-modal" />,
     ]
   }
 }
