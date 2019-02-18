@@ -23,7 +23,7 @@ import {
   updateSettings,
   updateQuoteRecords,
 } from './actions'
-import { loadSettings, loadQuotes, sortedQuoteRecords } from './util'
+import { loadSettings, loadQuotes } from './util'
 
 import 'Styles/options/style.scss'
 
@@ -135,11 +135,9 @@ const AddQuoteButton = connect(
  */
 const QuotesSection = ({ quoteRecords, openEditModal }) => {
   const values = Array.from(quoteRecords.values())
-  const sorted = sortedQuoteRecords(values)
-
   return (
     <section className="optionsSection">
-      {sorted.map(quoteRecord => (
+      {values.map(quoteRecord => (
         <QuoteListItem
           key={quoteRecord.id}
           quoteRecord={quoteRecord}
