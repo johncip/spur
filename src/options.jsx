@@ -218,19 +218,38 @@ const CancelButton = ({ onCancel }) => (
 /*
  * A form for editing a quote. Buttons should be passed in as children.
  */
-const QuoteForm = ({ quote, author, url, category, children }) => (
+const QuoteForm = ({ quote, author, url, category, children, handleChange }) => (
   <form className="quoteForm">
     <label className="quoteForm--label">Quote</label>
-    <textarea className="quoteForm--field quoteForm--field-textarea" value={quote} autoFocus />
+    <textarea
+      autoFocus
+      className="quoteForm--field quoteForm--field-textarea"
+      value={quote}
+      onChange={(event) => handleChange('quote', event) }
+    />
 
     <label className="quoteForm--label">Author</label>
-    <input className="quoteForm--field" value={author} />
+    <input
+      className="quoteForm--field"
+      value={author}
+      onChange={(event) => handleChange('author', event) }
+    />
 
     <label className="quoteForm--label">URL</label>
-    <input className="quoteForm--field" value={url} />
+    <input
+      className="quoteForm--field"
+      value={url}
+      onChange={handleChange}
+      onChange={(event) => handleChange('url', event) }
+    />
 
     <label className="quoteForm--label">Category</label>
-    <input className="quoteForm--field" value={category} />
+    <input
+      className="quoteForm--field"
+      value={category}
+      onChange={handleChange}
+      onChange={(event) => handleChange('category', event) }
+    />
 
     <div className="btnContainer">
       {children}
@@ -278,21 +297,21 @@ const AddQuoteModal = connect(
  * A modal for editing the clicked-on quote.
  */
 class _EditQuoteModal extends Component {
+  handleChange = (field, event) => {
+    this.props.setActiveQuote(
+      Object.assign({}, this.props.activeQuote, { [field]: event.target.value })
+    )
+  }
+
   handleSave = () => {
-    const qr = {
-      id: this.props.quoteRecord.id,
-      quote: 'sup',
-      author: 'braj',
-      category: 'mindset',
-      url: 'http://zombo.com',
-    }
-    this.props.updateQuoteRecord(qr)
-    this.props.closeModal()
+    const { activeQuote, updateQuoteRecord, closeModal } = this.props
+    updateQuoteRecord(activeQuote)
+    closeModal()
   }
 
   render() {
-    const { quoteRecord, isOpen, closeModal, updateQuoteRecord } = this.props;
-    const { quote, author, url, category } = quoteRecord;
+    const { activeQuote, isOpen, closeModal, updateQuoteRecord, setActiveQuote } = this.props;
+    const { quote, author, url, category } = activeQuote;
     return (
       <Modal
         className="modal"
@@ -309,6 +328,7 @@ class _EditQuoteModal extends Component {
           author={author}
           url={url}
           category={category}
+          handleChange={this.handleChange}
         >
           <button
             type="button"
@@ -325,12 +345,13 @@ class _EditQuoteModal extends Component {
 }
 const EditQuoteModal = connect(
   state => ({
-    quoteRecord: state.activeQuote,
+    activeQuote: state.activeQuote,
     isOpen: state.editModal.isOpen,
   }),
   (dispatch, own) => ({
     closeModal: () => dispatch(closeEditModal()),
     updateQuoteRecord: qr => dispatch(updateQuoteRecord(qr)),
+    setActiveQuote: qr => dispatch(setActiveQuote(qr)),
   }),
 )(_EditQuoteModal)
 
