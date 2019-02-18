@@ -189,7 +189,8 @@ const LinksSection = () => (
   <section className="optionsSection">
     <a className="link" href="https://github.com/johncip/spur">
       <FontAwesomeIcon icon={faGithub} />
-      Spur on <b>GitHub</b>
+      Spur on
+      <b> GitHub</b>
     </a>
 
     {navigator.userAgent.includes('Firefox') ? <FirefoxStoreLink /> : null}
@@ -197,10 +198,14 @@ const LinksSection = () => (
 
     <a className="link" href="mailto:spur.tab@gmail.com">
       <FontAwesomeIcon icon={faAt} />
-      Email John at <b>spur.tab@gmail.com</b>
+      Email John at
+      <b> spur.tab@gmail.com</b>
     </a>
 
-    <p>Thanks for using Spur! If you like it, please consider leaving a rating! 🏄</p>
+    <p>
+      Thanks for using Spur! If you like it, please consider leaving a rating!
+      <span role="img" aria-label="surf emoji"> 🏄</span>
+    </p>
   </section>
 )
 
