@@ -85,6 +85,7 @@ class _EditQuoteButton extends PureComponent {
   }
 
   render() {
+    const { quoteRecord: { quote, author } } = this.props
     return (
       <button
         className={this.classes()}
@@ -96,7 +97,8 @@ class _EditQuoteButton extends PureComponent {
         onBlur={this.handleMouseLeave}
       >
         <div className="truncatedText">
-          {this.props.quoteRecord.quote}
+          <span>{quote}</span>
+          <span className="inlineAuthor">{` — ${author}`}</span>
         </div>
         {this.state.hover ? <FontAwesomeIcon icon={faPencilAlt} /> : null}
       </button>
