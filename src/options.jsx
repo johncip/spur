@@ -239,30 +239,34 @@ const CancelButton = ({ onCancel }) => (
  */
 const QuoteForm = ({ quote, author, url, category, children, handleChange }) => (
   <form className="quoteForm">
-    <label className="quoteForm--label">Quote</label>
+    <label className="quoteForm--label" htmlFor="id-quote">Quote</label>
     <textarea
+      id="id-quote"
       autoFocus
       className="quoteForm--field quoteForm--field-textarea"
       value={quote}
       onChange={event => handleChange('quote', event)}
     />
 
-    <label className="quoteForm--label">Author</label>
+    <label className="quoteForm--label" htmlFor="id-author">Author</label>
     <input
+      id="id-author"
       className="quoteForm--field"
       value={author}
       onChange={event => handleChange('author', event)}
     />
 
-    <label className="quoteForm--label">URL</label>
+    <label className="quoteForm--label" htmlFor="id-url">URL</label>
     <input
+      id="id-url"
       className="quoteForm--field"
       value={url}
       onChange={event => handleChange('url', event)}
     />
 
-    <label className="quoteForm--label">Category</label>
+    <label className="quoteForm--label" htmlFor="id-category">Category</label>
     <input
+      id="id-category"
       className="quoteForm--field"
       value={category}
       onChange={event => handleChange('category', event)}

@@ -23,7 +23,7 @@ module.exports = {
     'react/prop-types': 'off',
     'react/no-unused-state': 'off',
 
-    'jsx-a11y/label-has-associated-control': ['error', { assert: 'both' } ],
+    'jsx-a11y/label-has-associated-control': ['error', { assert: 'either' } ],
     'jsx-a11y/label-has-for': 'off',
   }
 };
