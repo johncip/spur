@@ -71,9 +71,9 @@ class _EditQuoteButton extends PureComponent {
   }
 
   handleClick = () => {
-    const { setActiveQuote, quoteRecord, openEditModal } = this.props
+    const { setActiveQuote, quoteRecord, openModal } = this.props
     setActiveQuote(quoteRecord)
-    openEditModal()
+    openModal()
   }
 
   classes() {
@@ -109,7 +109,7 @@ const EditQuoteButton = connect(
   null,
   (dispatch, own) => ({
     setActiveQuote: () => dispatch(setActiveQuote(own.quoteRecord)),
-    openEditModal: () => dispatch(openEditModal()),
+    openModal: () => dispatch(openEditModal()),
   }),
 )(_EditQuoteButton)
 
@@ -136,7 +136,7 @@ const AddQuoteButton = connect(
 /*
  * The quotes section of the options page. An editable list of stored quotes.
  */
-const QuotesSection = ({ quoteRecords, openEditModal }) => {
+const QuotesSection = ({ quoteRecords }) => {
   const values = Array.from(quoteRecords.values())
   return (
     <section className="optionsSection">
