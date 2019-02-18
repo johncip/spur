@@ -9,9 +9,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus'
 import { faAt } from '@fortawesome/free-solid-svg-icons/faAt'
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons/faPencilAlt'
-import { faGithub } from '@fortawesome/free-brands-svg-icons'
-import { faFirefox } from '@fortawesome/free-brands-svg-icons'
-import { faChrome} from '@fortawesome/free-brands-svg-icons'
+import { faGithub } from '@fortawesome/free-brands-svg-icons/faGithub'
+import { faFirefox } from '@fortawesome/free-brands-svg-icons/faFirefox'
+import { faChrome } from '@fortawesome/free-brands-svg-icons/faChrome'
 
 import reducers from './reducers'
 import {
