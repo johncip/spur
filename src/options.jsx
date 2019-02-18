@@ -244,12 +244,12 @@ const QuoteForm = ({ quote, author, url, category, children }) => (
 /*
  * A modal for editing the clicked-on quote.
  */
-const _AddQuoteModal = ({ isOpen, closeAddModal }) => (
+const _AddQuoteModal = ({ isOpen, closeModal }) => (
   <Modal
     className="modal"
     overlayClassName="modalOverlay"
     isOpen={isOpen}
-    onRequestClose={closeAddModal}
+    onRequestClose={closeModal}
     contentLabel="Add Quote"
   >
     <h1 className="modal--heading">Add Quote</h1>
@@ -262,7 +262,7 @@ const _AddQuoteModal = ({ isOpen, closeAddModal }) => (
       category=""
     >
       <button type="button" className="btn btn-save">Add</button>
-      <CancelButton onCancel={closeAddModal} />
+      <CancelButton onCancel={closeModal} />
     </QuoteForm>
   </Modal>
 )
@@ -270,7 +270,7 @@ const AddQuoteModal = connect(
   state => ({
     isOpen: state.addModal.isOpen,
   }),
-  { closeAddModal },
+  { closeModal: closeAddModal },
 )(_AddQuoteModal)
 
 
@@ -278,14 +278,14 @@ const AddQuoteModal = connect(
 /*
  * A modal for editing the clicked-on quote.
  */
-const _EditQuoteModal = ({ quoteRecord, isOpen, closeEditModal }) => {
+const _EditQuoteModal = ({ quoteRecord, isOpen, closeModal }) => {
   const { quote, author, url, category } = quoteRecord;
   return (
     <Modal
       className="modal"
       overlayClassName="modalOverlay"
       isOpen={isOpen}
-      onRequestClose={closeEditModal}
+      onRequestClose={closeModal}
       contentLabel="Edit Quote"
     >
       <h1 className="modal--heading">Edit Quote</h1>
@@ -298,7 +298,7 @@ const _EditQuoteModal = ({ quoteRecord, isOpen, closeEditModal }) => {
         category={category}
       >
         <button type="button" className="btn btn-save">Save</button>
-        <CancelButton onCancel={closeEditModal} />
+        <CancelButton onCancel={closeModal} />
       </QuoteForm>
     </Modal>
   )
@@ -308,7 +308,7 @@ const EditQuoteModal = connect(
     quoteRecord: state.activeQuote,
     isOpen: state.editModal.isOpen,
   }),
-  { closeEditModal },
+  { closeModal: closeEditModal },
 )(_EditQuoteModal)
 
 
