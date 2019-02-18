@@ -316,11 +316,6 @@ const EditQuoteModal = connect(
  * Loads the options page and holds state.
  */
 class _AppRoot extends Component {
-  constructor() {
-    super()
-    this.state = { settings: null, quoteRecords: null }
-  }
-
   componentDidMount() {
     const { updateSettings, updateQuoteRecords } = this.props
     loadSettings().then(settings => updateSettings(settings))
@@ -350,8 +345,8 @@ const AppRoot = connect(
     quoteRecords: state.quoteRecords,
   }),
   (dispatch, own) => ({
-    updateSettings: settings => dispatch(updateSettings(settings)),
-    updateQuoteRecords: quoteRecords => dispatch(updateQuoteRecords(quoteRecords)),
+    updateSettings: sgs => dispatch(updateSettings(sgs)),
+    updateQuoteRecords: qrs => dispatch(updateQuoteRecords(qrs)),
   }),
 )(_AppRoot)
 
