@@ -191,18 +191,21 @@ const LinksSection = () => (
 /*
  * The entire options page.
  */
-const OptionsPage = ({ settings, quoteRecords }) => (
-  <div className="optionsContainer">
-    <h1 className="optionsHeading">Settings</h1>
-    <SettingsSection settings={settings} />
+const OptionsPage = ({ settings, quoteRecords, isBlurred }) => {
+  const classes = classNames('optionsContainer', { 'optionsContainer-is-blurred': isBlurred })
+  return (
+    <div className={classes}>
+      <h1 className="optionsHeading">Settings</h1>
+      <SettingsSection settings={settings} />
 
-    <h1 className="optionsHeading">Quotes</h1>
-    <QuotesSection quoteRecords={quoteRecords} />
+      <h1 className="optionsHeading">Quotes</h1>
+      <QuotesSection quoteRecords={quoteRecords} />
 
-    <h1 className="optionsHeading">Links</h1>
-    <LinksSection />
-  </div>
-)
+      <h1 className="optionsHeading">Links</h1>
+      <LinksSection />
+    </div>
+  )
+}
 
 /*
  * A cancel button for the modals.
@@ -334,7 +337,7 @@ class _AppRoot extends Component {
   }
 
   render() {
-    const { settings, quoteRecords } = this.props;
+    const { settings, quoteRecords, modalIsOpen } = this.props;
     if (!settings.size || !quoteRecords.size) {
       return null
     }
@@ -344,6 +347,7 @@ class _AppRoot extends Component {
         key="opts"
         settings={settings}
         quoteRecords={quoteRecords}
+        isBlurred={modalIsOpen}
       />,
       <EditQuoteModal key="edit-modal" />,
       <AddQuoteModal key="add-modal" />
@@ -354,6 +358,7 @@ const AppRoot = connect(
   state => ({
     settings: state.settings,
     quoteRecords: state.quoteRecords,
+    modalIsOpen: state.addModal.isOpen || state.editModal.isOpen,
   }),
   (dispatch, own) => ({
     updateSettings: settings => dispatch(updateSettings(settings)),

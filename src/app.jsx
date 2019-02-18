@@ -170,7 +170,7 @@ async function main() {
   const rootEl = document.getElementById('root')
   rootEl.classList.add(settings.theme)
   ReactDOM.render(<AppRoot />, rootEl)
-  // browser.runtime.openOptionsPage()
+  browser.runtime.openOptionsPage()
 }
 
 main()

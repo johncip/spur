@@ -15,18 +15,21 @@ p {
   padding: 20px;
 }
 
+.optionsContainer {
+  max-width: 720px;
+  margin: auto;
+}
+
+.optionsContainer-is-blurred {
+  filter: blur(8px);
+}
+
 .optionsHeading {
   font: 300 32px $basic-font-stack;
 
   .optionsContainer & {
     margin-bottom: 12px;
   }
-}
-
-.optionsContainer {
-  max-width: 720px;
-  margin: auto;
-  // TODO: blur on modal open
 }
 
 .optionsSection {
