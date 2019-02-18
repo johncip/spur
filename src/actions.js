@@ -14,11 +14,16 @@ export const closeEditModal = () => (
 )
 
 
-export const updateSettings = settings => (
-  { type: 'UPDATE_SETTINGS', payload: settings }
-)
 export const updateQuoteRecords = quoteRecords => (
   { type: 'UPDATE_QUOTE_RECORDS', payload: quoteRecords }
+)
+export const updateQuoteRecord = quote => (
+  { type: 'UPDATE_QUOTE_RECORD', payload: quote }
+)
+
+
+export const updateSettings = settings => (
+  { type: 'UPDATE_SETTINGS', payload: settings }
 )
 
 

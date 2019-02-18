@@ -22,6 +22,7 @@ import {
   closeAddModal,
   updateSettings,
   updateQuoteRecords,
+  updateQuoteRecord,
 } from './actions'
 import { loadSettings, loadQuotes } from './util'
 
@@ -276,37 +277,61 @@ const AddQuoteModal = connect(
 /*
  * A modal for editing the clicked-on quote.
  */
-const _EditQuoteModal = ({ quoteRecord, isOpen, closeModal }) => {
-  const { quote, author, url, category } = quoteRecord;
-  return (
-    <Modal
-      className="modal"
-      overlayClassName="modalOverlay"
-      isOpen={isOpen}
-      onRequestClose={closeModal}
-      contentLabel="Edit Quote"
-    >
-      <h1 className="modal--heading">Edit Quote</h1>
-      <hr className="modal--rule" />
+class _EditQuoteModal extends Component {
+  handleSave = () => {
+    const qr = {
+      id: this.props.quoteRecord.id,
+      quote: 'sup',
+      author: 'braj',
+      category: 'mindset',
+      url: 'http://zombo.com',
+    }
+    this.props.updateQuoteRecord(qr)
+    this.props.closeModal()
+  }
 
-      <QuoteForm
-        quote={quote}
-        author={author}
-        url={url}
-        category={category}
+  render() {
+    const { quoteRecord, isOpen, closeModal, updateQuoteRecord } = this.props;
+    const { quote, author, url, category } = quoteRecord;
+    return (
+      <Modal
+        className="modal"
+        overlayClassName="modalOverlay"
+        isOpen={isOpen}
+        onRequestClose={closeModal}
+        contentLabel="Edit Quote"
       >
-        <button type="button" className="btn btn-save">Save</button>
-        <CancelButton onCancel={closeModal} />
-      </QuoteForm>
-    </Modal>
-  )
+        <h1 className="modal--heading">Edit Quote</h1>
+        <hr className="modal--rule" />
+
+        <QuoteForm
+          quote={quote}
+          author={author}
+          url={url}
+          category={category}
+        >
+          <button
+            type="button"
+            className="btn btn-save"
+            onClick={this.handleSave}
+          >
+            Save
+          </button>
+          <CancelButton onCancel={closeModal} />
+        </QuoteForm>
+      </Modal>
+    )
+  }
 }
 const EditQuoteModal = connect(
   state => ({
     quoteRecord: state.activeQuote,
     isOpen: state.editModal.isOpen,
   }),
-  { closeModal: closeEditModal },
+  (dispatch, own) => ({
+    closeModal: () => dispatch(closeEditModal()),
+    updateQuoteRecord: qr => dispatch(updateQuoteRecord(qr)),
+  }),
 )(_EditQuoteModal)
 
 
