@@ -57,7 +57,7 @@ p {
   font-size: 13px;
 }
 
-.quoteListItem {
+.editQuoteButton {
   @extend %basic-type;
   @include background-tints($gray-6);
   @include focus-ring('border');
@@ -77,7 +77,7 @@ p {
   }
 }
 
-.quoteListItem-is-hovered {
+.editQuoteButton-is-hovered {
   display: flex;
   align-items: center;
 
@@ -92,7 +92,7 @@ p {
   }
 }
 
-.quoteListItem-add {
+.editQuoteButton-add {
   @extend %icon-margin;
   @include foreground-tints($gray-4);
 

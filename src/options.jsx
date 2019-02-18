@@ -56,7 +56,7 @@ class SettingsSection extends PureComponent {
 /*
  * A clickable displayed quote. Includes a pencil icon on hover.
  */
-class _QuoteListItem extends PureComponent {
+class _EditQuoteButton extends PureComponent {
   constructor(props) {
     super(props)
     this.state = { hover: false }
@@ -78,8 +78,8 @@ class _QuoteListItem extends PureComponent {
 
   classes() {
     return classNames(
-      'quoteListItem', {
-        'quoteListItem-is-hovered': this.state.hover,
+      'editQuoteButton', {
+        'editQuoteButton-is-hovered': this.state.hover,
       },
     )
   }
@@ -103,13 +103,13 @@ class _QuoteListItem extends PureComponent {
     )
   }
 }
-const QuoteListItem = connect(
+const EditQuoteButton = connect(
   null,
   (dispatch, own) => ({
     setActiveQuote: () => dispatch(setActiveQuote(own.quoteRecord)),
     openEditModal: () => dispatch(openEditModal()),
   }),
-)(_QuoteListItem)
+)(_EditQuoteButton)
 
 
 /*
@@ -117,7 +117,7 @@ const QuoteListItem = connect(
  */
 const _AddQuoteButton = ({ openAddModal }) => (
   <button
-    className="quoteListItem quoteListItem-add"
+    className="editQuoteButton editQuoteButton-add"
     type="button"
     onClick={openAddModal}
   >
@@ -139,7 +139,7 @@ const QuotesSection = ({ quoteRecords, openEditModal }) => {
   return (
     <section className="optionsSection">
       {values.map(quoteRecord => (
-        <QuoteListItem
+        <EditQuoteButton
           key={quoteRecord.id}
           quoteRecord={quoteRecord}
         />
