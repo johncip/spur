@@ -36,6 +36,6 @@ export const updateSettings = settings => (
 export const setActiveQuote = quote => (
   { type: 'SET_ACTIVE_QUOTE', payload: quote }
 )
-export const setNewActiveQuote = quote => (
+export const setNewActiveQuote = () => (
   { type: 'SET_NEW_ACTIVE_QUOTE' }
 )
