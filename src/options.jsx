@@ -372,13 +372,13 @@ class _EditQuoteModal extends Component {
 
   handleSave = () => {
     this.props.updateQuoteRecord(this.props.quoteRecord)
-    this.props.saveQuoteRecords()
+    // this.props.saveQuoteRecords()
     this.props.closeModal()
   }
 
   handleDelete = () => {
     this.props.deleteQuoteRecord(this.props.quoteRecord.id)
-    this.props.saveQuoteRecords()
+    // this.props.saveQuoteRecords()
     this.props.closeModal()
   }
 
