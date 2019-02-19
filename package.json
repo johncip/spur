@@ -50,7 +50,7 @@
     "watch": "webpack -w",
     "run": "web-ext run",
     "fflint": "web-ext lint || true",
-    "lint": "eslint . --ext .js,.jsx || true"
+    "lint": "eslint_d . --ext .js,.jsx || true"
   },
   "author": "",
   "license": "ISC",
