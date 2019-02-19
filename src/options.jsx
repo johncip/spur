@@ -222,11 +222,11 @@ const OptionsPage = ({ settings, quoteRecords }) => (
 /*
  * A cancel button for the modals.
  */
-const CancelButton = ({ onCancel }) => (
+const CancelButton = ({ onClick }) => (
   <button
     type="button"
     className="btn btn-cancel"
-    onClick={onCancel}
+    onClick={onClick}
   >
     Cancel
   </button>
@@ -324,7 +324,7 @@ class _AddQuoteModal extends Component {
           >
             Save
           </button>
-          <CancelButton onCancel={closeModal} />
+          <CancelButton onClick={closeModal} />
         </QuoteForm>
       </Modal>
     )
@@ -389,7 +389,7 @@ class _EditQuoteModal extends Component {
           >
             Save
           </button>
-          <CancelButton onCancel={closeModal} />
+          <CancelButton onClick={closeModal} />
         </QuoteForm>
       </Modal>
     )
