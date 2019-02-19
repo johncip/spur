@@ -34,25 +34,21 @@ import 'Styles/options/style.scss'
 /*
  * The settings section of the options page.
  */
-class SettingsSection extends PureComponent {
-  render() {
-    return (
-      <section className="optionsSection">
-        <div className="setting">
-          <label htmlFor="id-theme">
-            <span className="setting--labelText">Theme</span>
-            <select className="setting--select" id="id-theme">
-              <option value="indexCard">Index Card</option>
-              <option value="indexCardDark">Index Card Dark</option>
-            </select>
-          </label>
-        </div>
+const SettingsSection = () => (
+  <section className="optionsSection">
+    <div className="setting">
+      <label htmlFor="id-theme">
+        <span className="setting--labelText">Theme</span>
+        <select className="setting--select" id="id-theme">
+          <option value="indexCard">Index Card</option>
+          <option value="indexCardDark">Index Card Dark</option>
+        </select>
+      </label>
+    </div>
 
-        <button className="btn btn-save" type="button">Save</button>
-      </section>
-    )
-  }
-}
+    <button className="btn btn-save" type="button">Save</button>
+  </section>
+)
 
 
 /*
