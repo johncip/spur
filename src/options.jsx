@@ -73,9 +73,8 @@ class _EditQuoteButton extends PureComponent {
   }
 
   handleClick = () => {
-    const { setActiveQuote, quoteRecord, openModal } = this.props
-    setActiveQuote(quoteRecord)
-    openModal()
+    this.props.setActiveQuote(this.props.quoteRecord)
+    this.props.openModal()
   }
 
   classes() {
@@ -121,9 +120,8 @@ const EditQuoteButton = connect(
  */
 class _AddQuoteButton extends Component {
   handleClick = () => {
-    const { setNewActiveQuote, openModal } = this.props
-    setNewActiveQuote()
-    openModal()
+    this.props.setNewActiveQuote()
+    this.props.openModal()
   }
 
   render() {
@@ -297,10 +295,9 @@ class _AddQuoteModal extends Component {
   }
 
   handleSave = () => {
-    const { quoteRecord, updateQuoteRecord, closeModal, saveQuoteRecords } = this.props
-    updateQuoteRecord(quoteRecord)
-    saveQuoteRecords()
-    closeModal()
+    this.props.updateQuoteRecord(this.props.quoteRecord)
+    this.props.saveQuoteRecords()
+    this.props.closeModal()
   }
 
   render() {
@@ -364,10 +361,9 @@ class _EditQuoteModal extends Component {
   }
 
   handleSave = () => {
-    const { quoteRecord, updateQuoteRecord, closeModal, saveQuoteRecords } = this.props
-    updateQuoteRecord(quoteRecord)
-    saveQuoteRecords()
-    closeModal()
+    this.props.updateQuoteRecord(this.props.quoteRecord)
+    this.props.saveQuoteRecords()
+    this.props.closeModal()
   }
 
   render() {
@@ -423,9 +419,8 @@ const EditQuoteModal = connect(
  */
 class _AppRoot extends Component {
   componentDidMount() {
-    const { updateSettings, updateQuoteRecords } = this.props
-    loadSettings().then(settings => updateSettings(settings))
-    loadQuotes().then(quoteRecords => updateQuoteRecords(quoteRecords))
+    loadSettings().then(settings => this.props.updateSettings(settings))
+    loadQuotes().then(quoteRecords => this.props.updateQuoteRecords(quoteRecords))
   }
 
   render() {
