@@ -241,7 +241,6 @@ const QuoteForm = ({ quote, author, url, category, children, handleChange }) => 
     <label className="quoteForm--label" htmlFor="id-quote">Quote</label>
     <textarea
       id="id-quote"
-      autoFocus
       className="quoteForm--field quoteForm--field-textarea"
       value={quote}
       onChange={event => handleChange('quote', event)}
