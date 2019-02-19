@@ -26,7 +26,6 @@ p {
 .optionsContainer {
   max-width: 720px;
   margin: auto;
-  // TODO: blur on modal open
 }
 
 .optionsSection {
@@ -159,10 +158,16 @@ p {
 .modalOverlay {
   position: fixed;
   top: 0;
-  bottom: 0;
   left: 0;
+  bottom: 0;
   right: 0;
+  overflow-y: auto;
+  padding: 20px;
   background-color: $trans-white;
+}
+
+.ReactModal__Body--open {
+  overflow-y: hidden;
 }
 
 .quoteForm {
