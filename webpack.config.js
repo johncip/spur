@@ -17,6 +17,7 @@ module.exports = {
 
   entry: {
     app: './src/app.jsx',
+    elmApp: './src/Main.elm',
     options: './src/options.jsx',
   },
 
@@ -28,6 +29,12 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.elm$/,
+        exclude: [/elm-stuff/, /node_modules/],
+        use: {
+          loader: 'elm-webpack-loader',
+        },
+      }, {
         test: /\.jsx$/,
         exclude: /node_modules/,
         use: ['babel-loader'],
@@ -43,7 +50,7 @@ module.exports = {
       }, {
         test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         loader: 'file-loader',
-      }
+      },
     ],
   },
 
