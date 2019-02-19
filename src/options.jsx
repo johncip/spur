@@ -25,6 +25,7 @@ import {
   updateQuoteRecords,
   updateQuoteRecord,
   saveQuoteRecords,
+  deleteQuoteRecord,
 } from './actions'
 import { loadSettings, loadQuotes } from './util'
 
@@ -234,6 +235,20 @@ const CancelButton = ({ onClick }) => (
 
 
 /*
+ * A button for the edit modals that deletes the active quote.
+ */
+const DeleteButton = ({ onClick }) => (
+  <button
+    type="button"
+    className="btn btn-delete"
+    onClick={onClick}
+  >
+    Delete
+  </button>
+)
+
+
+/*
  * A form for editing a quote. Buttons should be passed in as children.
  */
 const QuoteForm = ({ quote, author, url, category, children, handleChange }) => (
@@ -361,6 +376,12 @@ class _EditQuoteModal extends Component {
     this.props.closeModal()
   }
 
+  handleDelete = () => {
+    this.props.deleteQuoteRecord(this.props.quoteRecord.id)
+    this.props.saveQuoteRecords()
+    this.props.closeModal()
+  }
+
   render() {
     const { quoteRecord, isOpen, closeModal } = this.props
     const { quote, author, url, category } = quoteRecord
@@ -389,6 +410,7 @@ class _EditQuoteModal extends Component {
           >
             Save
           </button>
+          <DeleteButton onClick={this.handleDelete} />
           <CancelButton onClick={closeModal} />
         </QuoteForm>
       </Modal>
@@ -402,6 +424,7 @@ const EditQuoteModal = connect(
   }),
   {
     saveQuoteRecords,
+    deleteQuoteRecord,
     closeModal: closeEditModal,
     updateQuoteRecord: quoteRecord => updateQuoteRecord(quoteRecord),
     setActiveQuote: quoteRecord => setActiveQuote(quoteRecord),

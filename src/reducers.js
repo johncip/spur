@@ -61,6 +61,11 @@ const quoteRecords = (state = new Map(), action) => {
       copy.set(quoteRecord.id, quoteRecord)
       return copy
     }
+    case 'DELETE_QUOTE_RECORD': {
+      const copy = new Map(state)
+      copy.delete(action.payload)
+      return copy
+    }
     // TODO thunk it up
     case 'SAVE_QUOTE_RECORDS': {
       browser.storage.local.set({ storedQuotes: Array.from(state.values()) })

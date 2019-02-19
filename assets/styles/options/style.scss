@@ -128,6 +128,13 @@ p {
   color: $gray-2;
 }
 
+.btn-delete {
+  @include background-tints($red, 'lighten')
+  height: 32px;
+  width: 80px;
+  color: $white;
+}
+
 .btnContainer {
   .btn + .btn {
     margin-left: 8px;

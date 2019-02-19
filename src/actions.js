@@ -23,6 +23,9 @@ export const updateQuoteRecords = quoteRecords => (
 export const updateQuoteRecord = quote => (
   { type: 'UPDATE_QUOTE_RECORD', payload: quote }
 )
+export const deleteQuoteRecord = id => (
+  { type: 'DELETE_QUOTE_RECORD', payload: id }
+)
 
 
 export const updateSettings = settings => (
