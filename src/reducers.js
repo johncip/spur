@@ -56,10 +56,10 @@ const quoteRecords = (state = new Map(), action) => {
       return normalizedQuoteRecords(action.payload)
     }
     case 'UPDATE_QUOTE_RECORD': {
-      const result = new Map(state)
+      const copy = new Map(state)
       const quoteRecord = action.payload
-      result.set(quoteRecord.id, quoteRecord)
-      return result
+      copy.set(quoteRecord.id, quoteRecord)
+      return copy
     }
     // TODO thunk it up
     case 'SAVE_QUOTE_RECORDS': {
