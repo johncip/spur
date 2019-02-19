@@ -29,11 +29,11 @@ function trimStart(str) {
  * Returns quote records sorted by quote. Ignores leading ellipsis.
  */
 // TODO: currently unused
-export const sortedQuoteRecords = (records) => {
-  return records.sort((a, b) => (
+export const sortedQuoteRecords = records => (
+  records.sort((a, b) => (
     trimStart(a.quote).localeCompare(trimStart(b.quote))
   ))
-}
+)
 
 /**
  * Reads a single key from browser storage and returns the value without the wrapper object.

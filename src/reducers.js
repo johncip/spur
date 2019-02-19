@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux'
 
-const normalizedQuoteRecords = (records) => {
-  return records.reduce((map, record, idx) => {
+const normalizedQuoteRecords = records => (
+  records.reduce((map, record, idx) => {
     map.set(idx, Object.assign({ id: idx }, record))
     return map
   }, new Map())
-}
+)
 
 const activeQuote = (state = {}, action) => {
   switch (action.type) {
