@@ -2,23 +2,21 @@ const path = require('path')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const GoogleFontsPlugin = require('@beyonk/google-fonts-webpack-plugin')
+// const GoogleFontsPlugin = require('@beyonk/google-fonts-webpack-plugin')
 
 module.exports = {
   mode: 'development',
 
   devtool: 'source-map',
 
-  resolve: {
-    alias: {
-      Styles: path.resolve(__dirname, 'assets', 'styles'),
-    },
-  },
+  // resolve: {
+  //   alias: {
+  //     Styles: path.resolve(__dirname, 'assets', 'styles'),
+  //   },
+  // },
 
   entry: {
-    app: './src/app.jsx',
-    elmApp: './src/Main.elm',
-    options: './src/options.jsx',
+    app: './src/Main.elm',
   },
 
   output: {
@@ -31,19 +29,17 @@ module.exports = {
       {
         test: /\.elm$/,
         exclude: [/elm-stuff/, /node_modules/],
-        use: {
+        use: [{
+          loader: 'elm-css-modules-loader',
+        }, {
           loader: 'elm-webpack-loader',
-        },
-      }, {
-        test: /\.jsx$/,
-        exclude: /node_modules/,
-        use: ['babel-loader'],
+        }],
       }, {
         test: /\.scss$/,
         use: ['style-loader', 'css-loader', 'sass-loader'],
-      }, {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+      // }, {
+      //   test: /\.css$/,
+      //   use: ['style-loader', 'css-loader'],
       }, {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         loader: 'url-loader?limit=10000&mimetype=application/font-woff',
@@ -65,19 +61,14 @@ module.exports = {
       chunks: ['app'],
       template: './src/template.html',
     }),
-    new HtmlWebpackPlugin({
-      filename: 'options.html',
-      chunks: ['options'],
-      template: './src/template.html',
-    }),
-    new GoogleFontsPlugin({
-      fonts: [
-        { family: 'Work Sans', variants: ['300', '400', '500'] },
-        { family: 'Staatliches', variants: ['400'], subsets: ['latin'] },
-        { family: 'PT Mono', variants: ['400'] },
-        { family: 'Overpass Mono', variants: ['300', '400'] },
-      ],
-      formats: ['woff2'],
-    }),
+    // new GoogleFontsPlugin({
+    //   fonts: [
+    //     { family: 'Work Sans', variants: ['300', '400', '500'] },
+    //     { family: 'Staatliches', variants: ['400'], subsets: ['latin'] },
+    //     { family: 'PT Mono', variants: ['400'] },
+    //     { family: 'Overpass Mono', variants: ['300', '400'] },
+    //   ],
+    //   formats: ['woff2'],
+    // }),
   ],
 }
