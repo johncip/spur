@@ -28,6 +28,7 @@
     "clean-webpack-plugin": "^1.0.1",
     "copy-webpack-plugin": "^4.6.0",
     "css-loader": "^2.1.0",
+    "elm-css-modules-loader": "^3.0.4",
     "elm-format": "^0.8.1",
     "elm-live": "^3.4.0",
     "elm-oracle": "^1.1.1",
