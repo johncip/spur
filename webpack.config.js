@@ -9,6 +9,10 @@ module.exports = {
 
   devtool: 'source-map',
 
+  devServer: {
+    contentBase: path.join(__dirname, 'dist'),
+  },
+
   // resolve: {
   //   alias: {
   //     Styles: path.resolve(__dirname, 'assets', 'styles'),
