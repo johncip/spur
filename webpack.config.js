@@ -1,6 +1,6 @@
 const path = require('path')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 // const GoogleFontsPlugin = require('@beyonk/google-fonts-webpack-plugin')
 
@@ -20,7 +20,7 @@ module.exports = {
   // },
 
   entry: {
-    app: './src/Main.elm',
+    app: './src/index.js',
   },
 
   output: {
@@ -33,21 +33,25 @@ module.exports = {
       {
         test: /\.elm$/,
         exclude: [/elm-stuff/, /node_modules/],
-        use: [{
-          loader: 'elm-css-modules-loader',
-        }, {
-          loader: 'elm-webpack-loader',
-        }],
-      }, {
+        use: [
+          { loader: 'elm-webpack-loader' },
+          // { loader: 'elm-css-modules-loader' },
+        ],
+      },
+      {
         test: /\.scss$/,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
-      // }, {
-      //   test: /\.css$/,
-      //   use: ['style-loader', 'css-loader'],
-      }, {
+        use: [
+          // 'style-loader',
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'sass-loader',
+        ],
+      },
+      {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         loader: 'url-loader?limit=10000&mimetype=application/font-woff',
-      }, {
+      },
+      {
         test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         loader: 'file-loader',
       },
@@ -64,6 +68,10 @@ module.exports = {
       filename: 'app.html',
       chunks: ['app'],
       template: './src/template.html',
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css',
+    }),
     }),
     // new GoogleFontsPlugin({
     //   fonts: [
