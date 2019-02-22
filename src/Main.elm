@@ -1,13 +1,44 @@
 module Main exposing (main)
 
-import CssModules exposing (css)
-import Html exposing (Html, a, button, div, hr, text)
-import Html.Attributes exposing (class, classList, href, id, type_)
+-- import CssModules exposing (css)
+
+import Browser
+import Html exposing (Html, a, button, div, hr, img, text)
+import Html.Attributes exposing (class, classList, href, id, src, type_)
 
 
-styles =
-    css "../assets/styles/app/style.scss"
-        { indexCard = "indexCard" }
+
+-- MODEL
+
+
+initModel =
+    Model "foo"
+
+
+type alias Model =
+    { data : String }
+
+
+
+-- UPDATE
+
+
+type Action
+    = NoOp
+
+
+update : Action -> Model -> Model
+update action model =
+    case action of
+        NoOp ->
+            model
+
+
+
+-- VIEW
+-- styles =
+--     css "../assets/styles/app/style.scss"
+--         { indexCard = "indexCard" }
 
 
 optionsButton : Html msg
@@ -49,10 +80,19 @@ quoteBox =
         ]
 
 
-main : Html msg
-main =
+view : Model -> Html Action
+view model =
     div
-        [ id "root", class "l-root", styles.class .indexCard ]
+        [ id "root", class "l-root indexCard" ]
         [ optionsButton
         , quoteBox
         ]
+
+
+main : Program () Model Action
+main =
+    Browser.sandbox
+        { init = initModel
+        , update = update
+        , view = view
+        }
