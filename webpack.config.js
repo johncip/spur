@@ -2,7 +2,7 @@ const path = require('path')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-// const GoogleFontsPlugin = require('@beyonk/google-fonts-webpack-plugin')
+const GoogleFontsPlugin = require('@beyonk/google-fonts-webpack-plugin')
 
 module.exports = {
   mode: 'development',
@@ -13,14 +13,14 @@ module.exports = {
     contentBase: path.join(__dirname, 'dist'),
   },
 
-  // resolve: {
-  //   alias: {
-  //     Styles: path.resolve(__dirname, 'assets', 'styles'),
-  //   },
-  // },
+  resolve: {
+    alias: {
+      Styles: path.resolve(__dirname, 'assets', 'styles'),
+    },
+  },
 
   entry: {
-    app: './src/index.js',
+    main: ['./src/index.js', 'Styles/app/style.scss'],
   },
 
   output: {
@@ -68,14 +68,14 @@ module.exports = {
       chunks: ['main'],
       template: './src/index.html',
     }),
-    // new GoogleFontsPlugin({
-    //   fonts: [
-    //     { family: 'Work Sans', variants: ['300', '400', '500'] },
-    //     { family: 'Staatliches', variants: ['400'], subsets: ['latin'] },
-    //     { family: 'PT Mono', variants: ['400'] },
-    //     { family: 'Overpass Mono', variants: ['300', '400'] },
-    //   ],
-    //   formats: ['woff2'],
-    // }),
+    new GoogleFontsPlugin({
+      fonts: [
+        { family: 'Work Sans', variants: ['300', '400', '500'] },
+        { family: 'Staatliches', variants: ['400'], subsets: ['latin'] },
+        { family: 'PT Mono', variants: ['400'] },
+        { family: 'Overpass Mono', variants: ['300', '400'] },
+      ],
+      formats: ['woff2'],
+    }),
   ],
 }
