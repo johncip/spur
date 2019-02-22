@@ -1,7 +1,5 @@
 module Main exposing (main)
 
--- import CssModules exposing (css)
-
 import Browser
 import Html exposing (Html, a, button, div, hr, img, text)
 import Html.Attributes exposing (class, classList, href, id, src, type_)
@@ -32,13 +30,6 @@ update action model =
     case action of
         NoOp ->
             model
-
-
-
--- VIEW
--- styles =
---     css "../assets/styles/app/style.scss"
---         { indexCard = "indexCard" }
 
 
 optionsButton : Html msg
