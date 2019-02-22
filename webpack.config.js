@@ -64,9 +64,9 @@ module.exports = {
       { from: 'assets/images/*.png', to: '[name].[ext]' },
     ]),
     new HtmlWebpackPlugin({
-      filename: 'app.html',
-      chunks: ['app'],
-      template: './src/template.html',
+      filename: 'index.html',
+      chunks: ['main'],
+      template: './src/index.html',
     }),
     // new GoogleFontsPlugin({
     //   fonts: [
