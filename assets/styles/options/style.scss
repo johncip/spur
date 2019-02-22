@@ -114,7 +114,7 @@ p {
 
 // TODO: try to avoid setting width & height
 .btn-save {
-  @include background-tints($blue-1, 'lighten')
+  @include background-tints($blue-1, 'lighten');
   height: 32px;
   width: 64px;
   color: $white;
@@ -122,14 +122,14 @@ p {
 
 // TODO: try to avoid setting width & height
 .btn-cancel {
-  @include background-tints($gray-4, 'lighten')
+  @include background-tints($gray-4, 'lighten');
   height: 32px;
   width: 80px;
   color: $gray-2;
 }
 
 .btn-delete {
-  @include background-tints($red, 'lighten')
+  @include background-tints($red, 'lighten');
   height: 32px;
   width: 80px;
   color: $white;
