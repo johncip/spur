@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Spur is a browser extension designed to spur your toward greater action. It places a random motivational quote on your new tab window.",
   "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johncip/spur.git"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.14",
     "@fortawesome/free-brands-svg-icons": "^5.7.1",
@@ -45,7 +49,7 @@
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "url-loader": "^1.1.2",
-    "web-ext": "^2.9.3",
+    "web-ext": "^3.0.0",
     "webpack": "^4.29.1",
     "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.2.0"
