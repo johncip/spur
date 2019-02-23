@@ -63,7 +63,12 @@ export async function loadSettings() {
  * Loads quotes from browser storage. If they are not found, seeds storage with the
  * included quotes and tries again.
  */
-export async function loadQuotes() {
+export async function loadQuotes(stop) {
   const quotes = await getOneKey('storedQuotes')
-  return quotes || (await seedStorage() && loadQuotes())
+
+  if (quotes || stop) {
+    return quotes
+  }
+
+  return await seedStorage() && loadQuotes(true)
 }
