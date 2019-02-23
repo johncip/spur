@@ -8,9 +8,10 @@ import { faBox } from '@fortawesome/free-solid-svg-icons/faBox'
 import { faCog } from '@fortawesome/free-solid-svg-icons/faCog'
 import { faGlobeAmericas } from '@fortawesome/free-solid-svg-icons/faGlobeAmericas'
 
-import { loadSettings, loadQuotes } from './util'
-
+import { loadSettings, loadQuotes, polyfillBrowser } from './util'
 import 'Styles/app/style.scss'
+
+polyfillBrowser()
 
 /*
  * The main text of a quote.

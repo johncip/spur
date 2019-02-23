@@ -52,7 +52,6 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(['dist']),
     new CopyWebpackPlugin([
-      { from: 'assets/*.json', to: '[name].[ext]' },
       { from: 'assets/images/*.png', to: '[name].[ext]' },
     ]),
     new HtmlWebpackPlugin({
