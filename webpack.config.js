@@ -9,6 +9,10 @@ module.exports = {
 
   devtool: 'source-map',
 
+  devServer: {
+    contentBase: path.join(__dirname, 'dist'),
+  },
+
   resolve: {
     alias: {
       Styles: path.resolve(__dirname, 'assets', 'styles'),
@@ -16,7 +20,7 @@ module.exports = {
   },
 
   entry: {
-    app: './src/app.jsx',
+    index: './src/app.jsx',
     options: './src/options.jsx',
   },
 
@@ -52,8 +56,8 @@ module.exports = {
       { from: 'assets/images/*.png', to: '[name].[ext]' },
     ]),
     new HtmlWebpackPlugin({
-      filename: 'app.html',
-      chunks: ['app'],
+      filename: 'index.html',
+      chunks: ['index'],
       template: './src/template.html',
     }),
     new HtmlWebpackPlugin({
