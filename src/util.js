@@ -27,7 +27,9 @@ export function polyfillBrowser() {
       },
     },
     runtime: {
-      openOptionsPage: () => null,
+      openOptionsPage: () => {
+        document.location.href = '/options.html'
+      }
     },
   }
 }
