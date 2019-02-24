@@ -474,24 +474,29 @@ const AppRoot = connect(
 
 class Provider extends Component {
   getChildContext() {
-    return {
-      store: this.props.store // This corresponds to the `store` passed in as a prop
-    };
+    return { store: this.props.store }
   }
+
   render() {
-    return this.props.children;
+    return this.props.children
   }
 }
 
 Provider.childContextTypes = {
-  store: PropTypes.object
+  store: PropTypes.object,
 }
 
 const rootEl = document.getElementById('root')
 const store = createStore(reducers)
 Modal.setAppElement('#root')
-ReactDOM.render((
-  <Provider store={store}>
-    <AppRoot />
-  </Provider>
-), rootEl)
+
+const render = () => {
+  ReactDOM.render((
+    <Provider store={store}>
+      <AppRoot />
+    </Provider>
+  ), rootEl)
+}
+
+render()
+store.subscribe(render)
