@@ -54,7 +54,8 @@
     "watch": "webpack -w",
     "run": "web-ext run",
     "fflint": "web-ext lint || true",
-    "lint": "eslint_d . --ext .js,.jsx || true"
+    "lint": "eslint_d . --ext .js,.jsx || true",
+    "dev": "webpack-dev-server"
   },
   "author": "",
   "license": "ISC",
