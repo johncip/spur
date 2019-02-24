@@ -1,9 +1,8 @@
-import React, { Component, PureComponent } from 'react'
+import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import Modal from 'react-modal'
 import classNames from 'classnames'
 import { createStore } from 'redux'
-import { connect } from 'react-redux'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus'
@@ -31,6 +30,8 @@ import { compose2, loadSettings, loadQuotes } from './util'
 
 import 'Styles/options/style.scss'
 
+const store = createStore(reducers)
+
 
 /*
  * The settings section of the options page.
@@ -55,7 +56,7 @@ const SettingsSection = () => (
 /*
  * A clickable displayed quote. Includes a pencil icon on hover.
  */
-class _EditQuoteButton extends PureComponent {
+class EditQuoteButton extends Component {
   constructor(props) {
     super(props)
     this.state = { hover: false }
@@ -70,8 +71,8 @@ class _EditQuoteButton extends PureComponent {
   }
 
   handleClick = () => {
-    this.props.setActiveQuote(this.props.quoteRecord)
-    this.props.openModal()
+    store.dispatch(setActiveQuote(this.props.quoteRecord))
+    store.dispatch(openEditModal())
   }
 
   classes() {
@@ -103,22 +104,15 @@ class _EditQuoteButton extends PureComponent {
     )
   }
 }
-const EditQuoteButton = connect(
-  null,
-  {
-    setActiveQuote: quoteRecord => setActiveQuote(quoteRecord),
-    openModal: openEditModal,
-  },
-)(_EditQuoteButton)
 
 
 /*
  * Button for adding a new quote.
  */
-class _AddQuoteButton extends Component {
+class AddQuoteButton extends Component {
   handleClick = () => {
-    this.props.setNewActiveQuote()
-    this.props.openModal()
+    store.dispatch(setNewActiveQuote())
+    store.dispatch(openAddModal())
   }
 
   render() {
@@ -134,13 +128,6 @@ class _AddQuoteButton extends Component {
     )
   }
 }
-const AddQuoteButton = connect(
-  null,
-  {
-    setNewActiveQuote,
-    openModal: openAddModal,
-  },
-)(_AddQuoteButton)
 
 
 /*
@@ -293,33 +280,38 @@ const QuoteForm = ({ quote, author, url, category, children, handleChange }) => 
 
 
 // TODO: delete AddQuoteModal
-// TODO: make this a presentational component?
 /*
  * A modal for editing the clicked-on quote.
  */
-class _AddQuoteModal extends Component {
+class AddQuoteModal extends Component {
   handleChange = (field, event) => {
-    this.props.setActiveQuote(
-      Object.assign({}, this.props.quoteRecord, { [field]: event.target.value }),
+    store.dispatch(
+      setActiveQuote(
+        Object.assign({}, this.props.quoteRecord, { [field]: event.target.value }),
+      ),
     )
   }
 
   handleSave = () => {
-    this.props.updateQuoteRecord(this.props.quoteRecord)
-    this.props.saveQuoteRecords()
-    this.props.closeModal()
+    store.dispatch(updateQuoteRecord(store.getState().activeQuote))
+    // store.dispatch(saveQuoteRecords())
+    store.dispatch(closeAddModal())
+  }
+
+  closeModal = () => {
+    store.dispatch(closeAddModal())
   }
 
   render() {
-    const { quoteRecord, isOpen, closeModal } = this.props
-    const { quote, author, url, category } = quoteRecord
+    const { activeQuote, addModal: { isOpen } } = store.getState()
+    const { quote, author, url, category } = activeQuote
 
     return (
       <Modal
         className="modal"
         overlayClassName="modalOverlay"
         isOpen={isOpen}
-        onRequestClose={closeModal}
+        onRequestClose={this.closeModal}
         contentLabel="Add Quote"
       >
         <h1 className="modal--heading">Add Quote</h1>
@@ -339,58 +331,52 @@ class _AddQuoteModal extends Component {
           >
             Save
           </button>
-          <CancelButton onClick={closeModal} />
+          <CancelButton onClick={this.closeModal} />
         </QuoteForm>
       </Modal>
     )
   }
 }
-const AddQuoteModal = connect(
-  state => ({
-    quoteRecord: state.activeQuote,
-    isOpen: state.addModal.isOpen,
-  }),
-  {
-    saveQuoteRecords,
-    closeModal: closeAddModal,
-    setActiveQuote: quoteRecord => setActiveQuote(quoteRecord),
-    updateQuoteRecord: quoteRecord => updateQuoteRecord(quoteRecord),
-  },
-)(_AddQuoteModal)
 
 
 // TODO: make this a presentational component?
 /*
  * A modal for editing the clicked-on quote.
  */
-class _EditQuoteModal extends Component {
+class EditQuoteModal extends Component {
+  closeModal = () => {
+    store.dispatch(closeEditModal())
+  }
+
   handleChange = (field, event) => {
-    this.props.setActiveQuote(
-      Object.assign({}, this.props.quoteRecord, { [field]: event.target.value }),
+    store.dispatch(
+      setActiveQuote(
+        Object.assign({}, this.props.quoteRecord, { [field]: event.target.value }),
+      ),
     )
   }
 
   handleSave = () => {
-    this.props.updateQuoteRecord(this.props.quoteRecord)
-    // this.props.saveQuoteRecords()
-    this.props.closeModal()
+    store.dispatch(updateQuoteRecord(store.getState().activeQuote))
+    // store.dispatch(saveQuoteRecords())
+    store.dispatch(closeEditModal())
   }
 
   handleDelete = () => {
-    this.props.deleteQuoteRecord(this.props.quoteRecord.id)
-    // this.props.saveQuoteRecords()
-    this.props.closeModal()
+    store.dispatch(deleteQuoteRecord(store.getState().activeQuote.id))
+    // store.dispatch(saveQuoteRecords())
+    store.dispatch(closeEditModal())
   }
 
   render() {
-    const { quoteRecord, isOpen, closeModal } = this.props
-    const { quote, author, url, category } = quoteRecord
+    const { activeQuote, editModal: { isOpen } } = store.getState()
+    const { quote, author, url, category } = activeQuote
     return (
       <Modal
         className="modal"
         overlayClassName="modalOverlay"
         isOpen={isOpen}
-        onRequestClose={closeModal}
+        onRequestClose={this.closeModal}
         contentLabel="Edit Quote"
       >
         <h1 className="modal--heading">Edit Quote</h1>
@@ -411,38 +397,25 @@ class _EditQuoteModal extends Component {
             Save
           </button>
           <DeleteButton onClick={this.handleDelete} />
-          <CancelButton onClick={closeModal} />
+          <CancelButton onClick={this.closeModal} />
         </QuoteForm>
       </Modal>
     )
   }
 }
-const EditQuoteModal = connect(
-  state => ({
-    quoteRecord: state.activeQuote,
-    isOpen: state.editModal.isOpen,
-  }),
-  {
-    saveQuoteRecords,
-    deleteQuoteRecord,
-    closeModal: closeEditModal,
-    updateQuoteRecord: quoteRecord => updateQuoteRecord(quoteRecord),
-    setActiveQuote: quoteRecord => setActiveQuote(quoteRecord),
-  },
-)(_EditQuoteModal)
 
 
 /*
  * Loads the options page and holds state.
  */
-class _AppRoot extends Component {
+class AppRoot extends Component {
   componentDidMount() {
-    loadSettings().then(settings => this.props.updateSettings(settings))
-    loadQuotes().then(quoteRecords => this.props.updateQuoteRecords(quoteRecords))
+    loadSettings().then(compose2(store.dispatch, updateSettings))
+    loadQuotes().then(compose2(store.dispatch, updateQuoteRecords))
   }
 
   render() {
-    const { settings, quoteRecords } = this.props
+    const { settings, quoteRecords } = store.getState()
     if (!settings.size || !quoteRecords.size) {
       return null
     }
@@ -458,44 +431,12 @@ class _AppRoot extends Component {
     ]
   }
 }
-const AppRoot = connect(
-  state => ({
-    settings: state.settings,
-    quoteRecords: state.quoteRecords,
-  }),
-  {
-    updateSettings: settings => updateSettings(settings),
-    updateQuoteRecords: quoteRecordList => updateQuoteRecords(quoteRecordList),
-  },
-)(_AppRoot)
 
-
-
-class Provider extends Component {
-  getChildContext() {
-    return { store: this.props.store }
-  }
-
-  render() {
-    return this.props.children
-  }
-}
-
-Provider.childContextTypes = {
-  store: PropTypes.object,
-}
 
 const rootEl = document.getElementById('root')
-const store = createStore(reducers)
 Modal.setAppElement('#root')
-
 const render = () => {
-  ReactDOM.render((
-    <Provider store={store}>
-      <AppRoot />
-    </Provider>
-  ), rootEl)
+  ReactDOM.render(<AppRoot />, rootEl)
 }
-
 store.subscribe(render)
 render()
