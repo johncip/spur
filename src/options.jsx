@@ -28,7 +28,7 @@ import {
   saveQuoteRecords,
   deleteQuoteRecord,
 } from './actions'
-import { loadSettings, loadQuotes } from './util'
+import { compose2, loadSettings, loadQuotes } from './util'
 
 import 'Styles/options/style.scss'
 
