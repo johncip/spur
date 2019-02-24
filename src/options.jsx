@@ -497,5 +497,5 @@ const render = () => {
   ), rootEl)
 }
 
-render()
 store.subscribe(render)
+render()
