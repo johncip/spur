@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom'
 import Modal from 'react-modal'
 import classNames from 'classnames'
 import { createStore } from 'redux'
-import { connect, Provider } from 'react-redux'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus'
@@ -469,6 +470,22 @@ const AppRoot = connect(
   },
 )(_AppRoot)
 
+
+
+class Provider extends Component {
+  getChildContext() {
+    return {
+      store: this.props.store // This corresponds to the `store` passed in as a prop
+    };
+  }
+  render() {
+    return this.props.children;
+  }
+}
+
+Provider.childContextTypes = {
+  store: PropTypes.object
+}
 
 const rootEl = document.getElementById('root')
 const store = createStore(reducers)
