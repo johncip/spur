@@ -25,7 +25,7 @@ import {
   updateSettings,
   updateQuoteRecords,
   updateQuoteRecord,
-  saveQuoteRecords,
+  // saveQuoteRecords,
   deleteQuoteRecord,
 } from './actions'
 import { compose2, loadSettings, loadQuotes } from './util'
