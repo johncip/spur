@@ -7,7 +7,7 @@ const GoogleFontsPlugin = require('@beyonk/google-fonts-webpack-plugin')
 module.exports = {
   mode: 'development',
 
-  devtool: 'source-map',
+  devtool: 'inline-source-map',
 
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
