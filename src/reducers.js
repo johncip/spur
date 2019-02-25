@@ -16,6 +16,8 @@ const activeQuote = (state = {}, action) => {
       return action.payload
     case 'SET_NEW_ACTIVE_QUOTE':
       return { quote: '', author: '', url: '', category: '', id: 'new' }
+    case 'PATCH_ACTIVE_QUOTE':
+      return Object.assign({}, state, action.payload)
     default:
       return state
   }

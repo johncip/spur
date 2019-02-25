@@ -28,6 +28,9 @@ export const updateSettings = settings => (
 export const setActiveQuote = quote => (
   { type: 'SET_ACTIVE_QUOTE', payload: quote }
 )
+export const patchActiveQuote = patch => (
+  { type: 'PATCH_ACTIVE_QUOTE', payload: patch }
+)
 export const setNewActiveQuote = () => (
   { type: 'SET_NEW_ACTIVE_QUOTE' }
 )

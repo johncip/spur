@@ -16,6 +16,7 @@ import reducers from './reducers'
 import {
   setActiveQuote,
   setNewActiveQuote,
+  patchActiveQuote,
   openModal,
   closeModal,
   updateSettings,
@@ -285,11 +286,7 @@ class EditModal extends Component {
   }
 
   handleChange = (field, event) => {
-    store.dispatch(
-      setActiveQuote(
-        Object.assign({}, store.getState().activeQuote, { [field]: event.target.value }),
-      ),
-    )
+    store.dispatch(patchActiveQuote({ [field]: event.target.value }))
   }
 
   handleSave = () => {
