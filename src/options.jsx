@@ -236,21 +236,19 @@ const DeleteButton = ({ onClick }) => (
 /*
  * A parameterized input for the quote form.
  */
-const QuoteFormField = ({ name, value, handleChange }) => {
-  const lower = name.toLowerCase()
-  return [
-    <label key={`label-${lower}`} className="quoteForm--label" htmlFor={`id-${lower}`}>
+const QuoteFormField = ({ name, value, handleChange }) => (
+  <div className="quoteForm--field">
+    <label className="quoteForm--label" htmlFor={`id-${name}`}>
       {name}
-    </label>,
+    </label>
     <input
-      key={`input-${lower}`}
-      id={`id-${lower}`}
-      className="quoteForm--field"
+      id={`id-${name}`}
+      className="quoteForm--input"
       value={value}
-      onChange={event => handleChange(lower, event)}
-    />,
-  ]
-}
+      onChange={event => handleChange(name.toLowerCase(), event)}
+    />
+  </div>
+)
 
 
 /*
@@ -258,13 +256,15 @@ const QuoteFormField = ({ name, value, handleChange }) => {
  */
 const QuoteForm = ({ quote, author, url, category, children, handleChange }) => (
   <form className="quoteForm">
-    <label className="quoteForm--label" htmlFor="id-quote">Quote</label>
-    <textarea
-      id="id-quote"
-      className="quoteForm--field quoteForm--field-textarea"
-      value={quote}
-      onChange={event => handleChange('quote', event)}
-    />
+    <div className="quoteForm--field">
+      <label className="quoteForm--label" htmlFor="id-quote">Quote</label>
+      <textarea
+        id="id-quote"
+        className="quoteForm--input quoteForm--input-textarea"
+        value={quote}
+        onChange={event => handleChange('quote', event)}
+      />
+    </div>
 
     <QuoteFormField name="Author" value={author} handleChange={handleChange} />
     <QuoteFormField name="URL" value={url} handleChange={handleChange} />

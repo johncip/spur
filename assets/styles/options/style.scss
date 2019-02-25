@@ -183,6 +183,12 @@ p {
   }
 }
 
+.quoteForm--field {
+  &:not(:last-child) {
+    margin-bottom: 20px;
+  }
+}
+
 .quoteForm--label {
   font: 500 14px $basic-font-stack;
   color: $gray-3;
@@ -190,7 +196,7 @@ p {
   margin-bottom: 6px;
 }
 
-.quoteForm--field {
+.quoteForm--input {
   @extend %basic-type;
   display: block;
   box-sizing: border-box;
@@ -198,13 +204,9 @@ p {
   border: 1px solid $gray-4;
   border-radius: 2px;
   padding: 6px;
-
-  &:not(:last-child) {
-    margin-bottom: 20px;
-  }
 }
 
-.quoteForm--field-textarea {
+.quoteForm--input-textarea {
   height: 150px;
 }
 
