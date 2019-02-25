@@ -18,8 +18,6 @@ import {
   setNewActiveQuote,
   openEditModal,
   closeEditModal,
-  openAddModal,
-  closeAddModal,
   updateSettings,
   updateQuoteRecords,
   putQuoteRecord,
@@ -113,7 +111,7 @@ class EditQuoteButton extends Component {
 class AddQuoteButton extends Component {
   handleClick = () => {
     store.dispatch(setNewActiveQuote())
-    store.dispatch(openAddModal())
+    store.dispatch(openEditModal())
   }
 
   render() {
@@ -281,73 +279,13 @@ const QuoteForm = ({ quote, author, url, category, children, handleChange }) => 
 )
 
 
-// TODO: delete AddQuoteModal
-/*
- * A modal for editing the clicked-on quote.
- */
-class AddQuoteModal extends Component {
-  closeModal = () => {
-    store.dispatch(closeAddModal())
-  }
-
-  handleChange = (field, event) => {
-    store.dispatch(
-      setActiveQuote(
-        Object.assign({}, this.props.quoteRecord, { [field]: event.target.value }),
-      ),
-    )
-  }
-
-  handleSave = () => {
-    store.dispatch(putQuoteRecord(store.getState().activeQuote))
-    // store.dispatch(saveQuoteRecords())
-    this.closeModal()
-  }
-
-  render() {
-    const { activeQuote, addModal: { isOpen } } = store.getState()
-    const { quote, author, url, category } = activeQuote
-
-    return (
-      <Modal
-        className="modal"
-        overlayClassName="modalOverlay"
-        isOpen={isOpen}
-        onRequestClose={this.closeModal}
-        contentLabel="Add Quote"
-      >
-        <h1 className="modal--heading">Add Quote</h1>
-        <hr className="modal--rule" />
-
-        <QuoteForm
-          quote={quote}
-          author={author}
-          url={url}
-          category={category}
-          handleChange={this.handleChange}
-        >
-          <button
-            type="button"
-            className="btn btn-save"
-            onClick={this.handleSave}
-          >
-            Save
-          </button>
-          <CancelButton onClick={this.closeModal} />
-        </QuoteForm>
-      </Modal>
-    )
-  }
-}
-
-
 // TODO: make this a presentational component?
 // TODO: add a prop for whether or not to allow delete
 // TODO: parameterize title
 /*
  * A modal for editing the clicked-on quote.
  */
-class EditQuoteModal extends Component {
+class EditModal extends Component {
   closeModal = () => {
     store.dispatch(closeEditModal())
   }
@@ -355,7 +293,7 @@ class EditQuoteModal extends Component {
   handleChange = (field, event) => {
     store.dispatch(
       setActiveQuote(
-        Object.assign({}, this.props.quoteRecord, { [field]: event.target.value }),
+        Object.assign({}, store.getState().activeQuote, { [field]: event.target.value }),
       ),
     )
   }
@@ -373,8 +311,9 @@ class EditQuoteModal extends Component {
   }
 
   render() {
-    const { activeQuote, editModal: { isOpen } } = store.getState()
+    const { activeQuote, quoteRecords, editModal: { isOpen } } = store.getState()
     const { quote, author, url, category } = activeQuote
+    const quoteExists = quoteRecords.has(activeQuote.id)
 
     return (
       <Modal
@@ -382,7 +321,7 @@ class EditQuoteModal extends Component {
         overlayClassName="modalOverlay"
         isOpen={isOpen}
         onRequestClose={this.closeModal}
-        contentLabel="Edit Quote"
+        contentLabel={quoteExists ? 'Edit Quote' : 'Add Quote'}
       >
         <h1 className="modal--heading">Edit Quote</h1>
         <hr className="modal--rule" />
@@ -401,7 +340,7 @@ class EditQuoteModal extends Component {
           >
             Save
           </button>
-          <DeleteButton onClick={this.handleDelete} />
+          {quoteExists ? <DeleteButton onClick={this.handleDelete} /> : null}
           <CancelButton onClick={this.closeModal} />
         </QuoteForm>
       </Modal>
@@ -432,8 +371,7 @@ class AppRoot extends Component {
         settings={settings}
         quoteRecords={quoteRecords}
       />,
-      <EditQuoteModal key="edit-modal" />,
-      <AddQuoteModal key="add-modal" />,
+      <EditModal key="edit-modal" />,
     ]
   }
 }
