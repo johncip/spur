@@ -79,7 +79,7 @@ const VerticalToggle = ({ up, handleClick }) => {
   const classes = classNames(
     'verticalToggle', {
       'verticalToggle-is-up': up,
-      'verticalToggle-is-down': !up,
+      'verticalToggle-is-down': !up
     },
   )
   return (
@@ -96,7 +96,7 @@ const QuoteBox = ({ text, author, url, category, expanded, toggle }) => {
   const classes = classNames(
     'quoteBox', {
       'quoteBox-is-expanded': expanded,
-      'quoteBox-is-collapsed': !expanded,
+      'quoteBox-is-collapsed': !expanded
     },
   )
   return (
@@ -123,7 +123,7 @@ class AppRoot extends Component {
       author: undefined,
       url: undefined,
       category: undefined,
-      expanded: false,
+      expanded: false
     }
   }
 
@@ -148,7 +148,7 @@ class AppRoot extends Component {
         category={this.state.category}
         expanded={this.state.expanded}
         toggle={this.toggle}
-      />,
+      />
     ]
   }
 }

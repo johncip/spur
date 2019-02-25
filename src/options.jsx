@@ -16,7 +16,7 @@ import reducers from './reducers'
 import {
   setActiveQuote, setNewActiveQuote, patchActiveQuote,
   updateSettings, updateQuotes,
-  putQuote, deleteQuote, closeModal,
+  putQuote, deleteQuote, closeModal
 } from './actions'
 import { loadSettings, loadQuotes } from './util'
 
@@ -300,7 +300,7 @@ const AppRoot = () => {
       settings={settings}
       quotes={quotes}
     />,
-    <EditModal key="edit-modal" />,
+    <EditModal key="edit-modal" />
   ] : null
 }
 

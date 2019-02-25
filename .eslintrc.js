@@ -10,6 +10,7 @@ module.exports = {
     webextensions: true,
   },
   rules: {
+    'comma-dangle': ['error', 'never'],
     'curly': 'off',
     'no-else-return': 'off',
     'no-unexpected-multiline': 'error',

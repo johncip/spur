@@ -85,5 +85,5 @@ export default combineReducers({
   activeQuote,
   modalIsOpen,
   settings,
-  quotes,
+  quotes
 })

@@ -1,6 +1,6 @@
 const DEFAULT_SETTINGS = {
   theme: 'indexCard',
-  wakeTime: '6 am',
+  wakeTime: '6 am'
 }
 
 const seeds = require('../assets/seeds.json')
@@ -23,14 +23,14 @@ export function polyfillBrowser() {
           // note: assumes setting object with single key
           const key = Object.keys(obj)[0]
           return localStorage.setItem(key, JSON.stringify({ [key]: obj[key] }))
-        },
-      },
+        }
+      }
     },
     runtime: {
       openOptionsPage: () => {
         document.location.href = '/options.html'
-      },
-    },
+      }
+    }
   }
 }
 
