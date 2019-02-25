@@ -41,7 +41,6 @@ polyfillBrowser()
  */
 async function seedStorage() {
   browser.storage.local.set({ storedQuotes: seeds })
-  return true
 }
 
 /**
@@ -80,5 +79,6 @@ export async function loadQuotes(stop) {
     return quotes
   }
 
-  return await seedStorage() && loadQuotes(true)
+  await seedStorage()
+  return loadQuotes(true)
 }
