@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import Modal from 'react-modal'
 import { createStore } from 'redux'

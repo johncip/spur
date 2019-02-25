@@ -33,7 +33,7 @@ export function polyfillBrowser() {
     runtime: {
       openOptionsPage: () => {
         document.location.href = '/options.html'
-      }
+      },
     },
   }
 }
