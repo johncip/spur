@@ -22,7 +22,7 @@ import {
   closeAddModal,
   updateSettings,
   updateQuoteRecords,
-  updateQuoteRecord,
+  putQuoteRecord,
   // saveQuoteRecords,
   deleteQuoteRecord,
 } from './actions'
@@ -293,7 +293,7 @@ class AddQuoteModal extends Component {
   }
 
   handleSave = () => {
-    store.dispatch(updateQuoteRecord(store.getState().activeQuote))
+    store.dispatch(putQuoteRecord(store.getState().activeQuote))
     // store.dispatch(saveQuoteRecords())
     store.dispatch(closeAddModal())
   }
@@ -357,7 +357,7 @@ class EditQuoteModal extends Component {
   }
 
   handleSave = () => {
-    store.dispatch(updateQuoteRecord(store.getState().activeQuote))
+    store.dispatch(putQuoteRecord(store.getState().activeQuote))
     // store.dispatch(saveQuoteRecords())
     store.dispatch(closeEditModal())
   }

@@ -58,7 +58,7 @@ const quoteRecords = (state = new Map(), action) => {
     case 'UPDATE_QUOTE_RECORDS': {
       return normalizedQuoteRecords(action.payload)
     }
-    case 'UPDATE_QUOTE_RECORD': {
+    case 'PUT_QUOTE_RECORD': {
       const copy = new Map(state)
       const quoteRecord = action.payload
       copy.set(quoteRecord.id, quoteRecord)

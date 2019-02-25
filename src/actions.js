@@ -20,8 +20,8 @@ export const saveQuoteRecords = () => (
 export const updateQuoteRecords = quoteRecords => (
   { type: 'UPDATE_QUOTE_RECORDS', payload: quoteRecords }
 )
-export const updateQuoteRecord = quote => (
-  { type: 'UPDATE_QUOTE_RECORD', payload: quote }
+export const putQuoteRecord = quote => (
+  { type: 'PUT_QUOTE_RECORD', payload: quote }
 )
 export const deleteQuoteRecord = id => (
   { type: 'DELETE_QUOTE_RECORD', payload: id }
