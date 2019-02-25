@@ -236,6 +236,7 @@ const DeleteButton = ({ onClick }) => (
 )
 
 
+// TODO: make a function / HOC for the fields
 /*
  * A form for editing a quote. Buttons should be passed in as children.
  */
