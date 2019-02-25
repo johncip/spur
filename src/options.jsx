@@ -60,7 +60,7 @@ const EditQuoteButton = ({ quoteRecord }) => (
     className="editQuoteButton"
     onClick={() => dispatch(setActiveQuote(quoteRecord))}
   >
-    <div className="truncatedText">
+    <div className="truncatedText" tabIndex="-1">
       <span>{quoteRecord.quote}</span>
       <span className="inlineAuthor">{` — ${quoteRecord.author}`}</span>
     </div>
