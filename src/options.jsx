@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 import ReactDOM from 'react-dom'
 import Modal from 'react-modal'
 import classNames from 'classnames'
@@ -52,56 +52,34 @@ const SettingsSection = () => (
 )
 
 
-// TODO: use hooks for hover
 /*
  * A clickable displayed quote. Includes a pencil icon on hover.
  */
-class EditQuoteButton extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { hover: false }
-  }
+const EditQuoteButton = ({ quoteRecord }) => {
+  const [hover, setHover] = useState(false)
+  const classes = classNames(
+    'editQuoteButton', {
+      'editQuoteButton-is-hovered': hover,
+    },
+  )
 
-  handleMouseEnter = () => {
-    this.setState({ hover: true })
-  }
-
-  handleMouseLeave = () => {
-    this.setState({ hover: false })
-  }
-
-  handleClick = () => {
-    dispatch(setActiveQuote(this.props.quoteRecord))
-  }
-
-  classes() {
-    return classNames(
-      'editQuoteButton', {
-        'editQuoteButton-is-hovered': this.state.hover,
-      },
-    )
-  }
-
-  render() {
-    const { quoteRecord: { quote, author } } = this.props
-    return (
-      <button
-        className={this.classes()}
-        type="button"
-        onClick={this.handleClick}
-        onMouseEnter={this.handleMouseEnter}
-        onMouseLeave={this.handleMouseLeave}
-        onFocus={this.handleMouseEnter}
-        onBlur={this.handleMouseLeave}
-      >
-        <div className="truncatedText">
-          <span>{quote}</span>
-          <span className="inlineAuthor">{` — ${author}`}</span>
-        </div>
-        {this.state.hover ? <FontAwesomeIcon icon={faPencilAlt} /> : null}
-      </button>
-    )
-  }
+  return (
+    <button
+      className={classes}
+      type="button"
+      onClick={() => dispatch(setActiveQuote(quoteRecord))}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+      onFocus={() => setHover(true)}
+      onBlur={() => setHover(false)}
+    >
+      <div className="truncatedText">
+        <span>{quoteRecord.quote}</span>
+        <span className="inlineAuthor">{` — ${quoteRecord.author}`}</span>
+      </div>
+      {hover ? <FontAwesomeIcon icon={faPencilAlt} /> : null}
+    </button>
+  )
 }
 
 
