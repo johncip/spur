@@ -14,14 +14,9 @@ import { faChrome } from '@fortawesome/free-brands-svg-icons/faChrome'
 
 import reducers from './reducers'
 import {
-  setActiveQuote,
-  setNewActiveQuote,
-  patchActiveQuote,
-  closeModal,
-  updateSettings,
-  updateQuotes,
-  putQuote,
-  deleteQuote,
+  setActiveQuote, setNewActiveQuote, patchActiveQuote,
+  updateSettings, updateQuotes,
+  putQuote, deleteQuote, closeModal,
 } from './actions'
 import { loadSettings, loadQuotes } from './util'
 
