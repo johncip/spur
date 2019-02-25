@@ -49,23 +49,6 @@ async function seedStorage() {
 }
 
 /**
- * Returns string with leading nonword characters removed.
- */
-function trimStart(str) {
-  return str.replace(/^\W+/, '')
-}
-
-/**
- * Returns quote records sorted by quote. Ignores leading ellipsis.
- */
-// TODO: currently unused
-export const sortedQuoteRecords = records => (
-  records.sort((a, b) => (
-    trimStart(a.quote).localeCompare(trimStart(b.quote))
-  ))
-)
-
-/**
  * Reads a single key from browser storage and returns the value without the wrapper object.
  */
 export async function getOneKey(key) {
