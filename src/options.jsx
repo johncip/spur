@@ -294,12 +294,10 @@ class EditModal extends Component {
 
   handleSave = () => {
     store.dispatch(putQuoteRecord(store.getState().activeQuote))
-    this.closeModal()
   }
 
   handleDelete = () => {
     store.dispatch(deleteQuoteRecord(store.getState().activeQuote.id))
-    this.closeModal()
   }
 
   render() {

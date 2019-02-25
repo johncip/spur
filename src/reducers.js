@@ -28,6 +28,10 @@ const modalIsOpen = (state = false, action) => {
       return true
     case 'CLOSE_MODAL':
       return false
+    case 'PUT_QUOTE_RECORD':
+      return false
+    case 'DELETE_QUOTE_RECORD':
+      return false
     default:
       return state
   }
