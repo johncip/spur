@@ -22,12 +22,12 @@ const activeQuote = (state = {}, action) => {
   }
 }
 
-const editModal = (state = { isOpen: false }, action) => {
+const modalIsOpen = (state = false, action) => {
   switch (action.type) {
-    case 'OPEN_EDIT_MODAL':
-      return { isOpen: true }
-    case 'CLOSE_EDIT_MODAL':
-      return { isOpen: false }
+    case 'OPEN_MODAL':
+      return true
+    case 'CLOSE_MODAL':
+      return false
     default:
       return state
   }
@@ -74,7 +74,7 @@ const quoteRecords = (state = new Map(), action) => {
 
 export default combineReducers({
   activeQuote,
-  editModal,
+  modalIsOpen,
   settings,
   quoteRecords,
 })

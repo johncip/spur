@@ -1,8 +1,8 @@
-export const openEditModal = () => (
-  { type: 'OPEN_EDIT_MODAL' }
+export const openModal = () => (
+  { type: 'OPEN_MODAL' }
 )
-export const closeEditModal = () => (
-  { type: 'CLOSE_EDIT_MODAL' }
+export const closeModal = () => (
+  { type: 'CLOSE_MODAL' }
 )
 
 

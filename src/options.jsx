@@ -16,8 +16,8 @@ import reducers from './reducers'
 import {
   setActiveQuote,
   setNewActiveQuote,
-  openEditModal,
-  closeEditModal,
+  openModal,
+  closeModal,
   updateSettings,
   updateQuoteRecords,
   putQuoteRecord,
@@ -71,7 +71,7 @@ class EditQuoteButton extends Component {
 
   handleClick = () => {
     store.dispatch(setActiveQuote(this.props.quoteRecord))
-    store.dispatch(openEditModal())
+    store.dispatch(openModal())
   }
 
   classes() {
@@ -111,7 +111,7 @@ class EditQuoteButton extends Component {
 class AddQuoteButton extends Component {
   handleClick = () => {
     store.dispatch(setNewActiveQuote())
-    store.dispatch(openEditModal())
+    store.dispatch(openModal())
   }
 
   render() {
@@ -287,7 +287,7 @@ const QuoteForm = ({ quote, author, url, category, children, handleChange }) => 
  */
 class EditModal extends Component {
   closeModal = () => {
-    store.dispatch(closeEditModal())
+    store.dispatch(closeModal())
   }
 
   handleChange = (field, event) => {
@@ -311,7 +311,7 @@ class EditModal extends Component {
   }
 
   render() {
-    const { activeQuote, quoteRecords, editModal: { isOpen } } = store.getState()
+    const { activeQuote, quoteRecords, modalIsOpen } = store.getState()
     const { quote, author, url, category } = activeQuote
     const quoteExists = quoteRecords.has(activeQuote.id)
 
@@ -319,7 +319,7 @@ class EditModal extends Component {
       <Modal
         className="modal"
         overlayClassName="modalOverlay"
-        isOpen={isOpen}
+        isOpen={modalIsOpen}
         onRequestClose={this.closeModal}
         contentLabel={quoteExists ? 'Edit Quote' : 'Add Quote'}
       >
