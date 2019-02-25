@@ -61,33 +61,42 @@ p {
   @include background-tints($gray-6);
   @include focus-ring('border');
 
+  $padding: 12px;
+
+  display: flex;
   width: 100%;
   height: 42px;
-  padding: 12px;
+  padding: $padding;
   text-align: left;
   border-radius: 2px;
 
-  &:focus {
-    padding-left: 8px - 3px;
+  > div {
+    flex-grow: 1;
+  }
+
+  > .svg-inline--fa {
+    display: none;
+    color: $gray-3;
+    margin-right: 4px;
   }
 
   & + & {
     margin-top: 10px;
   }
-}
 
-.editQuoteButton-is-hovered {
-  display: flex;
-  align-items: center;
-
-  > div:first-child {
-    flex-grow: 1;
-    margin-right: 8px;
+  &:focus {
+    padding-left: $padding - 3px;
   }
+  
+  &:focus,
+  &:hover {
+    > div {
+      margin-right: 8px;
+    }
 
-  .svg-inline--fa {
-    color: $gray-3;
-    margin-right: 4px;
+    > .svg-inline--fa {
+      display: block;
+    }
   }
 }
 

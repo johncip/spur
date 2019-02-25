@@ -1,7 +1,6 @@
-import React, { Component, useState } from 'react'
+import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import Modal from 'react-modal'
-import classNames from 'classnames'
 import { createStore } from 'redux'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -55,32 +54,19 @@ const SettingsSection = () => (
 /*
  * A clickable displayed quote. Includes a pencil icon on hover.
  */
-const EditQuoteButton = ({ quoteRecord }) => {
-  const [hover, setHover] = useState(false)
-  const classes = classNames(
-    'editQuoteButton', {
-      'editQuoteButton-is-hovered': hover,
-    },
-  )
-
-  return (
-    <button
-      className={classes}
-      type="button"
-      onClick={() => dispatch(setActiveQuote(quoteRecord))}
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
-      onFocus={() => setHover(true)}
-      onBlur={() => setHover(false)}
-    >
-      <div className="truncatedText">
-        <span>{quoteRecord.quote}</span>
-        <span className="inlineAuthor">{` — ${quoteRecord.author}`}</span>
-      </div>
-      {hover ? <FontAwesomeIcon icon={faPencilAlt} /> : null}
-    </button>
-  )
-}
+const EditQuoteButton = ({ quoteRecord }) => (
+  <button
+    type="button"
+    className="editQuoteButton editQuoteButton-is-hovered"
+    onClick={() => dispatch(setActiveQuote(quoteRecord))}
+  >
+    <div className="truncatedText">
+      <span>{quoteRecord.quote}</span>
+      <span className="inlineAuthor">{` — ${quoteRecord.author}`}</span>
+    </div>
+    <FontAwesomeIcon icon={faPencilAlt} />
+  </button>
+)
 
 
 /*
