@@ -289,7 +289,7 @@ const AppRoot = () => {
   const fetched = settings.size && quotes.size
 
   useEffect(() => {
-    if (fetched) { return }
+    if (fetched) return
     loadSettings().then(compose(dispatch, updateSettings))
     loadQuotes().then(compose(dispatch, updateQuotes))
   })

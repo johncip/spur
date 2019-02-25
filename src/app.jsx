@@ -1,7 +1,8 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import classNames from 'classnames'
 import sample from 'lodash.sample'
+import compose from 'compose-function'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBox } from '@fortawesome/free-solid-svg-icons/faBox'
@@ -114,43 +115,27 @@ const QuoteBox = ({ text, author, url, category, expanded, toggle }) => {
 /*
  * Loads a quote and renders the <QuoteBox />.
  */
-class AppRoot extends Component {
-  constructor(props) {
-    super(props)
+const AppRoot = () => {
+  const [expanded, setExpanded] = useState(false)
+  const [quote, setQuote] = useState({})
+  const loaded = !!quote.text
 
-    this.state = {
-      text: undefined,
-      author: undefined,
-      url: undefined,
-      category: undefined,
-      expanded: false
-    }
-  }
+  useEffect(() => {
+    if (!loaded) loadQuotes().then(compose(setQuote, sample))
+  })
 
-  componentDidMount() {
-    loadQuotes().then(quotes => this.setState(sample(quotes)))
-  }
-
-  toggle = () => {
-    this.setState(old => ({ expanded: !old.expanded }))
-  }
-
-  render() {
-    if (!this.state.text) return null
-
-    return [
-      <OptionsButton key="opts-btn" />,
-      <QuoteBox
-        key="quote-box"
-        text={this.state.text}
-        author={this.state.author}
-        url={this.state.url}
-        category={this.state.category}
-        expanded={this.state.expanded}
-        toggle={this.toggle}
-      />
-    ]
-  }
+  return loaded ? [
+    <OptionsButton key="opts-btn" />,
+    <QuoteBox
+      key="quote-box"
+      text={quote.text}
+      author={quote.author}
+      url={quote.url}
+      category={quote.category}
+      expanded={expanded}
+      toggle={() => setExpanded(!expanded)}
+    />
+  ] : null
 }
 
 async function main() {
