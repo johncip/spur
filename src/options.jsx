@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import Modal from 'react-modal'
 import { createStore } from 'redux'
+import compose from 'compose-function'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus'
@@ -22,7 +23,7 @@ import {
   putQuoteRecord,
   deleteQuoteRecord,
 } from './actions'
-import { compose2, loadSettings, loadQuotes } from './util'
+import { loadSettings, loadQuotes } from './util'
 
 import 'Styles/options/style.scss'
 
@@ -237,7 +238,7 @@ const QuoteForm = ({ quote, author, url, category, children, handleChange }) => 
  */
 const EditModal = () => {
   const { activeQuote, quoteRecords, modalIsOpen } = getState()
-  const handleClose = compose2(dispatch, closeModal)
+  const handleClose = compose(dispatch, closeModal)
   const handleDelete = () => dispatch(deleteQuoteRecord(activeQuote.id))
   const handleChange = (field, event) => {
     dispatch(patchActiveQuote({ [field]: event.target.value }))
@@ -288,8 +289,8 @@ const AppRoot = () => {
 
   useEffect(() => {
     if (fetched) { return }
-    loadSettings().then(compose2(dispatch, updateSettings))
-    loadQuotes().then(compose2(dispatch, updateQuoteRecords))
+    loadSettings().then(compose(dispatch, updateSettings))
+    loadQuotes().then(compose(dispatch, updateQuoteRecords))
   })
 
   return fetched ? [

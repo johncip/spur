@@ -5,10 +5,6 @@ const DEFAULT_SETTINGS = {
 
 const seeds = require('../assets/seeds.json')
 
-export function compose2(fn1, fn2) {
-  return (...args) => fn1(fn2(...args))
-}
-
 /**
  * Assigns browser shim unless browser is defined. Makes it possible to use
  * dev server.
