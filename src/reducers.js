@@ -14,9 +14,8 @@ const activeQuote = (state = {}, action) => {
   switch (action.type) {
     case 'SET_ACTIVE_QUOTE':
       return action.payload
-    case 'SET_NEW_ACTIVE_QUOTE': {
+    case 'SET_NEW_ACTIVE_QUOTE':
       return { quote: '', author: '', url: '', category: '', id: 'new' }
-    }
     default:
       return state
   }
