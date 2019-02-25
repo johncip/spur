@@ -21,7 +21,6 @@ import {
   updateSettings,
   updateQuoteRecords,
   putQuoteRecord,
-  // saveQuoteRecords,
   deleteQuoteRecord,
 } from './actions'
 import { compose2, loadSettings, loadQuotes } from './util'
@@ -277,9 +276,6 @@ const QuoteForm = ({ quote, author, url, category, children, handleChange }) => 
 )
 
 
-// TODO: make this a presentational component?
-// TODO: add a prop for whether or not to allow delete
-// TODO: parameterize title
 /*
  * A modal for editing the clicked-on quote.
  */
@@ -298,13 +294,11 @@ class EditModal extends Component {
 
   handleSave = () => {
     store.dispatch(putQuoteRecord(store.getState().activeQuote))
-    // store.dispatch(saveQuoteRecords())
     this.closeModal()
   }
 
   handleDelete = () => {
     store.dispatch(deleteQuoteRecord(store.getState().activeQuote.id))
-    // store.dispatch(saveQuoteRecords())
     this.closeModal()
   }
 
