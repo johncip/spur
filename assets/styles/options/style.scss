@@ -70,14 +70,12 @@ p {
   text-align: left;
   border-radius: 2px;
 
-  > div {
+  > .truncatedText {
     flex-grow: 1;
   }
 
-  > .svg-inline--fa {
+  > .editQuoteButton--pencil {
     display: none;
-    color: $gray-3;
-    margin-right: 4px;
   }
 
   & + & {
@@ -87,14 +85,14 @@ p {
   &:focus {
     padding-left: $padding - 3px;
   }
-  
+
   &:focus,
   &:hover {
-    > div {
+    > .truncatedText {
       margin-right: 8px;
     }
 
-    > .svg-inline--fa {
+    > .editQuoteButton--pencil {
       display: block;
     }
   }
@@ -104,11 +102,17 @@ p {
   @extend %icon-margin;
   @include foreground-tints($gray-4);
 
+  align-items: center;
   border: 2px dashed currentColor;
 
   &:focus {
     padding-left: 6px;
   }
+}
+
+.editQuoteButton--pencil {
+  color: $gray-3;
+  margin-right: 4px;
 }
 
 .truncatedText {

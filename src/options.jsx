@@ -64,7 +64,7 @@ const EditQuoteButton = ({ quoteRecord }) => (
       <span>{quoteRecord.quote}</span>
       <span className="inlineAuthor">{` — ${quoteRecord.author}`}</span>
     </div>
-    <FontAwesomeIcon icon={faPencilAlt} />
+    <FontAwesomeIcon icon={faPencilAlt} className="editQuoteButton--pencil" />
   </button>
 )
 
@@ -72,24 +72,16 @@ const EditQuoteButton = ({ quoteRecord }) => (
 /*
  * Button for adding a new quote.
  */
-class AddQuoteButton extends Component {
-  handleClick = () => {
-    dispatch(setNewActiveQuote())
-  }
-
-  render() {
-    return (
-      <button
-        className="editQuoteButton editQuoteButton-add"
-        type="button"
-        onClick={this.handleClick}
-      >
-        <FontAwesomeIcon icon={faPlus} />
-        New quote…
-      </button>
-    )
-  }
-}
+const AddQuoteButton = () => (
+  <button
+    className="editQuoteButton editQuoteButton-add"
+    type="button"
+    onClick={() => dispatch(setNewActiveQuote())}
+  >
+    <FontAwesomeIcon icon={faPlus} />
+    New quote…
+  </button>
+)
 
 
 /*
