@@ -28,7 +28,9 @@ import { compose2, loadSettings, loadQuotes } from './util'
 
 import 'Styles/options/style.scss'
 
+
 const store = createStore(reducers)
+const { dispatch } = store
 
 
 /*
@@ -70,8 +72,8 @@ class EditQuoteButton extends Component {
   }
 
   handleClick = () => {
-    store.dispatch(setActiveQuote(this.props.quoteRecord))
-    store.dispatch(openModal())
+    dispatch(setActiveQuote(this.props.quoteRecord))
+    dispatch(openModal())
   }
 
   classes() {
@@ -110,8 +112,8 @@ class EditQuoteButton extends Component {
  */
 class AddQuoteButton extends Component {
   handleClick = () => {
-    store.dispatch(setNewActiveQuote())
-    store.dispatch(openModal())
+    dispatch(setNewActiveQuote())
+    dispatch(openModal())
   }
 
   render() {
@@ -282,19 +284,19 @@ const QuoteForm = ({ quote, author, url, category, children, handleChange }) => 
  */
 class EditModal extends Component {
   closeModal = () => {
-    store.dispatch(closeModal())
+    dispatch(closeModal())
   }
 
   handleChange = (field, event) => {
-    store.dispatch(patchActiveQuote({ [field]: event.target.value }))
+    dispatch(patchActiveQuote({ [field]: event.target.value }))
   }
 
   handleSave = () => {
-    store.dispatch(putQuoteRecord(store.getState().activeQuote))
+    dispatch(putQuoteRecord(store.getState().activeQuote))
   }
 
   handleDelete = () => {
-    store.dispatch(deleteQuoteRecord(store.getState().activeQuote.id))
+    dispatch(deleteQuoteRecord(store.getState().activeQuote.id))
   }
 
   render() {
@@ -342,8 +344,8 @@ class EditModal extends Component {
 class AppRoot extends Component {
   componentDidMount() {
     // TODO: move this stuff into the store
-    loadSettings().then(compose2(store.dispatch, updateSettings))
-    loadQuotes().then(compose2(store.dispatch, updateQuoteRecords))
+    loadSettings().then(compose2(dispatch, updateSettings))
+    loadQuotes().then(compose2(dispatch, updateQuoteRecords))
   }
 
   render() {
