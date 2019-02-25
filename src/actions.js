@@ -8,20 +8,20 @@ export const closeModal = () => (
 
 
 // quote record list
-export const saveQuoteRecords = () => (
-  { type: 'SAVE_QUOTE_RECORDS' }
+export const saveQuotes = () => (
+  { type: 'SAVE_QUOTES' }
 )
 
-export const updateQuoteRecords = quoteRecords => (
-  { type: 'UPDATE_QUOTE_RECORDS', payload: quoteRecords }
+export const updateQuotes = quotes => (
+  { type: 'UPDATE_QUOTES', payload: quotes }
 )
 
-export const putQuoteRecord = quote => (
-  { type: 'PUT_QUOTE_RECORD', payload: quote }
+export const putQuote = quote => (
+  { type: 'PUT_QUOTE', payload: quote }
 )
 
-export const deleteQuoteRecord = id => (
-  { type: 'DELETE_QUOTE_RECORD', payload: id }
+export const deleteQuote = id => (
+  { type: 'DELETE_QUOTE', payload: id }
 )
 
 

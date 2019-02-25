@@ -3,7 +3,7 @@ import { polyfillBrowser } from './util'
 
 polyfillBrowser()
 
-const normalizedQuoteRecords = records => (
+const normalizedQuotes = records => (
   records.reduce((map, record, idx) => {
     map.set(idx, Object.assign({ id: idx }, record))
     return map
@@ -33,9 +33,9 @@ const modalIsOpen = (state = false, action) => {
       return true
     case 'CLOSE_MODAL':
       return false
-    case 'PUT_QUOTE_RECORD':
+    case 'PUT_QUOTE':
       return false
-    case 'DELETE_QUOTE_RECORD':
+    case 'DELETE_QUOTE':
       return false
     default:
       return state
@@ -51,28 +51,28 @@ const settings = (state = new Map(), action) => {
   }
 }
 
-const quoteRecords = (state = new Map(), action) => {
+const quotes = (state = new Map(), action) => {
   switch (action.type) {
-    case 'UPDATE_QUOTE_RECORDS': {
-      return normalizedQuoteRecords(action.payload)
+    case 'UPDATE_QUOTES': {
+      return normalizedQuotes(action.payload)
     }
-    case 'PUT_QUOTE_RECORD': {
+    case 'PUT_QUOTE': {
       const copy = new Map(state)
-      const quoteRecord = Object.assign({}, action.payload)
+      const quote = Object.assign({}, action.payload)
 
-      if (quoteRecord.id === 'new') {
-        quoteRecord.id = Math.random()
+      if (quote.id === 'new') {
+        quote.id = Math.random()
       }
-      copy.set(quoteRecord.id, quoteRecord)
+      copy.set(quote.id, quote)
       return copy
     }
-    case 'DELETE_QUOTE_RECORD': {
+    case 'DELETE_QUOTE': {
       const copy = new Map(state)
       copy.delete(action.payload)
       return copy
     }
     // TODO thunk it up
-    case 'SAVE_QUOTE_RECORDS': {
+    case 'SAVE_QUOTES': {
       browser.storage.local.set({ storedQuotes: Array.from(state.values()) })
       return state
     }
@@ -85,5 +85,5 @@ export default combineReducers({
   activeQuote,
   modalIsOpen,
   settings,
-  quoteRecords,
+  quotes,
 })

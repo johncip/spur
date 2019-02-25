@@ -19,9 +19,9 @@ import {
   patchActiveQuote,
   closeModal,
   updateSettings,
-  updateQuoteRecords,
-  putQuoteRecord,
-  deleteQuoteRecord,
+  updateQuotes,
+  putQuote,
+  deleteQuote,
 } from './actions'
 import { loadSettings, loadQuotes } from './util'
 
@@ -55,15 +55,15 @@ const SettingsSection = () => (
 /*
  * A clickable displayed quote. Includes a pencil icon on hover.
  */
-const EditQuoteButton = ({ quoteRecord }) => (
+const EditQuoteButton = ({ quote }) => (
   <button
     type="button"
     className="editQuoteButton"
-    onClick={() => dispatch(setActiveQuote(quoteRecord))}
+    onClick={() => dispatch(setActiveQuote(quote))}
   >
     <div className="truncatedText" tabIndex="-1">
-      <span>{quoteRecord.quote}</span>
-      <span className="inlineAuthor">{` — ${quoteRecord.author}`}</span>
+      <span>{quote.text}</span>
+      <span className="inlineAuthor">{` — ${quote.author}`}</span>
     </div>
     <FontAwesomeIcon icon={faPencilAlt} className="editQuoteButton--pencil" />
   </button>
@@ -88,14 +88,14 @@ const AddQuoteButton = () => (
 /*
  * The quotes section of the options page. An editable list of stored quotes.
  */
-const QuotesSection = ({ quoteRecords }) => {
-  const values = Array.from(quoteRecords.values())
+const QuotesSection = ({ quotes }) => {
+  const values = Array.from(quotes.values())
   return (
     <section className="optionsSection">
-      {values.map(quoteRecord => (
+      {values.map(quote => (
         <EditQuoteButton
-          key={quoteRecord.id}
-          quoteRecord={quoteRecord}
+          key={quote.id}
+          quote={quote}
         />
       ))}
       <AddQuoteButton />
@@ -155,13 +155,13 @@ const LinksSection = () => (
 /*
  * The entire options page.
  */
-const OptionsPage = ({ settings, quoteRecords }) => (
+const OptionsPage = ({ settings, quotes }) => (
   <div className="optionsContainer">
     <h1 className="optionsHeading">Settings</h1>
     <SettingsSection settings={settings} />
 
     <h1 className="optionsHeading">Quotes</h1>
-    <QuotesSection quoteRecords={quoteRecords} />
+    <QuotesSection quotes={quotes} />
 
     <h1 className="optionsHeading">Links</h1>
     <LinksSection />
@@ -216,15 +216,15 @@ const QuoteFormField = ({ name, value, handleChange }) => (
 /*
  * A form for editing a quote. Buttons should be passed in as children.
  */
-const QuoteForm = ({ quote, author, url, category, children, handleChange }) => (
+const QuoteForm = ({ text, author, url, category, children, handleChange }) => (
   <form className="quoteForm">
     <div className="quoteForm--field">
-      <label className="quoteForm--label" htmlFor="id-quote">Quote</label>
+      <label className="quoteForm--label" htmlFor="id-text">Quote</label>
       <textarea
-        id="id-quote"
+        id="id-text"
         className="quoteForm--input quoteForm--input-textarea"
-        value={quote}
-        onChange={event => handleChange('quote', event)}
+        value={text}
+        onChange={event => handleChange('text', event)}
       />
     </div>
 
@@ -243,13 +243,13 @@ const QuoteForm = ({ quote, author, url, category, children, handleChange }) => 
  * A modal for editing the clicked-on quote.
  */
 const EditModal = () => {
-  const { activeQuote, quoteRecords, modalIsOpen } = getState()
+  const { activeQuote, quotes, modalIsOpen } = getState()
   const handleClose = compose(dispatch, closeModal)
-  const handleDelete = () => dispatch(deleteQuoteRecord(activeQuote.id))
+  const handleDelete = () => dispatch(deleteQuote(activeQuote.id))
   const handleChange = (field, event) => {
     dispatch(patchActiveQuote({ [field]: event.target.value }))
   }
-  const quoteExists = quoteRecords.has(activeQuote.id)
+  const quoteExists = quotes.has(activeQuote.id)
 
   return (
     <Modal
@@ -263,7 +263,7 @@ const EditModal = () => {
       <hr className="modal--rule" />
 
       <QuoteForm
-        quote={activeQuote.quote}
+        text={activeQuote.text}
         author={activeQuote.author}
         url={activeQuote.url}
         category={activeQuote.category}
@@ -272,7 +272,7 @@ const EditModal = () => {
         <button
           type="button"
           className="btn btn-save"
-          onClick={() => dispatch(putQuoteRecord(activeQuote))}
+          onClick={() => dispatch(putQuote(activeQuote))}
         >
           Save
         </button>
@@ -290,20 +290,20 @@ const EditModal = () => {
  * Loads the options page and holds state.
  */
 const AppRoot = () => {
-  const { settings, quoteRecords } = getState()
-  const fetched = settings.size && quoteRecords.size
+  const { settings, quotes } = getState()
+  const fetched = settings.size && quotes.size
 
   useEffect(() => {
     if (fetched) { return }
     loadSettings().then(compose(dispatch, updateSettings))
-    loadQuotes().then(compose(dispatch, updateQuoteRecords))
+    loadQuotes().then(compose(dispatch, updateQuotes))
   })
 
   return fetched ? [
     <OptionsPage
       key="opts"
       settings={settings}
-      quoteRecords={quoteRecords}
+      quotes={quotes}
     />,
     <EditModal key="edit-modal" />,
   ] : null

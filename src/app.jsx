@@ -16,11 +16,11 @@ polyfillBrowser()
 /*
  * The main text of a quote.
  */
-const Quote = ({ quote }) => {
-  const size = 160 * (1 / (quote.length ** 0.3))
+const Quote = ({ text }) => {
+  const size = 160 * (1 / (text.length ** 0.3))
   return (
-    <div className="quoteBox--quote" style={{ fontSize: `${size}px` }}>
-      {quote}
+    <div className="quoteBox--text" style={{ fontSize: `${size}px` }}>
+      {text}
     </div>
   )
 }
@@ -92,7 +92,7 @@ const VerticalToggle = ({ up, handleClick }) => {
 /*
  * A displayed quote, with author, etc.
  */
-const QuoteBox = ({ quote, author, url, category, expanded, toggle }) => {
+const QuoteBox = ({ text, author, url, category, expanded, toggle }) => {
   const classes = classNames(
     'quoteBox', {
       'quoteBox-is-expanded': expanded,
@@ -101,7 +101,7 @@ const QuoteBox = ({ quote, author, url, category, expanded, toggle }) => {
   )
   return (
     <div className={classes}>
-      <Quote quote={quote} />
+      <Quote text={text} />
       <Author author={author} />
       <Rule />
       {url && <Info url={url} />}
@@ -119,7 +119,7 @@ class AppRoot extends Component {
     super(props)
 
     this.state = {
-      quote: undefined,
+      text: undefined,
       author: undefined,
       url: undefined,
       category: undefined,
@@ -136,13 +136,13 @@ class AppRoot extends Component {
   }
 
   render() {
-    if (!this.state.quote) return null
+    if (!this.state.text) return null
 
     return [
       <OptionsButton key="opts-btn" />,
       <QuoteBox
         key="quote-box"
-        quote={this.state.quote}
+        text={this.state.text}
         author={this.state.author}
         url={this.state.url}
         category={this.state.category}

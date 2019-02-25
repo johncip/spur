@@ -40,7 +40,7 @@ polyfillBrowser()
  * Seeds browser storage with the included quotes.
  */
 async function seedStorage() {
-  browser.storage.local.set({ storedQuotes: seeds })
+  browser.storage.local.set({ quotes: seeds })
 }
 
 /**
@@ -73,7 +73,7 @@ export async function loadSettings() {
  * included quotes and tries again.
  */
 export async function loadQuotes(stop) {
-  const quotes = await getOneKey('storedQuotes')
+  const quotes = await getOneKey('quotes')
 
   if (quotes || stop) {
     return quotes
