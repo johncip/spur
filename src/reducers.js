@@ -27,6 +27,10 @@ const modalIsOpen = (state = false, action) => {
   switch (action.type) {
     case 'OPEN_MODAL':
       return true
+    case 'SET_ACTIVE_QUOTE':
+      return true
+    case 'SET_NEW_ACTIVE_QUOTE':
+      return true
     case 'CLOSE_MODAL':
       return false
     case 'PUT_QUOTE_RECORD':

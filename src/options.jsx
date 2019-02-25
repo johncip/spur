@@ -17,7 +17,6 @@ import {
   setActiveQuote,
   setNewActiveQuote,
   patchActiveQuote,
-  openModal,
   closeModal,
   updateSettings,
   updateQuoteRecords,
@@ -73,7 +72,6 @@ class EditQuoteButton extends Component {
 
   handleClick = () => {
     dispatch(setActiveQuote(this.props.quoteRecord))
-    dispatch(openModal())
   }
 
   classes() {
@@ -113,7 +111,6 @@ class EditQuoteButton extends Component {
 class AddQuoteButton extends Component {
   handleClick = () => {
     dispatch(setNewActiveQuote())
-    dispatch(openModal())
   }
 
   render() {
