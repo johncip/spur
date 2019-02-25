@@ -28,7 +28,7 @@ import 'Styles/options/style.scss'
 
 
 const store = createStore(reducers)
-const { dispatch } = store
+const { dispatch, getState } = store
 
 
 /*
@@ -236,7 +236,7 @@ const QuoteForm = ({ quote, author, url, category, children, handleChange }) => 
  * A modal for editing the clicked-on quote.
  */
 const EditModal = () => {
-  const { activeQuote, quoteRecords, modalIsOpen } = store.getState()
+  const { activeQuote, quoteRecords, modalIsOpen } = getState()
   const handleClose = compose2(dispatch, closeModal)
   const handleDelete = () => dispatch(deleteQuoteRecord(activeQuote.id))
   const handleChange = (field, event) => {
@@ -283,7 +283,7 @@ const EditModal = () => {
  * Loads the options page and holds state.
  */
 const AppRoot = () => {
-  const { settings, quoteRecords } = store.getState()
+  const { settings, quoteRecords } = getState()
   const fetched = settings.size && quoteRecords.size
 
   useEffect(() => {
