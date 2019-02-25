@@ -57,7 +57,7 @@ const SettingsSection = () => (
 const EditQuoteButton = ({ quoteRecord }) => (
   <button
     type="button"
-    className="editQuoteButton editQuoteButton-is-hovered"
+    className="editQuoteButton"
     onClick={() => dispatch(setActiveQuote(quoteRecord))}
   >
     <div className="truncatedText">
