@@ -103,6 +103,9 @@ const QuotesSection = ({ quoteRecords }) => {
   )
 }
 
+/*
+ * Future home of a link to spur in the chrome store.
+ */
 const ChromeStoreLink = () => (
   <a className="link" href="https://chrome.google.com/webstore/category/extensions">
     <FontAwesomeIcon icon={faChrome} />
@@ -111,6 +114,9 @@ const ChromeStoreLink = () => (
   </a>
 )
 
+/*
+ * Future home of a link to spur in the firefox store.
+ */
 const FirefoxStoreLink = () => (
   <a className="link" href="https://addons.mozilla.org/en-US/firefox/">
     <FontAwesomeIcon icon={faFirefox} />
