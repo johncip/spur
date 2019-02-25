@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import Modal from 'react-modal'
 import { createStore } from 'redux'
@@ -282,28 +282,24 @@ const EditModal = () => {
 /*
  * Loads the options page and holds state.
  */
-class AppRoot extends Component {
-  componentDidMount() {
-    // TODO: move this stuff into the store
+const AppRoot = () => {
+  const { settings, quoteRecords } = store.getState()
+  const fetched = settings.size && quoteRecords.size
+
+  useEffect(() => {
+    if (fetched) { return }
     loadSettings().then(compose2(dispatch, updateSettings))
     loadQuotes().then(compose2(dispatch, updateQuoteRecords))
-  }
+  })
 
-  render() {
-    const { settings, quoteRecords } = store.getState()
-    if (!settings.size || !quoteRecords.size) {
-      return null
-    }
-
-    return [
-      <OptionsPage
-        key="opts"
-        settings={settings}
-        quoteRecords={quoteRecords}
-      />,
-      <EditModal key="edit-modal" />,
-    ]
-  }
+  return fetched ? [
+    <OptionsPage
+      key="opts"
+      settings={settings}
+      quoteRecords={quoteRecords}
+    />,
+    <EditModal key="edit-modal" />,
+  ] : null
 }
 
 
