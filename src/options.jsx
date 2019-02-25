@@ -53,6 +53,7 @@ const SettingsSection = () => (
 )
 
 
+// TODO: use hooks for hover
 /*
  * A clickable displayed quote. Includes a pencil icon on hover.
  */
@@ -340,6 +341,8 @@ class AddQuoteModal extends Component {
 
 
 // TODO: make this a presentational component?
+// TODO: add a prop for whether or not to allow delete
+// TODO: parameterize title
 /*
  * A modal for editing the clicked-on quote.
  */
@@ -371,6 +374,7 @@ class EditQuoteModal extends Component {
   render() {
     const { activeQuote, editModal: { isOpen } } = store.getState()
     const { quote, author, url, category } = activeQuote
+
     return (
       <Modal
         className="modal"
@@ -410,6 +414,7 @@ class EditQuoteModal extends Component {
  */
 class AppRoot extends Component {
   componentDidMount() {
+    // TODO: move this stuff into the store
     loadSettings().then(compose2(store.dispatch, updateSettings))
     loadQuotes().then(compose2(store.dispatch, updateQuoteRecords))
   }
