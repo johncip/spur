@@ -235,59 +235,47 @@ const QuoteForm = ({ quote, author, url, category, children, handleChange }) => 
 /*
  * A modal for editing the clicked-on quote.
  */
-class EditModal extends Component {
-  closeModal = () => {
-    dispatch(closeModal())
-  }
-
-  handleChange = (field, event) => {
+const EditModal = () => {
+  const { activeQuote, quoteRecords, modalIsOpen } = store.getState()
+  const handleClose = compose2(dispatch, closeModal)
+  const handleDelete = () => dispatch(deleteQuoteRecord(activeQuote.id))
+  const handleChange = (field, event) => {
     dispatch(patchActiveQuote({ [field]: event.target.value }))
   }
+  const quoteExists = quoteRecords.has(activeQuote.id)
 
-  handleSave = () => {
-    dispatch(putQuoteRecord(store.getState().activeQuote))
-  }
+  return (
+    <Modal
+      className="modal"
+      overlayClassName="modalOverlay"
+      isOpen={modalIsOpen}
+      onRequestClose={handleClose}
+      contentLabel={quoteExists ? 'Edit Quote' : 'Add Quote'}
+    >
+      <h1 className="modal--heading">Edit Quote</h1>
+      <hr className="modal--rule" />
 
-  handleDelete = () => {
-    dispatch(deleteQuoteRecord(store.getState().activeQuote.id))
-  }
-
-  render() {
-    const { activeQuote, quoteRecords, modalIsOpen } = store.getState()
-    const { quote, author, url, category } = activeQuote
-    const quoteExists = quoteRecords.has(activeQuote.id)
-
-    return (
-      <Modal
-        className="modal"
-        overlayClassName="modalOverlay"
-        isOpen={modalIsOpen}
-        onRequestClose={this.closeModal}
-        contentLabel={quoteExists ? 'Edit Quote' : 'Add Quote'}
+      <QuoteForm
+        quote={activeQuote.quote}
+        author={activeQuote.author}
+        url={activeQuote.url}
+        category={activeQuote.category}
+        handleChange={handleChange}
       >
-        <h1 className="modal--heading">Edit Quote</h1>
-        <hr className="modal--rule" />
-
-        <QuoteForm
-          quote={quote}
-          author={author}
-          url={url}
-          category={category}
-          handleChange={this.handleChange}
+        <button
+          type="button"
+          className="btn btn-save"
+          onClick={() => dispatch(putQuoteRecord(activeQuote))}
         >
-          <button
-            type="button"
-            className="btn btn-save"
-            onClick={this.handleSave}
-          >
-            Save
-          </button>
-          {quoteExists ? <DeleteButton onClick={this.handleDelete} /> : null}
-          <CancelButton onClick={this.closeModal} />
-        </QuoteForm>
-      </Modal>
-    )
-  }
+          Save
+        </button>
+        {quoteExists
+          ? <DeleteButton onClick={handleDelete} />
+          : null}
+        <CancelButton onClick={handleClose} />
+      </QuoteForm>
+    </Modal>
+  )
 }
 
 
