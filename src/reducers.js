@@ -15,7 +15,7 @@ const activeQuote = (state = {}, action) => {
     case 'SET_ACTIVE_QUOTE':
       return action.payload
     case 'SET_NEW_ACTIVE_QUOTE': {
-      return { quote: '', author: '', url: '', category: '', id: Math.random() }
+      return { quote: '', author: '', url: '', category: '', id: 'new' }
     }
     default:
       return state
@@ -60,7 +60,11 @@ const quoteRecords = (state = new Map(), action) => {
     }
     case 'PUT_QUOTE_RECORD': {
       const copy = new Map(state)
-      const quoteRecord = action.payload
+      const quoteRecord = Object.assign({}, action.payload)
+
+      if (quoteRecord.id === 'new') {
+        quoteRecord.id = Math.random()
+      }
       copy.set(quoteRecord.id, quoteRecord)
       return copy
     }
