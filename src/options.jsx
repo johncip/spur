@@ -233,8 +233,26 @@ const DeleteButton = ({ onClick }) => (
   </button>
 )
 
+/*
+ * A parameterized input for the quote form.
+ */
+const QuoteFormField = ({ name, value, handleChange }) => {
+  const lower = name.toLowerCase()
+  return [
+    <label key={`label-${lower}`} className="quoteForm--label" htmlFor={`id-${lower}`}>
+      {name}
+    </label>,
+    <input
+      key={`input-${lower}`}
+      id={`id-${lower}`}
+      className="quoteForm--field"
+      value={value}
+      onChange={event => handleChange(lower, event)}
+    />,
+  ]
+}
 
-// TODO: make a function / HOC for the fields
+
 /*
  * A form for editing a quote. Buttons should be passed in as children.
  */
@@ -248,29 +266,9 @@ const QuoteForm = ({ quote, author, url, category, children, handleChange }) => 
       onChange={event => handleChange('quote', event)}
     />
 
-    <label className="quoteForm--label" htmlFor="id-author">Author</label>
-    <input
-      id="id-author"
-      className="quoteForm--field"
-      value={author}
-      onChange={event => handleChange('author', event)}
-    />
-
-    <label className="quoteForm--label" htmlFor="id-url">URL</label>
-    <input
-      id="id-url"
-      className="quoteForm--field"
-      value={url}
-      onChange={event => handleChange('url', event)}
-    />
-
-    <label className="quoteForm--label" htmlFor="id-category">Category</label>
-    <input
-      id="id-category"
-      className="quoteForm--field"
-      value={category}
-      onChange={event => handleChange('category', event)}
-    />
+    <QuoteFormField name="Author" value={author} handleChange={handleChange} />
+    <QuoteFormField name="URL" value={url} handleChange={handleChange} />
+    <QuoteFormField name="Category" value={category} handleChange={handleChange} />
 
     <div className="btnContainer">
       {children}
