@@ -1,4 +1,6 @@
-// modal-only
+/*
+ * modal-only
+ */
 export const openModal = () => (
   { type: 'OPEN_MODAL' }
 )
@@ -7,7 +9,9 @@ export const closeModal = () => (
 )
 
 
-// quote record list
+/*
+ * quote record list
+ */
 export const saveQuotes = () => (
   { type: 'SAVE_QUOTES' }
 )
@@ -25,13 +29,17 @@ export const deleteQuote = id => (
 )
 
 
-// settings
+/*
+ * settings
+ */
 export const updateSettings = settings => (
   { type: 'UPDATE_SETTINGS', payload: settings }
 )
 
 
-// edit form
+/*
+ * edit form
+ */
 export const setActiveQuote = quote => (
   { type: 'SET_ACTIVE_QUOTE', payload: quote }
 )
