@@ -128,7 +128,7 @@ class AppRoot extends Component {
   }
 
   componentDidMount() {
-    loadQuotes().then(qs => this.setState(sample(qs)))
+    loadQuotes().then(quotes => this.setState(sample(quotes)))
   }
 
   toggle = () => {
