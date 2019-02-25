@@ -13,7 +13,7 @@
     "48": "spur1.png"
   },
   "chrome_url_overrides" : {
-    "newtab": "app.html"
+    "newtab": "index.html"
   },
   "permissions": [
     "storage"

@@ -53,6 +53,7 @@ module.exports = {
     new CleanWebpackPlugin(['dist']),
     new CopyWebpackPlugin([
       { from: 'assets/images/*.png', to: '[name].[ext]' },
+      { from: 'assets/manifest.json', to: 'manifest.json' },
     ]),
     new HtmlWebpackPlugin({
       filename: 'index.html',
