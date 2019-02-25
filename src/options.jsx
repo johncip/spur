@@ -285,6 +285,10 @@ const QuoteForm = ({ quote, author, url, category, children, handleChange }) => 
  * A modal for editing the clicked-on quote.
  */
 class AddQuoteModal extends Component {
+  closeModal = () => {
+    store.dispatch(closeAddModal())
+  }
+
   handleChange = (field, event) => {
     store.dispatch(
       setActiveQuote(
@@ -296,11 +300,7 @@ class AddQuoteModal extends Component {
   handleSave = () => {
     store.dispatch(putQuoteRecord(store.getState().activeQuote))
     // store.dispatch(saveQuoteRecords())
-    store.dispatch(closeAddModal())
-  }
-
-  closeModal = () => {
-    store.dispatch(closeAddModal())
+    this.closeModal()
   }
 
   render() {
@@ -362,13 +362,13 @@ class EditQuoteModal extends Component {
   handleSave = () => {
     store.dispatch(putQuoteRecord(store.getState().activeQuote))
     // store.dispatch(saveQuoteRecords())
-    store.dispatch(closeEditModal())
+    this.closeModal()
   }
 
   handleDelete = () => {
     store.dispatch(deleteQuoteRecord(store.getState().activeQuote.id))
     // store.dispatch(saveQuoteRecords())
-    store.dispatch(closeEditModal())
+    this.closeModal()
   }
 
   render() {
