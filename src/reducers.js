@@ -1,7 +1,4 @@
 import { combineReducers } from 'redux'
-import { polyfillBrowser } from './util'
-
-polyfillBrowser()
 
 const normalizedQuotes = records => (
   records.reduce((map, record, idx) => {
