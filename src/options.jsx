@@ -306,10 +306,8 @@ const AppRoot = () => {
 }
 
 
-const rootEl = document.getElementById('root')
-Modal.setAppElement('#root')
-const render = () => {
-  ReactDOM.render(<AppRoot />, rootEl)
-}
+const render = () => ReactDOM.render(<AppRoot />, window.root)
 store.subscribe(render)
+Modal.setAppElement('#root')
+
 render()

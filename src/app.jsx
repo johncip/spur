@@ -140,9 +140,8 @@ const AppRoot = () => {
 
 async function main() {
   const settings = await loadSettings()
-  const rootEl = document.getElementById('root')
-  rootEl.classList.add(settings.theme)
-  ReactDOM.render(<AppRoot />, rootEl)
+  window.root.classList.add(settings.theme)
+  ReactDOM.render(<AppRoot />, window.root)
 }
 
 main()
