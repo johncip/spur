@@ -1,6 +1,6 @@
 {
   "name": "spur",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Spur is a browser extension designed to spur your toward greater action. It places a random motivational quote on your new tab window.",
   "main": "app.js",
   "repository": {
@@ -15,6 +15,7 @@
     "@fortawesome/react-fontawesome": "^0.1.4",
     "classnames": "^2.2.6",
     "lodash.sample": "^4.2.1",
+    "prop-types": "^15.7.2",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
     "react-modal": "^3.8.1",
@@ -47,14 +48,16 @@
     "url-loader": "^1.1.2",
     "web-ext": "^3.0.0",
     "webpack": "^4.29.1",
-    "webpack-cli": "^3.2.3"
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-server": "^3.2.0"
   },
   "scripts": {
     "build": "webpack",
     "watch": "webpack -w",
     "run": "web-ext run",
     "fflint": "web-ext lint || true",
-    "lint": "eslint_d . --ext .js,.jsx || true"
+    "lint": "eslint_d . --ext .js,.jsx || true",
+    "dev": "webpack-dev-server"
   },
   "author": "",
   "license": "ISC",

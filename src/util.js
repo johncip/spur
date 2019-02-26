@@ -3,18 +3,44 @@ const DEFAULT_SETTINGS = {
   wakeTime: '6 am',
 }
 
-const STORAGE = browser.storage.local
+const seeds = require('../assets/seeds.json')
+
+/**
+ * Assigns browser shim unless browser is defined. Makes it possible to use
+ * dev server.
+ */
+export function polyfillBrowser() {
+  if (window.browser) { return }
+
+  window.browser = {
+    storage: {
+      local: {
+        get: (key) => {
+          const val = localStorage.getItem(key)
+          return val === null ? null : JSON.parse(val)
+        },
+        set: (obj) => {
+          // note: assumes setting object with single key
+          const key = Object.keys(obj)[0]
+          return localStorage.setItem(key, JSON.stringify({ [key]: obj[key] }))
+        },
+      },
+    },
+    runtime: {
+      openOptionsPage: () => {
+        document.location.href = '/options.html'
+      }
+    },
+  }
+}
+
+polyfillBrowser()
 
 /**
  * Seeds browser storage with the included quotes.
  */
 async function seedStorage() {
-  const url = browser.extension.getURL('seeds.json')
-
-  await fetch(url)
-    .then(resp => resp.json())
-    .then(seeds => STORAGE.set({ storedQuotes: seeds }))
-
+  browser.storage.local.set({ storedQuotes: seeds })
   return true
 }
 
@@ -39,8 +65,9 @@ export const sortedQuoteRecords = records => (
  * Reads a single key from browser storage and returns the value without the wrapper object.
  */
 export async function getOneKey(key) {
-  const response = await STORAGE.get(key)
-  if (!Object.keys(response).length) {
+  const response = await browser.storage.local.get(key)
+
+  if (!response || !Object.keys(response).length) {
     return null
   }
   return response[key]
@@ -63,7 +90,12 @@ export async function loadSettings() {
  * Loads quotes from browser storage. If they are not found, seeds storage with the
  * included quotes and tries again.
  */
-export async function loadQuotes() {
+export async function loadQuotes(stop) {
   const quotes = await getOneKey('storedQuotes')
-  return quotes || (await seedStorage() && loadQuotes())
+
+  if (quotes || stop) {
+    return quotes
+  }
+
+  return await seedStorage() && loadQuotes(true)
 }

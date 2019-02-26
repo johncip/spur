@@ -15,9 +15,6 @@
   "chrome_url_overrides" : {
     "newtab": "app.html"
   },
-  "web_accessible_resources": [
-    "seeds.json"
-  ],
   "permissions": [
     "storage"
   ],

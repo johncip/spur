@@ -8,9 +8,10 @@ import { faBox } from '@fortawesome/free-solid-svg-icons/faBox'
 import { faCog } from '@fortawesome/free-solid-svg-icons/faCog'
 import { faGlobeAmericas } from '@fortawesome/free-solid-svg-icons/faGlobeAmericas'
 
-import { loadSettings, loadQuotes } from './util'
-
+import { loadSettings, loadQuotes, polyfillBrowser } from './util'
 import 'Styles/app/style.scss'
+
+polyfillBrowser()
 
 /*
  * The main text of a quote.
@@ -91,44 +92,23 @@ const VerticalToggle = ({ up, handleClick }) => {
 /*
  * A displayed quote, with author, etc.
  */
-class QuoteBox extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { expanded: false }
-  }
-
-  toggleDrawer = () => {
-    this.setState(old => ({ expanded: !old.expanded }))
-  }
-
-  classes() {
-    const { expanded } = this.state
-    return classNames(
-      'quoteBox', {
-        'quoteBox-is-expanded': expanded,
-        'quoteBox-is-collapsed': !expanded,
-      },
-    )
-  }
-
-  render() {
-    const { quote, author, url, category } = this.props
-    return (
-      <div className={this.classes()}>
-        <Quote quote={quote} />
-        <Author author={author} />
-        <Rule />
-
-        {url && <Info url={url} />}
-        <Category category={category} />
-
-        <VerticalToggle
-          up={this.state.expanded}
-          handleClick={this.toggleDrawer}
-        />
-      </div>
-    )
-  }
+const QuoteBox = ({ quote, author, url, category, expanded, toggle }) => {
+  const classes = classNames(
+    'quoteBox', {
+      'quoteBox-is-expanded': expanded,
+      'quoteBox-is-collapsed': !expanded,
+    },
+  )
+  return (
+    <div className={classes}>
+      <Quote quote={quote} />
+      <Author author={author} />
+      <Rule />
+      {url && <Info url={url} />}
+      <Category category={category} />
+      <VerticalToggle up={expanded} handleClick={toggle} />
+    </div>
+  )
 }
 
 /*
@@ -143,11 +123,16 @@ class AppRoot extends Component {
       author: undefined,
       url: undefined,
       category: undefined,
+      expanded: false,
     }
   }
 
   componentDidMount() {
     loadQuotes().then(qs => this.setState(sample(qs)))
+  }
+
+  toggle = () => {
+    this.setState(old => ({ expanded: !old.expanded }))
   }
 
   render() {
@@ -161,6 +146,8 @@ class AppRoot extends Component {
         author={this.state.author}
         url={this.state.url}
         category={this.state.category}
+        expanded={this.state.expanded}
+        toggle={this.toggle}
       />,
     ]
   }
@@ -171,7 +158,6 @@ async function main() {
   const rootEl = document.getElementById('root')
   rootEl.classList.add(settings.theme)
   ReactDOM.render(<AppRoot />, rootEl)
-  browser.runtime.openOptionsPage()
 }
 
 main()

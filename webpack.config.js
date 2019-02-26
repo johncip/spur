@@ -7,7 +7,11 @@ const GoogleFontsPlugin = require('@beyonk/google-fonts-webpack-plugin')
 module.exports = {
   mode: 'development',
 
-  devtool: 'source-map',
+  devtool: 'inline-source-map',
+
+  devServer: {
+    contentBase: path.join(__dirname, 'dist'),
+  },
 
   resolve: {
     alias: {
@@ -16,7 +20,7 @@ module.exports = {
   },
 
   entry: {
-    app: './src/app.jsx',
+    index: './src/app.jsx',
     options: './src/options.jsx',
   },
 
@@ -48,12 +52,11 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(['dist']),
     new CopyWebpackPlugin([
-      { from: 'assets/*.json', to: '[name].[ext]' },
       { from: 'assets/images/*.png', to: '[name].[ext]' },
     ]),
     new HtmlWebpackPlugin({
-      filename: 'app.html',
-      chunks: ['app'],
+      filename: 'index.html',
+      chunks: ['index'],
       template: './src/template.html',
     }),
     new HtmlWebpackPlugin({
