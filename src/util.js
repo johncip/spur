@@ -1,9 +1,22 @@
+import compose from 'compose-function'
+
 const DEFAULT_SETTINGS = {
   theme: 'indexCard',
   wakeTime: '6 am'
 }
 
 const seeds = require('../assets/seeds.json')
+
+/*
+ * Given an object whose values are action creators, and a Redux store's dispatch function,
+ * returns a new object where each value is wrapped by dispatch.
+ */
+export function wrapActions(actions, dispatch) {
+  return Object.keys(actions).reduce((acc, key) => {
+    acc[key] = compose(dispatch, actions[key])
+    return acc
+  }, {})
+}
 
 /**
  * Assigns browser shim unless browser is defined. Makes it possible to use

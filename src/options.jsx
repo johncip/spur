@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import Modal from 'react-modal'
 import { createStore } from 'redux'
-import compose from 'compose-function'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus'
@@ -12,19 +11,20 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons/faGithub'
 import { faFirefox } from '@fortawesome/free-brands-svg-icons/faFirefox'
 import { faChrome } from '@fortawesome/free-brands-svg-icons/faChrome'
 
+import * as actions from './actions'
 import reducers from './reducers'
-import {
-  setActiveQuote, setNewActiveQuote, patchActiveQuote,
-  updateSettings, updateQuotes,
-  putQuote, deleteQuote, closeModal
-} from './actions'
-import { loadSettings, loadQuotes } from './util'
+import { loadSettings, loadQuotes, wrapActions } from './util'
 
 import 'Styles/options/style.scss'
 
-
 const store = createStore(reducers)
-const { dispatch, getState } = store
+const { getState } = store
+
+const {
+  setActiveQuote, setNewActiveQuote, patchActiveQuote,
+  updateSettings, updateQuotes,
+  putQuote, deleteQuote, closeModal
+} = wrapActions(actions, store.dispatch)
 
 
 /*
@@ -54,7 +54,7 @@ const EditQuoteButton = ({ quote }) => (
   <button
     type="button"
     className="editQuoteButton"
-    onClick={() => dispatch(setActiveQuote(quote))}
+    onClick={() => setActiveQuote(quote)}
   >
     <div className="truncatedText" tabIndex="-1">
       <span>{quote.text}</span>
@@ -72,7 +72,7 @@ const AddQuoteButton = () => (
   <button
     className="editQuoteButton editQuoteButton-add"
     type="button"
-    onClick={() => dispatch(setNewActiveQuote())}
+    onClick={() => setNewActiveQuote()}
   >
     <FontAwesomeIcon icon={faPlus} />
     New quote…
@@ -206,7 +206,7 @@ const DeleteButton = ({ onClick }) => (
 /*
  * A parameterized input for the quote form.
  */
-const QuoteFormField = ({ name, value, handleChange }) => (
+const QuoteFormField = ({ name, value }) => (
   <div className="quoteForm--field">
     <label className="quoteForm--label" htmlFor={`id-${name}`}>
       {name}
@@ -215,7 +215,7 @@ const QuoteFormField = ({ name, value, handleChange }) => (
       id={`id-${name}`}
       className="quoteForm--input"
       value={value}
-      onChange={event => handleChange(name.toLowerCase(), event)}
+      onChange={event => patchActiveQuote(name.toLowerCase(), event.target.value)}
     />
   </div>
 )
@@ -236,9 +236,9 @@ const QuoteForm = ({ text, author, url, category, children, handleChange }) => (
       />
     </div>
 
-    <QuoteFormField name="Author" value={author} handleChange={handleChange} />
-    <QuoteFormField name="URL" value={url} handleChange={handleChange} />
-    <QuoteFormField name="Category" value={category} handleChange={handleChange} />
+    <QuoteFormField name="Author" value={author} />
+    <QuoteFormField name="URL" value={url} />
+    <QuoteFormField name="Category" value={category} />
 
     <div className="btnContainer">
       {children}
@@ -252,11 +252,6 @@ const QuoteForm = ({ text, author, url, category, children, handleChange }) => (
  */
 const EditModal = () => {
   const { activeQuote, quotes, modalIsOpen } = getState()
-  const handleClose = compose(dispatch, closeModal)
-  const handleDelete = () => dispatch(deleteQuote(activeQuote.id))
-  const handleChange = (field, event) => {
-    dispatch(patchActiveQuote({ [field]: event.target.value }))
-  }
   const quoteExists = quotes.has(activeQuote.id)
 
   return (
@@ -264,7 +259,7 @@ const EditModal = () => {
       className="modal"
       overlayClassName="modalOverlay"
       isOpen={modalIsOpen}
-      onRequestClose={handleClose}
+      onRequestClose={closeModal}
       contentLabel={quoteExists ? 'Edit Quote' : 'Add Quote'}
     >
       <h1 className="modal--heading">Edit Quote</h1>
@@ -275,13 +270,12 @@ const EditModal = () => {
         author={activeQuote.author}
         url={activeQuote.url}
         category={activeQuote.category}
-        handleChange={handleChange}
       >
-        <SaveButton onClick={() => dispatch(putQuote(activeQuote))} />
+        <SaveButton onClick={() => putQuote(activeQuote)} />
         {quoteExists
-          ? <DeleteButton onClick={handleDelete} />
+          ? <DeleteButton onClick={() => deleteQuote(activeQuote.id)} />
           : null}
-        <CancelButton onClick={handleClose} />
+        <CancelButton onClick={closeModal} />
       </QuoteForm>
     </Modal>
   )
@@ -297,8 +291,8 @@ const AppRoot = () => {
 
   useEffect(() => {
     if (fetched) return
-    loadSettings().then(compose(dispatch, updateSettings))
-    loadQuotes().then(compose(dispatch, updateQuotes))
+    loadSettings().then(updateSettings)
+    loadQuotes().then(updateQuotes)
   })
 
   return fetched ? [
