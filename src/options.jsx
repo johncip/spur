@@ -164,6 +164,19 @@ const OptionsPage = ({ settings, quotes }) => (
 )
 
 /*
+ * A save button for the modal.
+ */
+const SaveButton = ({ onClick }) => (
+  <button
+    type="button"
+    className="btn btn-save"
+    onClick={onClick}
+  >
+    Save
+  </button>
+)
+
+/*
  * A cancel button for the modals.
  */
 const CancelButton = ({ onClick }) => (
@@ -264,13 +277,7 @@ const EditModal = () => {
         category={activeQuote.category}
         handleChange={handleChange}
       >
-        <button
-          type="button"
-          className="btn btn-save"
-          onClick={() => dispatch(putQuote(activeQuote))}
-        >
-          Save
-        </button>
+        <SaveButton onClick={() => dispatch(putQuote(activeQuote))} />
         {quoteExists
           ? <DeleteButton onClick={handleDelete} />
           : null}
