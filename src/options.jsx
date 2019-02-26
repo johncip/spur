@@ -13,7 +13,7 @@ import { faChrome } from '@fortawesome/free-brands-svg-icons/faChrome'
 
 import * as actions from './actions'
 import reducers from './reducers'
-import { loadSettings, loadQuotes, wrapActions } from './util'
+import { loadSettings, loadQuotes, wrapActions, polyfillBrowser } from './util'
 
 import 'Styles/options/style.scss'
 
@@ -306,8 +306,8 @@ const AppRoot = () => {
 }
 
 
+polyfillBrowser()
 const render = () => ReactDOM.render(<AppRoot />, window.root)
 store.subscribe(render)
 Modal.setAppElement('#root')
-
 render()

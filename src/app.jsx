@@ -12,7 +12,6 @@ import { faGlobeAmericas } from '@fortawesome/free-solid-svg-icons/faGlobeAmeric
 import { loadSettings, loadQuotes, polyfillBrowser } from './util'
 import 'Styles/app/style.scss'
 
-polyfillBrowser()
 
 /*
  * The main text of a quote.
@@ -139,6 +138,7 @@ const AppRoot = () => {
 }
 
 async function main() {
+  polyfillBrowser()
   const settings = await loadSettings()
   window.root.classList.add(settings.theme)
   ReactDOM.render(<AppRoot />, window.root)

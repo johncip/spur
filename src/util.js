@@ -47,8 +47,6 @@ export function polyfillBrowser() {
   }
 }
 
-polyfillBrowser()
-
 /**
  * Seeds browser storage with the included quotes.
  */
