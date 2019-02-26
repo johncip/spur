@@ -13,7 +13,7 @@ import { faChrome } from '@fortawesome/free-brands-svg-icons/faChrome'
 
 import * as actions from './actions'
 import reducers from './reducers'
-import { loadSettings, loadQuotes, wrapActions, polyfillBrowser } from './util'
+import { loadSettings, loadQuotes, polyfillBrowser } from './util'
 
 import 'Styles/options/style.scss'
 
