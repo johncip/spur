@@ -23,7 +23,6 @@ module.exports = {
     'react/no-multi-comp': 'off',
     'react/prop-types': 'off',
     'react/no-unused-state': 'off',
-    'react/forbid-prop-types': 'off',
     'react/no-render-return-value': 'off',
 
     'jsx-a11y/label-has-associated-control': ['error', { assert: 'either' } ],
