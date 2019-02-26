@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import Modal from 'react-modal'
-import { createStore } from 'redux'
+import { createStore, bindActionCreators } from 'redux'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus'
@@ -24,7 +24,7 @@ const {
   setActiveQuote, setNewActiveQuote, patchActiveQuote,
   updateSettings, updateQuotes,
   putQuote, deleteQuote, closeModal
-} = wrapActions(actions, store.dispatch)
+} = bindActionCreators(actions, store.dispatch)
 
 
 /*
