@@ -1,9 +1,6 @@
 import { combineReducers } from 'redux'
-import { polyfillBrowser } from './util'
 
-polyfillBrowser()
-
-const normalizedQuoteRecords = records => (
+const normalizedQuotes = records => (
   records.reduce((map, record, idx) => {
     map.set(idx, Object.assign({ id: idx }, record))
     return map
@@ -14,31 +11,29 @@ const activeQuote = (state = {}, action) => {
   switch (action.type) {
     case 'SET_ACTIVE_QUOTE':
       return action.payload
-    case 'SET_NEW_ACTIVE_QUOTE': {
-      return { quote: '', author: '', url: '', category: '', id: Math.random() }
-    }
+    case 'SET_NEW_ACTIVE_QUOTE':
+      return { quote: '', author: '', url: '', category: '', id: 'new' }
+    case 'PATCH_ACTIVE_QUOTE':
+      return Object.assign({}, state, action.payload)
     default:
       return state
   }
 }
 
-const addModal = (state = { isOpen: false }, action) => {
+const modalIsOpen = (state = false, action) => {
   switch (action.type) {
-    case 'OPEN_ADD_MODAL':
-      return { isOpen: true }
-    case 'CLOSE_ADD_MODAL':
-      return { isOpen: false }
-    default:
-      return state
-  }
-}
-
-const editModal = (state = { isOpen: false }, action) => {
-  switch (action.type) {
-    case 'OPEN_EDIT_MODAL':
-      return { isOpen: true }
-    case 'CLOSE_EDIT_MODAL':
-      return { isOpen: false }
+    case 'OPEN_MODAL':
+      return true
+    case 'SET_ACTIVE_QUOTE':
+      return true
+    case 'SET_NEW_ACTIVE_QUOTE':
+      return true
+    case 'CLOSE_MODAL':
+      return false
+    case 'PUT_QUOTE':
+      return false
+    case 'DELETE_QUOTE':
+      return false
     default:
       return state
   }
@@ -53,24 +48,28 @@ const settings = (state = new Map(), action) => {
   }
 }
 
-const quoteRecords = (state = new Map(), action) => {
+const quotes = (state = new Map(), action) => {
   switch (action.type) {
-    case 'UPDATE_QUOTE_RECORDS': {
-      return normalizedQuoteRecords(action.payload)
+    case 'UPDATE_QUOTES': {
+      return normalizedQuotes(action.payload)
     }
-    case 'UPDATE_QUOTE_RECORD': {
+    case 'PUT_QUOTE': {
       const copy = new Map(state)
-      const quoteRecord = action.payload
-      copy.set(quoteRecord.id, quoteRecord)
+      const quote = Object.assign({}, action.payload)
+
+      if (quote.id === 'new') {
+        quote.id = Math.random()
+      }
+      copy.set(quote.id, quote)
       return copy
     }
-    case 'DELETE_QUOTE_RECORD': {
+    case 'DELETE_QUOTE': {
       const copy = new Map(state)
       copy.delete(action.payload)
       return copy
     }
     // TODO thunk it up
-    case 'SAVE_QUOTE_RECORDS': {
+    case 'SAVE_QUOTES': {
       browser.storage.local.set({ storedQuotes: Array.from(state.values()) })
       return state
     }
@@ -81,8 +80,7 @@ const quoteRecords = (state = new Map(), action) => {
 
 export default combineReducers({
   activeQuote,
-  addModal,
-  editModal,
+  modalIsOpen,
   settings,
-  quoteRecords,
+  quotes
 })

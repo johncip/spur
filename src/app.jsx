@@ -1,7 +1,8 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import classNames from 'classnames'
 import sample from 'lodash.sample'
+import { compose } from 'redux'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBox } from '@fortawesome/free-solid-svg-icons/faBox'
@@ -11,16 +12,15 @@ import { faGlobeAmericas } from '@fortawesome/free-solid-svg-icons/faGlobeAmeric
 import { loadSettings, loadQuotes, polyfillBrowser } from './util'
 import 'Styles/app/style.scss'
 
-polyfillBrowser()
 
 /*
  * The main text of a quote.
  */
-const Quote = ({ quote }) => {
-  const size = 160 * (1 / (quote.length ** 0.3))
+const Quote = ({ text }) => {
+  const size = 160 * (1 / (text.length ** 0.3))
   return (
-    <div className="quoteBox--quote" style={{ fontSize: `${size}px` }}>
-      {quote}
+    <div className="quoteBox--text" style={{ fontSize: `${size}px` }}>
+      {text}
     </div>
   )
 }
@@ -79,7 +79,7 @@ const VerticalToggle = ({ up, handleClick }) => {
   const classes = classNames(
     'verticalToggle', {
       'verticalToggle-is-up': up,
-      'verticalToggle-is-down': !up,
+      'verticalToggle-is-down': !up
     },
   )
   return (
@@ -92,16 +92,16 @@ const VerticalToggle = ({ up, handleClick }) => {
 /*
  * A displayed quote, with author, etc.
  */
-const QuoteBox = ({ quote, author, url, category, expanded, toggle }) => {
+const QuoteBox = ({ text, author, url, category, expanded, toggle }) => {
   const classes = classNames(
     'quoteBox', {
       'quoteBox-is-expanded': expanded,
-      'quoteBox-is-collapsed': !expanded,
+      'quoteBox-is-collapsed': !expanded
     },
   )
   return (
     <div className={classes}>
-      <Quote quote={quote} />
+      <Quote text={text} />
       <Author author={author} />
       <Rule />
       {url && <Info url={url} />}
@@ -114,50 +114,34 @@ const QuoteBox = ({ quote, author, url, category, expanded, toggle }) => {
 /*
  * Loads a quote and renders the <QuoteBox />.
  */
-class AppRoot extends Component {
-  constructor(props) {
-    super(props)
+const AppRoot = () => {
+  const [expanded, setExpanded] = useState(false)
+  const [quote, setQuote] = useState({})
+  const loaded = !!quote.text
 
-    this.state = {
-      quote: undefined,
-      author: undefined,
-      url: undefined,
-      category: undefined,
-      expanded: false,
-    }
-  }
+  useEffect(() => {
+    if (!loaded) loadQuotes().then(compose(setQuote, sample))
+  })
 
-  componentDidMount() {
-    loadQuotes().then(qs => this.setState(sample(qs)))
-  }
-
-  toggle = () => {
-    this.setState(old => ({ expanded: !old.expanded }))
-  }
-
-  render() {
-    if (!this.state.quote) return null
-
-    return [
-      <OptionsButton key="opts-btn" />,
-      <QuoteBox
-        key="quote-box"
-        quote={this.state.quote}
-        author={this.state.author}
-        url={this.state.url}
-        category={this.state.category}
-        expanded={this.state.expanded}
-        toggle={this.toggle}
-      />,
-    ]
-  }
+  return loaded ? [
+    <OptionsButton key="opts-btn" />,
+    <QuoteBox
+      key="quote-box"
+      text={quote.text}
+      author={quote.author}
+      url={quote.url}
+      category={quote.category}
+      expanded={expanded}
+      toggle={() => setExpanded(!expanded)}
+    />
+  ] : null
 }
 
 async function main() {
+  polyfillBrowser()
   const settings = await loadSettings()
-  const rootEl = document.getElementById('root')
-  rootEl.classList.add(settings.theme)
-  ReactDOM.render(<AppRoot />, rootEl)
+  window.root.classList.add(settings.theme)
+  ReactDOM.render(<AppRoot />, window.root)
 }
 
 main()

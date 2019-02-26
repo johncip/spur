@@ -1,103 +1,103 @@
 [
   {
-    "quote"    : "A monk told Joshu, “I have just entered this monastery. I beg you to teach me.”\n\nJoshu asked, “Have you eaten your rice porridge?”\n\nThe monk replied, “I have.”\n\n“Then,” said Joshu, “Go and wash your bowl.”",
+    "text"     : "A monk told Joshu, “I have just entered this monastery. I beg you to teach me.”\n\nJoshu asked, “Have you eaten your rice porridge?”\n\nThe monk replied, “I have.”\n\n“Then,” said Joshu, “Go and wash your bowl.”",
     "author"   : "無門慧開",
     "category" : "Mindset",
     "url"      : "http://mnmlist.com/wash-your-bowl/"
   },
   {
-    "quote"    : "People who are unable to motivate themselves must be content with mediocrity, no matter how impressive their other talents.",
+    "text"     : "People who are unable to motivate themselves must be content with mediocrity, no matter how impressive their other talents.",
     "author"   : "Andrew Carnegie",
     "category" : "Mindset",
     "url"      : "https://www.brainyquote.com/quotes/andrew_carnegie_391523"
   },
   {
-    "quote"    : "The average person puts only 25% of his energy and ability into his work. The world takes off its hat to those who put in more than 50% of their capacity, and stands on its head for those few and far between souls who devote 100%.",
+    "text"     : "The average person puts only 25% of his energy and ability into his work. The world takes off its hat to those who put in more than 50% of their capacity, and stands on its head for those few and far between souls who devote 100%.",
     "author"   : "Andrew Carnegie",
     "category" : "Mindset",
     "url"      : "https://hear.ceoblognation.com/2012/10/16/the-men-who-built-america-andrew-carnegie/"
   },
   {
-    "quote"    : "The man who acquires the ability to take full possession of his own mind may take possession of anything else to which he is justly entitled.",
+    "text"     : "The man who acquires the ability to take full possession of his own mind may take possession of anything else to which he is justly entitled.",
     "author"   : "Andrew Carnegie",
     "category" : "Mindset",
     "url"      : "https://hear.ceoblognation.com/2012/10/16/the-men-who-built-america-andrew-carnegie/"
   },
   {
-    "quote"    : "...People will tell you to do what makes you happy, but a lot of this has been hard work, and I’m not always happy. And I don’t think you should do just what makes you happy. I think you should do what makes you great. Do what’s uncomfortable, and scary, and hard, but pays off in the long run.",
+    "text"     : "...People will tell you to do what makes you happy, but a lot of this has been hard work, and I’m not always happy. And I don’t think you should do just what makes you happy. I think you should do what makes you great. Do what’s uncomfortable, and scary, and hard, but pays off in the long run.",
     "author"   : "Charlie Day",
     "category" : "Mindset",
     "url"      : "https://motivationmentalist.com/2016/12/15/do-what-makes-you-great-charlie-day-motivational-video/"
   },
   {
-    "quote"    : "Success isn't always about “greatness,” it's about consistency. Consistent hard work gains success. Greatness will come.",
+    "text"     : "Success isn't always about “greatness,” it's about consistency. Consistent hard work gains success. Greatness will come.",
     "author"   : "Dwayne “The Rock” Johnson",
     "category" : "Mindset",
     "url"      : "https://twitter.com/therock/status/548846125529055232"
   },
   {
-    "quote"    : "Everybody pities the weak; jealousy you have to earn.",
+    "text"     : "Everybody pities the weak; jealousy you have to earn.",
     "author"   : "Arnold Schwarzenegger",
     "category" : "Mindset",
     "url"      : "https://www.goodreads.com/quotes/152890-everybody-pities-the-weak-jealousy-you-have-to-earn"
   },
   {
-    "quote"    : "You'll never change your life until you change something you do daily. The secret of your success is found in your daily routine.",
+    "text"     : "You'll never change your life until you change something you do daily. The secret of your success is found in your daily routine.",
     "author"   : "John C. Maxwell",
     "category" : "Mindset",
     "url"      : "https://www.johnmaxwell.com/blog/it-all-comes-down-to-what-you-do-daily/"
   },
   {
-    "quote"    : "...If we’re facing in the right direction, all we have to do is keep on walking.",
+    "text"     : "...If we’re facing in the right direction, all we have to do is keep on walking.",
     "author"   : "Joseph Goldstein",
     "category" : "Mindset",
     "url"      : "https://fakebuddhaquotes.com/if-we-are-facing-in-the-right-direction-all-we-have-to-do-is-keep-on-walking/"
   },
   {
-    "quote"    : "Argue for your limitations and, sure enough, they're yours.",
+    "text"     : "Argue for your limitations and, sure enough, they're yours.",
     "author"   : "Richard Bach",
     "category" : "Mindset",
     "url"      : "https://www.goodreads.com/quotes/5832-argue-for-your-limitations-and-sure-enough-they-re-yours"
   },
   {
-    "quote"    : "Losers spend way too much time being pissed off by the problem rather than moving into the positive state of mind and getting on with building the solution... Losers tell made up stories to themselves and those around them about the problem.\n\nThis storytelling takes up a lot of time and sucks away all the energy that could be channeled into coming up with the solution.",
+    "text"     : "Losers spend way too much time being pissed off by the problem rather than moving into the positive state of mind and getting on with building the solution... Losers tell made up stories to themselves and those around them about the problem.\n\nThis storytelling takes up a lot of time and sucks away all the energy that could be channeled into coming up with the solution.",
     "author"   : "Tim Denning",
     "category" : "Mindset",
     "url"      : "https://addicted2success.com/success-advice/how-losers-are-created-and-how-to-avoid-becoming-one/"
   },
   {
-    "quote"    : "Either you run the day or the day runs you.",
+    "text"     : "Either you run the day or the day runs you.",
     "author"   : "Jim Rohn",
     "category" : "Mindset"
   },
   {
-    "quote"    : "The secret of getting ahead is getting started.",
+    "text"     : "The secret of getting ahead is getting started.",
     "author"   : "Mark Twain",
     "category" : "Mindset"
   },
   {
-    "quote"    : "Try not to become a person of success, but rather try to become a person of value.",
+    "text"     : "Try not to become a person of success, but rather try to become a person of value.",
     "author"   : "Albert Einstein",
     "category" : "Mindset"
   },
   {
-    "quote"    : "The difference between winning and losing is most often not quitting.",
+    "text"     : "The difference between winning and losing is most often not quitting.",
     "author"   : "Walt Disney",
     "category" : "Mindset"
   },
   {
-    "quote"    : "You'll never plow a field by turning it over in your mind.",
+    "text"     : "You'll never plow a field by turning it over in your mind.",
     "author"   : "Irish proverb",
     "category" : "Mindset"
   },
   {
-    "quote"    : "If the wind will not serve, take to the oars.",
+    "text"     : "If the wind will not serve, take to the oars.",
     "author"   : "Latin proverb",
     "category" : "Mindset",
     "url"      : "https://philosiblog.com/2013/04/29/if-the-wind-will-not-serve-take-to-the-oars/"
   },
   {
-    "quote"    : "Skills can be taught. Character you either have or don't have. Bigfoot understood that there are two types of people in the world: those who do what they say they're going to do—and everyone else.",
+    "text"     : "Skills can be taught. Character you either have or don't have. Bigfoot understood that there are two types of people in the world: those who do what they say they're going to do—and everyone else.",
     "author"   : "Anthony Bourdain",
     "category" : "Mindset",
     "url"      : "https://archive.org/stream/Anthony_Bourdain_Kitchen_Confidential/Anthony_Bourdain_Kitchen_Confidential_djvu.txt"

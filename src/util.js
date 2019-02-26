@@ -1,6 +1,6 @@
 const DEFAULT_SETTINGS = {
   theme: 'indexCard',
-  wakeTime: '6 am',
+  wakeTime: '6 am'
 }
 
 const seeds = require('../assets/seeds.json')
@@ -23,43 +23,23 @@ export function polyfillBrowser() {
           // note: assumes setting object with single key
           const key = Object.keys(obj)[0]
           return localStorage.setItem(key, JSON.stringify({ [key]: obj[key] }))
-        },
-      },
+        }
+      }
     },
     runtime: {
       openOptionsPage: () => {
         document.location.href = '/options.html'
       }
-    },
+    }
   }
 }
-
-polyfillBrowser()
 
 /**
  * Seeds browser storage with the included quotes.
  */
 async function seedStorage() {
-  browser.storage.local.set({ storedQuotes: seeds })
-  return true
+  browser.storage.local.set({ quotes: seeds })
 }
-
-/**
- * Returns string with leading nonword characters removed.
- */
-function trimStart(str) {
-  return str.replace(/^\W+/, '')
-}
-
-/**
- * Returns quote records sorted by quote. Ignores leading ellipsis.
- */
-// TODO: currently unused
-export const sortedQuoteRecords = records => (
-  records.sort((a, b) => (
-    trimStart(a.quote).localeCompare(trimStart(b.quote))
-  ))
-)
 
 /**
  * Reads a single key from browser storage and returns the value without the wrapper object.
@@ -91,11 +71,12 @@ export async function loadSettings() {
  * included quotes and tries again.
  */
 export async function loadQuotes(stop) {
-  const quotes = await getOneKey('storedQuotes')
+  const quotes = await getOneKey('quotes')
 
   if (quotes || stop) {
     return quotes
   }
 
-  return await seedStorage() && loadQuotes(true)
+  await seedStorage()
+  return loadQuotes(true)
 }

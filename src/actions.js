@@ -1,40 +1,50 @@
-export const openAddModal = () => (
-  { type: 'OPEN_ADD_MODAL' }
+/*
+ * modal-only
+ */
+export const openModal = () => (
+  { type: 'OPEN_MODAL' }
 )
-export const closeAddModal = () => (
-  { type: 'CLOSE_ADD_MODAL' }
-)
-
-
-export const openEditModal = () => (
-  { type: 'OPEN_EDIT_MODAL' }
-)
-export const closeEditModal = () => (
-  { type: 'CLOSE_EDIT_MODAL' }
+export const closeModal = () => (
+  { type: 'CLOSE_MODAL' }
 )
 
 
-export const saveQuoteRecords = () => (
-  { type: 'SAVE_QUOTE_RECORDS' }
+/*
+ * quote record list
+ */
+export const saveQuotes = () => (
+  { type: 'SAVE_QUOTES' }
 )
-export const updateQuoteRecords = quoteRecords => (
-  { type: 'UPDATE_QUOTE_RECORDS', payload: quoteRecords }
+
+export const updateQuotes = quotes => (
+  { type: 'UPDATE_QUOTES', payload: quotes }
 )
-export const updateQuoteRecord = quote => (
-  { type: 'UPDATE_QUOTE_RECORD', payload: quote }
+
+export const putQuote = quote => (
+  { type: 'PUT_QUOTE', payload: quote }
 )
-export const deleteQuoteRecord = id => (
-  { type: 'DELETE_QUOTE_RECORD', payload: id }
+
+export const deleteQuote = id => (
+  { type: 'DELETE_QUOTE', payload: id }
 )
 
 
+/*
+ * settings
+ */
 export const updateSettings = settings => (
   { type: 'UPDATE_SETTINGS', payload: settings }
 )
 
 
+/*
+ * edit form
+ */
 export const setActiveQuote = quote => (
   { type: 'SET_ACTIVE_QUOTE', payload: quote }
+)
+export const patchActiveQuote = (key, value) => (
+  { type: 'PATCH_ACTIVE_QUOTE', payload: { [key]: value } }
 )
 export const setNewActiveQuote = () => (
   { type: 'SET_NEW_ACTIVE_QUOTE' }
