@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux'
+import { combineReducers, loop, Cmd } from 'redux-loop'
 
 
 // helpers
@@ -16,6 +16,12 @@ const ensureId = (quote) => {
     copy.id = Math.random()
   }
   return copy
+}
+
+const storeQuotes = (quoteMap) => {
+  window.browser.storage.local.set({
+    quotes: Array.from(quoteMap.values())
+  })
 }
 
 
@@ -71,17 +77,18 @@ const quotes = (state = new Map(), action) => {
       const copy = new Map(state)
       const quote = ensureId(action.payload)
       copy.set(quote.id, quote)
-      return copy
+      return loop(
+        copy,
+        Cmd.run(storeQuotes, { args: [copy] })
+      )
     }
     case 'DELETE_QUOTE': {
       const copy = new Map(state)
       copy.delete(action.payload)
-      return copy
-    }
-    // TODO thunk it up
-    case 'SAVE_QUOTES': {
-      browser.storage.local.set({ storedQuotes: Array.from(state.values()) })
-      return state
+      return loop(
+        copy,
+        Cmd.run(storeQuotes, { args: [copy] })
+      )
     }
     default:
       return state
