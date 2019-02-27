@@ -1,11 +1,38 @@
-import { combineReducers } from 'redux'
+import { combineReducers, loop, Cmd } from 'redux-loop'
 
+
+// helpers
+
+/*
+ * Given an array of quotes (see seeds.json), returns a map where the
+ * array indices are the keys, and the quotes contain a matching id field.
+ */
 const normalizedQuotes = records => (
   records.reduce((map, record, idx) => {
-    map.set(idx, Object.assign({ id: idx }, record))
+    map.set(idx, { ...record, id: idx })
     return map
   }, new Map())
 )
+
+/*
+ * Returns a copy of the given quote, assigning a new ID
+ */
+const ensureId = (quote) => {
+  const copy = { ...quote }
+  if (copy.id === 'new') {
+    copy.id = Math.random() // TODO: do something better
+  }
+  return copy
+}
+
+const storeQuotes = (quoteMap) => {
+  window.browser.storage.local.set({
+    quotes: Array.from(quoteMap.values())
+  })
+}
+
+
+// reducers
 
 const activeQuote = (state = {}, action) => {
   switch (action.type) {
@@ -14,7 +41,7 @@ const activeQuote = (state = {}, action) => {
     case 'SET_NEW_ACTIVE_QUOTE':
       return { quote: '', author: '', url: '', category: '', id: 'new' }
     case 'PATCH_ACTIVE_QUOTE':
-      return Object.assign({}, state, action.payload)
+      return { ...state, ...action.payload }
     default:
       return state
   }
@@ -54,24 +81,21 @@ const quotes = (state = new Map(), action) => {
       return normalizedQuotes(action.payload)
     }
     case 'PUT_QUOTE': {
-      const copy = new Map(state)
-      const quote = Object.assign({}, action.payload)
-
-      if (quote.id === 'new') {
-        quote.id = Math.random()
-      }
-      copy.set(quote.id, quote)
-      return copy
+      const next = new Map(state)
+      const quote = ensureId(action.payload)
+      next.set(quote.id, quote)
+      return loop(
+        next,
+        Cmd.run(storeQuotes, { args: [next] })
+      )
     }
     case 'DELETE_QUOTE': {
-      const copy = new Map(state)
-      copy.delete(action.payload)
-      return copy
-    }
-    // TODO thunk it up
-    case 'SAVE_QUOTES': {
-      browser.storage.local.set({ storedQuotes: Array.from(state.values()) })
-      return state
+      const next = new Map(state)
+      next.delete(action.payload)
+      return loop(
+        next,
+        Cmd.run(storeQuotes, { args: [next] })
+      )
     }
     default:
       return state

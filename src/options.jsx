@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import Modal from 'react-modal'
-import { createStore, bindActionCreators } from 'redux'
+import { bindActionCreators, createStore } from 'redux'
+import { install as installLoop } from 'redux-loop'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus'
@@ -17,14 +18,14 @@ import { loadSettings, loadQuotes, polyfillBrowser } from './util'
 
 import 'Styles/options/style.scss'
 
-const store = createStore(reducers)
-const { getState } = store
+const store = createStore(reducers, undefined, installLoop())
+const { dispatch, getState } = store
 
 const {
   setActiveQuote, setNewActiveQuote, patchActiveQuote,
   updateSettings, updateQuotes,
   putQuote, deleteQuote, closeModal
-} = bindActionCreators(actions, store.dispatch)
+} = bindActionCreators(actions, dispatch)
 
 
 /*
