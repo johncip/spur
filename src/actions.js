@@ -15,6 +15,16 @@ export const dismissToast = () => (
   { type: 'DISMISS_TOAST' }
 )
 
+// notifyAfter* should be curried with the active quote.
+export const notifyAfterSave = quote => () => (
+  { type: 'NOTIFY_AFTER_SAVE', payload: quote }
+)
+
+// also they aren't dispatched from the app, but in response to other actions.
+export const notifyAfterDelete = quote => () => (
+  { type: 'NOTIFY_AFTER_DELETE', payload: quote }
+)
+
 
 /*
  * quote record list

@@ -1,4 +1,5 @@
 import { combineReducers, loop, Cmd } from 'redux-loop'
+import { notifyAfterSave, notifyAfterDelete } from './actions'
 
 
 // helpers
@@ -23,6 +24,17 @@ const ensureId = (quote) => {
     copy.id = Math.random() // TODO: do something better
   }
   return copy
+}
+
+/*
+ * Returns a brief summary of a quote for use with the alert.
+ */
+const summary = ({ text }) => {
+  const len = 20
+  if (text.length < len) {
+    return text
+  }
+  return `(“${text.substring(0, len)}…”)`
 }
 
 /*
@@ -89,7 +101,13 @@ const quotes = (state = new Map(), action) => {
       next.set(quote.id, quote)
       return loop(
         next,
-        Cmd.run(storeQuotes, { args: [next] })
+        Cmd.run(
+          storeQuotes, {
+            args: [next],
+            successActionCreator: notifyAfterSave(quote)
+            // TODO: define failActionCreator
+          }
+        )
       )
     }
     case 'DELETE_QUOTE': {
@@ -98,7 +116,13 @@ const quotes = (state = new Map(), action) => {
       next.delete(quote.id)
       return loop(
         next,
-        Cmd.run(storeQuotes, { args: [next] })
+        Cmd.run(
+          storeQuotes, {
+            args: [next],
+            successActionCreator: notifyAfterDelete(quote)
+            // TODO: define failActionCreator
+          }
+        )
       )
     }
     default:
@@ -108,11 +132,16 @@ const quotes = (state = new Map(), action) => {
 
 const toast = (state = { message: null, shown: false }, action) => {
   switch (action.type) {
-    // TODO: move these to callbacks, this is just to see it pop up
-    case 'PUT_QUOTE':
-      return { message: 'Quote saved.', shown: true }
-    case 'DELETE_QUOTE':
-      return { message: 'Quote deleted.', shown: true }
+    case 'NOTIFY_AFTER_SAVE':
+      return {
+        message: `Quote ${summary(action.payload)} saved.`,
+        shown: true
+      }
+    case 'NOTIFY_AFTER_DELETE':
+      return {
+        message: `Quote ${summary(action.payload)} deleted.`,
+        shown: true
+      }
     case 'DISMISS_TOAST':
       return { ...state, shown: false }
     default:
