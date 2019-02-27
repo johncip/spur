@@ -280,7 +280,7 @@ const EditModal = () => {
       >
         <SaveButton onClick={() => putQuote(activeQuote)} />
         {quoteExists
-          ? <DeleteButton onClick={() => deleteQuote(activeQuote.id)} />
+          ? <DeleteButton onClick={() => deleteQuote(activeQuote)} />
           : null}
         <CancelButton onClick={closeModal} />
       </QuoteForm>

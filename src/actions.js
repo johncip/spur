@@ -31,8 +31,8 @@ export const putQuote = quote => (
   { type: 'PUT_QUOTE', payload: quote }
 )
 
-export const deleteQuote = id => (
-  { type: 'DELETE_QUOTE', payload: id }
+export const deleteQuote = quote => (
+  { type: 'DELETE_QUOTE', payload: quote }
 )
 
 

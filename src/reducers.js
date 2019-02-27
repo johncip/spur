@@ -91,7 +91,8 @@ const quotes = (state = new Map(), action) => {
     }
     case 'DELETE_QUOTE': {
       const next = new Map(state)
-      next.delete(action.payload)
+      const quote = action.payload
+      next.delete(quote.id)
       return loop(
         next,
         Cmd.run(storeQuotes, { args: [next] })
