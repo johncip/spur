@@ -1,11 +1,25 @@
 import { combineReducers } from 'redux'
 
+
+// helpers
+
 const normalizedQuotes = records => (
   records.reduce((map, record, idx) => {
     map.set(idx, Object.assign({ id: idx }, record))
     return map
   }, new Map())
 )
+
+const ensureId = (quote) => {
+  const copy = Object.assign({}, quote)
+  if (copy.id === 'new') {
+    copy.id = Math.random()
+  }
+  return copy
+}
+
+
+// reducers
 
 const activeQuote = (state = {}, action) => {
   switch (action.type) {
@@ -55,11 +69,7 @@ const quotes = (state = new Map(), action) => {
     }
     case 'PUT_QUOTE': {
       const copy = new Map(state)
-      const quote = Object.assign({}, action.payload)
-
-      if (quote.id === 'new') {
-        quote.id = Math.random()
-      }
+      const quote = ensureId(action.payload)
       copy.set(quote.id, quote)
       return copy
     }
