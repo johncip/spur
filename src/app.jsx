@@ -80,7 +80,7 @@ const VerticalToggle = ({ up, handleClick }) => {
     'verticalToggle', {
       'verticalToggle-is-up': up,
       'verticalToggle-is-down': !up
-    },
+    }
   )
   return (
     <button type="button" className={classes} onClick={handleClick}>
@@ -97,7 +97,7 @@ const QuoteBox = ({ text, author, url, category, expanded, toggle }) => {
     'quoteBox', {
       'quoteBox-is-expanded': expanded,
       'quoteBox-is-collapsed': !expanded
-    },
+    }
   )
   return (
     <div className={classes}>

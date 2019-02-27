@@ -16,13 +16,14 @@ export function polyfillBrowser() {
     storage: {
       local: {
         get: (key) => {
-          const val = localStorage.getItem(key)
+          const val = window.localStorage.getItem(key)
           return val === null ? null : JSON.parse(val)
         },
         set: (obj) => {
           // note: assumes setting object with single key
           const key = Object.keys(obj)[0]
-          return localStorage.setItem(key, JSON.stringify({ [key]: obj[key] }))
+          const val = JSON.stringify({ [key]: obj[key] })
+          return window.localStorage.setItem(key, val)
         }
       }
     },
@@ -38,7 +39,7 @@ export function polyfillBrowser() {
  * Seeds browser storage with the included quotes.
  */
 async function seedStorage() {
-  browser.storage.local.set({ quotes: seeds })
+  window.browser.storage.local.set({ quotes: seeds })
 }
 
 /**

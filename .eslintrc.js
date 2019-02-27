@@ -1,13 +1,13 @@
 module.exports = {
   extends: 'airbnb',
   settings: {
-    'import/resolver': 'webpack',
+    'import/resolver': 'webpack'
   },
   parser: 'babel-eslint',
   env: {
     browser: true,
     jquery: true,
-    webextensions: true,
+    webextensions: true
   },
   rules: {
     'comma-dangle': ['error', 'never'],
@@ -25,7 +25,7 @@ module.exports = {
     'react/no-unused-state': 'off',
     'react/prop-types': 'off',
 
-    'jsx-a11y/label-has-associated-control': ['error', { assert: 'either' } ],
-    'jsx-a11y/label-has-for': 'off',
+    'jsx-a11y/label-has-associated-control': ['error', { assert: 'either' }],
+    'jsx-a11y/label-has-for': 'off'
   }
-};
+}
