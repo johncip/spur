@@ -5,13 +5,13 @@ import { combineReducers, loop, Cmd } from 'redux-loop'
 
 const normalizedQuotes = records => (
   records.reduce((map, record, idx) => {
-    map.set(idx, Object.assign({ id: idx }, record))
+    map.set(idx, { ...record, id: idx })
     return map
   }, new Map())
 )
 
 const ensureId = (quote) => {
-  const copy = Object.assign({}, quote)
+  const copy = { ...quote }
   if (copy.id === 'new') {
     copy.id = Math.random()
   }
@@ -34,7 +34,7 @@ const activeQuote = (state = {}, action) => {
     case 'SET_NEW_ACTIVE_QUOTE':
       return { quote: '', author: '', url: '', category: '', id: 'new' }
     case 'PATCH_ACTIVE_QUOTE':
-      return Object.assign({}, state, action.payload)
+      return { ...state, ...action.payload }
     default:
       return state
   }

@@ -64,7 +64,7 @@ export async function loadSettings() {
     return DEFAULT_SETTINGS
   }
 
-  return Object.assign(DEFAULT_SETTINGS, settings)
+  return { ...DEFAULT_SETTINGS, settings }
 }
 
 /**
