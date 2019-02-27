@@ -25,11 +25,14 @@ const ensureId = (quote) => {
   return copy
 }
 
-const storeQuotes = (quoteMap) => {
+/*
+ * Puts the list of quotes in browser storage.
+ */
+const storeQuotes = quoteMap => (
   window.browser.storage.local.set({
     quotes: Array.from(quoteMap.values())
   })
-}
+)
 
 
 // reducers
