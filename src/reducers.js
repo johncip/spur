@@ -102,15 +102,15 @@ const quotes = (state = new Map(), action) => {
   }
 }
 
-const toast = (state = null, action) => {
+const toast = (state = { message: null, shown: false }, action) => {
   switch (action.type) {
     // TODO: move these to callbacks, this is just to see it pop up
     case 'PUT_QUOTE':
-      return 'Quote saved.'
+      return { message: 'Quote saved.', shown: true }
     case 'DELETE_QUOTE':
-      return 'Quote deleted.'
+      return { message: 'Quote deleted.', shown: true }
     case 'DISMISS_TOAST':
-      return null
+      return { ...state, shown: false }
     default:
       return state
   }

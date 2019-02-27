@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import Modal from 'react-modal'
 import { bindActionCreators, createStore } from 'redux'
 import { install as installLoop } from 'redux-loop'
+import classNames from 'classnames'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus'
@@ -291,16 +292,20 @@ const EditModal = () => {
 /*
  * Displays a floating notification in response to some action.
  */
-const Toast = ({ message }) => {
-  if (!message) return null
+const Toast = ({ message, shown, onClose }) => {
+  const classes = classNames(
+    'toast', {
+      'toast-hidden': !shown
+    }
+  )
 
   return (
-    <div className="toast">
+    <div className={classes}>
       <div className="toast--message">
         {message}
         <button type="button" className="toast--undoBtn">Undo</button>
       </div>
-      <button type="button" className="toast--closeBtn" onClick={dismissToast}>
+      <button type="button" className="toast--closeBtn" onClick={onClose}>
         <FontAwesomeIcon icon={faTimes} />
       </button>
     </div>
@@ -312,7 +317,7 @@ const Toast = ({ message }) => {
  * Loads the options page and holds state.
  */
 const AppRoot = () => {
-  const { settings, quotes, toast } = getState()
+  const { settings, quotes, toast: { message, shown } } = getState()
   const fetched = settings.size && quotes.size
 
   useEffect(() => {
@@ -322,7 +327,12 @@ const AppRoot = () => {
   })
 
   return fetched ? [
-    <Toast key="toast" message={toast} onClose={dismissToast} />,
+    <Toast
+      key="toast"
+      message={message}
+      shown={shown}
+      onClose={dismissToast}
+    />,
     <OptionsPage
       key="opts"
       settings={settings}
