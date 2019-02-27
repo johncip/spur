@@ -33,7 +33,13 @@ module.exports = {
     rules: [{
       test: /\.jsx$/,
       exclude: /node_modules/,
-      use: ['babel-loader']
+      use: {
+        loader: 'babel-loader',
+        options: {
+          presets: ['@babel/preset-react'],
+          plugins: ['@babel/plugin-proposal-class-properties']
+        }
+      }
     }, {
       test: /\.scss$/,
       use: ['style-loader', 'css-loader', 'sass-loader']
