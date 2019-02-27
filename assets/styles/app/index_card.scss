@@ -77,10 +77,10 @@ $vspace: 20px;
     @extend %truncated;
     @extend %icon-margin;
     @include slide;
+    @include foreground-tints($blue-2);
 
     margin-top: $vspace;
     font: $nerdy-font;
-    color: $blue-2;
 
     .svg-inline--fa {
       color: $gray-3;
@@ -89,11 +89,6 @@ $vspace: 20px;
     &:focus,
     &:hover {
       outline: 0;
-      filter: brightness(80%);
-    }
-
-    &:active {
-      filter: brightness(50%);
     }
   }
 
