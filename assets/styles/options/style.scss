@@ -175,23 +175,22 @@ p {
   @extend %basic-type;
 
   position: fixed;
-  top: 50px;
+  top: 40px;
   left: 50%;
   width: 600px;
   transform: translateX(-50%);
 
   display: flex;
   align-items: center;
-
-  border-radius: 4px;
   background-color: $gray-7;
-  border: 1px solid $gray-5;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  border: 1px solid $gray-6;
+  box-shadow: 2.5px 2.5px 4px $trans-black;
 }
 
 .toast--undoBtn {
   @extend %basic-type;
-  @include foreground-tints($gray-3);
+  @include foreground-tints($blue-2);
 
   margin-left: 6px;
 
@@ -206,13 +205,13 @@ p {
   @include focus-ring('outline');
 
   box-sizing: border-box;
-  padding: 20px;
+  padding: 16px;
   text-align: center;
   font-size: 18px;
 }
 
 .toast--message {
-  padding: 20px;
+  padding: 16px;
   flex-grow: 1;
   text-align: center;
 }
