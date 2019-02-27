@@ -3,6 +3,10 @@ import { combineReducers, loop, Cmd } from 'redux-loop'
 
 // helpers
 
+/*
+ * Given an array of quotes (see seeds.json), returns a map where the
+ * array indices are the keys, and the quotes contain a matching id field.
+ */
 const normalizedQuotes = records => (
   records.reduce((map, record, idx) => {
     map.set(idx, { ...record, id: idx })
@@ -10,10 +14,13 @@ const normalizedQuotes = records => (
   }, new Map())
 )
 
+/*
+ * Returns a copy of the given quote, assigning a new ID
+ */
 const ensureId = (quote) => {
   const copy = { ...quote }
   if (copy.id === 'new') {
-    copy.id = Math.random()
+    copy.id = Math.random() // TODO: do something better
   }
   return copy
 }
