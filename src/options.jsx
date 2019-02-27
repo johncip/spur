@@ -206,7 +206,7 @@ const DeleteButton = ({ onClick }) => (
 /*
  * A parameterized input for the quote form.
  */
-const QuoteFormField = ({ name, value }) => (
+const QuoteFormField = ({ name, value, onChange }) => (
   <div className="quoteForm--field">
     <label className="quoteForm--label" htmlFor={`id-${name}`}>
       {name}
@@ -215,7 +215,7 @@ const QuoteFormField = ({ name, value }) => (
       id={`id-${name}`}
       className="quoteForm--input"
       value={value}
-      onChange={event => patchActiveQuote(name.toLowerCase(), event.target.value)}
+      onChange={onChange}
     />
   </div>
 )
@@ -224,27 +224,31 @@ const QuoteFormField = ({ name, value }) => (
 /*
  * A form for editing a quote. Buttons should be passed in as children.
  */
-const QuoteForm = ({ text, author, url, category, children, handleChange }) => (
-  <form className="quoteForm">
-    <div className="quoteForm--field">
-      <label className="quoteForm--label" htmlFor="id-text">Quote</label>
-      <textarea
-        id="id-text"
-        className="quoteForm--input quoteForm--input-textarea"
-        value={text}
-        onChange={event => handleChange('text', event)}
-      />
-    </div>
+const QuoteForm = ({ text, author, url, category, children }) => {
+  const handleChangeFor = field => event => patchActiveQuote(field, event.target.value)
 
-    <QuoteFormField name="Author" value={author} />
-    <QuoteFormField name="URL" value={url} />
-    <QuoteFormField name="Category" value={category} />
+  return (
+    <form className="quoteForm">
+      <div className="quoteForm--field">
+        <label className="quoteForm--label" htmlFor="id-text">Quote</label>
+        <textarea
+          id="id-text"
+          className="quoteForm--input quoteForm--input-textarea"
+          value={text}
+          onChange={handleChangeFor('text')}
+        />
+      </div>
 
-    <div className="btnContainer">
-      {children}
-    </div>
-  </form>
-)
+      <QuoteFormField onChange={handleChangeFor('author')} name="Author" value={author} />
+      <QuoteFormField onChange={handleChangeFor('url')} name="URL" value={url} />
+      <QuoteFormField onChange={handleChangeFor('category')} name="Category" value={category} />
+
+      <div className="btnContainer">
+        {children}
+      </div>
+    </form>
+  )
+}
 
 
 /*
