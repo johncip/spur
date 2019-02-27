@@ -169,6 +169,54 @@ p {
   height: 150px;
 }
 
+// toast
+
+.toast {
+  @extend %basic-type;
+
+  position: fixed;
+  top: 50px;
+  left: 50%;
+  width: 600px;
+  transform: translateX(-50%);
+
+  display: flex;
+  align-items: center;
+
+  border-radius: 4px;
+  background-color: $gray-7;
+  border: 1px solid $gray-5;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.toast--undoBtn {
+  @extend %basic-type;
+  @include foreground-tints($gray-3);
+
+  margin-left: 6px;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.toast--closeBtn {
+  @include foreground-tints($gray-4);
+  @include background-tints($gray-7);
+  @include focus-ring('outline');
+
+  box-sizing: border-box;
+  padding: 20px;
+  text-align: center;
+  font-size: 18px;
+}
+
+.toast--message {
+  padding: 20px;
+  flex-grow: 1;
+  text-align: center;
+}
+
 
 // misc
 

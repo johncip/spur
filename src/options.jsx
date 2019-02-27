@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus'
 import { faAt } from '@fortawesome/free-solid-svg-icons/faAt'
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons/faPencilAlt'
+import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes'
 import { faGithub } from '@fortawesome/free-brands-svg-icons/faGithub'
 import { faFirefox } from '@fortawesome/free-brands-svg-icons/faFirefox'
 import { faChrome } from '@fortawesome/free-brands-svg-icons/faChrome'
@@ -288,10 +289,30 @@ const EditModal = () => {
 
 
 /*
+ * Displays a floating notification in response to some action.
+ */
+const Toast = ({ message }) => {
+  if (!message) return null
+
+  return (
+    <div className="toast">
+      <div className="toast--message">
+        {message}
+        <button type="button" className="toast--undoBtn">Undo</button>
+      </div>
+      <button type="button" className="toast--closeBtn">
+        <FontAwesomeIcon icon={faTimes} />
+      </button>
+    </div>
+  )
+}
+
+
+/*
  * Loads the options page and holds state.
  */
 const AppRoot = () => {
-  const { settings, quotes } = getState()
+  const { settings, quotes, toast } = getState()
   const fetched = settings.size && quotes.size
 
   useEffect(() => {
@@ -301,6 +322,7 @@ const AppRoot = () => {
   })
 
   return fetched ? [
+    <Toast key="toast" message={toast} />,
     <OptionsPage
       key="opts"
       settings={settings}

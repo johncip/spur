@@ -102,9 +102,22 @@ const quotes = (state = new Map(), action) => {
   }
 }
 
+const toast = (state = null, action) => {
+  switch (action.type) {
+    // TODO: move these to callbacks, this is just to see it pop up
+    case 'PUT_QUOTE':
+      return 'Quote saved.'
+    case 'DELETE_QUOTE':
+      return 'Quote deleted.'
+    default:
+      return state
+  }
+}
+
 export default combineReducers({
   activeQuote,
   modalIsOpen,
   settings,
-  quotes
+  quotes,
+  toast
 })
