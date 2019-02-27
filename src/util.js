@@ -74,7 +74,10 @@ export async function loadSettings() {
 export async function loadQuotes(stop) {
   const quotes = await getOneKey('quotes')
 
-  if (quotes || stop) {
+  // the length check can come out if
+  //  - I prevent removal of the last quote
+  //  - I add a blank state to the index page & don't auto-seed
+  if (stop || (quotes && Object.keys(quotes).length)) {
     return quotes
   }
 
