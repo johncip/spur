@@ -2,18 +2,30 @@
 @import '../common/mixins';
 @import '../common/variables';
 
+@import 'btn';
+@import 'modal';
+
+
 %basic-type {
   font: 400 14px $basic-font-stack;
   letter-spacing: -0.3px;
 }
 
+// base
+
 p {
   @extend %basic-type;
 }
 
+
+// layout
+
 .l-root {
   padding: 20px;
 }
+
+
+// container, section
 
 .optionsHeading {
   font: 300 32px $basic-font-stack;
@@ -44,6 +56,9 @@ p {
   }
 }
 
+
+// setting
+
 .setting--labelText {
   @extend %basic-type;
   margin-right: 8px;
@@ -55,6 +70,9 @@ p {
   padding: 4px 0;
   font-size: 13px;
 }
+
+
+// editQuoteButton
 
 .editQuoteButton {
   @extend %basic-type;
@@ -115,80 +133,8 @@ p {
   margin-right: 4px;
 }
 
-.truncatedText {
-  @extend %truncated;
-}
 
-.btn {
-  @include focus-ring('border');
-  border-radius: 2px;
-  font: 500 16px $basic-font-stack;
-}
-
-// TODO: try to avoid setting width & height
-.btn-save {
-  @include background-tints($blue-1, 'lighten');
-  height: 32px;
-  width: 64px;
-  color: $white;
-}
-
-// TODO: try to avoid setting width & height
-.btn-cancel {
-  @include background-tints($gray-4, 'lighten');
-  height: 32px;
-  width: 80px;
-  color: $gray-2;
-}
-
-.btn-delete {
-  @include background-tints($red, 'lighten');
-  height: 32px;
-  width: 80px;
-  color: $white;
-}
-
-.btnContainer {
-  .btn + .btn {
-    margin-left: 8px;
-  }
-}
-
-.modal {
-  @extend %absolute-center;
-  width: 420px;
-  padding: 24px;
-  background-color: $gray-7;
-  border: 1px solid $gray-4;
-  border-radius: 2px;
-}
-
-// TODO: set margin of h1 to 0 in base
-.modal--heading {
-  font: 300 28px $basic-font-stack;
-  margin: 0;
-  margin-bottom: 20px;
-}
-
-.modal--rule {
-  border-color: $gray-5;
-  margin-bottom: 20px;
-}
-
-.modalOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  overflow-y: auto;
-  padding: 20px;
-  background-color: $trans-white;
-}
-
-.ReactModal__Body--open {
-  overflow-y: hidden;
-}
+// quoteForm
 
 .quoteForm {
   > .btnContainer {
@@ -221,6 +167,13 @@ p {
 
 .quoteForm--input-textarea {
   height: 150px;
+}
+
+
+// misc
+
+.truncatedText {
+  @extend %truncated;
 }
 
 .link {
