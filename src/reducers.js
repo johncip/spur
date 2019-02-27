@@ -109,6 +109,8 @@ const toast = (state = null, action) => {
       return 'Quote saved.'
     case 'DELETE_QUOTE':
       return 'Quote deleted.'
+    case 'DISMISS_TOAST':
+      return null
     default:
       return state
   }

@@ -25,7 +25,7 @@ const { dispatch, getState } = store
 const {
   setActiveQuote, setNewActiveQuote, patchActiveQuote,
   updateSettings, updateQuotes,
-  putQuote, deleteQuote, closeModal
+  putQuote, deleteQuote, closeModal, dismissToast
 } = bindActionCreators(actions, dispatch)
 
 
@@ -300,7 +300,7 @@ const Toast = ({ message }) => {
         {message}
         <button type="button" className="toast--undoBtn">Undo</button>
       </div>
-      <button type="button" className="toast--closeBtn">
+      <button type="button" className="toast--closeBtn" onClick={dismissToast}>
         <FontAwesomeIcon icon={faTimes} />
       </button>
     </div>
@@ -322,7 +322,7 @@ const AppRoot = () => {
   })
 
   return fetched ? [
-    <Toast key="toast" message={toast} />,
+    <Toast key="toast" message={toast} onClose={dismissToast} />,
     <OptionsPage
       key="opts"
       settings={settings}
