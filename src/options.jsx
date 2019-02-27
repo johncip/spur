@@ -16,7 +16,7 @@ import { faChrome } from '@fortawesome/free-brands-svg-icons/faChrome'
 
 import * as actions from './actions'
 import reducers from './reducers'
-import { loadSettings, loadQuotes, polyfillBrowser } from './util'
+import { loadSettings, loadQuotes, summarize, polyfillBrowser } from './util'
 
 import 'Styles/options/style.scss'
 
@@ -292,12 +292,26 @@ const EditModal = () => {
 /*
  * Displays a floating notification in response to some action.
  */
-const Toast = ({ message, shown, onClose }) => {
+const Toast = ({ alertType, quote, shown, onClose }) => {
   const classes = classNames(
     'toast', {
       'toast-hidden': !shown
     }
   )
+
+  const message = (() => {
+    if (!quote) return null
+    const prefix = `Quote ${summarize(quote.text)}`
+
+    switch (alertType) {
+      case 'save':
+        return `${prefix} saved.`
+      case 'delete':
+        return `${prefix} deleted.`
+      default:
+        return 'error'
+    }
+  })()
 
   return (
     <div className={classes}>
@@ -317,7 +331,7 @@ const Toast = ({ message, shown, onClose }) => {
  * Loads the options page and holds state.
  */
 const AppRoot = () => {
-  const { settings, quotes, toast: { message, shown } } = getState()
+  const { settings, quotes, toast: { alertType, quote, shown } } = getState()
   const fetched = settings.size && quotes.size
 
   useEffect(() => {
@@ -329,7 +343,8 @@ const AppRoot = () => {
   return fetched ? [
     <Toast
       key="toast"
-      message={message}
+      alertType={alertType}
+      quote={quote}
       shown={shown}
       onClose={dismissToast}
     />,

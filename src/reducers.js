@@ -27,17 +27,6 @@ const ensureId = (quote) => {
 }
 
 /*
- * Returns a brief summary of a quote for use with the alert.
- */
-const summary = ({ text }) => {
-  const len = 20
-  if (text.length < len) {
-    return text
-  }
-  return `(“${text.substring(0, len)}…”)`
-}
-
-/*
  * Puts the list of quotes in browser storage.
  */
 const storeQuotes = quoteMap => (
@@ -130,16 +119,19 @@ const quotes = (state = new Map(), action) => {
   }
 }
 
-const toast = (state = { message: null, shown: false }, action) => {
+const initialToast = { quote: null, alertType: null, shown: null }
+const toast = (state = initialToast, action) => {
   switch (action.type) {
     case 'NOTIFY_AFTER_SAVE':
       return {
-        message: `Quote ${summary(action.payload)} saved.`,
+        quote: action.payload,
+        alertType: 'save',
         shown: true
       }
     case 'NOTIFY_AFTER_DELETE':
       return {
-        message: `Quote ${summary(action.payload)} deleted.`,
+        quote: action.payload,
+        alertType: 'delete',
         shown: true
       }
     case 'DISMISS_TOAST':
