@@ -74,20 +74,20 @@ const quotes = (state = new Map(), action) => {
       return normalizedQuotes(action.payload)
     }
     case 'PUT_QUOTE': {
-      const copy = new Map(state)
+      const next = new Map(state)
       const quote = ensureId(action.payload)
-      copy.set(quote.id, quote)
+      next.set(quote.id, quote)
       return loop(
-        copy,
-        Cmd.run(storeQuotes, { args: [copy] })
+        next,
+        Cmd.run(storeQuotes, { args: [next] })
       )
     }
     case 'DELETE_QUOTE': {
-      const copy = new Map(state)
-      copy.delete(action.payload)
+      const next = new Map(state)
+      next.delete(action.payload)
       return loop(
-        copy,
-        Cmd.run(storeQuotes, { args: [copy] })
+        next,
+        Cmd.run(storeQuotes, { args: [next] })
       )
     }
     default:
