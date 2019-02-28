@@ -94,6 +94,8 @@ export async function loadQuotes(stop) {
  * trailing punctuation.
  */
 export const summarize = (text, len = 5) => {
+  // TODO: it'd be better to trim to length, then trim at the last word boundary
+
   /* eslint-disable no-multi-spaces */
   const words = (
     text
