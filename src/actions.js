@@ -1,11 +1,28 @@
 /*
- * modal-only
+ * modal-specific
  */
 export const openModal = () => (
   { type: 'OPEN_MODAL' }
 )
 export const closeModal = () => (
   { type: 'CLOSE_MODAL' }
+)
+
+/*
+ * alert-specific
+ */
+export const dismissAlert = () => (
+  { type: 'DISMISS_ALERT' }
+)
+
+// notifyAfter* should be curried with the active quote.
+export const notifyAfterSave = quote => () => (
+  { type: 'ALERT_AFTER_SAVE', payload: quote }
+)
+
+// also they aren't dispatched from the app, but in response to other actions.
+export const notifyAfterDelete = quote => () => (
+  { type: 'ALERT_AFTER_DELETE', payload: quote }
 )
 
 
@@ -24,8 +41,8 @@ export const putQuote = quote => (
   { type: 'PUT_QUOTE', payload: quote }
 )
 
-export const deleteQuote = id => (
-  { type: 'DELETE_QUOTE', payload: id }
+export const deleteQuote = quote => (
+  { type: 'DELETE_QUOTE', payload: quote }
 )
 
 

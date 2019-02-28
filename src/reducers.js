@@ -1,4 +1,5 @@
 import { combineReducers, loop, Cmd } from 'redux-loop'
+import { notifyAfterSave, notifyAfterDelete } from './actions'
 
 
 // helpers
@@ -25,11 +26,14 @@ const ensureId = (quote) => {
   return copy
 }
 
-const storeQuotes = (quoteMap) => {
+/*
+ * Puts the list of quotes in browser storage.
+ */
+const storeQuotes = quoteMap => (
   window.browser.storage.local.set({
     quotes: Array.from(quoteMap.values())
   })
-}
+)
 
 
 // reducers
@@ -86,17 +90,51 @@ const quotes = (state = new Map(), action) => {
       next.set(quote.id, quote)
       return loop(
         next,
-        Cmd.run(storeQuotes, { args: [next] })
+        Cmd.run(
+          storeQuotes, {
+            args: [next],
+            successActionCreator: notifyAfterSave(quote)
+            // TODO: define failActionCreator
+          }
+        )
       )
     }
     case 'DELETE_QUOTE': {
       const next = new Map(state)
-      next.delete(action.payload)
+      const quote = action.payload
+      next.delete(quote.id)
       return loop(
         next,
-        Cmd.run(storeQuotes, { args: [next] })
+        Cmd.run(
+          storeQuotes, {
+            args: [next],
+            successActionCreator: notifyAfterDelete(quote)
+            // TODO: define failActionCreator
+          }
+        )
       )
     }
+    default:
+      return state
+  }
+}
+
+const alert_ = (state = { quote: null, type: null, shown: null }, action) => {
+  switch (action.type) {
+    case 'ALERT_AFTER_SAVE':
+      return {
+        quote: action.payload,
+        type: 'save',
+        shown: true
+      }
+    case 'ALERT_AFTER_DELETE':
+      return {
+        quote: action.payload,
+        type: 'delete',
+        shown: true
+      }
+    case 'DISMISS_ALERT':
+      return { ...state, shown: false }
     default:
       return state
   }
@@ -106,5 +144,6 @@ export default combineReducers({
   activeQuote,
   modalIsOpen,
   settings,
-  quotes
+  quotes,
+  alert_
 })

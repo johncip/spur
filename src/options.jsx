@@ -3,18 +3,20 @@ import ReactDOM from 'react-dom'
 import Modal from 'react-modal'
 import { bindActionCreators, createStore } from 'redux'
 import { install as installLoop } from 'redux-loop'
+import classNames from 'classnames'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus'
 import { faAt } from '@fortawesome/free-solid-svg-icons/faAt'
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons/faPencilAlt'
+import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes'
 import { faGithub } from '@fortawesome/free-brands-svg-icons/faGithub'
 import { faFirefox } from '@fortawesome/free-brands-svg-icons/faFirefox'
 import { faChrome } from '@fortawesome/free-brands-svg-icons/faChrome'
 
 import * as actions from './actions'
 import reducers from './reducers'
-import { loadSettings, loadQuotes, polyfillBrowser } from './util'
+import { loadSettings, loadQuotes, summarize, polyfillBrowser } from './util'
 
 import 'Styles/options/style.scss'
 
@@ -24,7 +26,7 @@ const { dispatch, getState } = store
 const {
   setActiveQuote, setNewActiveQuote, patchActiveQuote,
   updateSettings, updateQuotes,
-  putQuote, deleteQuote, closeModal
+  putQuote, deleteQuote, closeModal, dismissAlert
 } = bindActionCreators(actions, dispatch)
 
 
@@ -278,7 +280,7 @@ const EditModal = () => {
       >
         <SaveButton onClick={() => putQuote(activeQuote)} />
         {quoteExists
-          ? <DeleteButton onClick={() => deleteQuote(activeQuote.id)} />
+          ? <DeleteButton onClick={() => deleteQuote(activeQuote)} />
           : null}
         <CancelButton onClick={closeModal} />
       </QuoteForm>
@@ -288,10 +290,44 @@ const EditModal = () => {
 
 
 /*
+ * Displays a floating notification in response to some action.
+ */
+const Alert = ({ type, quote, shown, onClose }) => {
+  if (!quote) return null
+
+  const classes = classNames('alert', { 'alert-hidden': !shown })
+
+  const message = (() => {
+    const prefix = `${summarize(quote.text)}`
+    switch (type) {
+      case 'save':
+        return `${prefix} saved.`
+      case 'delete':
+        return `${prefix} deleted.`
+      default:
+        return null
+    }
+  })()
+
+  return (
+    <div className={classes}>
+      <div className="alert--message">
+        {message}
+        <button type="button" className="alert--undoBtn">Undo</button>
+      </div>
+      <button type="button" className="alert--closeBtn" onClick={onClose}>
+        <FontAwesomeIcon icon={faTimes} />
+      </button>
+    </div>
+  )
+}
+
+
+/*
  * Loads the options page and holds state.
  */
 const AppRoot = () => {
-  const { settings, quotes } = getState()
+  const { settings, quotes, alert_: { type, quote, shown } } = getState()
   const fetched = settings.size && quotes.size
 
   useEffect(() => {
@@ -301,6 +337,13 @@ const AppRoot = () => {
   })
 
   return fetched ? [
+    <Alert
+      key="alert"
+      type={type}
+      quote={quote}
+      shown={shown}
+      onClose={dismissAlert}
+    />,
     <OptionsPage
       key="opts"
       settings={settings}

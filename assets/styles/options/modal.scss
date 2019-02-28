@@ -1,0 +1,39 @@
+@import '../common/mixins';
+@import '../common/variables';
+
+.modal {
+  @extend %absolute-center;
+  width: 420px;
+  padding: 24px;
+  background-color: $gray-7;
+  border: 1px solid $gray-4;
+  border-radius: 2px;
+}
+
+// TODO: set margin of h1 to 0 in base
+.modal--heading {
+  font: 300 28px $basic-font-stack;
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+.modal--rule {
+  border-color: $gray-5;
+  margin-bottom: 20px;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow-y: auto;
+  padding: 20px;
+  background-color: $trans-white;
+}
+
+// vendor -- react-modal
+.ReactModal__Body--open {
+  overflow-y: hidden;
+}
