@@ -15,6 +15,7 @@ module.exports = {
     'no-else-return': 'off',
     'no-unexpected-multiline': 'error',
     'nonblock-statement-body-position': 'off',
+    'prefer-template': 'off',
     'object-curly-newline': 'off',
     'semi': ['error', 'never', { beforeStatementContinuationChars: 'always' }],
     'wrap-iife': ['error', 'inside'],
