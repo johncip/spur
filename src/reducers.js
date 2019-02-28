@@ -120,6 +120,7 @@ const quotes = (state = new Map(), action) => {
 }
 
 const initialToast = { quote: null, alertType: null, shown: null }
+
 const toast = (state = initialToast, action) => {
   switch (action.type) {
     case 'NOTIFY_AFTER_SAVE':
