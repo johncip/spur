@@ -14,6 +14,7 @@ module.exports = {
     'curly': 'off',
     'no-else-return': 'off',
     'no-unexpected-multiline': 'error',
+    'no-underscore-dangle': 'off',
     'nonblock-statement-body-position': 'off',
     'prefer-template': 'off',
     'object-curly-newline': 'off',
