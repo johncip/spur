@@ -202,17 +202,6 @@ p {
   padding: 16px;
   flex-grow: 1;
   text-align: center;
-
-  span {
-    // including nested spans
-    display: inline-block;
-    vertical-align: top;
-  }
-}
-
-.toast--summary {
-  @extend %truncated;
-  max-width: 220px;
 }
 
 .toast--undoBtn {
