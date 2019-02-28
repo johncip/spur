@@ -198,6 +198,12 @@ p {
   opacity: 0;
 }
 
+.toast--message {
+  padding: 16px;
+  flex-grow: 1;
+  text-align: center;
+}
+
 .toast--undoBtn {
   @extend %basic-type;
   @include foreground-tints($blue-2);
@@ -218,12 +224,6 @@ p {
   padding: 16px;
   text-align: center;
   font-size: 18px;
-}
-
-.toast--message {
-  padding: 16px;
-  flex-grow: 1;
-  text-align: center;
 }
 
 
