@@ -119,23 +119,21 @@ const quotes = (state = new Map(), action) => {
   }
 }
 
-const initialToast = { quote: null, alertType: null, shown: null }
-
-const toast = (state = initialToast, action) => {
+const alert_ = (state = { quote: null, type: null, shown: null }, action) => {
   switch (action.type) {
-    case 'NOTIFY_AFTER_SAVE':
+    case 'ALERT_AFTER_SAVE':
       return {
         quote: action.payload,
-        alertType: 'save',
+        type: 'save',
         shown: true
       }
-    case 'NOTIFY_AFTER_DELETE':
+    case 'ALERT_AFTER_DELETE':
       return {
         quote: action.payload,
-        alertType: 'delete',
+        type: 'delete',
         shown: true
       }
-    case 'DISMISS_TOAST':
+    case 'DISMISS_ALERT':
       return { ...state, shown: false }
     default:
       return state
@@ -147,5 +145,5 @@ export default combineReducers({
   modalIsOpen,
   settings,
   quotes,
-  toast
+  alert_
 })

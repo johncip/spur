@@ -9,20 +9,20 @@ export const closeModal = () => (
 )
 
 /*
- * toast-specific
+ * alert-specific
  */
-export const dismissToast = () => (
-  { type: 'DISMISS_TOAST' }
+export const dismissAlert = () => (
+  { type: 'DISMISS_ALERT' }
 )
 
 // notifyAfter* should be curried with the active quote.
 export const notifyAfterSave = quote => () => (
-  { type: 'NOTIFY_AFTER_SAVE', payload: quote }
+  { type: 'ALERT_AFTER_SAVE', payload: quote }
 )
 
 // also they aren't dispatched from the app, but in response to other actions.
 export const notifyAfterDelete = quote => () => (
-  { type: 'NOTIFY_AFTER_DELETE', payload: quote }
+  { type: 'ALERT_AFTER_DELETE', payload: quote }
 )
 
 

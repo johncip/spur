@@ -169,9 +169,9 @@ p {
   height: 150px;
 }
 
-// toast
+// alert
 
-.toast {
+.alert {
   @extend %basic-type;
 
   position: fixed;
@@ -194,17 +194,17 @@ p {
   transition-timing-function: ease-out;
 }
 
-.toast-hidden {
+.alert-hidden {
   opacity: 0;
 }
 
-.toast--message {
+.alert--message {
   padding: 16px;
   flex-grow: 1;
   text-align: center;
 }
 
-.toast--undoBtn {
+.alert--undoBtn {
   @extend %basic-type;
   @include foreground-tints($blue-2);
 
@@ -215,7 +215,7 @@ p {
   }
 }
 
-.toast--closeBtn {
+.alert--closeBtn {
   @include foreground-tints($gray-4);
   @include background-tints($gray-7);
   @include focus-ring('outline');

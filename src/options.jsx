@@ -26,7 +26,7 @@ const { dispatch, getState } = store
 const {
   setActiveQuote, setNewActiveQuote, patchActiveQuote,
   updateSettings, updateQuotes,
-  putQuote, deleteQuote, closeModal, dismissToast
+  putQuote, deleteQuote, closeModal, dismissAlert
 } = bindActionCreators(actions, dispatch)
 
 
@@ -292,10 +292,10 @@ const EditModal = () => {
 /*
  * Displays a floating notification in response to some action.
  */
-const Toast = ({ alertType, quote, shown, onClose }) => {
+const Alert = ({ type, quote, shown, onClose }) => {
   const classes = classNames(
-    'toast', {
-      'toast-hidden': !shown
+    'alert', {
+      'alert-hidden': !shown
     }
   )
 
@@ -303,7 +303,7 @@ const Toast = ({ alertType, quote, shown, onClose }) => {
     if (!quote) return null
     const prefix = `${summarize(quote.text)}`
 
-    switch (alertType) {
+    switch (type) {
       case 'save':
         return `${prefix} saved.`
       case 'delete':
@@ -315,11 +315,11 @@ const Toast = ({ alertType, quote, shown, onClose }) => {
 
   return quote ? (
     <div className={classes}>
-      <div className="toast--message">
+      <div className="alert--message">
         {message}
-        <button type="button" className="toast--undoBtn">Undo</button>
+        <button type="button" className="alert--undoBtn">Undo</button>
       </div>
-      <button type="button" className="toast--closeBtn" onClick={onClose}>
+      <button type="button" className="alert--closeBtn" onClick={onClose}>
         <FontAwesomeIcon icon={faTimes} />
       </button>
     </div>
@@ -331,7 +331,7 @@ const Toast = ({ alertType, quote, shown, onClose }) => {
  * Loads the options page and holds state.
  */
 const AppRoot = () => {
-  const { settings, quotes, toast: { alertType, quote, shown } } = getState()
+  const { settings, quotes, alert_: { type, quote, shown } } = getState()
   const fetched = settings.size && quotes.size
 
   useEffect(() => {
@@ -341,12 +341,12 @@ const AppRoot = () => {
   })
 
   return fetched ? [
-    <Toast
-      key="toast"
-      alertType={alertType}
+    <Alert
+      key="alert"
+      type={type}
       quote={quote}
       shown={shown}
-      onClose={dismissToast}
+      onClose={dismissAlert}
     />,
     <OptionsPage
       key="opts"
