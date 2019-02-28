@@ -4,12 +4,8 @@
 
 @import 'btn';
 @import 'modal';
+@import 'alert';
 
-
-%basic-type {
-  font: 400 14px $basic-font-stack;
-  letter-spacing: -0.3px;
-}
 
 // base
 
@@ -167,63 +163,6 @@ p {
 
 .quoteForm--input-textarea {
   height: 150px;
-}
-
-// alert
-
-.alert {
-  @extend %basic-type;
-
-  position: fixed;
-  top: 40px;
-  left: 50%;
-  width: 600px;
-  transform: translateX(-50%);
-  z-index: 1;
-
-  display: flex;
-  align-items: center;
-  background-color: $gray-7;
-  border-radius: 4px;
-  border: 1px solid $gray-6;
-  box-shadow: 2.5px 2.5px 4px $trans-black;
-
-  opacity: 1;
-  transition-property: opacity, visibility;
-  transition-duration: 0.3s;
-  transition-timing-function: ease-out;
-}
-
-.alert-hidden {
-  opacity: 0;
-}
-
-.alert--message {
-  padding: 16px;
-  flex-grow: 1;
-  text-align: center;
-}
-
-.alert--undoBtn {
-  @extend %basic-type;
-  @include foreground-tints($blue-2);
-
-  margin-left: 6px;
-
-  &:hover {
-    text-decoration: underline;
-  }
-}
-
-.alert--closeBtn {
-  @include foreground-tints($gray-4);
-  @include background-tints($gray-7);
-  @include focus-ring('outline');
-
-  box-sizing: border-box;
-  padding: 16px;
-  text-align: center;
-  font-size: 18px;
 }
 
 
