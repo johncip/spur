@@ -301,7 +301,7 @@ const Toast = ({ alertType, quote, shown, onClose }) => {
 
   const message = (() => {
     if (!quote) return null
-    const prefix = `Quote ${summarize(quote.text)}`
+    const prefix = `${summarize(quote.text)}`
 
     switch (alertType) {
       case 'save':
