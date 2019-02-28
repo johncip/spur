@@ -293,27 +293,23 @@ const EditModal = () => {
  * Displays a floating notification in response to some action.
  */
 const Alert = ({ type, quote, shown, onClose }) => {
-  const classes = classNames(
-    'alert', {
-      'alert-hidden': !shown
-    }
-  )
+  if (!quote) return null
+
+  const classes = classNames('alert', { 'alert-hidden': !shown })
 
   const message = (() => {
-    if (!quote) return null
     const prefix = `${summarize(quote.text)}`
-
     switch (type) {
       case 'save':
         return `${prefix} saved.`
       case 'delete':
         return `${prefix} deleted.`
       default:
-        return 'error'
+        return null
     }
   })()
 
-  return quote ? (
+  return (
     <div className={classes}>
       <div className="alert--message">
         {message}
@@ -323,7 +319,7 @@ const Alert = ({ type, quote, shown, onClose }) => {
         <FontAwesomeIcon icon={faTimes} />
       </button>
     </div>
-  ) : null
+  )
 }
 
 
