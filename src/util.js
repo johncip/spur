@@ -84,14 +84,3 @@ export async function loadQuotes(stop) {
   await seedStorage()
   return loadQuotes(true)
 }
-
-/*
- * Returns a brief summary of text for use with the alert.
- */
-export const summarize = (text) => {
-  const len = 20
-  if (text.length < len) {
-    return text
-  }
-  return `(“${text.substring(0, len)}…”)`
-}

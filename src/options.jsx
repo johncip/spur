@@ -16,7 +16,7 @@ import { faChrome } from '@fortawesome/free-brands-svg-icons/faChrome'
 
 import * as actions from './actions'
 import reducers from './reducers'
-import { loadSettings, loadQuotes, summarize, polyfillBrowser } from './util'
+import { loadSettings, loadQuotes, polyfillBrowser } from './util'
 
 import 'Styles/options/style.scss'
 
@@ -299,24 +299,25 @@ const Toast = ({ alertType, quote, shown, onClose }) => {
     }
   )
 
-  const message = (() => {
-    if (!quote) return null
-    const prefix = `Quote ${summarize(quote.text)}`
-
+  const verb = (() => {
     switch (alertType) {
       case 'save':
-        return `${prefix} saved.`
+        return ' saved.'
       case 'delete':
-        return `${prefix} deleted.`
+        return ' deleted.'
       default:
-        return 'error'
+        return null
     }
   })()
 
   return quote ? (
     <div className={classes}>
       <div className="toast--message">
-        {message}
+        {'\u00A0“'}
+        <span className="toast--summary">{quote.text}</span>
+        {'”\u00A0'}
+        <span>{verb}</span>
+
         <button type="button" className="toast--undoBtn">Undo</button>
       </div>
       <button type="button" className="toast--closeBtn" onClick={onClose}>
