@@ -313,7 +313,7 @@ const Toast = ({ alertType, quote, shown, onClose }) => {
     }
   })()
 
-  return (
+  return quote ? (
     <div className={classes}>
       <div className="toast--message">
         {message}
@@ -323,7 +323,7 @@ const Toast = ({ alertType, quote, shown, onClose }) => {
         <FontAwesomeIcon icon={faTimes} />
       </button>
     </div>
-  )
+  ) : null
 }
 
 
