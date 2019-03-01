@@ -148,6 +148,10 @@ const alert_ = (state = { quote: null, type: null, shown: null }, action) => {
       }
     case 'DISMISS_ALERT':
       return { ...state, shown: false }
+    case 'SET_ACTIVE_QUOTE':
+      return { ...state, shown: false }
+    case 'SET_NEW_ACTIVE_QUOTE':
+      return { ...state, shown: false }
     default:
       return state
   }
