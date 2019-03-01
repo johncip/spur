@@ -5,8 +5,9 @@ import { notifyAfterSave, notifyAfterDelete } from './actions'
 // helpers
 
 /*
- * Given an array of quotes (see seeds.json), returns a map where the
- * array indices are the keys, and the quotes contain a matching id field.
+ * Given an array of quote records, returns a map where the keys are
+ * the array indices, the values are the records, and the records gain
+ * a matching "id" property.
  */
 const normalizedQuotes = records => (
   records.reduce((map, record, idx) => {
