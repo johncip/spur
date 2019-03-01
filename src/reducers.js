@@ -17,12 +17,13 @@ const normalizedQuotes = records => (
 )
 
 /*
- * Returns a copy of the given quote, assigning a new ID
+ * Returns a quote that is not new.
  */
 const ensureId = (quote) => {
   const copy = { ...quote }
-  if (copy.id === 'new') {
+  if (copy.new) {
     copy.id = Math.random() // TODO: do something better
+    delete copy.new
   }
   return copy
 }
@@ -36,6 +37,17 @@ const storeQuotes = quoteMap => (
   })
 )
 
+/*
+ * Returns a new quote (a quote with no ID and a "new" flag).
+ */
+const newQuote = () => ({
+  quote: '',
+  author: '',
+  url: '',
+  category: '',
+  new: true
+})
+
 
 // reducers
 
@@ -44,7 +56,7 @@ const activeQuote = (state = {}, action) => {
     case 'SET_ACTIVE_QUOTE':
       return action.payload
     case 'SET_NEW_ACTIVE_QUOTE':
-      return { quote: '', author: '', url: '', category: '', id: 'new' }
+      return newQuote()
     case 'PATCH_ACTIVE_QUOTE':
       return { ...state, ...action.payload }
     default:
@@ -87,7 +99,7 @@ const quotes = (state = new Map(), action) => {
     }
     case 'PUT_QUOTE': {
       const next = new Map(state)
-      const quote = ensureId(action.payload)
+      const quote = ensureId({ ...action.payload })
       next.set(quote.id, quote)
       return loop(
         next,

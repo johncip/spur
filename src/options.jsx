@@ -258,9 +258,8 @@ const QuoteForm = ({ text, author, url, category, children }) => {
  * A modal for editing the clicked-on quote.
  */
 const EditModal = () => {
-  const { activeQuote, quotes, modalIsOpen } = getState()
-  const quoteExists = activeQuote.id !== 'new'
-  const title = quoteExists ? 'Edit Quote' : 'Add Quote'
+  const { activeQuote, modalIsOpen } = getState()
+  const title = !activeQuote.new ? 'Edit Quote' : 'Add Quote'
 
   return (
     <Modal
@@ -280,9 +279,9 @@ const EditModal = () => {
         category={activeQuote.category}
       >
         <SaveButton onClick={() => putQuote(activeQuote)} />
-        {quoteExists
-          ? <DeleteButton onClick={() => deleteQuote(activeQuote)} />
-          : null}
+        {activeQuote.new
+          ? null
+          : <DeleteButton onClick={() => deleteQuote(activeQuote)} />}
         <CancelButton onClick={closeModal} />
       </QuoteForm>
     </Modal>
