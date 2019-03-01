@@ -328,7 +328,7 @@ const Alert = ({ type, quote, shown, onClose }) => {
  */
 const AppRoot = () => {
   const { settings, quotes, alert_: { type, quote, shown } } = getState()
-  const fetched = settings.size && quotes.size
+  const fetched = Object.keys(settings).length && quotes.size
 
   useEffect(() => {
     if (fetched) return

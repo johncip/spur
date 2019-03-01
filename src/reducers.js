@@ -83,10 +83,10 @@ const modalIsOpen = (state = false, action) => {
   }
 }
 
-const settings = (state = new Map(), action) => {
+const settings = (state = {}, action) => {
   switch (action.type) {
     case 'UPDATE_SETTINGS':
-      return new Map(Object.entries(action.payload))
+      return { ...action.payload }
     default:
       return state
   }
