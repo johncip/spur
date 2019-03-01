@@ -38,6 +38,13 @@ const storeQuotes = quoteMap => (
 )
 
 /*
+ * Puts the list of quotes in browser storage.
+ */
+const storeSettings = settings => (
+  window.browser.storage.local.set({ settings })
+)
+
+/*
  * Returns a new quote (a quote with no ID and a "new" flag).
  */
 const newQuote = () => ({
@@ -85,8 +92,23 @@ const modalIsOpen = (state = false, action) => {
 
 const settings = (state = {}, action) => {
   switch (action.type) {
+    // TODO: UPDATE_* need better names (populate?) or just use fetch
     case 'UPDATE_SETTINGS':
       return { ...action.payload }
+
+    // TODO: PUT_SETTING
+
+    case 'SAVE_SETTINGS':
+      return loop(
+        state,
+        Cmd.run(
+          storeSettings, {
+            args: [state]
+            // TODO: make alert more generic & define saveActionCreator
+            // TODO: define failActionCreator
+          }
+        )
+      )
     default:
       return state
   }

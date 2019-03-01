@@ -53,6 +53,10 @@ export const updateSettings = settings => (
   { type: 'UPDATE_SETTINGS', payload: settings }
 )
 
+export const saveSettings = settings => (
+  { type: 'SAVE_SETTINGS', payload: settings }
+)
+
 
 /*
  * edit form

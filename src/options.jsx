@@ -25,8 +25,8 @@ const { dispatch, getState } = store
 
 const {
   setActiveQuote, setNewActiveQuote, patchActiveQuote,
-  updateSettings, updateQuotes,
-  putQuote, deleteQuote, closeModal, dismissAlert
+  updateSettings, saveSettings,
+  updateQuotes, putQuote, deleteQuote, closeModal, dismissAlert
 } = bindActionCreators(actions, dispatch)
 
 
@@ -45,7 +45,13 @@ const SettingsSection = () => (
       </label>
     </div>
 
-    <button className="btn btn-save" type="button">Save</button>
+    <button
+      type="button"
+      className="btn btn-save"
+      onClick={saveSettings}
+    >
+      Save
+    </button>
   </section>
 )
 
