@@ -259,7 +259,8 @@ const QuoteForm = ({ text, author, url, category, children }) => {
  */
 const EditModal = () => {
   const { activeQuote, quotes, modalIsOpen } = getState()
-  const quoteExists = quotes.has(activeQuote.id)
+  const quoteExists = activeQuote.id !== 'new'
+  const title = quoteExists ? 'Edit Quote' : 'Add Quote'
 
   return (
     <Modal
@@ -267,9 +268,9 @@ const EditModal = () => {
       overlayClassName="modalOverlay"
       isOpen={modalIsOpen}
       onRequestClose={closeModal}
-      contentLabel={quoteExists ? 'Edit Quote' : 'Add Quote'}
+      contentLabel={title}
     >
-      <h1 className="modal--heading">Edit Quote</h1>
+      <h1 className="modal--heading">{title}</h1>
       <hr className="modal--rule" />
 
       <QuoteForm
