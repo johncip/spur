@@ -40,9 +40,11 @@ const storeQuotes = quoteMap => (
 /*
  * Puts the list of quotes in browser storage.
  */
-const storeSettings = settings => (
-  window.browser.storage.local.set({ settings })
-)
+const storeSettings = settings => {
+  console.log('in storeSettings. arg: ')
+  console.log(settings)
+  return window.browser.storage.local.set({ settings })
+}
 
 /*
  * Returns a new quote (a quote with no ID and a "new" flag).
@@ -95,9 +97,9 @@ const settings = (state = {}, action) => {
     // TODO: UPDATE_* need better names (populate?) or just use fetch
     case 'UPDATE_SETTINGS':
       return { ...action.payload }
-
-    // TODO: PUT_SETTING
-
+    case 'PATCH_SETTINGS': {
+      return { ...state, ...action.payload }
+    }
     case 'SAVE_SETTINGS':
       return loop(
         state,

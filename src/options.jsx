@@ -4,6 +4,7 @@ import Modal from 'react-modal'
 import { bindActionCreators, createStore } from 'redux'
 import { install as installLoop } from 'redux-loop'
 import classNames from 'classnames'
+import Select from 'react-select'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus'
@@ -25,7 +26,7 @@ const { dispatch, getState } = store
 
 const {
   setActiveQuote, setNewActiveQuote, patchActiveQuote,
-  updateSettings, saveSettings,
+  updateSettings, patchSettings, saveSettings,
   updateQuotes, putQuote, deleteQuote, closeModal, dismissAlert
 } = bindActionCreators(actions, dispatch)
 
@@ -33,28 +34,52 @@ const {
 /*
  * The settings section of the options page.
  */
-const SettingsSection = () => (
-  <section className="optionsSection">
-    <div className="setting">
-      <label htmlFor="id-theme">
-        <span className="setting--labelText">Theme</span>
-        <select className="setting--select" id="id-theme">
-          <option value="indexCard">Index Card</option>
-          <option value="indexCardDark">Index Card Dark</option>
-        </select>
-      </label>
-    </div>
+const SettingsSection = () => {
+  const { settings } = getState()
 
-    <button
-      type="button"
-      className="btn btn-save"
-      onClick={saveSettings}
-    >
-      Save
-    </button>
-  </section>
-)
+  console.log(settings)
+  
+  const themes = [
+    { value: 'indexCard', label: 'Index Card' },
+    { value: 'indexCardDark', label: 'Index Card Dark' }
+  ]
 
+  const customStyles = {
+    option: (provided, state) => ({
+      ...provided,
+      backgroundColor: state.isSelected ? '#aaa' : 'white',
+      ':hover': {
+        backgroundColor: state.isSelected ? '#aaa' : '#ccc'
+      }
+    })
+  }
+
+  return (
+    <section className="optionsSection">
+      <div className="setting">
+        <label htmlFor="id-theme">
+          <span className="setting--labelText">Theme</span>
+          <Select
+            className="setting--select"
+            isSearchable={false}
+            onChange={opt => patchSettings('theme', opt.value)}
+            options={themes}
+            styles={customStyles}
+            value={themes.find(x => x.value === settings.theme)}
+          />
+        </label>
+      </div>
+
+      <button
+        type="button"
+        className="btn btn-save"
+        onClick={saveSettings}
+      >
+        Save
+      </button>
+    </section>
+  )
+}
 
 /*
  * A clickable displayed quote. Includes a pencil icon on hover.

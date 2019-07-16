@@ -53,6 +53,10 @@ export const updateSettings = settings => (
   { type: 'UPDATE_SETTINGS', payload: settings }
 )
 
+export const patchSettings = (key, value) => (
+  { type: 'PATCH_SETTINGS', payload: { [key]: value } }
+)
+
 export const saveSettings = settings => (
   { type: 'SAVE_SETTINGS', payload: settings }
 )
