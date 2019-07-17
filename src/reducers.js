@@ -88,8 +88,8 @@ const settings = (state = {}, action) => {
         state,
         Cmd.run(
           storeSettings, {
-            args: [state]
-            // TODO: make alert more generic & define saveActionCreator
+            args: [state],
+            successActionCreator: showAlert('Settings updated.')
             // TODO: define failActionCreator
           }
         )
