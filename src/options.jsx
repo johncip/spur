@@ -17,7 +17,7 @@ import { faChrome } from '@fortawesome/free-brands-svg-icons/faChrome'
 
 import * as actions from './actions'
 import reducers from './reducers'
-import { loadSettings, loadQuotes, summarize, polyfillBrowser } from './util'
+import { loadSettings, loadQuotes, polyfillBrowser } from './util'
 
 import 'Styles/options/style.scss'
 
@@ -36,8 +36,7 @@ const {
  */
 const SettingsSection = () => {
   const { settings } = getState()
-
-  console.log('settings (from state):', settings)
+  // console.log('settings (from state):', settings)
 
   const themes = [
     { value: 'indexCard', label: 'Index Card' },
@@ -323,22 +322,10 @@ const EditModal = () => {
 /*
  * Displays a floating notification in response to some action.
  */
-const Alert = ({ type, quote, shown, onClose }) => {
-  if (!quote) return null
+const Alert = ({ message, shown, onClose }) => {
+  if (!message) return null
 
   const classes = classNames('alert', { 'alert-hidden': !shown })
-
-  const message = (() => {
-    const prefix = `${summarize(quote.text)}`
-    switch (type) {
-      case 'save':
-        return `${prefix} saved.`
-      case 'delete':
-        return `${prefix} deleted.`
-      default:
-        return null
-    }
-  })()
 
   return (
     <div className={classes}>
@@ -357,7 +344,7 @@ const Alert = ({ type, quote, shown, onClose }) => {
  * Loads the options page and holds state.
  */
 const AppRoot = () => {
-  const { settings, quotes, alert_: { type, quote, shown } } = getState()
+  const { settings, quotes, alert_: { message, shown } } = getState()
 
   useEffect(() => {
     loadSettings().then(updateSettings)
@@ -367,8 +354,7 @@ const AppRoot = () => {
   return [
     <Alert
       key="alert"
-      type={type}
-      quote={quote}
+      message={message}
       shown={shown}
       onClose={dismissAlert}
     />,

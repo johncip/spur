@@ -1,6 +1,6 @@
 import { combineReducers, loop, Cmd } from 'redux-loop'
-import { notifyAfterSave, notifyAfterDelete } from './actions'
-import { storeSettings, storeQuotes } from './util'
+import { showAlert } from './actions'
+import { storeSettings, storeQuotes, summarize } from './util'
 
 
 // helpers
@@ -113,7 +113,7 @@ const quotes = (state = new Map(), action) => {
         Cmd.run(
           storeQuotes, {
             args: [next],
-            successActionCreator: notifyAfterSave(quote)
+            successActionCreator: showAlert(`${summarize(quote.text)} saved.`)
             // TODO: define failActionCreator
           }
         )
@@ -128,7 +128,7 @@ const quotes = (state = new Map(), action) => {
         Cmd.run(
           storeQuotes, {
             args: [next],
-            successActionCreator: notifyAfterDelete(quote)
+            successActionCreator: showAlert(`${summarize(quote.text)} deleted.`)
             // TODO: define failActionCreator
           }
         )
@@ -139,18 +139,11 @@ const quotes = (state = new Map(), action) => {
   }
 }
 
-const alert_ = (state = { quote: null, type: null, shown: null }, action) => {
+const alert_ = (state = { message: null, shown: null }, action) => {
   switch (action.type) {
-    case 'ALERT_AFTER_SAVE':
+    case 'SHOW_ALERT':
       return {
-        quote: action.payload,
-        type: 'save',
-        shown: true
-      }
-    case 'ALERT_AFTER_DELETE':
-      return {
-        quote: action.payload,
-        type: 'delete',
+        message: action.payload,
         shown: true
       }
     case 'DISMISS_ALERT':
