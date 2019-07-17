@@ -34,17 +34,6 @@
   text-align: center;
 }
 
-.alert--undoBtn {
-  @extend %basic-type;
-  @include foreground-tints($blue-2);
-
-  margin-left: 6px;
-
-  &:hover {
-    text-decoration: underline;
-  }
-}
-
 .alert--closeBtn {
   @include foreground-tints($gray-4);
   @include background-tints($gray-7);

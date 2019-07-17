@@ -344,7 +344,6 @@ const Alert = ({ type, quote, shown, onClose }) => {
     <div className={classes}>
       <div className="alert--message">
         {message}
-        <button type="button" className="alert--undoBtn">Undo</button>
       </div>
       <button type="button" className="alert--closeBtn" onClick={onClose}>
         <FontAwesomeIcon icon={faTimes} />
