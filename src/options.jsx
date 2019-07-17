@@ -37,8 +37,8 @@ const {
 const SettingsSection = () => {
   const { settings } = getState()
 
-  console.log(settings)
-  
+  console.log('settings (from state):', settings)
+
   const themes = [
     { value: 'indexCard', label: 'Index Card' },
     { value: 'indexCardDark', label: 'Index Card Dark' }

@@ -77,9 +77,9 @@ export async function loadSettings() {
   const settings = await getOneKey('settings')
 
   if (!settings) {
+    console.log('WARNING: loaded default settings')
     return DEFAULT_SETTINGS
   }
-
   return { ...DEFAULT_SETTINGS, settings }
 }
 
