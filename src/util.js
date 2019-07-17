@@ -80,7 +80,7 @@ export async function loadSettings() {
     console.log('WARNING: loaded default settings')
     return DEFAULT_SETTINGS
   }
-  return { ...DEFAULT_SETTINGS, settings }
+  return { ...DEFAULT_SETTINGS, ...settings }
 }
 
 /**
