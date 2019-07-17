@@ -62,9 +62,10 @@ p {
 
 .setting--select {
   @extend %basic-type;
+  display: inline-block;
   margin: 3px 0; // don't move on focus outline
-  padding: 4px 0;
   font-size: 13px;
+  width: 50%;
 }
 
 

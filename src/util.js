@@ -42,6 +42,22 @@ async function seedStorage() {
   window.browser.storage.local.set({ quotes: seeds })
 }
 
+/*
+ * Puts the list of quotes in browser storage.
+ */
+export const storeQuotes = quoteMap => (
+  window.browser.storage.local.set({
+    quotes: Array.from(quoteMap.values())
+  })
+)
+
+/*
+ * Puts the settings in browser storage.
+ */
+export const storeSettings = settings => (
+  window.browser.storage.local.set({ settings })
+)
+
 /**
  * Reads a single key from browser storage and returns the value without the wrapper object.
  */
@@ -61,10 +77,10 @@ export async function loadSettings() {
   const settings = await getOneKey('settings')
 
   if (!settings) {
+    console.log('WARNING: loaded default settings')
     return DEFAULT_SETTINGS
   }
-
-  return { ...DEFAULT_SETTINGS, settings }
+  return { ...DEFAULT_SETTINGS, ...settings }
 }
 
 /**

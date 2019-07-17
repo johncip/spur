@@ -4,6 +4,7 @@ import Modal from 'react-modal'
 import { bindActionCreators, createStore } from 'redux'
 import { install as installLoop } from 'redux-loop'
 import classNames from 'classnames'
+import Select from 'react-select'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus'
@@ -16,7 +17,7 @@ import { faChrome } from '@fortawesome/free-brands-svg-icons/faChrome'
 
 import * as actions from './actions'
 import reducers from './reducers'
-import { loadSettings, loadQuotes, summarize, polyfillBrowser } from './util'
+import { loadSettings, loadQuotes, polyfillBrowser } from './util'
 
 import 'Styles/options/style.scss'
 
@@ -25,7 +26,7 @@ const { dispatch, getState } = store
 
 const {
   setActiveQuote, setNewActiveQuote, patchActiveQuote,
-  updateSettings, saveSettings,
+  updateSettings, patchSettings, saveSettings,
   updateQuotes, putQuote, deleteQuote, closeModal, dismissAlert
 } = bindActionCreators(actions, dispatch)
 
@@ -33,28 +34,51 @@ const {
 /*
  * The settings section of the options page.
  */
-const SettingsSection = () => (
-  <section className="optionsSection">
-    <div className="setting">
-      <label htmlFor="id-theme">
-        <span className="setting--labelText">Theme</span>
-        <select className="setting--select" id="id-theme">
-          <option value="indexCard">Index Card</option>
-          <option value="indexCardDark">Index Card Dark</option>
-        </select>
-      </label>
-    </div>
+const SettingsSection = () => {
+  const { settings } = getState()
+  // console.log('settings (from state):', settings)
 
-    <button
-      type="button"
-      className="btn btn-save"
-      onClick={saveSettings}
-    >
-      Save
-    </button>
-  </section>
-)
+  const themes = [
+    { value: 'indexCard', label: 'Index Card' },
+    { value: 'indexCardDark', label: 'Index Card Dark' }
+  ]
 
+  const customStyles = {
+    option: (provided, state) => ({
+      ...provided,
+      backgroundColor: state.isSelected ? '#aaa' : 'white',
+      ':hover': {
+        backgroundColor: state.isSelected ? '#aaa' : '#ccc'
+      }
+    })
+  }
+
+  return (
+    <section className="optionsSection">
+      <div className="setting">
+        <label htmlFor="id-theme">
+          <span className="setting--labelText">Theme</span>
+          <Select
+            className="setting--select"
+            isSearchable={false}
+            onChange={opt => patchSettings('theme', opt.value)}
+            options={themes}
+            styles={customStyles}
+            value={themes.find(x => x.value === settings.theme)}
+          />
+        </label>
+      </div>
+
+      <button
+        type="button"
+        className="btn btn-save"
+        onClick={saveSettings}
+      >
+        Save
+      </button>
+    </section>
+  )
+}
 
 /*
  * A clickable displayed quote. Includes a pencil icon on hover.
@@ -298,28 +322,15 @@ const EditModal = () => {
 /*
  * Displays a floating notification in response to some action.
  */
-const Alert = ({ type, quote, shown, onClose }) => {
-  if (!quote) return null
+const Alert = ({ message, shown, onClose }) => {
+  if (!message) return null
 
   const classes = classNames('alert', { 'alert-hidden': !shown })
-
-  const message = (() => {
-    const prefix = `${summarize(quote.text)}`
-    switch (type) {
-      case 'save':
-        return `${prefix} saved.`
-      case 'delete':
-        return `${prefix} deleted.`
-      default:
-        return null
-    }
-  })()
 
   return (
     <div className={classes}>
       <div className="alert--message">
         {message}
-        <button type="button" className="alert--undoBtn">Undo</button>
       </div>
       <button type="button" className="alert--closeBtn" onClick={onClose}>
         <FontAwesomeIcon icon={faTimes} />
@@ -333,20 +344,17 @@ const Alert = ({ type, quote, shown, onClose }) => {
  * Loads the options page and holds state.
  */
 const AppRoot = () => {
-  const { settings, quotes, alert_: { type, quote, shown } } = getState()
-  const fetched = Object.keys(settings).length && quotes.size
+  const { settings, quotes, alert_: { message, shown } } = getState()
 
   useEffect(() => {
-    if (fetched) return
     loadSettings().then(updateSettings)
     loadQuotes().then(updateQuotes)
-  })
+  }, [])
 
-  return fetched ? [
+  return [
     <Alert
       key="alert"
-      type={type}
-      quote={quote}
+      message={message}
       shown={shown}
       onClose={dismissAlert}
     />,
@@ -356,7 +364,7 @@ const AppRoot = () => {
       quotes={quotes}
     />,
     <EditModal key="edit-modal" />
-  ] : null
+  ]
 }
 
 

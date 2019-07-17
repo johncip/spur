@@ -1,5 +1,6 @@
 import { combineReducers, loop, Cmd } from 'redux-loop'
-import { notifyAfterSave, notifyAfterDelete } from './actions'
+import { showAlert } from './actions'
+import { storeSettings, storeQuotes, summarize } from './util'
 
 
 // helpers
@@ -27,22 +28,6 @@ const ensureId = (quote) => {
   }
   return copy
 }
-
-/*
- * Puts the list of quotes in browser storage.
- */
-const storeQuotes = quoteMap => (
-  window.browser.storage.local.set({
-    quotes: Array.from(quoteMap.values())
-  })
-)
-
-/*
- * Puts the list of quotes in browser storage.
- */
-const storeSettings = settings => (
-  window.browser.storage.local.set({ settings })
-)
 
 /*
  * Returns a new quote (a quote with no ID and a "new" flag).
@@ -95,16 +80,16 @@ const settings = (state = {}, action) => {
     // TODO: UPDATE_* need better names (populate?) or just use fetch
     case 'UPDATE_SETTINGS':
       return { ...action.payload }
-
-    // TODO: PUT_SETTING
-
+    case 'PATCH_SETTINGS': {
+      return { ...state, ...action.payload }
+    }
     case 'SAVE_SETTINGS':
       return loop(
         state,
         Cmd.run(
           storeSettings, {
-            args: [state]
-            // TODO: make alert more generic & define saveActionCreator
+            args: [state],
+            successActionCreator: showAlert('Settings updated.')
             // TODO: define failActionCreator
           }
         )
@@ -128,7 +113,7 @@ const quotes = (state = new Map(), action) => {
         Cmd.run(
           storeQuotes, {
             args: [next],
-            successActionCreator: notifyAfterSave(quote)
+            successActionCreator: showAlert(`${summarize(quote.text)} saved.`)
             // TODO: define failActionCreator
           }
         )
@@ -143,7 +128,7 @@ const quotes = (state = new Map(), action) => {
         Cmd.run(
           storeQuotes, {
             args: [next],
-            successActionCreator: notifyAfterDelete(quote)
+            successActionCreator: showAlert(`${summarize(quote.text)} deleted.`)
             // TODO: define failActionCreator
           }
         )
@@ -154,18 +139,11 @@ const quotes = (state = new Map(), action) => {
   }
 }
 
-const alert_ = (state = { quote: null, type: null, shown: null }, action) => {
+const alert_ = (state = { message: null, shown: null }, action) => {
   switch (action.type) {
-    case 'ALERT_AFTER_SAVE':
+    case 'SHOW_ALERT':
       return {
-        quote: action.payload,
-        type: 'save',
-        shown: true
-      }
-    case 'ALERT_AFTER_DELETE':
-      return {
-        quote: action.payload,
-        type: 'delete',
+        message: action.payload,
         shown: true
       }
     case 'DISMISS_ALERT':

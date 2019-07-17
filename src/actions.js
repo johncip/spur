@@ -15,16 +15,10 @@ export const dismissAlert = () => (
   { type: 'DISMISS_ALERT' }
 )
 
-// notifyAfter* should be curried with the active quote.
-export const notifyAfterSave = quote => () => (
-  { type: 'ALERT_AFTER_SAVE', payload: quote }
+// notifyAfter* should be curried with the message.
+export const showAlert = message => () => (
+  { type: 'SHOW_ALERT', payload: message }
 )
-
-// also they aren't dispatched from the app, but in response to other actions.
-export const notifyAfterDelete = quote => () => (
-  { type: 'ALERT_AFTER_DELETE', payload: quote }
-)
-
 
 /*
  * quote record list
@@ -51,6 +45,10 @@ export const deleteQuote = quote => (
  */
 export const updateSettings = settings => (
   { type: 'UPDATE_SETTINGS', payload: settings }
+)
+
+export const patchSettings = (key, value) => (
+  { type: 'PATCH_SETTINGS', payload: { [key]: value } }
 )
 
 export const saveSettings = settings => (
