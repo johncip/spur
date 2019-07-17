@@ -42,6 +42,22 @@ async function seedStorage() {
   window.browser.storage.local.set({ quotes: seeds })
 }
 
+/*
+ * Puts the list of quotes in browser storage.
+ */
+export const storeQuotes = quoteMap => (
+  window.browser.storage.local.set({
+    quotes: Array.from(quoteMap.values())
+  })
+)
+
+/*
+ * Puts the settings in browser storage.
+ */
+export const storeSettings = settings => (
+  window.browser.storage.local.set({ settings })
+)
+
 /**
  * Reads a single key from browser storage and returns the value without the wrapper object.
  */

@@ -1,5 +1,6 @@
 import { combineReducers, loop, Cmd } from 'redux-loop'
 import { notifyAfterSave, notifyAfterDelete } from './actions'
+import { storeSettings, storeQuotes } from './util'
 
 
 // helpers
@@ -26,24 +27,6 @@ const ensureId = (quote) => {
     delete copy.new
   }
   return copy
-}
-
-/*
- * Puts the list of quotes in browser storage.
- */
-const storeQuotes = quoteMap => (
-  window.browser.storage.local.set({
-    quotes: Array.from(quoteMap.values())
-  })
-)
-
-/*
- * Puts the list of quotes in browser storage.
- */
-const storeSettings = settings => {
-  console.log('in storeSettings. arg: ')
-  console.log(settings)
-  return window.browser.storage.local.set({ settings })
 }
 
 /*
