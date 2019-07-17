@@ -8,14 +8,16 @@
   top: 40px;
   left: 50%;
   width: 600px;
+  max-width: calc(100% - 20px);
   transform: translateX(-50%);
   z-index: 1;
 
   display: flex;
   align-items: center;
-  background-color: $gray-7;
+  background-color: $gray-2;
   border-radius: 4px;
-  border: 1px solid $gray-6;
+  border: 1px solid $gray-1;
+  color: $gray-7;
   box-shadow: 2.5px 2.5px 4px $trans-black;
 
   opacity: 1;
@@ -35,8 +37,8 @@
 }
 
 .alert--closeBtn {
-  @include foreground-tints($gray-4);
-  @include background-tints($gray-7);
+  @include foreground-tints($gray-7, 'lighten');
+  @include background-tints($gray-2, 'darken');
   @include focus-ring('outline');
 
   box-sizing: border-box;
