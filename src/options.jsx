@@ -359,15 +359,13 @@ const Alert = ({ type, quote, shown, onClose }) => {
  */
 const AppRoot = () => {
   const { settings, quotes, alert_: { type, quote, shown } } = getState()
-  const fetched = Object.keys(settings).length && quotes.size
 
   useEffect(() => {
-    if (fetched) return
     loadSettings().then(updateSettings)
     loadQuotes().then(updateQuotes)
-  })
+  }, [])
 
-  return fetched ? [
+  return [
     <Alert
       key="alert"
       type={type}
@@ -381,7 +379,7 @@ const AppRoot = () => {
       quotes={quotes}
     />,
     <EditModal key="edit-modal" />
-  ] : null
+  ]
 }
 
 
