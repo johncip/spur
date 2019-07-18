@@ -133,7 +133,7 @@ $vspace: 20px;
     opacity: 1;
     transition: opacity 0.4s, visibility 0.4s;
 
-    @media (max-width: 900px) {
+    @media (max-width: 600px) {
       visibility: hidden;
       opacity: 0;
     }

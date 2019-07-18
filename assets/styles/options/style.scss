@@ -202,3 +202,22 @@ p {
 .inlineAuthor {
   color: $gray-3;
 }
+
+// duplicated from .indexCard .optionsButton
+.backButton {
+  @include foreground-tints($gray-5);
+  @include focus-ring('outline');
+
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  color: $gray-5;
+  font-size: 24px;
+  opacity: 1;
+  transition: opacity 0.4s, visibility 0.4s;
+
+  @media (max-width: 600px) {
+    visibility: hidden;
+    opacity: 0;
+  }
+}

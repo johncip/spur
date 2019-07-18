@@ -14,6 +14,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes'
 import { faGithub } from '@fortawesome/free-brands-svg-icons/faGithub'
 import { faFirefox } from '@fortawesome/free-brands-svg-icons/faFirefox'
 import { faChrome } from '@fortawesome/free-brands-svg-icons/faChrome'
+import { faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons/faArrowCircleLeft'
 
 import * as actions from './actions'
 import reducers from './reducers'
@@ -30,6 +31,20 @@ const {
   updateQuotes, putQuote, deleteQuote, closeModal, dismissAlert
 } = bindActionCreators(actions, dispatch)
 
+
+// TODO: replace with new tab page in real extension
+/*
+ * A gear linking back to the main page.
+ */
+const BackButton = () => (
+  <button
+    type="button"
+    className="backButton"
+    onClick={() => window.history.back()}
+  >
+    <FontAwesomeIcon icon={faArrowCircleLeft} />
+  </button>
+)
 
 /*
  * The settings section of the options page.
@@ -352,6 +367,7 @@ const AppRoot = () => {
   }, [])
 
   return [
+    <BackButton />,
     <Alert
       key="alert"
       message={message}
