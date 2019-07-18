@@ -5,6 +5,9 @@ $nerdy-font: 300 12px $mono-font-stack;
 $vspace: 20px;
 
 .indexCard {
+  overflow: hidden;
+  height: 100vh;
+
   .quoteBox {
     position: relative; // for verticalToggle
     display: flex;
