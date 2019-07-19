@@ -10,6 +10,9 @@
   &:active {
     color: call(get-function($fn), $color, 40%);
   }
+  &:disabled {
+    color: $color;
+  }
 }
 
 /*
@@ -23,6 +26,9 @@
   }
   &:active {
     background-color: call(get-function($fn), $color, 10%);
+  }
+  &:disabled {
+    background-color: $color;
   }
 }
 
