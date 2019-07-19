@@ -116,7 +116,6 @@ const settings = (state = {}, action) => {
           storeSettings, {
             args: [state],
             successActionCreator: showAlert('Settings updated.')
-            // TODO: define failActionCreator
           }
         )
       )
@@ -140,7 +139,6 @@ const quotes = (state = new Map(), action) => {
           storeQuotes, {
             args: [next],
             successActionCreator: showAlert(`${summarize(quote.text)} saved.`)
-            // TODO: define failActionCreator
           }
         )
       )
@@ -155,7 +153,6 @@ const quotes = (state = new Map(), action) => {
           storeQuotes, {
             args: [next],
             successActionCreator: showAlert(`${summarize(quote.text)} deleted.`)
-            // TODO: define failActionCreator
           }
         )
       )
