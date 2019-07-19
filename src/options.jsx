@@ -58,6 +58,14 @@ const SettingsSection = () => {
     { value: 'indexCardDark', label: 'Index Card Dark' }
   ]
 
+  const wakeTimes = [
+    { value: 4, label: '4 am' },
+    { value: 5, label: '5 am' },
+    { value: 6, label: '6 am' },
+    { value: 7, label: '7 am' },
+    { value: 8, label: '8 am' }
+  ]
+
   const customStyles = {
     option: (provided, state) => ({
       ...provided,
@@ -78,8 +86,22 @@ const SettingsSection = () => {
             isSearchable={false}
             onChange={opt => patchSettings('theme', opt.value)}
             options={themes}
-            styles={customStyles}
             value={themes.find(x => x.value === settings.theme)}
+            styles={customStyles}
+          />
+        </label>
+      </div>
+
+      <div className="setting">
+        <label htmlFor="id-time">
+          <span className="setting--labelText">Wake Time</span>
+          <Select
+            className="setting--select"
+            isSearchable={false}
+            onChange={opt => patchSettings('wakeTime', opt.value)}
+            options={wakeTimes}
+            value={wakeTimes.find(x => x.value === settings.wakeTime)}
+            styles={customStyles}
           />
         </label>
       </div>
@@ -201,11 +223,11 @@ const LinksSection = () => (
  */
 const OptionsPage = ({ settings, quotes }) => (
   <div className="optionsContainer">
-    <h1 className="optionsHeading">Settings</h1>
-    <SettingsSection settings={settings} />
-
     <h1 className="optionsHeading">Quotes</h1>
     <QuotesSection quotes={quotes} />
+
+    <h1 className="optionsHeading">Settings</h1>
+    <SettingsSection settings={settings} />
 
     <h1 className="optionsHeading">Links</h1>
     <LinksSection />

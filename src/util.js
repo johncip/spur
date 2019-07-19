@@ -1,6 +1,6 @@
 const DEFAULT_SETTINGS = {
   theme: 'indexCard',
-  wakeTime: '6 am'
+  wakeTime: 6
 }
 
 const seeds = require('../assets/seeds.json')
