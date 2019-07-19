@@ -50,7 +50,7 @@ const BackButton = () => (
  * The settings section of the options page.
  */
 const SettingsSection = () => {
-  const { settings } = getState()
+  const { settings, settingsEdited } = getState()
   // console.log('settings (from state):', settings)
 
   const themes = [
@@ -88,6 +88,7 @@ const SettingsSection = () => {
         type="button"
         className="btn btn-save"
         onClick={saveSettings}
+        disabled={!settingsEdited}
       >
         Save
       </button>
@@ -214,11 +215,12 @@ const OptionsPage = ({ settings, quotes }) => (
 /*
  * A save button for the modal.
  */
-const SaveButton = ({ onClick }) => (
+const SaveButton = ({ onClick, disabled }) => (
   <button
     type="button"
     className="btn btn-save"
     onClick={onClick}
+    disabled={disabled}
   >
     Save
   </button>
@@ -303,8 +305,9 @@ const QuoteForm = ({ text, author, url, category, children }) => {
  * A modal for editing the clicked-on quote.
  */
 const EditModal = () => {
-  const { activeQuote, modalIsOpen } = getState()
+  const { activeQuote, modalIsOpen, quoteEdited } = getState()
   const title = !activeQuote.new ? 'Edit Quote' : 'Add Quote'
+  const valid = activeQuote.text && activeQuote.author
 
   return (
     <Modal
@@ -323,7 +326,10 @@ const EditModal = () => {
         url={activeQuote.url}
         category={activeQuote.category}
       >
-        <SaveButton onClick={() => putQuote(activeQuote)} />
+        <SaveButton
+          onClick={() => putQuote(activeQuote)}
+          disabled={!quoteEdited || !valid}
+        />
         {activeQuote.new
           ? null
           : <DeleteButton onClick={() => deleteQuote(activeQuote)} />}

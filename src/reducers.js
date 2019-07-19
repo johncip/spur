@@ -56,6 +56,32 @@ const activeQuote = (state = {}, action) => {
   }
 }
 
+const quoteEdited = (state = false, action) => {
+  switch (action.type) {
+    case 'SET_ACTIVE_QUOTE':
+      return false
+    case 'SET_NEW_ACTIVE_QUOTE':
+      return false
+    case 'PATCH_ACTIVE_QUOTE':
+      return true
+    default:
+      return state
+  }
+}
+
+const settingsEdited = (state = false, action) => {
+  switch (action.type) {
+    case 'UPDATE_SETTINGS':
+      return false
+    case 'PATCH_SETTINGS':
+      return true
+    case 'SAVE_SETTINGS':
+      return true
+    default:
+      return state
+  }
+}
+
 const modalIsOpen = (state = false, action) => {
   switch (action.type) {
     case 'OPEN_MODAL':
@@ -160,6 +186,8 @@ const alert_ = (state = { message: null, shown: null }, action) => {
 export default combineReducers({
   activeQuote,
   modalIsOpen,
+  quoteEdited,
+  settingsEdited,
   settings,
   quotes,
   alert_
