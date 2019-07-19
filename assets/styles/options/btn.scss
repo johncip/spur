@@ -8,6 +8,10 @@
   @include focus-ring('border');
   border-radius: 2px;
   font: 500 16px $basic-font-stack;
+
+  &:disabled {
+    opacity: 0.25;
+  }
 }
 
 .btn-save {
