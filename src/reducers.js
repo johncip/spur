@@ -71,7 +71,7 @@ const quoteEdited = (state = false, action) => {
 
 const settingsEdited = (state = false, action) => {
   switch (action.type) {
-    case 'UPDATE_SETTINGS':
+    case 'POPULATE_SETTINGS':
       return false
     case 'PATCH_SETTINGS':
       return true
@@ -103,8 +103,7 @@ const modalIsOpen = (state = false, action) => {
 
 const settings = (state = {}, action) => {
   switch (action.type) {
-    // TODO: UPDATE_* need better names (populate?) or just use fetch
-    case 'UPDATE_SETTINGS':
+    case 'POPULATE_SETTINGS':
       return { ...action.payload }
     case 'PATCH_SETTINGS': {
       return { ...state, ...action.payload }
@@ -126,7 +125,7 @@ const settings = (state = {}, action) => {
 
 const quotes = (state = new Map(), action) => {
   switch (action.type) {
-    case 'UPDATE_QUOTES': {
+    case 'POPULATE_QUOTES': {
       return normalizedQuotes(action.payload)
     }
     case 'PUT_QUOTE': {

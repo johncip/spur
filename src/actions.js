@@ -27,8 +27,8 @@ export const saveQuotes = () => (
   { type: 'SAVE_QUOTES' }
 )
 
-export const updateQuotes = quotes => (
-  { type: 'UPDATE_QUOTES', payload: quotes }
+export const populateQuotes = quotes => (
+  { type: 'POPULATE_QUOTES', payload: quotes }
 )
 
 export const putQuote = quote => (
@@ -43,8 +43,8 @@ export const deleteQuote = quote => (
 /*
  * settings
  */
-export const updateSettings = settings => (
-  { type: 'UPDATE_SETTINGS', payload: settings }
+export const populateSettings = settings => (
+  { type: 'POPULATE_SETTINGS', payload: settings }
 )
 
 export const patchSettings = (key, value) => (

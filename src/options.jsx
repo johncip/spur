@@ -27,8 +27,8 @@ const { dispatch, getState } = store
 
 const {
   setActiveQuote, setNewActiveQuote, patchActiveQuote,
-  updateSettings, patchSettings, saveSettings,
-  updateQuotes, putQuote, deleteQuote, closeModal, dismissAlert
+  populateSettings, patchSettings, saveSettings,
+  populateQuotes, putQuote, deleteQuote, closeModal, dismissAlert
 } = bindActionCreators(actions, dispatch)
 
 
@@ -368,8 +368,8 @@ const AppRoot = () => {
   const { settings, quotes, alert_: { message, shown } } = getState()
 
   useEffect(() => {
-    loadSettings().then(updateSettings)
-    loadQuotes().then(updateQuotes)
+    loadSettings().then(populateSettings)
+    loadQuotes().then(populateQuotes)
   }, [])
 
   return [
