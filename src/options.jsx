@@ -394,7 +394,7 @@ const AppRoot = () => {
   }, [])
 
   return [
-    <BackButton />,
+    <BackButton key="back-button" />,
     <Alert
       key="alert"
       message={message}
