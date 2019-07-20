@@ -21,15 +21,7 @@ p {
 }
 
 
-// container, section
-
-.optionsHeading {
-  font: 300 32px $basic-font-stack;
-
-  .optionsContainer & {
-    margin-bottom: 12px;
-  }
-}
+// containers, sections
 
 .optionsContainer {
   max-width: 720px;
@@ -52,6 +44,26 @@ p {
   }
 }
 
+
+// headings
+
+.optionsHeading {
+  font: 300 32px $basic-font-stack;
+
+  .optionsContainer & {
+    margin-bottom: 12px;
+  }
+}
+
+.optionsSubheading {
+  font: 600 14px $basic-font-stack;
+  text-transform: uppercase;
+  color: $gray-3;
+
+  .optionsContainer &:not(:first-of-type) {
+    margin-top: 32px;
+  }
+}
 
 // setting
 
