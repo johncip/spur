@@ -76,7 +76,7 @@ const settingsEdited = (state = false, action) => {
     case 'PATCH_SETTINGS':
       return true
     case 'SAVE_SETTINGS':
-      return true
+      return false
     default:
       return state
   }
