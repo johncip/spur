@@ -5,6 +5,7 @@ import { bindActionCreators, createStore } from 'redux'
 import { install as installLoop } from 'redux-loop'
 import classNames from 'classnames'
 import Select from 'react-select'
+import { saveAs } from 'file-saver'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus'
@@ -18,7 +19,7 @@ import { faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons/faArrowCirc
 
 import * as actions from './actions'
 import reducers from './reducers'
-import { loadSettings, loadQuotes, seedStorage, polyfillBrowser } from './util'
+import { loadSettings, loadQuotes, seedStorage, polyfillBrowser, printQuotes } from './util'
 
 import 'Styles/options/style.scss'
 
@@ -51,7 +52,7 @@ const BackButton = () => (
  * The settings section of the options page.
  */
 const SettingsSection = () => {
-  const { settings, settingsEdited, chosenFile } = getState()
+  const { quotes, settings, settingsEdited, chosenFile } = getState()
 
   const themes = [
     { value: 'indexCard', label: 'Index Card' },
@@ -142,7 +143,12 @@ const SettingsSection = () => {
         <button
           type="button"
           className="btn btn-blue"
-          onClick={() => { }}
+          onClick={() => {
+            saveAs(
+              new Blob([printQuotes(quotes)], { type: 'application/json;charset=utf-8' }),
+              'spur-export.json'
+            )
+          }}
         >
           Export Quotes
         </button>

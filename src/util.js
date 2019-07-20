@@ -149,3 +149,12 @@ export const summarize = (text, len = 5) => {
   return `“${core}”`
   /* eslint-enable no-multi-spaces */
 }
+
+export function printQuotes(quotes) {
+  const entries = Array.from(quotes.values()).map((q) => {
+    const { id, ...q2 } = q
+    return q2
+  })
+
+  return JSON.stringify(entries, null, 2)
+}
