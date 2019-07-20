@@ -27,8 +27,12 @@ export const saveQuotes = () => (
   { type: 'SAVE_QUOTES' }
 )
 
-export const updateQuotes = quotes => (
-  { type: 'UPDATE_QUOTES', payload: quotes }
+export const populateQuotes = quotes => (
+  { type: 'POPULATE_QUOTES', payload: quotes }
+)
+
+export const populateQuotesAfterReset = quotes => (
+  { type: 'POPULATE_QUOTES_AFTER_RESET', payload: quotes }
 )
 
 export const putQuote = quote => (
@@ -43,8 +47,8 @@ export const deleteQuote = quote => (
 /*
  * settings
  */
-export const updateSettings = settings => (
-  { type: 'UPDATE_SETTINGS', payload: settings }
+export const populateSettings = settings => (
+  { type: 'POPULATE_SETTINGS', payload: settings }
 )
 
 export const patchSettings = (key, value) => (
@@ -53,6 +57,14 @@ export const patchSettings = (key, value) => (
 
 export const saveSettings = settings => (
   { type: 'SAVE_SETTINGS', payload: settings }
+)
+
+export const chooseFile = file => (
+  { type: 'CHOOSE_FILE', payload: file }
+)
+
+export const importQuotes = () => (
+  { type: 'IMPORT_QUOTES' }
 )
 
 

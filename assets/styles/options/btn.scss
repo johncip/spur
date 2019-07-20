@@ -14,6 +14,14 @@
   }
 }
 
+.btn-blue {
+  @include background-tints($blue-1, 'lighten');
+  height: 32px;
+  padding-left: 8px;
+  padding-right: 8px;
+  color: $white;
+}
+
 .btn-save {
   @include background-tints($blue-1, 'lighten');
   height: 32px;

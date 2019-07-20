@@ -1,6 +1,6 @@
 const DEFAULT_SETTINGS = {
   theme: 'indexCard',
-  wakeTime: '6 am'
+  wakeTime: 6
 }
 
 const seeds = require('../assets/seeds.json')
@@ -38,7 +38,7 @@ export function polyfillBrowser() {
 /**
  * Seeds browser storage with the included quotes.
  */
-async function seedStorage() {
+export async function seedStorage() {
   window.browser.storage.local.set({ quotes: seeds })
 }
 
@@ -69,6 +69,18 @@ export async function getOneKey(key) {
   }
   return response[key]
 }
+
+/*
+ * Reads and parses an "uploaded" quotes JSON file.
+ * **ALSO STORES IT IMMEDIATELY AND UPDATES THE REDUX STORE**
+ */
+export async function readQuotesFile(file, callback, dispatch) {
+  const data = await new Response(file).text()
+  const parsed = JSON.parse(data)
+  storeQuotes(parsed)
+  dispatch(callback(parsed))
+}
+
 
 /**
  * Loads settings from storage, or supplies defaults.
@@ -136,4 +148,13 @@ export const summarize = (text, len = 5) => {
 
   return `“${core}”`
   /* eslint-enable no-multi-spaces */
+}
+
+export function printQuotes(quotes) {
+  const entries = Array.from(quotes.values()).map((q) => {
+    const { id, ...q2 } = q
+    return q2
+  })
+
+  return JSON.stringify(entries, null, 2)
 }

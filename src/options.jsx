@@ -5,6 +5,7 @@ import { bindActionCreators, createStore } from 'redux'
 import { install as installLoop } from 'redux-loop'
 import classNames from 'classnames'
 import Select from 'react-select'
+import { saveAs } from 'file-saver'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus'
@@ -18,7 +19,7 @@ import { faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons/faArrowCirc
 
 import * as actions from './actions'
 import reducers from './reducers'
-import { loadSettings, loadQuotes, polyfillBrowser } from './util'
+import { loadSettings, loadQuotes, seedStorage, polyfillBrowser, printQuotes } from './util'
 
 import 'Styles/options/style.scss'
 
@@ -27,8 +28,9 @@ const { dispatch, getState } = store
 
 const {
   setActiveQuote, setNewActiveQuote, patchActiveQuote,
-  updateSettings, patchSettings, saveSettings,
-  updateQuotes, putQuote, deleteQuote, closeModal, dismissAlert
+  populateSettings, patchSettings, saveSettings,
+  populateQuotes, populateQuotesAfterReset, putQuote, deleteQuote, closeModal, dismissAlert,
+  chooseFile, importQuotes
 } = bindActionCreators(actions, dispatch)
 
 
@@ -50,12 +52,19 @@ const BackButton = () => (
  * The settings section of the options page.
  */
 const SettingsSection = () => {
-  const { settings, settingsEdited } = getState()
-  // console.log('settings (from state):', settings)
+  const { quotes, settings, settingsEdited, chosenFile } = getState()
 
   const themes = [
     { value: 'indexCard', label: 'Index Card' },
     { value: 'indexCardDark', label: 'Index Card Dark' }
+  ]
+
+  const wakeTimes = [
+    { value: 4, label: '4 am' },
+    { value: 5, label: '5 am' },
+    { value: 6, label: '6 am' },
+    { value: 7, label: '7 am' },
+    { value: 8, label: '8 am' }
   ]
 
   const customStyles = {
@@ -70,6 +79,8 @@ const SettingsSection = () => {
 
   return (
     <section className="optionsSection">
+      <h2 className="optionsSubheading">Basic</h2>
+
       <div className="setting">
         <label htmlFor="id-theme">
           <span className="setting--labelText">Theme</span>
@@ -78,8 +89,22 @@ const SettingsSection = () => {
             isSearchable={false}
             onChange={opt => patchSettings('theme', opt.value)}
             options={themes}
-            styles={customStyles}
             value={themes.find(x => x.value === settings.theme)}
+            styles={customStyles}
+          />
+        </label>
+      </div>
+
+      <div className="setting">
+        <label htmlFor="id-time">
+          <span className="setting--labelText">Wake Time</span>
+          <Select
+            className="setting--select"
+            isSearchable={false}
+            onChange={opt => patchSettings('wakeTime', opt.value)}
+            options={wakeTimes}
+            value={wakeTimes.find(x => x.value === settings.wakeTime)}
+            styles={customStyles}
           />
         </label>
       </div>
@@ -92,6 +117,52 @@ const SettingsSection = () => {
       >
         Save
       </button>
+
+      <h2 className="optionsSubheading">Advanced</h2>
+
+      <div className="setting">
+        <input
+          className="fileInput"
+          id="image-file"
+          type="file"
+          accept=".json"
+          onChange={e => chooseFile(e.target.files[0])}
+        />
+
+        <button
+          type="button"
+          className="btn btn-blue"
+          disabled={!chosenFile}
+          onClick={importQuotes}
+        >
+          Import Quotes
+        </button>
+      </div>
+
+      <div className="setting">
+        <button
+          type="button"
+          className="btn btn-blue"
+          onClick={() => {
+            saveAs(
+              new Blob([printQuotes(quotes)], { type: 'application/json;charset=utf-8' }),
+              'spur-export.json'
+            )
+          }}
+        >
+          Export Quotes
+        </button>
+      </div>
+
+      <div className="setting">
+        <button
+          type="button"
+          className="btn btn-blue"
+          onClick={() => { seedStorage().then(loadQuotes).then(populateQuotesAfterReset) }}
+        >
+          Reset Quotes
+        </button>
+      </div>
     </section>
   )
 }
@@ -201,11 +272,11 @@ const LinksSection = () => (
  */
 const OptionsPage = ({ settings, quotes }) => (
   <div className="optionsContainer">
-    <h1 className="optionsHeading">Settings</h1>
-    <SettingsSection settings={settings} />
-
     <h1 className="optionsHeading">Quotes</h1>
     <QuotesSection quotes={quotes} />
+
+    <h1 className="optionsHeading">Settings</h1>
+    <SettingsSection settings={settings} />
 
     <h1 className="optionsHeading">Links</h1>
     <LinksSection />
@@ -368,12 +439,12 @@ const AppRoot = () => {
   const { settings, quotes, alert_: { message, shown } } = getState()
 
   useEffect(() => {
-    loadSettings().then(updateSettings)
-    loadQuotes().then(updateQuotes)
+    loadSettings().then(populateSettings)
+    loadQuotes().then(populateQuotes)
   }, [])
 
   return [
-    <BackButton />,
+    <BackButton key="back-button" />,
     <Alert
       key="alert"
       message={message}

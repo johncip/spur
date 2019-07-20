@@ -1,6 +1,6 @@
 import { combineReducers, loop, Cmd } from 'redux-loop'
-import { showAlert } from './actions'
-import { storeSettings, storeQuotes, summarize } from './util'
+import { showAlert, populateQuotes } from './actions'
+import { storeSettings, storeQuotes, summarize, readQuotesFile } from './util'
 
 
 // helpers
@@ -71,12 +71,32 @@ const quoteEdited = (state = false, action) => {
 
 const settingsEdited = (state = false, action) => {
   switch (action.type) {
-    case 'UPDATE_SETTINGS':
+    case 'POPULATE_SETTINGS':
       return false
     case 'PATCH_SETTINGS':
       return true
     case 'SAVE_SETTINGS':
-      return true
+      return false
+    default:
+      return state
+  }
+}
+
+const chosenFile = (state = null, action) => {
+  switch (action.type) {
+    case 'CHOOSE_FILE':
+      return action.payload
+    case 'IMPORT_QUOTES': {
+      return loop(
+        state,
+        Cmd.run(
+          readQuotesFile, {
+            args: [state, populateQuotes, Cmd.dispatch],
+            successActionCreator: showAlert('Quotes imported.')
+          }
+        )
+      )
+    }
     default:
       return state
   }
@@ -103,8 +123,7 @@ const modalIsOpen = (state = false, action) => {
 
 const settings = (state = {}, action) => {
   switch (action.type) {
-    // TODO: UPDATE_* need better names (populate?) or just use fetch
-    case 'UPDATE_SETTINGS':
+    case 'POPULATE_SETTINGS':
       return { ...action.payload }
     case 'PATCH_SETTINGS': {
       return { ...state, ...action.payload }
@@ -126,9 +145,13 @@ const settings = (state = {}, action) => {
 
 const quotes = (state = new Map(), action) => {
   switch (action.type) {
-    case 'UPDATE_QUOTES': {
+    case 'POPULATE_QUOTES':
       return normalizedQuotes(action.payload)
-    }
+    case 'POPULATE_QUOTES_AFTER_RESET':
+      return loop(
+        normalizedQuotes(action.payload),
+        Cmd.action(showAlert('Quotes reset.')())
+      )
     case 'PUT_QUOTE': {
       const next = new Map(state)
       const quote = ensureId({ ...action.payload })
@@ -187,5 +210,6 @@ export default combineReducers({
   settingsEdited,
   settings,
   quotes,
+  chosenFile,
   alert_
 })
