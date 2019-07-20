@@ -55,6 +55,14 @@ export const saveSettings = settings => (
   { type: 'SAVE_SETTINGS', payload: settings }
 )
 
+export const chooseFile = file => (
+  { type: 'CHOOSE_FILE', payload: file }
+)
+
+export const importQuotes = () => (
+  { type: 'IMPORT_QUOTES' }
+)
+
 
 /*
  * edit form

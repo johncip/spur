@@ -28,7 +28,8 @@ const { dispatch, getState } = store
 const {
   setActiveQuote, setNewActiveQuote, patchActiveQuote,
   populateSettings, patchSettings, saveSettings,
-  populateQuotes, putQuote, deleteQuote, closeModal, dismissAlert
+  populateQuotes, putQuote, deleteQuote, closeModal, dismissAlert,
+  chooseFile, importQuotes
 } = bindActionCreators(actions, dispatch)
 
 
@@ -50,7 +51,7 @@ const BackButton = () => (
  * The settings section of the options page.
  */
 const SettingsSection = () => {
-  const { settings, settingsEdited } = getState()
+  const { settings, settingsEdited, chosenFile } = getState()
 
   const themes = [
     { value: 'indexCard', label: 'Index Card' },
@@ -77,6 +78,8 @@ const SettingsSection = () => {
 
   return (
     <section className="optionsSection">
+      <h2 className="optionsSubheading">Basic</h2>
+
       <div className="setting">
         <label htmlFor="id-theme">
           <span className="setting--labelText">Theme</span>
@@ -113,6 +116,47 @@ const SettingsSection = () => {
       >
         Save
       </button>
+
+      <h2 className="optionsSubheading">Advanced</h2>
+
+      <div className="setting">
+        <input
+          className="fileInput"
+          id="image-file"
+          type="file"
+          accept=".json"
+          onChange={e => chooseFile(e.target.files[0])}
+        />
+
+        <button
+          type="button"
+          className="btn btn-blue"
+          disabled={!chosenFile}
+          onClick={importQuotes}
+        >
+          Import Quotes
+        </button>
+      </div>
+
+      <div className="setting">
+        <button
+          type="button"
+          className="btn btn-blue"
+          onClick={() => { }}
+        >
+          Export Quotes
+        </button>
+      </div>
+
+      <div className="setting">
+        <button
+          type="button"
+          className="btn btn-blue"
+          onClick={() => { }}
+        >
+          Reset Quotes
+        </button>
+      </div>
     </section>
   )
 }

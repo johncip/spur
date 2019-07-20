@@ -1,6 +1,6 @@
 import { combineReducers, loop, Cmd } from 'redux-loop'
-import { showAlert } from './actions'
-import { storeSettings, storeQuotes, summarize } from './util'
+import { showAlert, populateQuotes } from './actions'
+import { storeSettings, storeQuotes, summarize, readQuotesFile } from './util'
 
 
 // helpers
@@ -77,6 +77,26 @@ const settingsEdited = (state = false, action) => {
       return true
     case 'SAVE_SETTINGS':
       return false
+    default:
+      return state
+  }
+}
+
+const chosenFile = (state = null, action) => {
+  switch (action.type) {
+    case 'CHOOSE_FILE':
+      return action.payload
+    case 'IMPORT_QUOTES': {
+      return loop(
+        state,
+        Cmd.run(
+          readQuotesFile, {
+            args: [state, populateQuotes, Cmd.dispatch],
+            successActionCreator: showAlert('Quotes JSON imported.')
+          }
+        )
+      )
+    }
     default:
       return state
   }
@@ -186,5 +206,6 @@ export default combineReducers({
   settingsEdited,
   settings,
   quotes,
+  chosenFile,
   alert_
 })

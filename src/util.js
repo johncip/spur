@@ -70,6 +70,18 @@ export async function getOneKey(key) {
   return response[key]
 }
 
+/*
+ * Reads and parses an "uploaded" quotes JSON file.
+ * **ALSO STORES IT IMMEDIATELY AND UPDATES THE REDUX STORE**
+ */
+export async function readQuotesFile(file, callback, dispatch) {
+  const data = await new Response(file).text()
+  const parsed = JSON.parse(data)
+  storeQuotes(parsed)
+  dispatch(callback(parsed))
+}
+
+
 /**
  * Loads settings from storage, or supplies defaults.
  */
