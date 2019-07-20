@@ -235,3 +235,14 @@ p {
     opacity: 0;
   }
 }
+
+.fileInput {
+  display: inline-block;
+  background-color: $gray-6;
+  border-radius: 2px;
+  padding: 8px;
+
+  .setting & {
+    margin-right: 12px;
+  }
+}
