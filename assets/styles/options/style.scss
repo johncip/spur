@@ -57,7 +57,9 @@ p {
 
 .setting--labelText {
   @extend %basic-type;
+  display: inline-block;
   margin-right: 8px;
+  min-width: 6em;
 }
 
 .setting--select {
