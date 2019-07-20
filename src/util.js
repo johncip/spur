@@ -38,7 +38,7 @@ export function polyfillBrowser() {
 /**
  * Seeds browser storage with the included quotes.
  */
-async function seedStorage() {
+export async function seedStorage() {
   window.browser.storage.local.set({ quotes: seeds })
 }
 

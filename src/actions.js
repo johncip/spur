@@ -31,6 +31,10 @@ export const populateQuotes = quotes => (
   { type: 'POPULATE_QUOTES', payload: quotes }
 )
 
+export const populateQuotesAfterReset = quotes => (
+  { type: 'POPULATE_QUOTES_AFTER_RESET', payload: quotes }
+)
+
 export const putQuote = quote => (
   { type: 'PUT_QUOTE', payload: quote }
 )

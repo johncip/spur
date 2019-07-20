@@ -92,7 +92,7 @@ const chosenFile = (state = null, action) => {
         Cmd.run(
           readQuotesFile, {
             args: [state, populateQuotes, Cmd.dispatch],
-            successActionCreator: showAlert('Quotes JSON imported.')
+            successActionCreator: showAlert('Quotes imported.')
           }
         )
       )
@@ -145,9 +145,13 @@ const settings = (state = {}, action) => {
 
 const quotes = (state = new Map(), action) => {
   switch (action.type) {
-    case 'POPULATE_QUOTES': {
+    case 'POPULATE_QUOTES':
       return normalizedQuotes(action.payload)
-    }
+    case 'POPULATE_QUOTES_AFTER_RESET':
+      return loop(
+        normalizedQuotes(action.payload),
+        Cmd.action(showAlert('Quotes reset.')())
+      )
     case 'PUT_QUOTE': {
       const next = new Map(state)
       const quote = ensureId({ ...action.payload })

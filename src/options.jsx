@@ -18,7 +18,7 @@ import { faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons/faArrowCirc
 
 import * as actions from './actions'
 import reducers from './reducers'
-import { loadSettings, loadQuotes, polyfillBrowser } from './util'
+import { loadSettings, loadQuotes, seedStorage, polyfillBrowser } from './util'
 
 import 'Styles/options/style.scss'
 
@@ -28,7 +28,7 @@ const { dispatch, getState } = store
 const {
   setActiveQuote, setNewActiveQuote, patchActiveQuote,
   populateSettings, patchSettings, saveSettings,
-  populateQuotes, putQuote, deleteQuote, closeModal, dismissAlert,
+  populateQuotes, populateQuotesAfterReset, putQuote, deleteQuote, closeModal, dismissAlert,
   chooseFile, importQuotes
 } = bindActionCreators(actions, dispatch)
 
@@ -152,7 +152,7 @@ const SettingsSection = () => {
         <button
           type="button"
           className="btn btn-blue"
-          onClick={() => { }}
+          onClick={() => { seedStorage().then(loadQuotes).then(populateQuotesAfterReset) }}
         >
           Reset Quotes
         </button>
