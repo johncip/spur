@@ -51,7 +51,6 @@ const BackButton = () => (
  */
 const SettingsSection = () => {
   const { settings, settingsEdited } = getState()
-  // console.log('settings (from state):', settings)
 
   const themes = [
     { value: 'indexCard', label: 'Index Card' },
