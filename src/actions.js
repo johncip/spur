@@ -21,7 +21,7 @@ export const showAlert = message => () => (
 )
 
 /*
- * quote record list
+ * quotes
  */
 export const saveQuotes = () => (
   { type: 'SAVE_QUOTES' }
