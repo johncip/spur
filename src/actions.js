@@ -21,7 +21,7 @@ export const showAlert = message => () => (
 )
 
 /*
- * quote record list
+ * quotes
  */
 export const saveQuotes = () => (
   { type: 'SAVE_QUOTES' }
@@ -41,6 +41,10 @@ export const putQuote = quote => (
 
 export const deleteQuote = quote => (
   { type: 'DELETE_QUOTE', payload: quote }
+)
+
+export const shuffleQuotes = () => (
+  { type: 'SHUFFLE_QUOTES' }
 )
 
 

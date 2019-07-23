@@ -1,21 +1,16 @@
 import { combineReducers, loop, Cmd } from 'redux-loop'
 import { showAlert, populateQuotes } from './actions'
-import { storeSettings, storeQuotes, summarize, readQuotesFile } from './util'
+import {
+  storeSettings,
+  storeQuotes,
+  summarize,
+  readQuotesFile,
+  shuffledQuotes,
+  normalizedQuotes
+} from './util'
 
 
 // helpers
-
-/*
- * Given an array of quote records, returns a map where the keys are
- * the array indices, the values are the records, and the records gain
- * a matching "id" property.
- */
-const normalizedQuotes = records => (
-  records.reduce((map, record, idx) => {
-    map.set(idx, { ...record, id: idx })
-    return map
-  }, new Map())
-)
 
 /*
  * Returns a quote that is not new.
@@ -23,7 +18,7 @@ const normalizedQuotes = records => (
 const ensureId = (quote) => {
   const copy = { ...quote }
   if (copy.new) {
-    copy.id = Math.random() // TODO: do something better
+    copy.id = Math.random() // TODO: just use the new index
     delete copy.new
   }
   return copy
@@ -32,7 +27,7 @@ const ensureId = (quote) => {
 /*
  * Returns a new quote (a quote with no ID and a "new" flag).
  */
-const newQuote = () => ({
+const blankQuote = () => ({
   quote: '',
   author: '',
   url: '',
@@ -48,7 +43,7 @@ const activeQuote = (state = {}, action) => {
     case 'SET_ACTIVE_QUOTE':
       return action.payload
     case 'SET_NEW_ACTIVE_QUOTE':
-      return newQuote()
+      return blankQuote()
     case 'PATCH_ACTIVE_QUOTE':
       return { ...state, ...action.payload }
     default:
@@ -176,6 +171,18 @@ const quotes = (state = new Map(), action) => {
           storeQuotes, {
             args: [next],
             successActionCreator: showAlert(`${summarize(quote.text)} deleted.`)
+          }
+        )
+      )
+    }
+    case 'SHUFFLE_QUOTES': {
+      const shuffled = shuffledQuotes(state)
+      return loop(
+        shuffled,
+        Cmd.run(
+          storeQuotes, {
+            args: [shuffled],
+            successActionCreator: showAlert('Quotes shuffled.')
           }
         )
       )
