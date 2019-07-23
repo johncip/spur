@@ -35,8 +35,10 @@ p {
   padding: 16px;
   color: $gray-2;
 
-  .setting {
-    margin-bottom: 12px;
+
+  .settingGroup:not(:last-of-type) {
+    margin-bottom: 24px;
+
   }
 
   .optionsContainer &:not(:last-child) {
@@ -67,6 +69,16 @@ p {
 
 // setting
 
+.settingGroup {
+  background-color: $gray-6;
+  padding: 12px;
+  border-radius: 2px;
+
+  > *:not(:first-child) {
+    margin-top: 12px;
+  }
+}
+
 .setting--labelText {
   @extend %basic-type;
   display: inline-block;
@@ -80,6 +92,27 @@ p {
   margin: 3px 0; // don't move on focus outline
   font-size: 13px;
   width: 50%;
+}
+
+.setting--caption {
+  @extend %basic-type;
+  margin-left: 1em;
+
+  .warning {
+    margin-left: 8px;
+  }
+}
+
+.warning {
+  font-style: italic;
+  color: darken(red, 20%);
+
+  > .svg-inline--fa {
+    position: relative;
+    top: -2px;
+    margin-right: 2px;
+    font-size: 80%;
+  }
 }
 
 

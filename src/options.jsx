@@ -16,6 +16,7 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons/faGithub'
 import { faFirefox } from '@fortawesome/free-brands-svg-icons/faFirefox'
 import { faChrome } from '@fortawesome/free-brands-svg-icons/faChrome'
 import { faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons/faArrowCircleLeft'
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons/faExclamationTriangle'
 
 import * as actions from './actions'
 import reducers from './reducers'
@@ -30,7 +31,7 @@ const {
   setActiveQuote, setNewActiveQuote, patchActiveQuote,
   populateSettings, patchSettings, saveSettings,
   populateQuotes, populateQuotesAfterReset, putQuote, deleteQuote, closeModal, dismissAlert,
-  chooseFile, importQuotes
+  chooseFile, importQuotes, shuffleQuotes
 } = bindActionCreators(actions, dispatch)
 
 
@@ -81,87 +82,122 @@ const SettingsSection = () => {
     <section className="optionsSection">
       <h2 className="optionsSubheading">Basic</h2>
 
-      <div className="setting">
-        <label htmlFor="id-theme">
-          <span className="setting--labelText">Theme</span>
-          <Select
-            className="setting--select"
-            isSearchable={false}
-            onChange={opt => patchSettings('theme', opt.value)}
-            options={themes}
-            value={themes.find(x => x.value === settings.theme)}
-            styles={customStyles}
-          />
-        </label>
+      <div className="settingGroup">
+        <div className="setting">
+          <label htmlFor="id-theme">
+            <span className="setting--labelText">Theme</span>
+            <Select
+              className="setting--select"
+              isSearchable={false}
+              onChange={opt => patchSettings('theme', opt.value)}
+              options={themes}
+              value={themes.find(x => x.value === settings.theme)}
+              styles={customStyles}
+            />
+          </label>
+        </div>
+
+        <div className="setting">
+          <label htmlFor="id-time">
+            <span className="setting--labelText">Wake Time</span>
+            <Select
+              className="setting--select"
+              isSearchable={false}
+              onChange={opt => patchSettings('wakeTime', opt.value)}
+              options={wakeTimes}
+              value={wakeTimes.find(x => x.value === settings.wakeTime)}
+              styles={customStyles}
+            />
+          </label>
+        </div>
+
+        <button
+          type="button"
+          className="btn btn-save"
+          onClick={saveSettings}
+          disabled={!settingsEdited}
+        >
+          Save
+        </button>
       </div>
 
-      <div className="setting">
-        <label htmlFor="id-time">
-          <span className="setting--labelText">Wake Time</span>
-          <Select
-            className="setting--select"
-            isSearchable={false}
-            onChange={opt => patchSettings('wakeTime', opt.value)}
-            options={wakeTimes}
-            value={wakeTimes.find(x => x.value === settings.wakeTime)}
-            styles={customStyles}
-          />
-        </label>
-      </div>
+      <div className="settingGroup">
+        <div className="setting">
+          <button
+            type="button"
+            className="btn btn-blue"
+            onClick={shuffleQuotes}
+          >
+            Shuffle Quotes
+          </button>
 
-      <button
-        type="button"
-        className="btn btn-save"
-        onClick={saveSettings}
-        disabled={!settingsEdited}
-      >
-        Save
-      </button>
+          <span className="setting--caption">Put quotes in a new random order.</span>
+        </div>
+      </div>
 
       <h2 className="optionsSubheading">Advanced</h2>
 
-      <div className="setting">
-        <input
-          className="fileInput"
-          id="image-file"
-          type="file"
-          accept=".json"
-          onChange={e => chooseFile(e.target.files[0])}
-        />
+      <div className="settingGroup">
+        <div className="setting">
+          <input
+            className="fileInput"
+            id="image-file"
+            type="file"
+            accept=".json"
+            onChange={e => chooseFile(e.target.files[0])}
+          />
+          <br />
+          <button
+            type="button"
+            className="btn btn-blue"
+            disabled={!chosenFile}
+            onClick={importQuotes}
+          >
+            Import Quotes
+          </button>
+          <span className="setting--caption">
+            Import quotes from a JSON file.
+            <span className="warning">
+              <FontAwesomeIcon icon={faExclamationTriangle} />
+              Deletes current quotes!
+            </span>
+          </span>
+        </div>
 
-        <button
-          type="button"
-          className="btn btn-blue"
-          disabled={!chosenFile}
-          onClick={importQuotes}
-        >
-          Import Quotes
-        </button>
-      </div>
+        <div className="setting">
+          <button
+            type="button"
+            className="btn btn-blue"
+            onClick={() => {
+              saveAs(
+                new Blob([printQuotes(quotes)], { type: 'application/json;charset=utf-8' }),
+                'spur-export.json'
+              )
+            }}
+          >
+            Export Quotes
+          </button>
+          <span className="setting--caption">
+            Save current quotes to a JSON file. (Same format is used for import.)
+          </span>
+        </div>
 
-      <div className="setting">
-        <button
-          type="button"
-          className="btn btn-blue"
-          onClick={() => {
-            saveAs(
-              new Blob([printQuotes(quotes)], { type: 'application/json;charset=utf-8' }),
-              'spur-export.json'
-            )
-          }}
-        >
-          Export Quotes
-        </button>
-      </div>
-
-      <div className="setting">
-        <button
-          type="button"
-          className="btn btn-blue"
-          onClick={() => { seedStorage().then(loadQuotes).then(populateQuotesAfterReset) }}
-        >
-          Reset Quotes
-        </button>
+        <div className="setting">
+          <button
+            type="button"
+            className="btn btn-blue"
+            onClick={() => { seedStorage().then(loadQuotes).then(populateQuotesAfterReset) }}
+          >
+            Reset Quotes
+          </button>
+          <span className="setting--caption">
+            Restore the default quote set.
+            <span className="warning">
+              <FontAwesomeIcon icon={faExclamationTriangle} />
+              Deletes current quotes!
+            </span>
+          </span>
+        </div>
       </div>
     </section>
   )
