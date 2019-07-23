@@ -178,7 +178,7 @@ const SettingsSection = () => {
             Export Quotes
           </button>
           <span className="setting--caption">
-            Save current quotes to a JSON file. (Same format is used for import.)
+            Save current quotes to a JSON file. (Useful for seeing the import format.)
           </span>
         </div>
 
