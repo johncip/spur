@@ -175,6 +175,18 @@ const quotes = (state = new Map(), action) => {
         )
       )
     }
+    case 'SHUFFLE_QUOTES': {
+      const shuffled = shuffledQuotes(state)
+      return loop(
+        shuffled,
+        Cmd.run(
+          storeQuotes, {
+            args: [shuffled],
+            successActionCreator: showAlert('Quotes shuffled.')
+          }
+        )
+      )
+    }
     default:
       return state
   }

@@ -43,6 +43,10 @@ export const deleteQuote = quote => (
   { type: 'DELETE_QUOTE', payload: quote }
 )
 
+export const shuffleQuotes = () => (
+  { type: 'SHUFFLE_QUOTES' }
+)
+
 
 /*
  * settings
