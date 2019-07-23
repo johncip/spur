@@ -1,21 +1,16 @@
 import { combineReducers, loop, Cmd } from 'redux-loop'
 import { showAlert, populateQuotes } from './actions'
-import { storeSettings, storeQuotes, summarize, readQuotesFile } from './util'
+import {
+  storeSettings,
+  storeQuotes,
+  summarize,
+  readQuotesFile,
+  shuffledQuotes,
+  normalizedQuotes
+} from './util'
 
 
 // helpers
-
-/*
- * Given an array of quote records, returns a map where the keys are
- * the array indices, the values are the records, and the records gain
- * a matching "id" property.
- */
-const normalizedQuotes = records => (
-  records.reduce((map, record, idx) => {
-    map.set(idx, { ...record, id: idx })
-    return map
-  }, new Map())
-)
 
 /*
  * Returns a quote that is not new.

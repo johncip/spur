@@ -1,3 +1,5 @@
+import shuffle from 'lodash.shuffle'
+
 const DEFAULT_SETTINGS = {
   theme: 'indexCard',
   wakeTime: 6
@@ -150,11 +152,29 @@ export const summarize = (text, len = 5) => {
   /* eslint-enable no-multi-spaces */
 }
 
-export function printQuotes(quotes) {
-  const entries = Array.from(quotes.values()).map((q) => {
+export function denormalizedQuotes(quotes) {
+  return Array.from(quotes.values()).map((q) => {
     const { id, ...q2 } = q
     return q2
   })
+}
 
-  return JSON.stringify(entries, null, 2)
+export function printQuotes(quotes) {
+  return JSON.stringify(denormalizedQuotes(quotes), null, 2)
+}
+
+/*
+ * Given an array of quote records, returns a map where the keys are
+ * the array indices, the values are the records, and the records gain
+ * a matching "id" property.
+ */
+export const normalizedQuotes = records => (
+  records.reduce((map, record, idx) => {
+    map.set(idx, { ...record, id: idx })
+    return map
+  }, new Map())
+)
+
+export function shuffledQuotes(quotes) {
+  return normalizedQuotes(shuffle(denormalizedQuotes(quotes)))
 }
