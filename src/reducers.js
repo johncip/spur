@@ -32,7 +32,7 @@ const ensureId = (quote) => {
 /*
  * Returns a new quote (a quote with no ID and a "new" flag).
  */
-const newQuote = () => ({
+const blankQuote = () => ({
   quote: '',
   author: '',
   url: '',
@@ -48,7 +48,7 @@ const activeQuote = (state = {}, action) => {
     case 'SET_ACTIVE_QUOTE':
       return action.payload
     case 'SET_NEW_ACTIVE_QUOTE':
-      return newQuote()
+      return blankQuote()
     case 'PATCH_ACTIVE_QUOTE':
       return { ...state, ...action.payload }
     default:
