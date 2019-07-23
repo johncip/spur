@@ -23,7 +23,7 @@ const normalizedQuotes = records => (
 const ensureId = (quote) => {
   const copy = { ...quote }
   if (copy.new) {
-    copy.id = Math.random() // TODO: do something better
+    copy.id = Math.random() // TODO: just use the new index
     delete copy.new
   }
   return copy
